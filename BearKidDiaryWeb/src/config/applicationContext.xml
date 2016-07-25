@@ -41,7 +41,7 @@
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan">
 			<list>
-				<value>com.bearkiddiary.bean.TestBean</value>
+				<value>com.bearkiddiary.bean</value>
 			</list>
 		</property>
 		<property name="hibernateProperties">
