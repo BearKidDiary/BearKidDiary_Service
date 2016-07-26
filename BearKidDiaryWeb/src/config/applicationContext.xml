@@ -34,8 +34,8 @@
 		<property name="initialSize" value="30"></property>
 	</bean>
 	<bean id="sessionFactory"
-		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
-		<property name="dataSource" ref="dataSource" />
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
+		p:dataSource-ref="dataSource">
 		<property name="packagesToScan">
 			<list>
 				<value>com.bearkiddiary.bean</value>
@@ -50,22 +50,22 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="hibernateTemplateMysql" class="org.springframework.orm.hibernate5.HibernateTemplate">
-		<property name="sessionFactory" ref="sessionFactory"></property>
+	<bean id="hibernateTemplateMysql" class="org.springframework.orm.hibernate5.HibernateTemplate"
+		p:sessionFactory-ref="sessionFactory">
 	</bean>
 
-	<bean id="Service" class="com.bearkiddiary.service.impl.ServiceImpl">
-		<property name="testDao" ref="testDao"></property>
+	<bean id="Service" class="com.bearkiddiary.service.impl.ServiceImpl"
+		p:testDao-ref="testDao">
 	</bean>
 	<!-- 测试Dao操作 -->
-	<bean id="testDao" class="com.bearkiddiary.dao.impl.TestDaoImpl">
-		<property name="sessionFactory" ref="sessionFactory"></property>
+	<bean id="testDao" class="com.bearkiddiary.dao.impl.TestDaoImpl"
+		p:sessionFactory-ref="sessionFactory">
 	</bean>
 
 	<!-- 定义事务管理器（声明式的事务） -->
 	<bean id="transactionManager"
-		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
-		<property name="sessionFactory" ref="sessionFactory" />
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager"
+		p:sessionFactory-ref="sessionFactory">
 	</bean>
 	<tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
