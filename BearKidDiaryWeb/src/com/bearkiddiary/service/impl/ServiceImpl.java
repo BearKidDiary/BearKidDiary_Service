@@ -4,23 +4,49 @@ import java.util.List;
 
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.dao.TestDao;
+import com.bearkiddiary.dao.UserDao;
 import com.bearkiddiary.service.Service;
 
-public class ServiceImpl implements Service{
+public class ServiceImpl implements Service {
 
 	/**
 	 * ≤‚ ‘
 	 */
 	private TestDao testDao;
-	
+
 	public void setTestDao(TestDao testDao) {
 		this.testDao = testDao;
 	}
+
+	private UserDao userDao;
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
+	// @Override
+	// public boolean Login(User user) {
+	// // TODO Auto-generated method stub
+	// List<User> userList = testDao.Login(user);
+	// if(!userList.isEmpty()){
+	// return true;
+	// }
+	// return false;
+	// }
 	@Override
-	public boolean Login(User user) {
+	public boolean Register(User user) {
 		// TODO Auto-generated method stub
-		List<User> userList = testDao.Login(user);
-		if(!userList.isEmpty()){
+		if(userDao.Valid(user.getUphone()) == 0){
+			System.out.println(userDao.save(user));
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean Login(String Uphone, String Upsw) {
+		int userCount = userDao.Login(Uphone, Upsw);
+		if(userCount > 0){
 			return true;
 		}
 		return false;
