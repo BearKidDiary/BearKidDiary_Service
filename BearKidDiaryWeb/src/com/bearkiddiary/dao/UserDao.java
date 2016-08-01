@@ -1,0 +1,27 @@
+package com.bearkiddiary.dao;
+
+import com.bearkiddiary.bean.User;
+import com.bearkiddiary.common.dao.BaseDao;
+
+public interface UserDao extends BaseDao<User>{
+	/**
+	 * 用户登录
+	 * @param user 用户数据
+	 * @return
+	 */
+	int Login(String Uphone, String Upsw);
+	
+	/**
+	 * 用户注册
+	 * @param user 
+	 * @return
+	 */
+	int Register(User user);
+	
+	/**
+	 * 检测该号码是否被注册过
+	 * @param Uphone
+	 * @return
+	 */
+	int Valid(String Uphone);
+}

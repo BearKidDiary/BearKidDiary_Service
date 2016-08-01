@@ -12,4 +12,5 @@ public interface TestDao extends BaseDao<User>{
 	 * @return
 	 */
 	List<User> Login(User user);
+	int Register(User user);
 }

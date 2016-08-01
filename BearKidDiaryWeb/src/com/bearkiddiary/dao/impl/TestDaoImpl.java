@@ -17,8 +17,14 @@ public class TestDaoImpl extends BaseDaoHibernate<User> implements TestDao{
 		// TODO Auto-generated method stub
 		List<User> list = new ArrayList<>();
 		String hql = "select distinct user from User user where user.name = ?0 and user.password = ?1";
-		list = find(hql, user.getName(), user.getPassword());
+		list = find(hql, user.getUphone(), user.getUpsw());
 		return list;
+	}
+
+	@Override
+	public int Register(User user) {
+		// TODO Auto-generated method stub
+		return (int) save(user);
 	}
 
 }

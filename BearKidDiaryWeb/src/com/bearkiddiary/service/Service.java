@@ -10,6 +10,6 @@ public interface Service {
 	 * @return
 	 */
 	//µÇÂ¼¹¦ÄÜ
-	boolean Login(User user);
-
+	boolean Login(String Uphone, String Upsw);
+	boolean Register(User user);
 }
