@@ -36,7 +36,7 @@ public class ServiceImpl implements Service {
 	@Override
 	public boolean Register(User user) {
 		// TODO Auto-generated method stub
-		if(userDao.Valid(user.getUphone()) == 0){
+		if (userDao.Valid(user.getUphone()) == 0) {
 			System.out.println(userDao.save(user));
 			return true;
 		}
@@ -46,10 +46,27 @@ public class ServiceImpl implements Service {
 	@Override
 	public boolean Login(String Uphone, String Upsw) {
 		int userCount = userDao.Login(Uphone, Upsw);
-		if(userCount > 0){
+		if (userCount > 0) {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int update(String Uphone,String Parameter, String value) {
+		int result = 0;
+		switch (Parameter) {
+		    case User.NAME:
+		    	result = userDao.updateName(Uphone, value);
+		    	break;
+		    case User.AREA:
+		    	result = userDao.updateArea(Uphone, value);
+		    	break;
+		    case User.EMAIL:
+		    	result = userDao.updateEmail(Uphone, value);
+		    	break;
+		}
+		return result;
 	}
 
 }

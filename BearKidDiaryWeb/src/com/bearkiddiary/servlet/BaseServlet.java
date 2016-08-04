@@ -16,13 +16,13 @@ import com.bearkiddiary.utils.ServiceBean;
  * Servlet implementation class BaseServlet
  */
 @WebServlet("/BaseServlet")
-public class BaseServlet extends HttpServlet {
+public abstract class BaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected Service service;
 	
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	response.setContentType("text/html;charset=GBK");
-    	PrintWriter out = response.getWriter();
-    }
+    protected abstract void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+    
+    @Override
+    protected abstract void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 }

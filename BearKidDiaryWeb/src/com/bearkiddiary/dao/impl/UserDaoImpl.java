@@ -40,4 +40,22 @@ public class UserDaoImpl extends BaseDaoHibernate<User> implements UserDao{
 		return list.size();
 	}
 
+	@Override
+	public int updateName(String Uphone, String Uname) {
+		String hql = "update User user set user.Uname = ?0 where user.Uphone = ?1";
+		return update(hql, Uname, Uphone);
+	}
+
+	@Override
+	public int updateArea(String Uphone, String Uarea) {
+		String hql = "update User user set user.Uarea = ?0 where user.Uphone = ?1";
+		return update(hql, Uarea, Uphone);
+	}
+
+	@Override
+	public int updateEmail(String Uphone, String Uemail) {
+		String hql = "update User user set user.Uemail = ?0 where user.Uphone = ?1";
+		return update(hql, Uemail, Uphone);
+	}
+
 }

@@ -138,5 +138,14 @@ public class BaseDaoHibernate<T> implements BaseDao<T>{
 					.setMaxResults(pageSize)
 					.list();
 			}
+			
+			protected int update(String hql, Object...objects ){
+				Query queryupdate = getSessionFactory().getCurrentSession()
+						.createQuery(hql);
+				for(int i = 0; i < objects.length; i++){
+					queryupdate.setParameter(i + "", objects[i]);
+				}
+				return queryupdate.executeUpdate();
+			}
 	
 }

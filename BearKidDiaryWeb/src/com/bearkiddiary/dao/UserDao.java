@@ -24,4 +24,8 @@ public interface UserDao extends BaseDao<User>{
 	 * @return
 	 */
 	int Valid(String Uphone);
+	
+	int updateName(String Uphone, String Uname);
+	int updateArea(String Uphone, String Uarea);
+	int updateEmail(String Uphone, String Uemail);
 }

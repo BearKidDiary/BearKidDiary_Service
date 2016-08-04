@@ -16,12 +16,13 @@ import com.bearkiddiary.utils.ServiceBean;
 /**
  * Servlet implementation class RegisterServlet
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = "/register.jsp")
+@WebServlet(name = "RegisterServlet", urlPatterns = "/regist.jsp")
 public class RegisterServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-       
+    
     @Override
-    protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    		throws ServletException, IOException {
     	response.setContentType("text/html;charset=GBK");
     	PrintWriter out = response.getWriter();
     	service = ServiceBean.getService(getServletContext());
@@ -38,4 +39,11 @@ public class RegisterServlet extends BaseServlet {
 		System.out.println(isSuccess);
 		out.println(isSuccess);
     }
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
+	}
 }

@@ -12,4 +12,12 @@ public interface Service {
 	//登录功能
 	boolean Login(String Uphone, String Upsw);
 	boolean Register(User user);
+	
+	/**
+	 * 更新操作
+	 * @param Parameter
+	 * @param value
+	 * @return
+	 */
+	int update(String Uphone, String Parameter, String value);
 }

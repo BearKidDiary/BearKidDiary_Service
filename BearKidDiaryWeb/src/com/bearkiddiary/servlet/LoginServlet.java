@@ -2,6 +2,8 @@ package com.bearkiddiary.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Enumeration;
+import java.util.Map;
 import java.util.Observable;
 
 import javax.servlet.ServletException;
@@ -24,16 +26,27 @@ public class LoginServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 	private Result<User> result;
 	private Gson gson = new Gson();
-
+	
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		service = ServiceBean.getService(getServletContext());
 
+//		Map<String, String> params=((Object) request).getParams();
+//		Iterator it = params.keySet().iterator();
+//		while(it.hasNext()){
+//		    String paramName = (String) it.next();
+//		    String paramValue = request.getParameter(paramName);
+//		    //处理你得到的参数名与值
+//		    System.out.println(paramName+"="+paramValue);
+//		}
+		
 		String Uphone = request.getParameter("Uphone");
 		String Upsw = request.getParameter("Upsw");
+		System.out.println(Uphone);
+		String user = request.getParameter("User");
+		System.out.println(request.getRequestURI());
 		Login(Uphone, Upsw, out);
 	}
 
@@ -54,10 +67,18 @@ public class LoginServlet extends BaseServlet {
 					result.setResultMessage("登录失败，用户名或密码错误！");
 					result.setData(user);
 				}
-				
+
+				System.out.println(gson.toJson(result));
 				writer.write(gson.toJson(result));
 			}
 		}).start();
 
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		
 	}
 }

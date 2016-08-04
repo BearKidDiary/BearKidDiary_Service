@@ -7,10 +7,10 @@
 <title>登录</title>
 </head>
 <body>
-	<form action="LoginServlet" method="POST">
+	<!-- <form action="LoginServlet" method="POST">
 		phone:<input type="text" Uphone="Uphone"><br> 
 		password:<input type="password" Upsw="Upsw"><br> 
 		submit:<input type="submit" value="submit"><br>
-	</form>
+	</form> -->
 </body>
 </html>

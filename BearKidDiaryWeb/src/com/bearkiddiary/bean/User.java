@@ -28,10 +28,10 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer Uid;
     private String Uname = null;
     private String Usex = null;
-    private String Uphone = null;
+    private String Uphone;
     private String Uarea = null;
     private String Upsw;
     //private String Uavatar;
