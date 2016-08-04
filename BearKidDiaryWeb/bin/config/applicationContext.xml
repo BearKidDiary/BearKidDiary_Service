@@ -54,9 +54,12 @@
 		p:sessionFactory-ref="sessionFactory">
 	</bean>
 
-	<bean id="Service" class="com.bearkiddiary.service.impl.ServiceImpl"
-		p:testDao-ref="testDao">
+	<bean id="service" class="com.bearkiddiary.service.impl.ServiceImpl"
+		p:testDao-ref="testDao"
+		p:userDao-ref="userDao">
 	</bean>
+	<bean id="userDao" class="com.bearkiddiary.dao.impl.UserDaoImpl"
+		p:sessionFactory-ref="sessionFactory"></bean>
 	<!-- 测试Dao操作 -->
 	<bean id="testDao" class="com.bearkiddiary.dao.impl.TestDaoImpl"
 		p:sessionFactory-ref="sessionFactory">

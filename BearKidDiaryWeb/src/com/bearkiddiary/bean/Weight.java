@@ -1,0 +1,55 @@
+package com.bearkiddiary.bean;
+
+import javax.persistence.CascadeType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+
+public class Weight {
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long Wid;
+
+	private Long Wtime;
+
+	private float Wweight;
+
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "Kid")
+	private Kid kid;
+
+	public Long getWid() {
+		return Wid;
+	}
+
+	public void setWid(Long wid) {
+		Wid = wid;
+	}
+
+	public Long getWtime() {
+		return Wtime;
+	}
+
+	public void setWtime(Long wtime) {
+		Wtime = wtime;
+	}
+
+	public float getWweight() {
+		return Wweight;
+	}
+
+	public void setWweight(float wweight) {
+		Wweight = wweight;
+	}
+
+	public Kid getKid() {
+		return kid;
+	}
+
+	public void setKid(Kid kid) {
+		this.kid = kid;
+	}
+
+}

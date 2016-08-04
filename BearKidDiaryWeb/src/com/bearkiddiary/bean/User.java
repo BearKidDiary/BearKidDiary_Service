@@ -1,87 +1,132 @@
 package com.bearkiddiary.bean;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
 
 /**
  * 用户表
  */
 @Entity
-@Table(name="User")
+@Table(name = "User")
 public class User implements Serializable {
-    public static final String NAME = "Uname";
-    public static final String SEX = "Usex";
-    public static final String PHONE = "Uphone";
-    public static final String AREA = "Uarea";
-    public static final String PSW = "Upsw";
-    public static final String AVATAR = "Uavatar";
-    public static final String WORKEXPERIENCE = "Uworkexperience";
-    public static final String SPECIALTY = "Uspecialty";
-    public static final String EDUEXPERIENCE = "Ueduexperience";
-    public static final String EMAIL = "Uemail";
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-    private String Uname = null;
-    private String Usex = null;
-    private String Uphone = null;
-    private String Uarea = null;
-    private String Upsw;
-    //private String Uavatar;
-    private String Uemail = null;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long Uid;
 
-    public String getUname() {
-        return Uname;
-    }
+	private String Uname = null;
 
-    public void setUname(String Uname) {
-        this.Uname = Uname;
-    }
+	private String Usex = null;
 
-    public String getUsex() {
-        return Usex;
-    }
+	private String Uphone = null;
 
-    public void setUsex(String Usex) {
-        this.Usex = Usex;
-    }
+	private String Uarea = null;
 
-    public String getUphone() {
-        return Uphone;
-    }
+	private String Upsw;
 
-    public void setUphone(String Uphone) {
-        this.Uphone = Uphone;
-    }
+	private String Uavatar;
 
-    public String getUarea() {
-        return Uarea;
-    }
+	private String Uemail = null;
 
-    public void setUarea(String Uarea) {
-        this.Uarea = Uarea;
-    }
+	/**
+	 * 该用户天生所在的家庭
+	 */
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "creator")
+	private Family ownFamily;
 
-    public String getUemail() {
-        return Uemail;
-    }
+	/**
+	 * 该用户参与的家庭，即别人邀请自己加入的家庭
+	 */
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "members")
+	private Set<Family> accessFamily = new HashSet<>();
 
-    public void setUemail(String Uemail) {
-        this.Uemail = Uemail;
-    }
+	public Long getUid() {
+		return Uid;
+	}
 
-    public String getUpsw() {
-        return Upsw;
-    }
+	public void setUid(Long uid) {
+		Uid = uid;
+	}
 
-    public void setUpsw(String Upsw) {
-        this.Upsw = Upsw;
-    }
+	public String getUname() {
+		return Uname;
+	}
+
+	public void setUname(String uname) {
+		Uname = uname;
+	}
+
+	public String getUsex() {
+		return Usex;
+	}
+
+	public void setUsex(String usex) {
+		Usex = usex;
+	}
+
+	public String getUphone() {
+		return Uphone;
+	}
+
+	public void setUphone(String uphone) {
+		Uphone = uphone;
+	}
+
+	public String getUarea() {
+		return Uarea;
+	}
+
+	public void setUarea(String uarea) {
+		Uarea = uarea;
+	}
+
+	public String getUpsw() {
+		return Upsw;
+	}
+
+	public void setUpsw(String upsw) {
+		Upsw = upsw;
+	}
+
+	public String getUavatar() {
+		return Uavatar;
+	}
+
+	public void setUavatar(String uavatar) {
+		Uavatar = uavatar;
+	}
+
+	public String getUemail() {
+		return Uemail;
+	}
+
+	public void setUemail(String uemail) {
+		Uemail = uemail;
+	}
+
+	public Family getOwnFamily() {
+		return ownFamily;
+	}
+
+	public void setOwnFamily(Family ownFamily) {
+		this.ownFamily = ownFamily;
+	}
+
+	public Set<Family> getAccessFamily() {
+		return accessFamily;
+	}
+
+	public void setAccessFamily(Set<Family> accessFamily) {
+		this.accessFamily = accessFamily;
+	}
 }
