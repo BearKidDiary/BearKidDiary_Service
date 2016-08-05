@@ -26,6 +26,7 @@ public class Height implements Serializable {
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "kid")
 	private Kid kid;
+
 	public Long getHid() {
 		return Hid;
 	}
@@ -57,6 +58,6 @@ public class Height implements Serializable {
 	public void setKid(Kid kid) {
 		this.kid = kid;
 	}
-	
+
 	
 }

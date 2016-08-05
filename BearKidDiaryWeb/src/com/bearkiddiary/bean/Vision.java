@@ -67,5 +67,4 @@ public class Vision implements Serializable {
 	public void setKid(Kid kid) {
 		this.kid = kid;
 	}
-	
 }

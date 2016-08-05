@@ -3,20 +3,10 @@ package com.bearkiddiary.service.impl;
 import java.util.List;
 
 import com.bearkiddiary.bean.User;
-import com.bearkiddiary.dao.TestDao;
 import com.bearkiddiary.dao.UserDao;
 import com.bearkiddiary.service.Service;
 
 public class ServiceImpl implements Service {
-
-	/**
-	 * ≤‚ ‘
-	 */
-	private TestDao testDao;
-
-	public void setTestDao(TestDao testDao) {
-		this.testDao = testDao;
-	}
 
 	private UserDao userDao;
 

@@ -1,1 +1,7 @@
 /build/
+<<<<<<< HEAD
+=======
+.project
+.classpath
+/bin/
+>>>>>>> 0949374999e24acec757d3be379c9215582c3f51

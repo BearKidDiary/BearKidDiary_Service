@@ -27,6 +27,7 @@ public class Weight implements Serializable{
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "kid")
 	private Kid kid;
+
 	public Long getWid() {
 		return Wid;
 	}

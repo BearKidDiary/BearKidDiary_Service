@@ -2,10 +2,19 @@ package com.bearkiddiary.bean;
 
 import java.io.Serializable;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -35,6 +44,31 @@ public class Organization implements Serializable {
 	 * 机构的公告
 	 */
 	private String Oannounce;
+	/**
+	 * 机构的创建者
+	 */
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "creator")
+	private User creator;
+	/**
+	 * 机构的成员
+	 */
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Organization_User", joinColumns = @JoinColumn(name = "Oid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
+	private Set<User> members = new HashSet<>();
+	/**
+	 * 机构开设的课程
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
+	private Set<Course> courses = new HashSet<>();
+
+	public Set<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(Set<Course> courses) {
+		this.courses = courses;
+	}
 
 	public Long getOid() {
 		return Oid;
@@ -82,5 +116,21 @@ public class Organization implements Serializable {
 
 	public void setOannounce(String oannounce) {
 		Oannounce = oannounce;
+	}
+
+	public User getCreator() {
+		return creator;
+	}
+
+	public void setCreator(User creator) {
+		this.creator = creator;
+	}
+
+	public Set<User> getMembers() {
+		return members;
+	}
+
+	public void setMembers(Set<User> members) {
+		this.members = members;
 	}
 }
