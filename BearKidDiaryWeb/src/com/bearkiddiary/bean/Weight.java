@@ -1,14 +1,22 @@
 package com.bearkiddiary.bean;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
-public class Weight {
+@Entity
+@Table(name = "Weight")
+public class Weight implements Serializable{
 	@Id
+	@Column(name = "wid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Wid;
 
@@ -17,9 +25,8 @@ public class Weight {
 	private float Wweight;
 
 	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "Kid")
+	@JoinColumn(name = "kid")
 	private Kid kid;
-
 	public Long getWid() {
 		return Wid;
 	}

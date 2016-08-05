@@ -53,26 +53,20 @@ public class LoginServlet extends BaseServlet {
 	public void Login(String Uphone, String Upsw, PrintWriter writer) {
 		result = new Result<>();
 		User user = new User();
-		new Thread(new Runnable() {
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				if (service.Login(Uphone, Upsw)) {
-					result.setResultCode(0);
-					result.setResultMessage("µÇÂ¼³É¹¦£¡");
-					user.setUphone(Uphone);
-					result.setData(user);
-				} else {
-					result.setResultCode(1);
-					result.setResultMessage("µÇÂ¼Ê§°Ü£¬ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
-					result.setData(user);
-				}
+		// TODO Auto-generated method stub
+		if (service.Login(Uphone, Upsw)) {
+			result.setResultCode(0);
+			result.setResultMessage("µÇÂ¼³É¹¦£¡");
+			user.setUphone(Uphone);
+			result.setData(user);
+		} else {
+			result.setResultCode(1);
+			result.setResultMessage("µÇÂ¼Ê§°Ü£¬ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+			result.setData(user);
+		}
 
-				System.out.println(gson.toJson(result));
-				writer.write(gson.toJson(result));
-			}
-		}).start();
-
+		System.out.println(gson.toJson(result));
+		writer.write(gson.toJson(result));
 	}
 
 	@Override
