@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -49,6 +50,24 @@ public class User implements Serializable {
 	 */
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "members")
 	private Set<Family> accessFamily = new HashSet<>();
+
+	/**
+	 * 如果该用户是管理员，批准过的课程列表
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "approver")
+	private Set<Course> approverCourse = new HashSet<>();
+
+	/**
+	 * 如果是管理员，创建的机构
+	 */
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "creator")
+	private Organization createOrganization;
+
+	/**
+	 * 作为成员参与其中的机构
+	 */
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "members")
+	private Set<Organization> attendOrganization = new HashSet<>();
 
 	public Long getUid() {
 		return Uid;
@@ -128,5 +147,29 @@ public class User implements Serializable {
 
 	public void setAccessFamily(Set<Family> accessFamily) {
 		this.accessFamily = accessFamily;
+	}
+
+	public Set<Course> getApproverCourse() {
+		return approverCourse;
+	}
+
+	public void setApproverCourse(Set<Course> approverCourse) {
+		this.approverCourse = approverCourse;
+	}
+
+	public Organization getCreateOrganization() {
+		return createOrganization;
+	}
+
+	public void setCreateOrganization(Organization createOrganization) {
+		this.createOrganization = createOrganization;
+	}
+
+	public Set<Organization> getAttendOrganization() {
+		return attendOrganization;
+	}
+
+	public void setAttendOrganization(Set<Organization> attendOrganization) {
+		this.attendOrganization = attendOrganization;
 	}
 }

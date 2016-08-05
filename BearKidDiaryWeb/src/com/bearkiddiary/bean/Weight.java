@@ -1,12 +1,16 @@
 package com.bearkiddiary.bean;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "Weight")
 public class Weight {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

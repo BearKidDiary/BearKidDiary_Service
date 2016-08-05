@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -23,31 +24,57 @@ public class Kid implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Kid;
 
+	/**
+	 * 孩子名字
+	 */
 	private String Kname;
-
+	/**
+	 * 孩子性别
+	 */
 	private String Ksex;
-
+	/**
+	 * 孩子出生时间
+	 */
 	private Long Kbirthday;
-
+	/**
+	 * 家长叮嘱
+	 */
 	private String Kask;
-
+	/**
+	 * 所在的家庭
+	 */
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Fid")
 	private Family family;
-
+	/**
+	 * 头像URL
+	 */
 	private String Kavatar;
-
+	/**
+	 * 孩子的时间轴
+	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kid")
 	private Set<TimeLine> Ktimeline = new HashSet<>();
-
+	/**
+	 * 孩子的重量
+	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kid")
 	private Set<Weight> weight = new HashSet<>();
-
+	/**
+	 * 孩子的视力
+	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kid")
 	private Set<Vision> vision = new HashSet<>();
-
+	/**
+	 * 孩子的身高
+	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kid")
 	private Set<Height> height = new HashSet<>();
+	/**
+	 * 孩子参与的课程
+	 */
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "students")
+	private Set<Course> attendCourse = new HashSet<>();
 
 	public Long getKid() {
 		return Kid;
@@ -135,5 +162,13 @@ public class Kid implements Serializable {
 
 	public void setHeight(Set<Height> height) {
 		this.height = height;
+	}
+
+	public Set<Course> getAttendCourse() {
+		return attendCourse;
+	}
+
+	public void setAttendCourse(Set<Course> attendCourse) {
+		this.attendCourse = attendCourse;
 	}
 }
