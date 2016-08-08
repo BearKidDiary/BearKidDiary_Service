@@ -51,19 +51,14 @@
 		</property>
 	</bean>
 	<bean id="hibernateTemplateMysql" class="org.springframework.orm.hibernate5.HibernateTemplate"
-		p:sessionFactory-ref="sessionFactory">
-	</bean>
+		p:sessionFactory-ref="sessionFactory" />
 
 	<bean id="service" class="com.bearkiddiary.service.impl.ServiceImpl"
-		p:testDao-ref="testDao"
-		p:userDao-ref="userDao">
-	</bean>
+		p:userDao-ref="userDao" />
 	<bean id="userDao" class="com.bearkiddiary.dao.impl.UserDaoImpl"
-		p:sessionFactory-ref="sessionFactory"></bean>
-	<!-- 测试Dao操作 -->
-	<bean id="testDao" class="com.bearkiddiary.dao.impl.TestDaoImpl"
-		p:sessionFactory-ref="sessionFactory">
-	</bean>
+		p:sessionFactory-ref="sessionFactory" />
+	<bean id="familyDao" class="com.bearkiddiary.dao.impl.FamilyDaoImpl"
+		p:sessionFactory-ref="sessionFactory" p:userDao-ref="userDao" />
 
 	<!-- 定义事务管理器（声明式的事务） -->
 	<bean id="transactionManager"

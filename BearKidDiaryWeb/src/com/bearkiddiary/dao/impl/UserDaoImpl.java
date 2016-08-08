@@ -7,7 +7,7 @@ import com.bearkiddiary.bean.User;
 import com.bearkiddiary.common.dao.impl.BaseDaoHibernate;
 import com.bearkiddiary.dao.UserDao;
 
-public class UserDaoImpl extends BaseDaoHibernate<User> implements UserDao{
+public class UserDaoImpl extends BaseDaoHibernate<User> implements UserDao {
 
 	/**
 	 * 返回根据用户登录名，密码匹配的数据个数
@@ -16,7 +16,7 @@ public class UserDaoImpl extends BaseDaoHibernate<User> implements UserDao{
 	public int Login(String Uphone, String Upsw) {
 		String hql = "select distinct user from User user where user.Uphone = ?0 and user.Upsw = ?1";
 		List<User> list = new ArrayList();
-		list = find(hql,Uphone,Upsw);
+		list = find(hql, Uphone, Upsw);
 		return list.size();
 	}
 
@@ -58,4 +58,13 @@ public class UserDaoImpl extends BaseDaoHibernate<User> implements UserDao{
 		return update(hql, Uemail, Uphone);
 	}
 
+	@Override
+	public User getUser(String Uphone) {
+		final String hql = "select * from User where User.Uphone = " + Uphone;
+		List<User> list = find(hql);
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
 }

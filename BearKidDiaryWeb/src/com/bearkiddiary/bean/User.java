@@ -20,17 +20,18 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "User")
 public class User implements Serializable {
-	
+
+	public static final String id = "Uid";
 	public static final String NAME = "Uname";
-    public static final String SEX = "Usex";
-    public static final String PHONE = "Uphone";
-    public static final String AREA = "Uarea";
-    public static final String PSW = "Upsw";
-    public static final String AVATAR = "Uavatar";
-    public static final String WORKEXPERIENCE = "Uworkexperience";
-    public static final String SPECIALTY = "Uspecialty";
-    public static final String EDUEXPERIENCE = "Ueduexperience";
-    public static final String EMAIL = "Uemail";
+	public static final String SEX = "Usex";
+	public static final String PHONE = "Uphone";
+	public static final String AREA = "Uarea";
+	public static final String PSW = "Upsw";
+	public static final String AVATAR = "Uavatar";
+	public static final String WORKEXPERIENCE = "Uworkexperience";
+	public static final String SPECIALTY = "Uspecialty";
+	public static final String EDUEXPERIENCE = "Ueduexperience";
+	public static final String EMAIL = "Uemail";
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Uid;

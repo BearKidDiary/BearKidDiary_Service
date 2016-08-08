@@ -19,10 +19,4 @@ import com.bearkiddiary.utils.ServiceBean;
 public abstract class BaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected Service service;
-	
-    @Override
-    protected abstract void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
-    
-    @Override
-    protected abstract void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 }

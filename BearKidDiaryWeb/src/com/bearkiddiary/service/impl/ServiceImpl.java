@@ -3,6 +3,7 @@ package com.bearkiddiary.service.impl;
 import java.util.List;
 
 import com.bearkiddiary.bean.User;
+import com.bearkiddiary.dao.FamilyDao;
 import com.bearkiddiary.dao.UserDao;
 import com.bearkiddiary.service.Service;
 
@@ -12,6 +13,12 @@ public class ServiceImpl implements Service {
 
 	public void setUserDao(UserDao userDao) {
 		this.userDao = userDao;
+	}
+
+	private FamilyDao familyDao;
+
+	public void setFamilyDao(FamilyDao familyDao) {
+		this.familyDao = familyDao;
 	}
 
 	// @Override
@@ -43,20 +50,25 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public int update(String Uphone,String Parameter, String value) {
+	public int update(String Uphone, String Parameter, String value) {
 		int result = 0;
 		switch (Parameter) {
-		    case User.NAME:
-		    	result = userDao.updateName(Uphone, value);
-		    	break;
-		    case User.AREA:
-		    	result = userDao.updateArea(Uphone, value);
-		    	break;
-		    case User.EMAIL:
-		    	result = userDao.updateEmail(Uphone, value);
-		    	break;
+		case User.NAME:
+			result = userDao.updateName(Uphone, value);
+			break;
+		case User.AREA:
+			result = userDao.updateArea(Uphone, value);
+			break;
+		case User.EMAIL:
+			result = userDao.updateEmail(Uphone, value);
+			break;
 		}
 		return result;
+	}
+
+	@Override
+	public int createFamily(String Uphone, String Fname) {
+		return familyDao.createFamily(Uphone, Fname);
 	}
 
 }
