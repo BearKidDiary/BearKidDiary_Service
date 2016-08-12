@@ -23,6 +23,17 @@ import com.google.gson.annotations.Expose;
 @Entity
 @Table(name = "Organization")
 public class Organization implements Serializable {
+	//创建，解散，修改机构
+	public final static Integer CREATE = 1;
+	public final static Integer DELETE = -1;
+	public final static Integer UPDATE = 0;
+	
+	public final static String ONAME = "Oname";
+	public final static String OADDRESS = "Oaddress";
+	public final static String OTIME = "Otime";
+	public final static String OANNOUNCE = "Oannounce";
+	public final static String UID = "Uid";
+	
 	@Expose
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

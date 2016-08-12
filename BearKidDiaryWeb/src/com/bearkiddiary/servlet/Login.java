@@ -43,8 +43,6 @@ public class Login extends BaseServlet {
 		String Uphone = request.getParameter("Uphone");
 		String Upsw = request.getParameter("Upsw");
 		System.out.println(Uphone);
-		String user = request.getParameter("User");
-		System.out.println(request.getRequestURI());
 		Login(Uphone, Upsw, out);
 	}
 

@@ -132,6 +132,7 @@ public class Course {
 	public void setCdesc(String cdesc) {
 		Cdesc = cdesc;
 	}
+	
 
 	public String getCname() {
 		return Cname;

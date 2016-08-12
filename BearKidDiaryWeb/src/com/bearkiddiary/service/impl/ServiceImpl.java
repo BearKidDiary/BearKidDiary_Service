@@ -5,9 +5,11 @@ import java.util.List;
 import java.util.Set;
 
 import com.bearkiddiary.bean.Family;
+import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.dao.FamilyDao;
 import com.bearkiddiary.dao.KidDao;
+import com.bearkiddiary.dao.OrgDao;
 import com.bearkiddiary.dao.UserDao;
 import com.bearkiddiary.service.Service;
 
@@ -31,6 +33,12 @@ public class ServiceImpl implements Service {
 		this.kidDao = kidDao;
 	}
 
+	private OrgDao orgDao;
+
+	public void setOrgDao(OrgDao orgDao) {
+		this.orgDao = orgDao;
+	}
+
 	// @Override
 	// public boolean Login(User user) {
 	// // TODO Auto-generated method stub
@@ -40,6 +48,9 @@ public class ServiceImpl implements Service {
 	// }
 	// return false;
 	// }
+	/**
+	 * 注册
+	 */
 	@Override
 	public boolean Register(User user) {
 		// TODO Auto-generated method stub
@@ -50,6 +61,9 @@ public class ServiceImpl implements Service {
 		return false;
 	}
 
+	/**
+	 * 登录
+	 */
 	@Override
 	public boolean Login(String Uphone, String Upsw) {
 		int userCount = userDao.Login(Uphone, Upsw);
@@ -59,8 +73,11 @@ public class ServiceImpl implements Service {
 		return false;
 	}
 
+	/**
+	 * 更新个人信息
+	 */
 	@Override
-	public int update(String Uphone, String Parameter, String value) {
+	public int updateUser(String Uphone, String Parameter, String value) {
 		int result = 0;
 		switch (Parameter) {
 		case User.NAME:
@@ -114,5 +131,36 @@ public class ServiceImpl implements Service {
 	@Override
 	public Family getCreatedFamily(String Uphone) {
 		return familyDao.getCreatedFramily(Uphone);
+	}
+
+	@Override
+	public long createOrg(String Oname, String Oaddress, String Oannounce, Long Uid) {
+		long Oid = orgDao.createOrg(Oname, Oaddress, Oannounce, Uid);
+		return Oid;
+	}
+
+	/**
+	 * 解散机构
+	 */
+	@Override
+	public void deleteOrg(long Oid) {
+		orgDao.deleteOrg(Oid);
+	}
+
+	@Override
+	public long updateOrg(long Oid, String Parameter, String value) {
+		long result = 0;
+		switch (Parameter) {
+		case Organization.ONAME:
+			result = orgDao.updateOname(Oid, value);
+			break;
+		case Organization.OADDRESS:
+			result = orgDao.updateOaddress(Oid, value);
+			break;
+		case Organization.OANNOUNCE:
+			result = orgDao.updateOannounce(Oid, value);
+			break;
+		}
+		return result;
 	}
 }
