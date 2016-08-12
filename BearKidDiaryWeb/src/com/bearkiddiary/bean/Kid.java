@@ -54,6 +54,11 @@ public class Kid implements Serializable {
 	@Expose
 	private String Kask;
 	/**
+	 * 孩子获得的小红花数目
+	 */
+	@Expose
+	private Integer Kflowers;
+	/**
 	 * 所在的家庭
 	 */
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -186,4 +191,11 @@ public class Kid implements Serializable {
 		this.attendCourse = attendCourse;
 	}
 
+	public Integer getKflowers() {
+		return Kflowers;
+	}
+
+	public void setKflowers(Integer kflowers) {
+		Kflowers = kflowers;
+	}
 }

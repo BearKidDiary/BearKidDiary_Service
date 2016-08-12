@@ -26,4 +26,12 @@ public class ResultCode {
 	 * 不存在对应的关联关系
 	 */
 	public static final int ERROR_NO_RELATION = -5;
+	/**
+	 * 不存在该孩子
+	 */
+	public static final int ERROR_NO_KID = -6;
+	/**
+	 * 不能正常获得结果，过程发生了错误
+	 */
+	public static final int ERROR_NO_RESULT = -100;
 }

@@ -35,7 +35,7 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 			return ResultCode.ERROR_NO_USER;
 		}
 
-		if (getCreatedFramily(Uphone) != null) {// 已经有创建的家庭了
+		if (getCreatedFamily(Uphone) != null) {// 已经有创建的家庭了
 			return ResultCode.ERROR_ALREADY_HAVE_FAMILY;
 		}
 
@@ -47,7 +47,7 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 	}
 
 	@Override
-	public Family getCreatedFramily(String Uphone) {
+	public Family getCreatedFamily(String Uphone) {
 		final String hql = "select family from Family family join family.creator creator where creator.Uphone = ?0";
 		List<Family> list = find(hql, Uphone);
 		if (list == null || list.size() == 0)
@@ -72,7 +72,7 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 
 	@Override
 	public Set<User> getMembersInFamily(String Uphone) {
-		Family family = getCreatedFramily(Uphone);
+		Family family = getCreatedFamily(Uphone);
 		if (family == null) {
 			return null;
 		}
@@ -148,7 +148,7 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 		User user = userDao.getUser(Uid);
 		if (user == null)
 			return ResultCode.ERROR_NO_USER;
-		Family family = getCreatedFramily(Uphone);
+		Family family = getCreatedFamily(Uphone);
 		if (family == null)
 			return ResultCode.ERROR_NO_FAMILY;
 
@@ -162,7 +162,7 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 		User user = userDao.getUser(memberPhone);
 		if (user == null)
 			return ResultCode.ERROR_NO_USER;
-		Family family = getCreatedFramily(creatorPhone);
+		Family family = getCreatedFamily(creatorPhone);
 		if (family == null)
 			return ResultCode.ERROR_NO_FAMILY;
 
@@ -173,7 +173,7 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 
 	@Override
 	public int deleteMemberFromFamily(String memberUphone, String creatorUphone) {
-		Family family = getCreatedFramily(creatorUphone);
+		Family family = getCreatedFamily(creatorUphone);
 		if (family == null)
 			return ResultCode.ERROR_NO_FAMILY;
 
@@ -223,7 +223,7 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 
 	@Override
 	public int updateFamilyName(String Uphone, String Fname) {
-		Family family = getCreatedFramily(Uphone);
+		Family family = getCreatedFamily(Uphone);
 		if (family == null) {
 			return ResultCode.ERROR_NO_FAMILY;
 		}

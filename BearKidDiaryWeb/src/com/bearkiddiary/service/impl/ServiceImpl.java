@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.bearkiddiary.bean.Family;
+import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.dao.FamilyDao;
 import com.bearkiddiary.dao.KidDao;
@@ -114,14 +115,14 @@ public class ServiceImpl implements Service {
 		}
 		return members;
 	}
-	
+
 	@Override
 	public User getFamilyCreator(String Uphone, Long Fid) {
 		User creator = null;
-		if(Fid!=null){
+		if (Fid != null) {
 			creator = familyDao.getCreatorInFamily(Fid);
 		}
-		if(creator==null && Uphone!=null){
+		if (creator == null && Uphone != null) {
 			creator = userDao.getUser(Uphone);
 		}
 		return creator;
@@ -161,7 +162,7 @@ public class ServiceImpl implements Service {
 			family = familyDao.getFamily(Fid);
 		}
 		if (family == null && Uphone != null) {
-			family = familyDao.getCreatedFramily(Uphone);
+			family = familyDao.getCreatedFamily(Uphone);
 		}
 		return family;
 	}
@@ -182,5 +183,57 @@ public class ServiceImpl implements Service {
 			result = familyDao.updateFamilyName(Uphone, Fname);
 		}
 		return result;
+	}
+
+	@Override
+	public Set<Kid> getKids(Long Kid, String Uphone, Long Fid) {
+		if (Kid != null) {
+			Set<Kid> set = new HashSet<>();
+			Kid k = kidDao.getKid(Kid);
+			if (k != null) {
+				set.add(k);
+				return set;
+			}
+		}
+
+		if (Fid != null) {
+			Set<Kid> set = kidDao.getKidsInFamily(Fid);
+			if (set != null)
+				return set;
+		}
+
+		if (Uphone != null) {
+			Set<Kid> set = kidDao.getKidsInFamily(Uphone);
+			if (set != null)
+				return set;
+		}
+
+		return null;
+	}
+
+	@Override
+	public int removeKid(Long Kid) {
+		return kidDao.removeKid(Kid);
+	}
+
+	@Override
+	public int addKid(String Kname, Long Kbirthday, String Kavatar, String Ksex, String Kask, Integer Kflowers,
+			Long Fid, String Uphone) {
+		Kid kid = new Kid();
+		kid.setKname(Kname);
+		kid.setKbirthday(Kbirthday);
+		kid.setKavatar(Kavatar);
+		kid.setKsex(Ksex);
+		kid.setKask(Kask);
+		kid.setKflowers(Kflowers);
+
+		int code = ResultCode.ERROR_NO_FAMILY;
+		if (Fid != null) {
+			code = kidDao.addKid(Fid, kid);
+		}
+		if (code != ResultCode.SUCCESS && Uphone != null) {
+			code = kidDao.addKid(Uphone, kid);
+		}
+		return code;
 	}
 }
