@@ -30,13 +30,5 @@ public class TestServlet extends BaseServlet {
 		Result<Family> result = new Result<>();
 		PrintWriter out = resp.getWriter();
 
-		String Uphone = req.getParameter("Uphone");
-		if (Uphone == null) {
-			out.write("Uphone==null");
-			return;
-		}
-
-//		Family family = service.getCreatedFamily(Uphone);
-//		out.write(gson.toJson(family));
 	}
 }

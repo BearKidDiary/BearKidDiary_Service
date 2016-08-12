@@ -122,6 +122,7 @@ public interface Service {
 	 * @return
 	 */
 	int updateFamily(String Uphone, Long Fid, String Fname);
+<<<<<<< HEAD
 	
 //机构
 	/**
@@ -149,4 +150,6 @@ public interface Service {
 	 */
 	long updateOrg(long Oid, String Parameter, String value);
 
+=======
+>>>>>>> 20b28f0dc139ae9f991fc66d37a5f22ad7e64470
 }
