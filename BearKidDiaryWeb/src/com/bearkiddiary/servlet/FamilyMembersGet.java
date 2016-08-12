@@ -2,6 +2,7 @@ package com.bearkiddiary.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -34,6 +35,7 @@ public class FamilyMembersGet extends BaseServlet {
 
 		String Uphone = request.getParameter("Uphone");
 		String SFid = request.getParameter("Fid");
+		String Range = request.getParameter("Range");
 
 		if (Uphone == null && SFid == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
@@ -45,7 +47,17 @@ public class FamilyMembersGet extends BaseServlet {
 
 		Long Fid = SFid == null ? null : Long.valueOf(SFid);
 
-		Set<User> members = service.getFamilyMembers(Uphone, Fid);
+		Set<User> members = null;
+		if (Range == null)
+			Range = "ALL";
+		if (Range.equals("Attend"))
+			members = service.getFamilyMembers(Uphone, Fid);
+		else if (Range.equals("Create")) {
+			members = new HashSet<>();
+			User creator = service.getFamilyCreator(Uphone, Fid);
+			members.add(creator);
+		} else// Range=="ALL"
+			members = service.getFamilyMembersAndCreator(Uphone, Fid);
 
 		result.setResultCode(ResultCode.SUCCESS);
 		result.setData(members);

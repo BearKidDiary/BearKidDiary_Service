@@ -36,7 +36,7 @@ public class TestServlet extends BaseServlet {
 			return;
 		}
 
-		Family family = service.getCreatedFamily(Uphone);
-		out.write(gson.toJson(family));
+//		Family family = service.getCreatedFamily(Uphone);
+//		out.write(gson.toJson(family));
 	}
 }

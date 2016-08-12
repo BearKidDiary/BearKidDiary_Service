@@ -1,3 +1,4 @@
+
 package com.bearkiddiary.utils;
 
 public class ResultCode {
@@ -22,5 +23,8 @@ public class ResultCode {
 	 * 不存在该家庭
 	 */
 	public static final int ERROR_NO_FAMILY = -4;
-
+	/**
+	 * 不存在对应的关联关系
+	 */
+	public static final int ERROR_NO_RELATION = -5;
 }

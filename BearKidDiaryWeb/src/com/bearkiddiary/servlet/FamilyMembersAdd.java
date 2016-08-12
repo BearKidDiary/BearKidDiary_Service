@@ -12,8 +12,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.utils.ResultCode;
-import com.bearkiddiary.utils.ServiceBean;
-import com.google.gson.Gson;
 
 @WebServlet("/family/members/add")
 public class FamilyMembersAdd extends BaseServlet {

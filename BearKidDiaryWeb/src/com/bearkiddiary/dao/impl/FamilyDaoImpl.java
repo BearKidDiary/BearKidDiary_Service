@@ -58,7 +58,7 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 
 	@Override
 	public Set<Family> getAttendedFramily(String Uphone) {
-		final String hql = "select family from Family as family join family.members as member where member.Uphone = ?0";
+		final String hql = "select family from Family family join family.members m where m.Uphone = ?0";
 		List<Family> list = find(hql, Uphone);
 		return new HashSet<>(list);
 	}
@@ -73,6 +73,9 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 	@Override
 	public Set<User> getMembersInFamily(String Uphone) {
 		Family family = getCreatedFramily(Uphone);
+		if (family == null) {
+			return null;
+		}
 		return getMembersInFamily(family.getFid());
 	}
 
@@ -87,20 +90,26 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 
 	@Override
 	public Set<User> getMembersAndCreatorInFamily(long Fid) {
+		Set<User> set = new HashSet<>();
 		User creator = getCreatorInFamily(Fid);
 		Set<User> members = getMembersInFamily(Fid);
-		if (creator != null)
-			members.add(creator);
-		return members;
+		if (creator != null) {
+			set.add(creator);
+		}
+		set.addAll(members);
+		return set;
 	}
 
 	@Override
 	public Set<User> getMembersAndCreatorInFamily(String Uphone) {
+		Set<User> set = new HashSet<>();
 		Set<User> members = getMembersInFamily(Uphone);
 		User creator = userDao.getUser(Uphone);
-		if (creator != null)
-			members.add(creator);
-		return members;
+		if (creator != null) {
+			set.add(creator);
+		}
+		set.addAll(members);
+		return set;
 	}
 
 	@Override
@@ -160,5 +169,66 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 		family.getMembers().add(user);
 		update(family);
 		return ResultCode.SUCCESS;
-	};
+	}
+
+	@Override
+	public int deleteMemberFromFamily(String memberUphone, String creatorUphone) {
+		Family family = getCreatedFramily(creatorUphone);
+		if (family == null)
+			return ResultCode.ERROR_NO_FAMILY;
+
+		User member = userDao.getUser(memberUphone);
+		if (member == null) {
+			return ResultCode.ERROR_NO_USER;
+		}
+
+		boolean success = family.getMembers().remove(member);
+		update(family);
+		if (success) {
+			update(family);
+			return ResultCode.SUCCESS;
+		}
+		return ResultCode.ERROR_NO_RELATION;
+	}
+
+	@Override
+	public int deleteMemberFromFamily(String Uphone, Long Fid) {
+		Family family = getFamily(Fid);
+		if (family == null)
+			return ResultCode.ERROR_NO_FAMILY;
+
+		User member = userDao.getUser(Uphone);
+		if (member == null) {
+			return ResultCode.ERROR_NO_USER;
+		}
+
+		boolean success = family.getMembers().remove(member);
+		if (success) {
+			update(family);
+			return ResultCode.SUCCESS;
+		}
+		return ResultCode.ERROR_NO_RELATION;
+	}
+
+	@Override
+	public int updateFamilyName(Long Fid, String Fname) {
+		Family family = getFamily(Fid);
+		if (family == null) {
+			return ResultCode.ERROR_NO_FAMILY;
+		}
+		family.setFname(Fname);
+		update(family);
+		return ResultCode.SUCCESS;
+	}
+
+	@Override
+	public int updateFamilyName(String Uphone, String Fname) {
+		Family family = getCreatedFramily(Uphone);
+		if (family == null) {
+			return ResultCode.ERROR_NO_FAMILY;
+		}
+		family.setFname(Fname);
+		update(family);
+		return ResultCode.SUCCESS;
+	}
 }

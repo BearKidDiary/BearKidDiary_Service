@@ -12,6 +12,7 @@ import com.bearkiddiary.dao.KidDao;
 import com.bearkiddiary.dao.OrgDao;
 import com.bearkiddiary.dao.UserDao;
 import com.bearkiddiary.service.Service;
+import com.bearkiddiary.utils.ResultCode;
 
 public class ServiceImpl implements Service {
 
@@ -95,6 +96,9 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public int createFamily(String Uphone, String Fname) {
+		if (Fname == null) {
+			Fname = Uphone + "µÄ¼ÒÍ¥";
+		}
 		return familyDao.createFamily(Uphone, Fname);
 	}
 
@@ -114,6 +118,33 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
+	public Set<User> getFamilyMembersAndCreator(String Uphone, Long Fid) {
+		Set<User> members = null;
+		if (Fid != null) {
+			members = familyDao.getMembersAndCreatorInFamily(Fid);
+		}
+		if ((members == null || members.size() == 0) && Uphone != null) {
+			members = familyDao.getMembersAndCreatorInFamily(Uphone);
+		}
+		if (members == null) {
+			members = new HashSet<>();
+		}
+		return members;
+	}
+	
+	@Override
+	public User getFamilyCreator(String Uphone, Long Fid) {
+		User creator = null;
+		if(Fid!=null){
+			creator = familyDao.getCreatorInFamily(Fid);
+		}
+		if(creator==null && Uphone!=null){
+			creator = userDao.getUser(Uphone);
+		}
+		return creator;
+	}
+
+	@Override
 	public int addFamilyMembers(Long Fid, String creatorPhone, Long Uid, String memberPhone) {
 		if (Fid != null) {
 			if (Uid != null)
@@ -129,8 +160,45 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public Family getCreatedFamily(String Uphone) {
-		return familyDao.getCreatedFramily(Uphone);
+	public int removeFamilyMember(Long Fid, String creatorPhone, String memberPhone) {
+		int code = ResultCode.ERROR_MISSING_PARAMETER;
+		if (Fid != null) {
+			code = familyDao.deleteMemberFromFamily(memberPhone, Fid);
+		}
+		if (code != ResultCode.SUCCESS && creatorPhone != null) {
+			code = familyDao.deleteMemberFromFamily(memberPhone, creatorPhone);
+		}
+		return code;
+	}
+
+	@Override
+	public Family getCreatedFamily(String Uphone, Long Fid) {
+		Family family = null;
+		if (Fid != null) {
+			family = familyDao.getFamily(Fid);
+		}
+		if (family == null && Uphone != null) {
+			family = familyDao.getCreatedFramily(Uphone);
+		}
+		return family;
+	}
+
+	@Override
+	public Set<Family> getAttendFamily(String Uphone) {
+		return familyDao.getAttendedFramily(Uphone);
+	}
+
+	@Override
+	public int updateFamily(String Uphone, Long Fid, String Fname) {
+		int result = ResultCode.ERROR_MISSING_PARAMETER;
+		if (Fid != null) {
+			result = familyDao.updateFamilyName(Fid, Fname);
+		}
+
+		if (result != ResultCode.SUCCESS && Uphone != null) {
+			result = familyDao.updateFamilyName(Uphone, Fname);
+		}
+		return result;
 	}
 
 	@Override
