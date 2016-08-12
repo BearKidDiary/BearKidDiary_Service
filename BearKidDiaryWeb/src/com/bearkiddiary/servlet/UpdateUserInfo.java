@@ -12,13 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
+import com.bearkiddiary.utils.ParameterDecode;
 import com.bearkiddiary.utils.ServiceBean;
 import com.google.gson.Gson;
 
 /**
  * Servlet implementation class UpdateUserInfo
  */
-@WebServlet(name = "UpdateUserInfo", urlPatterns = "/updateinfo.jsp")
+@WebServlet(name = "UpdateUserInfo", urlPatterns = "/user/updateinfo")
 public class UpdateUserInfo extends BaseServlet {
 	private static final long serialVersionUID = 1L;
     private Result<User> result;
@@ -39,17 +40,14 @@ public class UpdateUserInfo extends BaseServlet {
 		int updateId = -1;
 		if(Uname != null){
 			//解码
-			String name = new String(Uname.getBytes("iso-8859-1"), "UTF-8");
-			name = URLDecoder.decode(name, "UTF-8");
-			updateId = service.update(Uphone, User.NAME, name);
+			String name = ParameterDecode.decode(Uname);
+			updateId = service.updateUser(Uphone, User.NAME, name);
 		}else if(Uarea != null){
-			String area = new String(Uarea.getBytes("iso-8859-1"), "UTF-8");
-			area = URLDecoder.decode(area, "UTF-8");
-			updateId = service.update(Uphone, User.AREA, area);
+			String area = ParameterDecode.decode(Uarea);
+			updateId = service.updateUser(Uphone, User.AREA, area);
 		}else if(Uemail != null){
-			Uemail = new String(Uemail.getBytes("iso-8859-1"), "UTF-8");
-			Uemail = URLDecoder.decode(Uemail, "UTF-8");
-			updateId = service.update(Uphone, User.EMAIL, Uemail);
+			Uemail = ParameterDecode.decode(Uemail);
+			updateId = service.updateUser(Uphone, User.EMAIL, Uemail);
 		}else {
 			System.out.println("没有任何数据！");
 		}

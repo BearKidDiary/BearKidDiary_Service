@@ -25,7 +25,7 @@ public interface Service {
 	 * @param Parameter
 	 * @param value
 	 */
-	int update(String Uphone, String Parameter, String value);
+	int updateUser(String Uphone, String Parameter, String value);
 
 	/**
 	 * 创建一个家庭
@@ -166,4 +166,33 @@ public interface Service {
 	 */
 	int addKid(String Kname, Long Kbirthday, String Kavatar, String Ksex, String Kask, Integer Kflowers, Long Fid,
 			String Uphone);
+
+	// 机构
+	/**
+	 * 创建机构
+	 * 
+	 * @param Oname
+	 * @param Oaddress
+	 * @param Oannounce
+	 * @param Uid
+	 * @return
+	 */
+	public long createOrg(String Oname, String Oaddress, String Oannounce, Long Uid);
+
+	/**
+	 * 解散机构
+	 * 
+	 * @param Oid
+	 */
+	public void deleteOrg(long Oid);
+
+	/**
+	 * 更新机构信息
+	 * 
+	 * @param Oid
+	 * @param Parameter
+	 * @param value
+	 * @return
+	 */
+	long updateOrg(long Oid, String Parameter, String value);
 }

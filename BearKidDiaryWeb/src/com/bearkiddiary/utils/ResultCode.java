@@ -1,3 +1,4 @@
+
 package com.bearkiddiary.utils;
 
 public class ResultCode {

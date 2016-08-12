@@ -2,6 +2,7 @@ package com.bearkiddiary.common.dao.impl;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
@@ -126,6 +127,12 @@ public class BaseDaoHibernate<T> implements BaseDao<T> {
 		return query.setFirstResult((pageNo - 1) * pageSize).setMaxResults(pageSize).list();
 	}
 	
+	/**
+	 * ¸üÐÂ²Ù×÷
+	 * @param hql
+	 * @param objects
+	 * @return
+	 */
 	public int update(String hql, Object...objects){
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
 		for(int i = 0; i < objects.length; i++){
@@ -133,5 +140,5 @@ public class BaseDaoHibernate<T> implements BaseDao<T> {
 		}
 		return query.executeUpdate();
 	}
-
+	
 }
