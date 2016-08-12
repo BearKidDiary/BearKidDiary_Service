@@ -26,9 +26,7 @@ public class UpdateUserInfo extends BaseServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		service = ServiceBean.getService(getServletContext());
 		user = new User();
 		
 		String Uphone = request.getParameter(User.PHONE);
@@ -67,7 +65,6 @@ public class UpdateUserInfo extends BaseServlet {
 			result.setResultMessage("更新数据失败！");
 			result.setData(user);
 		}
-		Gson gson = new Gson();
 		out.write(gson.toJson(result));
 		System.out.println(gson.toJson(result));
 	}
@@ -75,6 +72,6 @@ public class UpdateUserInfo extends BaseServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		doPost(request, response);
 	}
-
 }

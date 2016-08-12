@@ -5,6 +5,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,28 +17,34 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "Course")
 public class Course {
-
+	@Expose
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Cid;
 	/**
 	 * 开课时间
 	 */
+	@Expose
 	private Long Cclasstime;
 	/**
 	 * 结束时间
 	 */
+	@Expose
 	private Long Cendtime;
 	/**
 	 * 开学时间
 	 */
+	@Expose
 	private Long Ctime;
 	/**
 	 * 毕业时间
 	 */
+	@Expose
 	private Long Cofftime;
 	/**
 	 * 开课审批人
@@ -48,18 +55,22 @@ public class Course {
 	/**
 	 * 课程的开课背景、原因
 	 */
+	@Expose
 	private String Cbackground;
 	/**
 	 * 课程描述
 	 */
+	@Expose
 	private String Cdesc;
 	/**
 	 * 课程名称
 	 */
+	@Expose
 	private String Cname;
 	/**
 	 * 周一到周日是否需要上课
 	 */
+	@Expose
 	private Boolean Cmonday, Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday;
 	/**
 	 * 课程所属的机构

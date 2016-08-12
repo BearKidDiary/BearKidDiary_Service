@@ -66,13 +66,13 @@ public class BaseDaoHibernate<T> implements BaseDao<T> {
 
 	// 根据HQL语句查询实体
 	@SuppressWarnings("unchecked")
-	protected List<T> find(String hql) {
+	public List<T> find(String hql) {
 		return (List<T>) getSessionFactory().getCurrentSession().createQuery(hql).list();
 	}
 
 	// 根据带占位符参数HQL语句查询实体
 	@SuppressWarnings("unchecked")
-	protected List<T> find(String hql, Object... params) {
+	public List<T> find(String hql, Object... params) {
 		// 创建查询
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
 		// 为包含占位符的HQL语句设置参数
@@ -94,7 +94,7 @@ public class BaseDaoHibernate<T> implements BaseDao<T> {
 	 * @return 当前页的所有记录
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<T> findByPage(String hql, int pageNo, int pageSize) {
+	public List<T> findByPage(String hql, int pageNo, int pageSize) {
 		// 创建查询
 		return getSessionFactory().getCurrentSession().createQuery(hql)
 				// 执行分页
@@ -115,7 +115,7 @@ public class BaseDaoHibernate<T> implements BaseDao<T> {
 	 * @return 当前页的所有记录
 	 */
 	@SuppressWarnings("unchecked")
-	protected List<T> findByPage(String hql, int pageNo, int pageSize, Object... params) {
+	public List<T> findByPage(String hql, int pageNo, int pageSize, Object... params) {
 		// 创建查询
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
 		// 为包含占位符的HQL语句设置参数

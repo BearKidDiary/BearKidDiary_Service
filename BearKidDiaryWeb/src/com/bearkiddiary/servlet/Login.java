@@ -21,27 +21,25 @@ import com.google.gson.Gson;
 /**
  * Servlet implementation class LoginServlet
  */
-@WebServlet(name = "LoginServlet", urlPatterns = "/login.jsp")
-public class LoginServlet extends BaseServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = "/user/login")
+public class Login extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 	private Result<User> result;
-	private Gson gson = new Gson();
-	
-	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		service = ServiceBean.getService(getServletContext());
 
-//		Map<String, String> params=((Object) request).getParams();
-//		Iterator it = params.keySet().iterator();
-//		while(it.hasNext()){
-//		    String paramName = (String) it.next();
-//		    String paramValue = request.getParameter(paramName);
-//		    //处理你得到的参数名与值
-//		    System.out.println(paramName+"="+paramValue);
-//		}
-		
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+
+		// Map<String, String> params=((Object) request).getParams();
+		// Iterator it = params.keySet().iterator();
+		// while(it.hasNext()){
+		// String paramName = (String) it.next();
+		// String paramValue = request.getParameter(paramName);
+		// //处理你得到的参数名与值
+		// System.out.println(paramName+"="+paramValue);
+		// }
+
 		String Uphone = request.getParameter("Uphone");
 		String Upsw = request.getParameter("Upsw");
 		System.out.println(Uphone);
@@ -72,7 +70,6 @@ public class LoginServlet extends BaseServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+		doPost(request, response);
 	}
 }

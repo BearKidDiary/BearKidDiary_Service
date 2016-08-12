@@ -7,9 +7,8 @@ import com.bearkiddiary.bean.User;
 import com.bearkiddiary.common.dao.BaseDao;
 
 public interface FamilyDao extends BaseDao<Family> {
-	public static final int ERROR_NO_USER = -1;
-	public static final int ERROR_ALREADY_HAVE_FAMILY = -2;
-	public static final int SUCESS = 0;
+
+	Family getFamily(Long Fid);
 
 	/**
 	 * 创建一个家庭
@@ -58,7 +57,7 @@ public interface FamilyDao extends BaseDao<Family> {
 	 * @param Fid
 	 * @return
 	 */
-	Set<User> getCreatorInFamily(long Fid);
+	User getCreatorInFamily(long Fid);
 
 	/**
 	 * 获取id为Fid的家庭中的所有家庭成员（包括创建者）
@@ -75,4 +74,45 @@ public interface FamilyDao extends BaseDao<Family> {
 	 * @return
 	 */
 	Set<User> getMembersAndCreatorInFamily(String Uphone);
+
+	/**
+	 * 添加家庭成员到家庭中
+	 * 
+	 * @param Fid
+	 *            家庭编号
+	 * @param Uid
+	 *            家庭成员编号
+	 */
+	int addMemberToFamily(Long Fid, Long Uid);
+
+	/**
+	 * 添加家庭成员到家庭中
+	 * 
+	 * @param Fid
+	 *            家庭编号
+	 * @param Uphone
+	 *            成员的手机号码
+	 */
+	int addMemberToFamily(Long Fid, String Uphone);
+
+	/**
+	 * 添加家庭成员到用户创建的家庭中
+	 * 
+	 * @param Uphone
+	 *            创建者的手机号码
+	 * @param Uid
+	 *            家庭成员
+	 */
+	int addMemberToFamily(String Uphone, Long Uid);
+
+	/**
+	 * 添加家庭成员到用户创建的家庭中
+	 * 
+	 * @param creatorPhone
+	 *            创建者的手机号码
+	 * @param memberPhone
+	 *            成员的手机号码
+	 * @return
+	 */
+	int addMemberToFamily(String creatorPhone, String memberPhone);
 }

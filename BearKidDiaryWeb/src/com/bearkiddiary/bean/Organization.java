@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -17,32 +18,39 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "Organization")
 public class Organization implements Serializable {
-
+	@Expose
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Oid;
 	/**
 	 * 机构的名称
 	 */
+	@Expose
 	private String Oname;
 	/**
 	 * 机构的地址
 	 */
+	@Expose
 	private String Oaddress;
 	/**
 	 * 机构的成立时间
 	 */
+	@Expose
 	private Long Otime;
 	/**
 	 * 机构的标志图
 	 */
+	@Expose
 	private String Oavatar;
 	/**
 	 * 机构的公告
 	 */
+	@Expose
 	private String Oannounce;
 	/**
 	 * 机构的创建者

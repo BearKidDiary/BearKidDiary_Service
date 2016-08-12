@@ -16,34 +16,31 @@ import com.bearkiddiary.utils.ServiceBean;
 /**
  * Servlet implementation class RegisterServlet
  */
-@WebServlet(name = "RegisterServlet", urlPatterns = "/regist.jsp")
-public class RegisterServlet extends BaseServlet {
+@WebServlet(name = "RegisterServlet", urlPatterns = "/user/regist")
+public class Register extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-    
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-    		throws ServletException, IOException {
-    	response.setContentType("text/html;charset=GBK");
-    	PrintWriter out = response.getWriter();
-    	service = ServiceBean.getService(getServletContext());
-    	
-    	User user = new User();
+
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		PrintWriter out = response.getWriter();
+
+		User user = new User();
 		boolean isSuccess = false;
 		user.setUphone(request.getParameter("Uphone"));
 		user.setUpsw(request.getParameter("Upsw"));
-		if(user.getUphone() == null || user.getUpsw() == null){
+		if (user.getUphone() == null || user.getUpsw() == null) {
 			isSuccess = false;
-		}else {
+		} else {
 			isSuccess = service.Register(user);
 		}
 		System.out.println(isSuccess);
 		out.println(isSuccess);
-    }
+	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		
+		doPost(request, response);
 	}
 }

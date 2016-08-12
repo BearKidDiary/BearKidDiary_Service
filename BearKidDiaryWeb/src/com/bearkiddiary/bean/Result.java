@@ -1,5 +1,7 @@
 package com.bearkiddiary.bean;
 
+import com.google.gson.annotations.Expose;
+
 /**
  * 返回给客户端的数据格式
  * @author admin
@@ -7,9 +9,11 @@ package com.bearkiddiary.bean;
  * @param <T>
  */
 public class Result<T> {
-	
+	@Expose
 	private int resultCode;
+	@Expose
 	private String resultMessage;
+	@Expose
 	private T data;
 	
 	public int getResultCode() {

@@ -6,6 +6,7 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,6 +14,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.google.gson.annotations.Expose;
 
 /**
  * 用户表
@@ -32,22 +35,30 @@ public class User implements Serializable {
 	public static final String SPECIALTY = "Uspecialty";
 	public static final String EDUEXPERIENCE = "Ueduexperience";
 	public static final String EMAIL = "Uemail";
+	@Expose
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Uid;
 
+	@Expose
 	private String Uname = null;
 
+	@Expose
 	private String Usex = null;
 
+	@Expose
 	private String Uphone = null;
 
+	@Expose
 	private String Uarea = null;
 
+	@Expose
 	private String Upsw;
 
+	@Expose
 	private String Uavatar;
 
+	@Expose
 	private String Uemail = null;
 
 	/**
@@ -182,5 +193,11 @@ public class User implements Serializable {
 
 	public void setAttendOrganization(Set<Organization> attendOrganization) {
 		this.attendOrganization = attendOrganization;
+	}
+
+	@Override
+	public String toString() {
+		StringBuffer sb = new StringBuffer("Uid: " + Uid + " Uname: " + Uname + " Uphone: " + Uphone);
+		return sb.toString();
 	}
 }

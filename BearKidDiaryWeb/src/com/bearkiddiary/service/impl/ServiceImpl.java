@@ -1,9 +1,13 @@
 package com.bearkiddiary.service.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.bearkiddiary.bean.Family;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.dao.FamilyDao;
+import com.bearkiddiary.dao.KidDao;
 import com.bearkiddiary.dao.UserDao;
 import com.bearkiddiary.service.Service;
 
@@ -19,6 +23,12 @@ public class ServiceImpl implements Service {
 
 	public void setFamilyDao(FamilyDao familyDao) {
 		this.familyDao = familyDao;
+	}
+
+	private KidDao kidDao;
+
+	public void setKidDao(KidDao kidDao) {
+		this.kidDao = kidDao;
 	}
 
 	// @Override
@@ -71,4 +81,38 @@ public class ServiceImpl implements Service {
 		return familyDao.createFamily(Uphone, Fname);
 	}
 
+	@Override
+	public Set<User> getFamilyMembers(String Uphone, Long Fid) {
+		Set<User> members = null;
+		if (Fid != null) {
+			members = familyDao.getMembersInFamily(Fid);
+		}
+		if ((members == null || members.size() == 0) && Uphone != null) {
+			members = familyDao.getMembersInFamily(Uphone);
+		}
+		if (members == null) {
+			members = new HashSet<>();
+		}
+		return members;
+	}
+
+	@Override
+	public int addFamilyMembers(Long Fid, String creatorPhone, Long Uid, String memberPhone) {
+		if (Fid != null) {
+			if (Uid != null)
+				return familyDao.addMemberToFamily(Fid, Uid);
+			else
+				return familyDao.addMemberToFamily(Fid, memberPhone);
+		} else {
+			if (Uid != null)
+				return familyDao.addMemberToFamily(creatorPhone, Uid);
+			else
+				return familyDao.addMemberToFamily(creatorPhone, memberPhone);
+		}
+	}
+
+	@Override
+	public Family getCreatedFamily(String Uphone) {
+		return familyDao.getCreatedFramily(Uphone);
+	}
 }

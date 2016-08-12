@@ -54,12 +54,14 @@
 		p:sessionFactory-ref="sessionFactory" />
 
 	<bean id="service" class="com.bearkiddiary.service.impl.ServiceImpl"
-		p:userDao-ref="userDao" />
+		p:userDao-ref="userDao" p:familyDao-ref="familyDao" p:kidDao-ref="kidDao" />
 	<bean id="userDao" class="com.bearkiddiary.dao.impl.UserDaoImpl"
 		p:sessionFactory-ref="sessionFactory" />
 	<bean id="familyDao" class="com.bearkiddiary.dao.impl.FamilyDaoImpl"
 		p:sessionFactory-ref="sessionFactory" p:userDao-ref="userDao" />
-
+	<bean id="kidDao" class="com.bearkiddiary.dao.impl.KidDaoImpl"
+		p:sessionFactory-ref="sessionFactory" p:familyDao-ref="familyDao" />
+		
 	<!-- 定义事务管理器（声明式的事务） -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager"

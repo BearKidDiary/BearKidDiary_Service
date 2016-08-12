@@ -60,8 +60,18 @@ public class UserDaoImpl extends BaseDaoHibernate<User> implements UserDao {
 
 	@Override
 	public User getUser(String Uphone) {
-		final String hql = "select * from User where User.Uphone = " + Uphone;
-		List<User> list = find(hql);
+		final String hql = "select user from User user where user.Uphone = ?0";
+		List<User> list = find(hql, Uphone);
+		if (list.size() > 0) {
+			return list.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public User getUser(Long Uid) {
+		final String hql = "select user from User user where user.Uid = ?0";
+		List<User> list = find(hql, Uid);
 		if (list.size() > 0) {
 			return list.get(0);
 		}

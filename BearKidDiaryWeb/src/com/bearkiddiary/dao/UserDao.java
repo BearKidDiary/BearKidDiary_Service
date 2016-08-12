@@ -39,7 +39,13 @@ public interface UserDao extends BaseDao<User> {
 	 * 获取手机号码为Uphone的用户
 	 * 
 	 * @param Uphone
-	 * @return
 	 */
 	User getUser(String Uphone);
+
+	/**
+	 * 获取编号为Uid的用户
+	 * 
+	 * @param Uid
+	 */
+	User getUser(Long Uid);
 }

@@ -15,37 +15,21 @@ import javax.servlet.annotation.WebFilter;
 @WebFilter("/*")
 public class EncodeFilter implements Filter {
 
-	/**
-	 * Default constructor.
-	 */
 	public EncodeFilter() {
 	}
 
-	/**
-	 * @see Filter#destroy()
-	 */
+	@Override
 	public void destroy() {
 	}
 
-	/**
-	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
-	 */
+	@Override
+	public void init(FilterConfig filterConfig) throws ServletException {
+	}
+
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		// TODO Auto-generated method stub
-		// place your code here
 		request.setCharacterEncoding("UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		response.setContentType("json/application;charset=utf-8");
-		// pass the request along the filter chain
+		response.setCharacterEncoding("GBK");
 		chain.doFilter(request, response);
 	}
-
-	/**
-	 * @see Filter#init(FilterConfig)
-	 */
-	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
-	}
-
 }
