@@ -35,19 +35,19 @@ public class Family implements Serializable {
 	/**
 	 * 家庭的创建者， 只有创建者可以新增孩子
 	 */
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Uid")
 	private User creator;
 	/**
 	 * 家庭的成员
 	 */
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Family_User", joinColumns = @JoinColumn(name = "Fid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
 	private Set<User> members = new HashSet<>();
 	/**
 	 * 家庭的孩子
 	 */
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "family", fetch = FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "family")
 	private Set<Kid> kid = new HashSet<>();
 
 	public Long getFid() {
@@ -109,24 +109,6 @@ public class Family implements Serializable {
 
 	@Override
 	public String toString() {
-		StringBuffer sb = new StringBuffer("Fid: " + Fid + " Fname: " + Fname);
-		if (creator != null) {
-			sb.append("  creator: " + creator);
-		}
-		if (members != null) {
-			sb.append(" members [ ");
-			for (User user : members) {
-				sb.append(user + " ");
-			}
-			sb.append("]");
-		}
-		if (kid != null) {
-			sb.append(" kids [ ");
-			for (Kid k : kid) {
-				sb.append(k + " ");
-			}
-			sb.append("]");
-		}
-		return sb.toString();
+		return "Fid: " + Fid + " Fname: " + Fname;
 	}
 }

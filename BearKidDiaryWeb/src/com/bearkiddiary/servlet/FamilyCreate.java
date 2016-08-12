@@ -22,7 +22,7 @@ import com.google.gson.Gson;
  * Servlet implementation class CreateFamilyServlet
  */
 @WebServlet("/family/create")
-public class CreateFamily extends BaseServlet {
+public class FamilyCreate extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -33,7 +33,7 @@ public class CreateFamily extends BaseServlet {
 		String Uphone = request.getParameter("Uphone");
 		String Fname = request.getParameter("Fname");
 		System.out.println("phone: " + Uphone + " name: " + Fname);
-		if (Uphone == null || Fname == null) {
+		if (Uphone == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
 			result.setResultMessage("请求参数不完整");
 			out.write(gson.toJson(result));

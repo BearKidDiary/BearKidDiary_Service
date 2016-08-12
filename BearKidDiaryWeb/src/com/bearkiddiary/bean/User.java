@@ -52,7 +52,6 @@ public class User implements Serializable {
 	@Expose
 	private String Uarea = null;
 
-	@Expose
 	private String Upsw;
 
 	@Expose
@@ -199,5 +198,19 @@ public class User implements Serializable {
 	public String toString() {
 		StringBuffer sb = new StringBuffer("Uid: " + Uid + " Uname: " + Uname + " Uphone: " + Uphone);
 		return sb.toString();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof User) {
+			User u = (User) obj;
+			if (u.getUid() != null && Uid != null && u.getUid().equals(Uid)) {
+				return true;
+			}
+			if (u.getUphone() != null && Uphone != null && u.getUphone().equals(Uphone)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

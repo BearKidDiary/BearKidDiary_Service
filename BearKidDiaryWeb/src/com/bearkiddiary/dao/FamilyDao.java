@@ -115,4 +115,44 @@ public interface FamilyDao extends BaseDao<Family> {
 	 * @return
 	 */
 	int addMemberToFamily(String creatorPhone, String memberPhone);
+
+	/**
+	 * 删除家庭成员
+	 * 
+	 * @param Uphone
+	 *            家庭成员手机号码
+	 * @param Fid
+	 *            家庭编号
+	 */
+	int deleteMemberFromFamily(String Uphone, Long Fid);
+
+	/**
+	 * 删除家庭成员
+	 * 
+	 * @param memberUphone
+	 *            家庭成员的手机号码
+	 * @param creatorUphone
+	 *            家庭创建者的手机号码
+	 */
+	int deleteMemberFromFamily(String memberUphone, String creatorUphone);
+
+	/**
+	 * 更新家庭的名字
+	 * 
+	 * @param Fid
+	 *            家庭编号
+	 * @param Fname
+	 *            家庭的新名字
+	 */
+	int updateFamilyName(Long Fid, String Fname);
+
+	/**
+	 * 更新家庭的名字
+	 * 
+	 * @param Uphone
+	 *            家庭创建者的手机号码
+	 * @param Fname
+	 *            家庭的新名字
+	 */
+	int updateFamilyName(String Uphone, String Fname);
 }

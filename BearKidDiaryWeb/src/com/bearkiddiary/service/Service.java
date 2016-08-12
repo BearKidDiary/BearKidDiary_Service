@@ -49,6 +49,28 @@ public interface Service {
 	Set<User> getFamilyMembers(String Uphone, Long Fid);
 
 	/**
+	 * 获得家庭的所有成员 包含创建者<br/>
+	 * Uphone或者Fid二者有其一就可以了
+	 * 
+	 * @param Uphone
+	 *            创建者的手机号码
+	 * @param Fid
+	 *            家庭的编号
+	 * @return
+	 */
+	Set<User> getFamilyMembersAndCreator(String Uphone, Long Fid);
+
+	/**
+	 * 获取家庭的创建者
+	 * 
+	 * @param Uphone
+	 *            创建者的手机号码
+	 * @param Fid
+	 *            家庭编号
+	 */
+	User getFamilyCreator(String Uphone, Long Fid);
+
+	/**
 	 * 添加家庭成员到家庭中
 	 * 
 	 * @param Fid
@@ -58,5 +80,46 @@ public interface Service {
 	 */
 	int addFamilyMembers(Long Fid, String creatorPhone, Long Uid, String memberPhone);
 
-	Family getCreatedFamily(String Uphone);
+	/**
+	 * 删除家庭成员
+	 * 
+	 * @param Fid
+	 *            家庭编号
+	 * @param creatorPhone
+	 *            创建者的手机号码
+	 * @param memberPhone
+	 *            家庭成员的手机号码
+	 */
+	int removeFamilyMember(Long Fid, String creatorPhone, String memberPhone);
+
+	/**
+	 * 获取创建的家庭信息
+	 * 
+	 * @param Uphone
+	 *            创建者的手机号码
+	 * @param Fid
+	 *            家庭编号
+	 */
+	Family getCreatedFamily(String Uphone, Long Fid);
+
+	/**
+	 * 获取参与的家庭信息
+	 * 
+	 * @param Uphone
+	 *            创建者的手机号码
+	 */
+	Set<Family> getAttendFamily(String Uphone);
+
+	/**
+	 * 更新家庭信息
+	 * 
+	 * @param Uphone
+	 *            创建者的手机号码
+	 * @param Fid
+	 *            家庭的编号
+	 * @param Fname
+	 *            家庭的名字
+	 * @return
+	 */
+	int updateFamily(String Uphone, Long Fid, String Fname);
 }
