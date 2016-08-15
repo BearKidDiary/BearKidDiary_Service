@@ -28,11 +28,11 @@ public class TimeLine implements Serializable {
 
 	private Integer Ttypelogo;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "Uid")
 	private User author;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "Kid")
 	private Kid kid;
 

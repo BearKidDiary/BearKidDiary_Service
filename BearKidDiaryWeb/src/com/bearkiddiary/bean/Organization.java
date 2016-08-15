@@ -71,7 +71,7 @@ public class Organization implements Serializable {
 	/**
 	 * 机构的创建者
 	 */
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "creator")
 	private User creator;
 	/**
@@ -84,7 +84,7 @@ public class Organization implements Serializable {
 	/**
 	 * 机构的家长
 	 */
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "Organization_Parents", joinColumns = @JoinColumn(name = "Oid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
 	private Set<User> parents = new HashSet<>();
 	/**

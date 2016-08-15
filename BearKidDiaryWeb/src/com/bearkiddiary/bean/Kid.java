@@ -54,9 +54,14 @@ public class Kid implements Serializable {
 	@Expose
 	private String Kask;
 	/**
+	 * 孩子获得的小红花数目
+	 */
+	@Expose
+	private Integer Kflowers;
+	/**
 	 * 所在的家庭
 	 */
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "Fid")
 	private Family family;
 	/**
@@ -87,7 +92,7 @@ public class Kid implements Serializable {
 	/**
 	 * 孩子参与的课程
 	 */
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "students")
+	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "students")
 	private Set<Course> attendCourse = new HashSet<>();
 
 	public Long getKid() {
@@ -186,4 +191,11 @@ public class Kid implements Serializable {
 		this.attendCourse = attendCourse;
 	}
 
+	public Integer getKflowers() {
+		return Kflowers;
+	}
+
+	public void setKflowers(Integer kflowers) {
+		Kflowers = kflowers;
+	}
 }

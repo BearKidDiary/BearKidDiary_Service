@@ -25,7 +25,7 @@ public interface FamilyDao extends BaseDao<Family> {
 	 * @param Uphone
 	 * @return 创建的家庭
 	 */
-	Family getCreatedFramily(String Uphone);
+	Family getCreatedFamily(String Uphone);
 
 	/**
 	 * 获取参与的家庭（不包括创建的家庭）

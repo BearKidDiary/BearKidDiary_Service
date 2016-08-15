@@ -3,6 +3,7 @@ package com.bearkiddiary.service;
 import java.util.Set;
 
 import com.bearkiddiary.bean.Family;
+import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.User;
 
 public interface Service {
@@ -26,6 +27,7 @@ public interface Service {
 	 */
 	int updateUser(String Uphone, String Parameter, String value);
 
+	//////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
 	/**
 	 * 创建一个家庭
 	 * 
@@ -124,6 +126,72 @@ public interface Service {
 	int updateFamily(String Uphone, Long Fid, String Fname);
 	
 //机构
+
+	//////////////////////////////////////////////////////// 孩子/////////////////////////////////////////////////////////
+	/**
+	 * 获取孩子的信息
+	 * 
+	 * @param Kid
+	 *            孩子编号
+	 * @param Uphone
+	 *            家庭创建者手机号码
+	 * @param Fid
+	 *            家庭编号
+	 */
+	Set<Kid> getKids(Long Kid, String Uphone, Long Fid);
+
+	/**
+	 * 删除孩子
+	 * 
+	 * @param Kid
+	 *            孩子编号
+	 */
+	int removeKid(Long Kid);
+
+	/**
+	 * 新添加一个孩子到家庭中
+	 * 
+	 * @param Kname
+	 *            孩子的名字
+	 * @param Kbirthday
+	 *            孩子的生日
+	 * @param Kavatar
+	 *            孩子头像的URL
+	 * @param Ksex
+	 *            孩子的性别
+	 * @param Kask
+	 *            家长的叮嘱
+	 * @param Kflowers
+	 *            小红花数
+	 * @param Fid
+	 *            家庭的编号
+	 * @param Uphone
+	 *            家庭创建者的手机号码
+	 */
+	int addKid(String Kname, Long Kbirthday, String Kavatar, String Ksex, String Kask, Integer Kflowers, Long Fid,
+			String Uphone);
+
+	/**
+	 * 更新孩子的信息
+	 * 
+	 * @param Kid
+	 *            孩子的编号
+	 * @param Kname
+	 *            孩子的名字
+	 * @param Kbirthday
+	 *            孩子的生日
+	 * @param Kavatar
+	 *            孩子头像的URL
+	 * @param Ksex
+	 *            孩子的性别
+	 * @param Kask
+	 *            家长的叮嘱
+	 * @param Kflowers
+	 *            小红花数
+	 */
+	int updateKid(Long Kid, String Kname, Long Kbirthday, String Kavatar, String Ksex, String Kask, Integer Kflowers);
+
+	// 机构
 	/**
 	 * 创建机构
 	 * @param Oname 

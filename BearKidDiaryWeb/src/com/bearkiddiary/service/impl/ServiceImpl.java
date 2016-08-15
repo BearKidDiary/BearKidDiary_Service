@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.bearkiddiary.bean.Family;
+import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.dao.FamilyDao;
@@ -178,7 +179,7 @@ public class ServiceImpl implements Service {
 			family = familyDao.getFamily(Fid);
 		}
 		if (family == null && Uphone != null) {
-			family = familyDao.getCreatedFramily(Uphone);
+			family = familyDao.getCreatedFamily(Uphone);
 		}
 		return family;
 	}
@@ -249,4 +250,69 @@ public class ServiceImpl implements Service {
 	}
 
 	
+
+	@Override
+	public Set<Kid> getKids(Long Kid, String Uphone, Long Fid) {
+		if (Kid != null) {
+			Set<Kid> set = new HashSet<>();
+			Kid k = kidDao.getKid(Kid);
+			if (k != null) {
+				set.add(k);
+				return set;
+			}
+		}
+
+		if (Fid != null) {
+			Set<Kid> set = kidDao.getKidsInFamily(Fid);
+			if (set != null)
+				return set;
+		}
+
+		if (Uphone != null) {
+			Set<Kid> set = kidDao.getKidsInFamily(Uphone);
+			if (set != null)
+				return set;
+		}
+
+		return null;
+	}
+
+	@Override
+	public int removeKid(Long Kid) {
+		return kidDao.removeKid(Kid);
+	}
+
+	@Override
+	public int addKid(String Kname, Long Kbirthday, String Kavatar, String Ksex, String Kask, Integer Kflowers,
+			Long Fid, String Uphone) {
+		Kid kid = new Kid();
+		kid.setKname(Kname);
+		kid.setKbirthday(Kbirthday);
+		kid.setKavatar(Kavatar);
+		kid.setKsex(Ksex);
+		kid.setKask(Kask);
+		kid.setKflowers(Kflowers);
+
+		int code = ResultCode.ERROR_NO_FAMILY;
+		if (Fid != null) {
+			code = kidDao.addKid(Fid, kid);
+		}
+		if (code != ResultCode.SUCCESS && Uphone != null) {
+			code = kidDao.addKid(Uphone, kid);
+		}
+		return code;
+	}
+
+	@Override
+	public int updateKid(Long Kid, String Kname, Long Kbirthday, String Kavatar, String Ksex, String Kask,
+			Integer Kflowers) {
+		Kid data = new Kid();
+		data.setKname(Kname);
+		data.setKbirthday(Kbirthday);
+		data.setKavatar(Kavatar);
+		data.setKsex(Ksex);
+		data.setKask(Kask);
+		data.setKflowers(Kflowers);
+		return kidDao.updateKid(Kid, data);
+	}
 }

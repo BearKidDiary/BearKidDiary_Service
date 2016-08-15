@@ -32,5 +32,17 @@ public class ResultCode {
 	/**
 	 * 不存在该机构
 	 */
-	public static final int ERROR_NO_ORG = -6;
+	public static final int ERROR_NO_ORG = -8;
+	/**
+	 * 不存在该孩子
+	 */
+	public static final int ERROR_NO_KID = -6;
+	/**
+	 * 已存在该孩子
+	 */
+	public static final int ERROR_EXIST_KID = -7;
+	/**
+	 * 不能正常获得结果，过程发生了错误
+	 */
+	public static final int ERROR_NO_RESULT = -100;
 }
