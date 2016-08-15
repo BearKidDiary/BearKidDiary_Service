@@ -66,13 +66,13 @@ public class Organization implements Serializable {
 	/**
 	 * 机构的创建者
 	 */
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "creator")
 	private User creator;
 	/**
 	 * 机构的成员
 	 */
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "Organization_User", joinColumns = @JoinColumn(name = "Oid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
 	private Set<User> members = new HashSet<>();
 	/**

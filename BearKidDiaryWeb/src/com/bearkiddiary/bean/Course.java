@@ -75,13 +75,13 @@ public class Course {
 	/**
 	 * 课程所属的机构
 	 */
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "organization")
 	private Organization organization;
 	/**
 	 * 参与课程的孩子
 	 */
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "Course_Student", joinColumns = @JoinColumn(name = "Cid"), inverseJoinColumns = @JoinColumn(name = "Kid"))
 	private Set<Kid> students = new HashSet<>();
 

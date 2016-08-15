@@ -61,7 +61,7 @@ public class Kid implements Serializable {
 	/**
 	 * 所在的家庭
 	 */
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "Fid")
 	private Family family;
 	/**
@@ -92,7 +92,7 @@ public class Kid implements Serializable {
 	/**
 	 * 孩子参与的课程
 	 */
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "students")
+	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "students")
 	private Set<Course> attendCourse = new HashSet<>();
 
 	public Long getKid() {

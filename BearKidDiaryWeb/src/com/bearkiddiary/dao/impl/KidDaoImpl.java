@@ -21,7 +21,7 @@ public class KidDaoImpl extends BaseDaoHibernate<Kid> implements KidDao {
 
 	@Override
 	public Kid getKid(Long Kid) {
-		final String hql = "select k from Kid k where k.Kid = ?";
+		final String hql = "select k from Kid k where k.Kid = ?0";
 		List<Kid> list = find(hql, Kid);
 		if (list != null && list.size() > 0)
 			return list.get(0);
@@ -33,10 +33,8 @@ public class KidDaoImpl extends BaseDaoHibernate<Kid> implements KidDao {
 		Family family = familyDao.getFamily(Fid);
 		if (family == null)
 			return null;
-
-		final String hql = "select k from Kid k join k.family family where family.Fid = ?";
-		List<Kid> list = find(hql, Fid);
-		return new HashSet<>(list);
+		family.getKid().size();
+		return family.getKid();
 	}
 
 	@Override
@@ -44,7 +42,7 @@ public class KidDaoImpl extends BaseDaoHibernate<Kid> implements KidDao {
 		Family family = familyDao.getCreatedFamily(Uphone);
 		if (family == null)
 			return null;
-		System.out.println(family.getKid().size());
+		family.getKid().size();
 		return family.getKid();
 	}
 
@@ -55,6 +53,11 @@ public class KidDaoImpl extends BaseDaoHibernate<Kid> implements KidDao {
 			return ResultCode.ERROR_NO_KID;
 
 		if (kid.getKname() != null) {
+			for(Kid brother:k.getFamily().getKid()){//有兄弟的名字相同
+				if(brother.getKname().equals(kid.getKname())){
+					return ResultCode.ERROR_EXIST_KID;
+				}
+			}
 			k.setKname(kid.getKname());
 		}
 
@@ -88,10 +91,13 @@ public class KidDaoImpl extends BaseDaoHibernate<Kid> implements KidDao {
 		if (family == null) {
 			return ResultCode.ERROR_NO_FAMILY;
 		}
-
+		for (Kid k : family.getKid()) {
+			if (k.getKname().equals(kid.getKname())) {
+				return ResultCode.ERROR_EXIST_KID;
+			}
+		}
+		kid.setFamily(family);
 		save(kid);
-		family.getKid().add(kid);
-		familyDao.update(family);
 		return ResultCode.SUCCESS;
 	}
 
@@ -101,49 +107,14 @@ public class KidDaoImpl extends BaseDaoHibernate<Kid> implements KidDao {
 		if (family == null) {
 			return ResultCode.ERROR_NO_FAMILY;
 		}
-
+		for (Kid k : family.getKid()) {
+			if (k.getKname().equals(kid.getKname())) {
+				return ResultCode.ERROR_EXIST_KID;
+			}
+		}
+		kid.setFamily(family);
 		save(kid);
-		family.getKid().add(kid);
-		familyDao.update(family);
 		return ResultCode.SUCCESS;
-	}
-
-	@Override
-	public int removeKid(Long Fid, Long Kid) {
-		Kid k = getKid(Kid);
-		if (k == null) {
-			return ResultCode.ERROR_NO_KID;
-		}
-		Family family = familyDao.getFamily(Fid);
-		if (family == null) {
-			return ResultCode.ERROR_NO_FAMILY;
-		}
-
-		boolean success = family.getKid().remove(k);
-		if (success) {
-			familyDao.update(family);
-			return ResultCode.SUCCESS;
-		}
-		return ResultCode.ERROR_NO_RELATION;
-	}
-
-	@Override
-	public int removeKid(String Uphone, Long Kid) {
-		Kid k = getKid(Kid);
-		if (k == null) {
-			return ResultCode.ERROR_NO_KID;
-		}
-		Family family = familyDao.getCreatedFamily(Uphone);
-		if (family == null) {
-			return ResultCode.ERROR_NO_FAMILY;
-		}
-
-		boolean success = family.getKid().remove(k);
-		if (success) {
-			familyDao.update(family);
-			return ResultCode.SUCCESS;
-		}
-		return ResultCode.ERROR_NO_RELATION;
 	}
 
 	@Override

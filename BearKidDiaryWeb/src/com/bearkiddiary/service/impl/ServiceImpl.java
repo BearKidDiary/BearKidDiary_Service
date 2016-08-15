@@ -284,4 +284,17 @@ public class ServiceImpl implements Service {
 		}
 		return code;
 	}
+
+	@Override
+	public int updateKid(Long Kid, String Kname, Long Kbirthday, String Kavatar, String Ksex, String Kask,
+			Integer Kflowers) {
+		Kid data = new Kid();
+		data.setKname(Kname);
+		data.setKbirthday(Kbirthday);
+		data.setKavatar(Kavatar);
+		data.setKsex(Ksex);
+		data.setKask(Kask);
+		data.setKflowers(Kflowers);
+		return kidDao.updateKid(Kid, data);
+	}
 }

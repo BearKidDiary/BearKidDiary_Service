@@ -61,25 +61,6 @@ public interface KidDao extends BaseDao<Kid> {
 	 */
 	int updateKid(Long Kid, Kid kid);
 
-	/**
-	 * 从家庭中删除一个孩子
-	 * 
-	 * @param Fid
-	 *            家庭编号
-	 * @param Kid
-	 *            孩子编号
-	 */
-	int removeKid(Long Fid, Long Kid);
-
-	/**
-	 * 从家庭中删除一个孩子
-	 * 
-	 * @param Uphone
-	 *            创建者的手机号码
-	 * @param Kid
-	 *            孩子的编号
-	 */
-	int removeKid(String Uphone, Long Kid);
 
 	/**
 	 * 删除一个孩子

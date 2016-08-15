@@ -27,6 +27,7 @@ public interface Service {
 	 */
 	int updateUser(String Uphone, String Parameter, String value);
 
+	//////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
 	/**
 	 * 创建一个家庭
 	 * 
@@ -124,6 +125,7 @@ public interface Service {
 	 */
 	int updateFamily(String Uphone, Long Fid, String Fname);
 
+	//////////////////////////////////////////////////////// 孩子/////////////////////////////////////////////////////////
 	/**
 	 * 获取孩子的信息
 	 * 
@@ -166,6 +168,26 @@ public interface Service {
 	 */
 	int addKid(String Kname, Long Kbirthday, String Kavatar, String Ksex, String Kask, Integer Kflowers, Long Fid,
 			String Uphone);
+
+	/**
+	 * 更新孩子的信息
+	 * 
+	 * @param Kid
+	 *            孩子的编号
+	 * @param Kname
+	 *            孩子的名字
+	 * @param Kbirthday
+	 *            孩子的生日
+	 * @param Kavatar
+	 *            孩子头像的URL
+	 * @param Ksex
+	 *            孩子的性别
+	 * @param Kask
+	 *            家长的叮嘱
+	 * @param Kflowers
+	 *            小红花数
+	 */
+	int updateKid(Long Kid, String Kname, Long Kbirthday, String Kavatar, String Ksex, String Kask, Integer Kflowers);
 
 	// 机构
 	/**

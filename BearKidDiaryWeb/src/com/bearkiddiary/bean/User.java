@@ -69,13 +69,13 @@ public class User implements Serializable {
 	/**
 	 * 该用户参与的家庭，即别人邀请自己加入的家庭
 	 */
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "members")
+	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "members")
 	private Set<Family> accessFamily = new HashSet<>();
 
 	/**
 	 * 如果该用户是管理员，批准过的课程列表
 	 */
-	@OneToMany(cascade = CascadeType.ALL, mappedBy = "approver")
+	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "approver")
 	private Set<Course> approverCourse = new HashSet<>();
 
 	/**
@@ -87,7 +87,7 @@ public class User implements Serializable {
 	/**
 	 * 作为成员参与其中的机构
 	 */
-	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "members")
+	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "members")
 	private Set<Organization> attendOrganization = new HashSet<>();
 
 	public Long getUid() {

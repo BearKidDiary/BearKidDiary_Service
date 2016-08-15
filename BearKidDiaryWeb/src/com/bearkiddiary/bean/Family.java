@@ -41,7 +41,7 @@ public class Family implements Serializable {
 	/**
 	 * 家庭的成员
 	 */
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "Family_User", joinColumns = @JoinColumn(name = "Fid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
 	private Set<User> members = new HashSet<>();
 	/**

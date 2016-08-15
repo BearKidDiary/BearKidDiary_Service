@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.service.Service;
+import com.bearkiddiary.utils.ResultCode;
 import com.bearkiddiary.utils.ServiceBean;
 
 /**
@@ -24,18 +26,34 @@ public class Register extends BaseServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
+		Result<User> result = new Result<>();
 
 		User user = new User();
 		boolean isSuccess = false;
 		user.setUphone(request.getParameter("Uphone"));
 		user.setUpsw(request.getParameter("Upsw"));
 		if (user.getUphone() == null || user.getUpsw() == null) {
-			isSuccess = false;
-		} else {
-			isSuccess = service.Register(user);
+			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
+			result.setResultMessage("请求参数不完整");
+			out.write(gson.toJson(result));
+			out.close();
+			return;
 		}
-		System.out.println(isSuccess);
-		out.println(isSuccess);
+
+		isSuccess = service.Register(user);
+
+		// 创建一个家庭
+		int code = ResultCode.ERROR_NO_RESULT;
+		if (isSuccess)
+			code = service.createFamily(user.getUphone(), user.getUphone() + "的家庭");
+		result.setResultCode(code);
+		if (code == ResultCode.SUCCESS) {
+			result.setResultMessage("注册成功");
+		}
+		if (code == ResultCode.ERROR_NO_RESULT) {
+			result.setResultMessage("注册失败");
+		}
+		out.println(gson.toJson(result));
 	}
 
 	@Override

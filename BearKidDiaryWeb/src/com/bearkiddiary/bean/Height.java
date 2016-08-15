@@ -23,7 +23,7 @@ public class Height implements Serializable {
 	private Long Htime;
 	private Float Hheight;
 	
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "kid")
 	private Kid kid;
 
