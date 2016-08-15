@@ -23,6 +23,11 @@ import com.google.gson.annotations.Expose;
 @Entity
 @Table(name = "Organization")
 public class Organization implements Serializable {
+	
+	//加入机构是教师还是家长
+	public final static Integer TEACHER = 0;
+	public final static Integer PARENT = 1;
+	
 	//创建，解散，修改机构
 	public final static Integer CREATE = 1;
 	public final static Integer DELETE = -1;
@@ -70,11 +75,18 @@ public class Organization implements Serializable {
 	@JoinColumn(name = "creator")
 	private User creator;
 	/**
-	 * 机构的成员
+	 * 机构的老师
 	 */
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "Organization_User", joinColumns = @JoinColumn(name = "Oid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
-	private Set<User> members = new HashSet<>();
+	@JoinTable(name = "Organization_Teachers", joinColumns = @JoinColumn(name = "Oid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
+	private Set<User> teachers = new HashSet<>();
+	
+	/**
+	 * 机构的家长
+	 */
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "Organization_Parents", joinColumns = @JoinColumn(name = "Oid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
+	private Set<User> parents = new HashSet<>();
 	/**
 	 * 机构开设的课程
 	 */
@@ -145,11 +157,20 @@ public class Organization implements Serializable {
 		this.creator = creator;
 	}
 
-	public Set<User> getMembers() {
-		return members;
+	public Set<User> getTeachers() {
+		return teachers;
 	}
 
-	public void setMembers(Set<User> members) {
-		this.members = members;
+	public void setTeachers(Set<User> teachers) {
+		this.teachers = teachers;
 	}
+
+	public Set<User> getParents() {
+		return parents;
+	}
+
+	public void setParents(Set<User> parents) {
+		this.parents = parents;
+	}
+	
 }

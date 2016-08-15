@@ -2,6 +2,7 @@
 package com.bearkiddiary.utils;
 
 public class ResultCode {
+	
 	private ResultCode() {
 	}
 
@@ -27,4 +28,9 @@ public class ResultCode {
 	 * 不存在对应的关联关系
 	 */
 	public static final int ERROR_NO_RELATION = -5;
+	
+	/**
+	 * 不存在该机构
+	 */
+	public static final int ERROR_NO_ORG = -6;
 }

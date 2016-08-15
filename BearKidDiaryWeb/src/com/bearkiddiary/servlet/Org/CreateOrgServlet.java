@@ -1,4 +1,4 @@
-package com.bearkiddiary.servlet;
+package com.bearkiddiary.servlet.Org;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,17 +12,23 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.Result;
+import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+/**
+ * 1、创建机构
+ * 2、删除机构
+ * 3、修改机构（机构名，机构地址，机构公告）
+ */
 /**
  * Servlet implementation class CreateOrgServlet
  */
 @WebServlet(name = "CreateOrgServlet", urlPatterns = "/org/create")
 public class CreateOrgServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	private JsonObject jsonObject;
+	private JsonObject jsonResult; 
 	private JsonObject jsonData;
 	private Result<Organization> result;
 	
@@ -40,9 +46,14 @@ public class CreateOrgServlet extends BaseServlet {
 		doOrgOperate(type, request, response);
 	}
 	
+	/**
+	 * 操作机构函数
+	 * @param type
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 */
 	public void doOrgOperate(Integer type, HttpServletRequest request, HttpServletResponse response) throws IOException{
-		PrintWriter out = null;
-		out = response.getWriter();
 		
 		String Oname = request.getParameter(Organization.ONAME);
 		String Oaddress = request.getParameter(Organization.OADDRESS);
@@ -62,15 +73,27 @@ public class CreateOrgServlet extends BaseServlet {
 			result.setResultCode(ResultCode.SUCCESS);
 			result.setResultMessage("创建成功");
 			result.setData(org);
-			response.getWriter().write(new Gson().toJson(result));
+			
+			responseWriter(response, new Gson().toJson(result));
 			System.out.println("创建成功：" + Oid);
 		}else if(type == Organization.DELETE){ // 删除机构
-			
+			//获取客户端传递的机构id
 			long Oid = Long.valueOf(request.getParameter("Oid"));
 			service.deleteOrg(Oid);
-			System.out.println("删除成功！");
-		}else if(type == Organization.UPDATE){
 			
+			jsonData = new JsonObject();
+			jsonData.addProperty("Oid", Oid);
+			jsonData.addProperty("Oname", Oname);
+			
+			jsonResult = new JsonObject();
+			jsonResult.addProperty("resultCode", ResultCode.SUCCESS);
+			jsonResult.addProperty("resultMessage", "删除成功！");
+			jsonResult.add("Data", jsonData);
+			responseWriter(response, new Gson().toJson(jsonResult));
+			System.out.println("删除成功！");
+		}else if(type == Organization.UPDATE){ //修改机构
+			
+			//获取客户端传递的机构id
 			long Oid = Long.valueOf(request.getParameter("Oid"));
 			if(Oname != null){
 				service.updateOrg(Oid, Organization.ONAME, Oname);
@@ -80,8 +103,30 @@ public class CreateOrgServlet extends BaseServlet {
 				service.updateOrg(Oid, Organization.OANNOUNCE, Oannounce);
 			}
 			
+			//返回的json数据
+			jsonData = new JsonObject();
+			jsonData.addProperty("Oid", Oid);
+			jsonData.addProperty("Oname", Oname);
+			
+			jsonResult = new JsonObject();
+			jsonResult.addProperty("resultCode", ResultCode.SUCCESS);
+			jsonResult.addProperty("resultMessage", "修改成功");
+			jsonResult.add("Data", jsonData);
+			
+			responseWriter(response, new Gson().toJson(jsonResult));
 			System.out.println("修改数据！");
 		}
+	}
+	
+	/**
+	 * 打印函数
+	 * @param response
+	 * @param Object
+	 * @throws IOException
+	 */
+	public void responseWriter(HttpServletResponse response, String Object) throws IOException{
+		PrintWriter out = response.getWriter();
+		out.write(Object);
 	}
 
 }

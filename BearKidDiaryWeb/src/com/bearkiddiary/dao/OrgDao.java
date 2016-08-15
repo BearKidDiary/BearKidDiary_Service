@@ -43,4 +43,26 @@ public interface OrgDao extends BaseDao<Organization>{
 	 * @return
 	 */
 	public long updateOannounce(long Oid, String Oannounce);
+	
+	/**
+	 * 获取机构
+	 */
+	public Organization getOrg(long Oid);
+//机构与用户之间的关系
+	
+	/**
+	 * 添加机构教师
+	 * @param Oid
+	 * @param Uid
+	 * @return
+	 */
+	public int addOrgTeacher(long Oid, long Uid);
+	
+	/**
+	 * 添加机构家长
+	 * @param Oid
+	 * @param Uid
+	 * @return
+	 */
+	public int addOrgParent(long Oid, long Uid);
 }

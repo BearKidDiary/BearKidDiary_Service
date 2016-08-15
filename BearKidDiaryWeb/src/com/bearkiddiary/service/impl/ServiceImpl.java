@@ -199,7 +199,6 @@ public class ServiceImpl implements Service {
 			result = familyDao.updateFamilyName(Uphone, Fname);
 		}
 		return result;
-<<<<<<< HEAD
 	}
 
 	@Override
@@ -231,7 +230,23 @@ public class ServiceImpl implements Service {
 			break;
 		}
 		return result;
-=======
->>>>>>> 20b28f0dc139ae9f991fc66d37a5f22ad7e64470
 	}
+
+	@Override
+	public int addOrgMember(long Oid, long Uid, int identity) {
+		int resultCode = -1;
+		switch (identity) {
+		case 0:
+			resultCode = orgDao.addOrgTeacher(Oid, Uid);
+			break;
+		case 1:
+			resultCode = orgDao.addOrgParent(Oid, Uid);
+			break;
+		default:
+			break;
+		}
+		return resultCode;
+	}
+
+	
 }

@@ -122,7 +122,6 @@ public interface Service {
 	 * @return
 	 */
 	int updateFamily(String Uphone, Long Fid, String Fname);
-<<<<<<< HEAD
 	
 //机构
 	/**
@@ -150,6 +149,11 @@ public interface Service {
 	 */
 	long updateOrg(long Oid, String Parameter, String value);
 
-=======
->>>>>>> 20b28f0dc139ae9f991fc66d37a5f22ad7e64470
+	/**
+	 * 添加机构成员（家长或者教师）
+	 * @param Oid
+	 * @param Uid
+	 * @return
+	 */
+	public int addOrgMember(long Oid, long Uid, int identity);
 }
