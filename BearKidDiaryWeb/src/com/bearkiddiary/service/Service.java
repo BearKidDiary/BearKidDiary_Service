@@ -128,6 +128,8 @@ public interface Service {
 	 * @return
 	 */
 	int updateFamily(String Uphone, Long Fid, String Fname);
+	
+//机构
 
 	//////////////////////////////////////////////////////// 孩子/////////////////////////////////////////////////////////
 	/**
@@ -287,29 +289,34 @@ public interface Service {
 	// 机构
 	/**
 	 * 创建机构
-	 * 
-	 * @param Oname
+	 * @param Oname 
 	 * @param Oaddress
 	 * @param Oannounce
 	 * @param Uid
 	 * @return
 	 */
 	public long createOrg(String Oname, String Oaddress, String Oannounce, Long Uid);
-
+	
 	/**
 	 * 解散机构
-	 * 
 	 * @param Oid
 	 */
 	public void deleteOrg(long Oid);
-
+	
 	/**
 	 * 更新机构信息
-	 * 
 	 * @param Oid
 	 * @param Parameter
 	 * @param value
 	 * @return
 	 */
 	long updateOrg(long Oid, String Parameter, String value);
+
+	/**
+	 * 添加机构成员（家长或者教师）
+	 * @param Oid
+	 * @param Uid
+	 * @return
+	 */
+	public int addOrgMember(long Oid, long Uid, int identity);
 }

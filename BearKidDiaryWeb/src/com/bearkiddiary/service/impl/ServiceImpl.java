@@ -135,14 +135,14 @@ public class ServiceImpl implements Service {
 		}
 		return members;
 	}
-
+	
 	@Override
 	public User getFamilyCreator(String Uphone, Long Fid) {
 		User creator = null;
-		if (Fid != null) {
+		if(Fid!=null){
 			creator = familyDao.getCreatorInFamily(Fid);
 		}
-		if (creator == null && Uphone != null) {
+		if(creator==null && Uphone!=null){
 			creator = userDao.getUser(Uphone);
 		}
 		return creator;
@@ -235,6 +235,24 @@ public class ServiceImpl implements Service {
 		}
 		return result;
 	}
+
+	@Override
+	public int addOrgMember(long Oid, long Uid, int identity) {
+		int resultCode = -1;
+		switch (identity) {
+		case 0:
+			resultCode = orgDao.addOrgTeacher(Oid, Uid);
+			break;
+		case 1:
+			resultCode = orgDao.addOrgParent(Oid, Uid);
+			break;
+		default:
+			break;
+		}
+		return resultCode;
+	}
+
+	
 
 	@Override
 	public Set<Kid> getKids(Long Kid, String Uphone, Long Fid) {

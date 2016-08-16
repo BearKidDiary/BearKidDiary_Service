@@ -85,11 +85,16 @@ public class User implements Serializable {
 	private Organization createOrganization;
 
 	/**
-	 * 作为成员参与其中的机构
+	 * 作为老师参与其中的机构
 	 */
-	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "members")
-	private Set<Organization> attendOrganization = new HashSet<>();
-
+	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "teachers")
+	private Set<Organization> workOrganization = new HashSet<>();
+	/**
+	 * 作为家长参与其中的机构
+	 */
+	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "parents")
+	private Set<Organization> parentOrganization = new HashSet<>(); 
+	
 	public Long getUid() {
 		return Uid;
 	}
@@ -186,12 +191,20 @@ public class User implements Serializable {
 		this.createOrganization = createOrganization;
 	}
 
-	public Set<Organization> getAttendOrganization() {
-		return attendOrganization;
+	public Set<Organization> getWorkOrganization() {
+		return workOrganization;
 	}
 
-	public void setAttendOrganization(Set<Organization> attendOrganization) {
-		this.attendOrganization = attendOrganization;
+	public void setWorkOrganization(Set<Organization> workOrganization) {
+		this.workOrganization = workOrganization;
+	}
+
+	public Set<Organization> getParentOrganization() {
+		return parentOrganization;
+	}
+
+	public void setParentOrganization(Set<Organization> parentOrganization) {
+		this.parentOrganization = parentOrganization;
 	}
 
 	@Override

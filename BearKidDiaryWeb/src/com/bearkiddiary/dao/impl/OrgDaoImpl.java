@@ -10,6 +10,7 @@ import com.bearkiddiary.bean.User;
 import com.bearkiddiary.common.dao.impl.BaseDaoHibernate;
 import com.bearkiddiary.dao.OrgDao;
 import com.bearkiddiary.dao.UserDao;
+import com.bearkiddiary.utils.ResultCode;
 
 public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao{
 
@@ -55,6 +56,55 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 	public long updateOannounce(long Oid, String Oannounce) {
 		String hql = "update Organization org set org.Oannounce = ?0 where org.Oid = ?1";
 		return update(hql, Oannounce, Oid);
+	}
+	
+	
+	@Override
+	public Organization getOrg(long Oid) {
+		String hql = "select org from Organization org where org.Oid = ?0";
+		List<Organization> list = find(hql,Oid);
+		if(list.size() > 0){
+			return list.get(0);
+		}
+		return null;
+	}
+	
+	/**
+	 * 添加机构教师
+	 */
+	@Override
+	public int addOrgTeacher(long Oid, long Uid) {
+		User teacher = userDao.getUser(Uid);
+		if(teacher == null) {
+			return ResultCode.ERROR_NO_USER;
+		}
+		
+		Organization org = getOrg(Oid);
+		if(org == null){
+			return ResultCode.ERROR_NO_ORG;
+		}
+		org.getTeachers().add(teacher);
+		update(org);
+		return ResultCode.SUCCESS;
+	}
+
+	/**
+	 * 添加机构家长
+	 */
+	@Override
+	public int addOrgParent(long Oid, long Uid) {
+		User parent = userDao.getUser(Uid);
+		if(parent == null) {
+			return ResultCode.ERROR_NO_USER;
+		}
+		
+		Organization org = getOrg(Oid);
+		if(org == null){
+			return ResultCode.ERROR_NO_ORG;
+		}
+		org.getParents().add(parent);
+		update(org);
+		return ResultCode.SUCCESS;
 	}
 
 	
