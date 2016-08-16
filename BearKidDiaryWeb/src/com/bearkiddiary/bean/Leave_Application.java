@@ -1,0 +1,177 @@
+package com.bearkiddiary.bean;
+
+import java.io.Serializable;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import com.google.gson.annotations.Expose;
+
+@Entity
+@Table(name = "Leave_Application")
+public class Leave_Application implements Serializable{
+
+	public static final Integer APPROVE_YES = 1;//同意
+	public static final Integer APPROVE_NO = 0;//不同意
+	
+	public static final Integer APPROVED = 1;//已审批
+	public static final Integer UNAPPROVED = 0;//未审批
+	
+	public static final Integer SICK_LEAVE = 1;//病假
+	public static final Integer THING_LEAVE = 2;//事假
+	
+	public static final String LAID = "LAid"; 
+	public static final String LASTATUS = "LAstatus";
+	public static final String LASTARTTIME = "LAstarttime";
+	public static final String LAENDTIME = "LAendtime";
+	public static final String LATYPE = "LAtype";
+	public static final String LAREASON = "LAreason";
+	public static final String LACOMMENT = "LAcomment";
+	
+	@Expose
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long LAid;
+	/**
+	 * 申请状态
+	 */
+	@Expose
+	private Integer LAstatus;
+	
+	/**
+	 * 请假开始时间
+	 */
+	@Expose
+	private Long LAstarttime;
+	
+	/**
+	 * 请假结束时间
+	 */
+	@Expose
+	private Long LAendtime;
+	
+	/**
+	 * 请假类型
+	 */
+	@Expose
+	private Integer LAtype;
+	
+	/**
+	 * 请假原因
+	 */
+	@Expose
+	private String LAreason;
+	
+	/**
+	 * 审批人评语
+	 */
+	@Expose
+	private String LAcomment;
+	
+	/**
+	 * 审批人
+	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "LArover")
+	private User LArover;
+	
+	/**
+	 * 申请人
+	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "LAapplication")
+	private User LAapplicant;
+	
+	/**
+	 * 对应的机构
+	 */
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "LAorg")
+	private Organization LAorg;
+
+	public Long getLAid() {
+		return LAid;
+	}
+
+	public void setLAid(Long lAid) {
+		LAid = lAid;
+	}
+
+	public Integer getLAstatus() {
+		return LAstatus;
+	}
+
+	public void setLAstatus(Integer lAstatus) {
+		LAstatus = lAstatus;
+	}
+
+	public Long getLAstarttime() {
+		return LAstarttime;
+	}
+
+	public void setLAstarttime(Long lAstarttime) {
+		LAstarttime = lAstarttime;
+	}
+
+	public Long getLAendtime() {
+		return LAendtime;
+	}
+
+	public void setLAendtime(Long lAendtime) {
+		LAendtime = lAendtime;
+	}
+
+	public Integer getLAtype() {
+		return LAtype;
+	}
+
+	public void setLAtype(Integer lAtype) {
+		LAtype = lAtype;
+	}
+
+	public String getLAreason() {
+		return LAreason;
+	}
+
+	public void setLAreason(String lAreason) {
+		LAreason = lAreason;
+	}
+
+	public String getLAcomment() {
+		return LAcomment;
+	}
+
+	public void setLAcomment(String lAcomment) {
+		LAcomment = lAcomment;
+	}
+
+	public User getLArover() {
+		return LArover;
+	}
+
+	public void setLArover(User lArover) {
+		LArover = lArover;
+	}
+
+	public User getLAapplicant() {
+		return LAapplicant;
+	}
+
+	public void setLAapplicant(User lAapplicant) {
+		LAapplicant = lAapplicant;
+	}
+
+	public Organization getLAorg() {
+		return LAorg;
+	}
+
+	public void setLAorg(Organization lAorg) {
+		LAorg = lAorg;
+	}
+}

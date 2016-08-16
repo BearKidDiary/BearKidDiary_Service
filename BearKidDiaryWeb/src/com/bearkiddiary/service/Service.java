@@ -1,20 +1,16 @@
 package com.bearkiddiary.service;
 
+import java.util.List;
 import java.util.Set;
 
 import com.bearkiddiary.bean.Family;
 import com.bearkiddiary.bean.Kid;
+import com.bearkiddiary.bean.Leave_Application;
 import com.bearkiddiary.bean.User;
 
 public interface Service {
-
-	/**
-	 * 测试
-	 * 
-	 * @param user
-	 *            获取的用户
-	 */
-	// 登录功能
+//用户
+    // 登录功能
 	boolean Login(String Uphone, String Upsw);
 
 	boolean Register(User user);
@@ -27,7 +23,37 @@ public interface Service {
 	 */
 	int updateUser(String Uphone, String Parameter, String value);
 
-	//////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
+	/**
+	 * 提交请假申请
+	 * @param application
+	 * @param Oid
+	 * @param Uphone
+	 * @return
+	 */
+	Long commitApplication(Leave_Application application, Long Oid, String Uphone);
+	
+	/**
+	 * 更新请假申请的状态
+	 * @param LAstatus
+	 * @param LAcomment
+	 * @return
+	 */
+	Long updateApplication(Integer LAstatus, String LAcomment, Long LAid);
+	
+	/**
+	 * 获取机构的请假申请列表
+	 * @param Oid
+	 * @return
+	 */
+	List<Leave_Application> getOrgApplicationList(Long Oid);
+	
+	/**
+	 * 教师获取个人请假的申请列表
+	 * @param Uid
+	 * @return
+	 */
+	List<Leave_Application> getUserApplicationList(Long Uid);
+//////////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
 	/**
 	 * 创建一个家庭
 	 * 
@@ -124,9 +150,6 @@ public interface Service {
 	 * @return
 	 */
 	int updateFamily(String Uphone, Long Fid, String Fname);
-	
-//机构
-
 	//////////////////////////////////////////////////////// 孩子/////////////////////////////////////////////////////////
 	/**
 	 * 获取孩子的信息
@@ -191,7 +214,8 @@ public interface Service {
 	 */
 	int updateKid(Long Kid, String Kname, Long Kbirthday, String Kavatar, String Ksex, String Kask, Integer Kflowers);
 
-	// 机构
+
+// 机构
 	/**
 	 * 创建机构
 	 * @param Oname 

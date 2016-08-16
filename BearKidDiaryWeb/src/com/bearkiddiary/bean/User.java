@@ -95,6 +95,18 @@ public class User implements Serializable {
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "parents")
 	private Set<Organization> parentOrganization = new HashSet<>(); 
 	
+	/**
+	 * 请假申请
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "LAapplicant")
+	private Set<Leave_Application> application = new HashSet<>();
+	
+	/**
+	 * 请假审批
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "LArover")
+	private Set<Leave_Application> approval = new HashSet<>();
+	
 	public Long getUid() {
 		return Uid;
 	}
@@ -205,6 +217,23 @@ public class User implements Serializable {
 
 	public void setParentOrganization(Set<Organization> parentOrganization) {
 		this.parentOrganization = parentOrganization;
+	}
+
+	
+	public Set<Leave_Application> getApplication() {
+		return application;
+	}
+
+	public void setApplication(Set<Leave_Application> application) {
+		this.application = application;
+	}
+
+	public Set<Leave_Application> getApproval() {
+		return approval;
+	}
+
+	public void setApproval(Set<Leave_Application> approval) {
+		this.approval = approval;
 	}
 
 	@Override

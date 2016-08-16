@@ -6,10 +6,12 @@ import java.util.Set;
 
 import com.bearkiddiary.bean.Family;
 import com.bearkiddiary.bean.Kid;
+import com.bearkiddiary.bean.Leave_Application;
 import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.dao.FamilyDao;
 import com.bearkiddiary.dao.KidDao;
+import com.bearkiddiary.dao.LADao;
 import com.bearkiddiary.dao.OrgDao;
 import com.bearkiddiary.dao.UserDao;
 import com.bearkiddiary.service.Service;
@@ -39,6 +41,13 @@ public class ServiceImpl implements Service {
 
 	public void setOrgDao(OrgDao orgDao) {
 		this.orgDao = orgDao;
+	}
+	
+	private LADao laDao;
+	
+
+	public void setLaDao(LADao laDao) {
+		this.laDao = laDao;
 	}
 
 	// @Override
@@ -95,6 +104,43 @@ public class ServiceImpl implements Service {
 		return result;
 	}
 
+	/**
+	 * 提交请假申请 , 成功返回LAid
+	 */
+	public Long commitApplication(Leave_Application application, Long Oid, String Uphone){
+		Organization org = orgDao.getOrg(Oid);
+		if(org == null){
+			return (long) ResultCode.ERROR_NO_ORG;
+		}
+		User user = userDao.getUser(Uphone);
+		if(user == null){
+			return (long) ResultCode.ERROR_NO_USER;
+		}
+		
+		application.setLAorg(org);
+		application.setLAapplicant(user);
+		return laDao.commitApplicaton(application);
+	}
+	
+	@Override
+	public Long updateApplication(Integer LAstatus, String LAcomment, Long LAid) {
+		Long result = laDao.updateApplication(LAstatus, LAcomment, LAid);
+		if(result > 0){
+			return result;
+		}
+		return (long) ResultCode.ERROR;
+	}
+
+	@Override
+	public List<Leave_Application> getOrgApplicationList(Long Oid) {
+		return laDao.getOrgApplicationList(Oid);
+	}
+
+	@Override
+	public List<Leave_Application> getUserApplicationList(Long Uid) {
+		return laDao.getUserApplicationList(Uid);
+	}
+	
 	@Override
 	public int createFamily(String Uphone, String Fname) {
 		if (Fname == null) {
@@ -315,4 +361,6 @@ public class ServiceImpl implements Service {
 		data.setKflowers(Kflowers);
 		return kidDao.updateKid(Kid, data);
 	}
+
+	
 }

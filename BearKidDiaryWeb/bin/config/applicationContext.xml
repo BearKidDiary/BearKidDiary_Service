@@ -54,7 +54,8 @@
 		p:sessionFactory-ref="sessionFactory" />
 
 	<bean id="service" class="com.bearkiddiary.service.impl.ServiceImpl"
-		p:userDao-ref="userDao" p:familyDao-ref="familyDao" p:kidDao-ref="kidDao"  p:orgDao-ref="orgDao"/>
+		p:userDao-ref="userDao" p:familyDao-ref="familyDao" p:kidDao-ref="kidDao"
+		p:orgDao-ref="orgDao" p:laDao-ref="laDao" />
 	<bean id="userDao" class="com.bearkiddiary.dao.impl.UserDaoImpl"
 		p:sessionFactory-ref="sessionFactory" />
 
@@ -66,6 +67,10 @@
 
 	<bean id="orgDao" class="com.bearkiddiary.dao.impl.OrgDaoImpl"
 		p:sessionFactory-ref="sessionFactory" p:userDao-ref="userDao"></bean>
+
+	<bean id="laDao" class="com.bearkiddiary.dao.impl.LADaoImpl"
+		p:sessionFactory-ref="sessionFactory" p:userDao-ref="userDao"
+		p:orgDao-ref="orgDao"></bean>
 
 	<!-- 定义事务管理器（声明式的事务） -->
 	<bean id="transactionManager"

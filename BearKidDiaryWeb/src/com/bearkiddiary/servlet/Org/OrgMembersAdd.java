@@ -19,7 +19,7 @@ import com.google.gson.JsonObject;
 /**
  * Servlet implementation class OrgMembersAdd
  */
-@WebServlet(name = "/OrgMembersAdd", urlPatterns = "/org/members/add")
+@WebServlet(name = "/OrgMembersAdd", urlPatterns = "/org/member/add")
 public class OrgMembersAdd extends BaseServlet {
 	private static final long serialVersionUID = 1L;
     private int resultCode;   

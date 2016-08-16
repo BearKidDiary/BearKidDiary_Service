@@ -9,6 +9,11 @@ import com.google.gson.annotations.Expose;
  * @param <T>
  */
 public class Result<T> {
+	
+	public static final String RESULTCODE = "resultCode";
+	public static final String RESULTMESSAGE = "resultMessage";
+	public static final String DATA = "data";
+	
 	@Expose
 	private int resultCode;
 	@Expose

@@ -19,7 +19,7 @@ public interface UserDao extends BaseDao<User> {
 	 * @param user
 	 * @return
 	 */
-	int Register(User user);
+	Long Register(User user);
 
 	/**
 	 * 检测该号码是否被注册过

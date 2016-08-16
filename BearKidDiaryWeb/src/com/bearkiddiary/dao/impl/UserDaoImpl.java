@@ -24,8 +24,8 @@ public class UserDaoImpl extends BaseDaoHibernate<User> implements UserDao {
 	 * 注册成功返回用户id
 	 */
 	@Override
-	public int Register(User user) {
-		int Uid = (int) save(user);
+	public Long Register(User user) {
+		Long Uid = (Long) save(user);
 		return Uid;
 	}
 

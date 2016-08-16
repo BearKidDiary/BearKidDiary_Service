@@ -41,8 +41,14 @@ public class ResultCode {
 	 * 已存在该孩子
 	 */
 	public static final int ERROR_EXIST_KID = -7;
+	
 	/**
 	 * 不能正常获得结果，过程发生了错误
 	 */
 	public static final int ERROR_NO_RESULT = -100;
+	
+	/**
+	 * 错误
+	 */
+	public static final int ERROR = -200;
 }

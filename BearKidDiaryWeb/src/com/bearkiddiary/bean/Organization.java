@@ -33,6 +33,7 @@ public class Organization implements Serializable {
 	public final static Integer DELETE = -1;
 	public final static Integer UPDATE = 0;
 	
+	public final static String OID = "Oid";
 	public final static String ONAME = "Oname";
 	public final static String OADDRESS = "Oaddress";
 	public final static String OTIME = "Otime";
@@ -93,6 +94,12 @@ public class Organization implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
 	private Set<Course> courses = new HashSet<>();
 
+	/**
+	 * 机构对应的请假申请
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "LAorg")
+	private Set<Leave_Application> application = new HashSet<>();
+	
 	public Set<Course> getCourses() {
 		return courses;
 	}
@@ -171,6 +178,14 @@ public class Organization implements Serializable {
 
 	public void setParents(Set<User> parents) {
 		this.parents = parents;
+	}
+
+	public Set<Leave_Application> getApplication() {
+		return application;
+	}
+
+	public void setApplication(Set<Leave_Application> application) {
+		this.application = application;
 	}
 	
 }
