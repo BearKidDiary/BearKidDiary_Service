@@ -2,7 +2,10 @@ package com.bearkiddiary.dao;
 
 import java.util.Set;
 
+import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
+import com.bearkiddiary.bean.Vision;
+import com.bearkiddiary.bean.Weight;
 import com.bearkiddiary.common.dao.BaseDao;
 
 public interface KidDao extends BaseDao<Kid> {
@@ -60,7 +63,6 @@ public interface KidDao extends BaseDao<Kid> {
 	 *            孩子信息
 	 */
 	int updateKid(Long Kid, Kid kid);
-
 
 	/**
 	 * 删除一个孩子

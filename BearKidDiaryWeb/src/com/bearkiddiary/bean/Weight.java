@@ -12,16 +12,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "Weight")
 public class Weight implements Serializable{
 	@Id
 	@Column(name = "wid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Expose
 	private Long Wid;
 
+	@Expose
 	private Long Wtime;
 
+	@Expose
 	private float Wweight;
 
 	@ManyToOne(cascade = CascadeType.ALL)

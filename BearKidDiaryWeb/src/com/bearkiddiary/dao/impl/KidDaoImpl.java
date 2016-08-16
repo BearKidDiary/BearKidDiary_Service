@@ -5,7 +5,10 @@ import java.util.List;
 import java.util.Set;
 
 import com.bearkiddiary.bean.Family;
+import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
+import com.bearkiddiary.bean.Vision;
+import com.bearkiddiary.bean.Weight;
 import com.bearkiddiary.common.dao.impl.BaseDaoHibernate;
 import com.bearkiddiary.dao.FamilyDao;
 import com.bearkiddiary.dao.KidDao;

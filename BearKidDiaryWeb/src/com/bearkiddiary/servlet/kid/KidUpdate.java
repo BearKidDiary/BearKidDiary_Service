@@ -1,4 +1,4 @@
-package com.bearkiddiary.servlet;
+package com.bearkiddiary.servlet.kid;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Result;
+import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 
 @WebServlet("/kid/update")

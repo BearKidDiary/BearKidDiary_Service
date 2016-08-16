@@ -12,15 +12,21 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "Height")
 public class Height implements Serializable {
 	@Id
 	@Column(name = "hid")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Expose
 	private Long Hid;
 	
+	@Expose
 	private Long Htime;
+	
+	@Expose
 	private Float Hheight;
 	
 	@ManyToOne(cascade = CascadeType.MERGE)
@@ -58,6 +64,4 @@ public class Height implements Serializable {
 	public void setKid(Kid kid) {
 		this.kid = kid;
 	}
-
-	
 }

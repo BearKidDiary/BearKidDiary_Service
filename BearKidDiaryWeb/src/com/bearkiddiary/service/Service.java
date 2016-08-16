@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.Set;
 
 import com.bearkiddiary.bean.Family;
+import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Leave_Application;
 import com.bearkiddiary.bean.User;
+import com.bearkiddiary.bean.Vision;
+import com.bearkiddiary.bean.Weight;
 
 public interface Service {
 //用户
@@ -213,6 +216,97 @@ public interface Service {
 	 *            小红花数
 	 */
 	int updateKid(Long Kid, String Kname, Long Kbirthday, String Kavatar, String Ksex, String Kask, Integer Kflowers);
+
+	/**
+	 * 添加孩子身体信息
+	 * 
+	 * @param Kid
+	 *            孩子的编号
+	 * @param Hheight
+	 *            孩子的身高
+	 * @param Wweight
+	 *            孩子的体重
+	 * @param Vleft
+	 *            孩子的左眼视力
+	 * @param Vright
+	 *            孩子的右眼视力
+	 * @param time
+	 *            更新时间
+	 */
+	int addKidBodyMsg(Long Kid, Float Hheight, Float Wweight, Float Vleft, Float Vright, Long time);
+
+	/**
+	 * 获取孩子的身高信息
+	 * 
+	 * @param Kid
+	 *            孩子的编号
+	 * @param order
+	 *            desc或者asc
+	 */
+	List<Height> getHeight(Long Kid, String order);
+
+	/**
+	 * 分页获取孩子的身高信息
+	 * 
+	 * @param Kid
+	 *            孩子的编号
+	 * @param order
+	 *            desc或者asc
+	 * @param pageNum
+	 *            页码
+	 * @param pageSize
+	 *            页大小
+	 * @return
+	 */
+	List<Height> getHeight(Long Kid, String order, int pageNum, int pageSize);
+
+	/**
+	 * 获取孩子的体重信息
+	 * 
+	 * @param Kid
+	 *            孩子编号
+	 * @param order
+	 *            desc或者asc
+	 */
+	List<Weight> getWeight(Long Kid, String order);
+
+	/**
+	 * 分页获取孩子的体重信息
+	 * 
+	 * @param Kid
+	 *            孩子的编号
+	 * @param order
+	 *            desc或者asc
+	 * @param pageNum
+	 *            页码
+	 * @param pageSize
+	 *            页大小
+	 */
+	List<Weight> getWeight(Long Kid, String order, int pageNum, int pageSize);
+
+	/**
+	 * 获取孩子的视力信息
+	 * 
+	 * @param Kid
+	 *            孩子的编号
+	 * @param order
+	 *            desc或者asc
+	 */
+	List<Vision> getVision(Long Kid, String order);
+
+	/**
+	 * 分页获取孩子的视力信息
+	 * 
+	 * @param Kid
+	 *            孩子的编号
+	 * @param order
+	 *            desc或者asc
+	 * @param pageNum
+	 *            页码
+	 * @param pageSize
+	 *            页大小
+	 */
+	List<Vision> getVision(Long Kid, String order, int pageNum, int pageSize);
 
 
 // 机构
