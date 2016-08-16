@@ -6,6 +6,7 @@ import java.util.Set;
 import com.bearkiddiary.bean.Family;
 import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
+import com.bearkiddiary.bean.TimeLine;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.bean.Vision;
 import com.bearkiddiary.bean.Weight;
@@ -128,8 +129,6 @@ public interface Service {
 	 * @return
 	 */
 	int updateFamily(String Uphone, Long Fid, String Fname);
-	
-//机构
 
 	//////////////////////////////////////////////////////// 孩子/////////////////////////////////////////////////////////
 	/**
@@ -286,25 +285,87 @@ public interface Service {
 	 */
 	List<Vision> getVision(Long Kid, String order, int pageNum, int pageSize);
 
+	/**
+	 * 添加时间轴事件
+	 * 
+	 * @param content
+	 *            内容
+	 * @param time
+	 *            时间
+	 * @param image1
+	 *            图片1URL
+	 * @param image2
+	 *            图片2URL
+	 * @param image3
+	 *            图片3URL
+	 * @param type
+	 *            时间轴事件类型
+	 * @param logoType
+	 *            时间轴事件图标类型
+	 * @param Uid
+	 *            发布者的编号
+	 * @param Uphone
+	 *            发布者的手机号码
+	 * @param Kid
+	 *            孩子的编号
+	 */
+	int addTimeLine(String content, Long time, String image1, String image2, String image3, String type, int logoType,
+			Long Uid, String Uphone, Long Kid);
+
+	/**
+	 * 获取时间轴事件
+	 * 
+	 * @param Kid
+	 *            孩子的编号
+	 * @param Uid
+	 *            发布者的编号
+	 * @param Uphone
+	 *            发布者的手机号码
+	 * @param Order
+	 *            排序
+	 */
+	List<TimeLine> getTimeLine(Long Kid, Long Uid, String Uphone, String Order);
+
+	/**
+	 * 分页获取时间轴事件
+	 * 
+	 * @param Kid
+	 *            孩子的编号
+	 * @param Uid
+	 *            发布者的编号
+	 * @param Uphone
+	 *            发布者的手机号码
+	 * @param Order
+	 *            排序
+	 * @param pageSize
+	 *            分页大小
+	 * @param pageNum
+	 *            分页的页码
+	 */
+	List<TimeLine> getTimeLine(Long Kid, Long Uid, String Uphone, String Order, int pageSize, int pageNum);
+
 	// 机构
 	/**
 	 * 创建机构
-	 * @param Oname 
+	 * 
+	 * @param Oname
 	 * @param Oaddress
 	 * @param Oannounce
 	 * @param Uid
 	 * @return
 	 */
 	public long createOrg(String Oname, String Oaddress, String Oannounce, Long Uid);
-	
+
 	/**
 	 * 解散机构
+	 * 
 	 * @param Oid
 	 */
 	public void deleteOrg(long Oid);
-	
+
 	/**
 	 * 更新机构信息
+	 * 
 	 * @param Oid
 	 * @param Parameter
 	 * @param value
@@ -314,6 +375,7 @@ public interface Service {
 
 	/**
 	 * 添加机构成员（家长或者教师）
+	 * 
 	 * @param Oid
 	 * @param Uid
 	 * @return
