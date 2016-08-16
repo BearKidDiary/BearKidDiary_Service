@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Set;
 
 import com.bearkiddiary.bean.Family;
+import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.User;
+import com.bearkiddiary.bean.Vision;
+import com.bearkiddiary.bean.Weight;
 import com.bearkiddiary.dao.FamilyDao;
 import com.bearkiddiary.dao.KidDao;
 import com.bearkiddiary.dao.OrgDao;
@@ -296,5 +299,47 @@ public class ServiceImpl implements Service {
 		data.setKask(Kask);
 		data.setKflowers(Kflowers);
 		return kidDao.updateKid(Kid, data);
+	}
+
+	@Override
+	public int addKidBodyMsg(Long Kid, Float Hheight, Float Wweight, Float Vleft, Float Vright, Long time) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Height> getHeight(Long Kid, String order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Height> getHeight(Long Kid, String order, int pageNum, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Weight> getWeight(Long Kid, String order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Weight> getWeight(Long Kid, String order, int pageNum, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Vision> getVision(Long Kid, String order) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Vision> getVision(Long Kid, String order, int pageNum, int pageSize) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
