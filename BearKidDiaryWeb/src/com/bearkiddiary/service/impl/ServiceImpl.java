@@ -12,9 +12,12 @@ import com.bearkiddiary.bean.User;
 import com.bearkiddiary.bean.Vision;
 import com.bearkiddiary.bean.Weight;
 import com.bearkiddiary.dao.FamilyDao;
+import com.bearkiddiary.dao.HeightDao;
 import com.bearkiddiary.dao.KidDao;
 import com.bearkiddiary.dao.OrgDao;
 import com.bearkiddiary.dao.UserDao;
+import com.bearkiddiary.dao.VisionDao;
+import com.bearkiddiary.dao.WeightDao;
 import com.bearkiddiary.service.Service;
 import com.bearkiddiary.utils.ResultCode;
 
@@ -36,6 +39,24 @@ public class ServiceImpl implements Service {
 
 	public void setKidDao(KidDao kidDao) {
 		this.kidDao = kidDao;
+	}
+
+	private HeightDao heightDao;
+
+	public void setHeightDao(HeightDao heightDao) {
+		this.heightDao = heightDao;
+	}
+
+	private WeightDao weightDao;
+
+	public void setWeightDao(WeightDao weightDao) {
+		this.weightDao = weightDao;
+	}
+
+	private VisionDao visionDao;
+
+	public void setVisionDao(VisionDao visionDao) {
+		this.visionDao = visionDao;
 	}
 
 	private OrgDao orgDao;
@@ -135,14 +156,14 @@ public class ServiceImpl implements Service {
 		}
 		return members;
 	}
-	
+
 	@Override
 	public User getFamilyCreator(String Uphone, Long Fid) {
 		User creator = null;
-		if(Fid!=null){
+		if (Fid != null) {
 			creator = familyDao.getCreatorInFamily(Fid);
 		}
-		if(creator==null && Uphone!=null){
+		if (creator == null && Uphone != null) {
 			creator = userDao.getUser(Uphone);
 		}
 		return creator;
@@ -252,8 +273,6 @@ public class ServiceImpl implements Service {
 		return resultCode;
 	}
 
-	
-
 	@Override
 	public Set<Kid> getKids(Long Kid, String Uphone, Long Fid) {
 		if (Kid != null) {
@@ -321,43 +340,45 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public int addKidBodyMsg(Long Kid, Float Hheight, Float Wweight, Float Vleft, Float Vright, Long time) {
-		// TODO Auto-generated method stub
-		return 0;
+		if (Hheight != null) {
+			return heightDao.addHeightToKid(Kid, Hheight, time);
+		}
+		if (Wweight != null) {
+			return weightDao.addWeightToKid(Kid, Wweight, time);
+		}
+		if (Vleft != null || Vright != null) {
+			return visionDao.addVision(Kid, Vleft, Vright, time);
+		}
+		return ResultCode.ERROR_MISSING_PARAMETER;
 	}
 
 	@Override
 	public List<Height> getHeight(Long Kid, String order) {
-		// TODO Auto-generated method stub
-		return null;
+		return heightDao.getHeight(Kid, order);
 	}
 
 	@Override
 	public List<Height> getHeight(Long Kid, String order, int pageNum, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		return heightDao.getHeight(Kid, order, pageSize, pageNum);
 	}
 
 	@Override
 	public List<Weight> getWeight(Long Kid, String order) {
-		// TODO Auto-generated method stub
-		return null;
+		return weightDao.getWeight(Kid, order);
 	}
 
 	@Override
 	public List<Weight> getWeight(Long Kid, String order, int pageNum, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		return weightDao.getWeight(Kid, order, pageNum, pageSize);
 	}
 
 	@Override
 	public List<Vision> getVision(Long Kid, String order) {
-		// TODO Auto-generated method stub
-		return null;
+		return visionDao.getVision(Kid, order);
 	}
 
 	@Override
 	public List<Vision> getVision(Long Kid, String order, int pageNum, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
+		return visionDao.getVision(Kid, order, pageNum, pageSize);
 	}
 }

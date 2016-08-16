@@ -11,17 +11,23 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table(name = "Vision")
 public class Vision implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Expose
 	private Long Vid;
 
+	@Expose
 	private Float Vleft;
 
+	@Expose
 	private Float Vright;
 
+	@Expose
 	private Long Vtime;
 
 	@ManyToOne(cascade = CascadeType.ALL)

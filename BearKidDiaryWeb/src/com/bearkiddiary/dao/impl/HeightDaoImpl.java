@@ -46,7 +46,11 @@ public class HeightDaoImpl extends BaseDaoHibernate<Height> implements HeightDao
 
 	@Override
 	public List<Height> getHeight(Long Kid, String order, int pageSize, int pageNum) {
-		// TODO Auto-generated method stub
-		return null;
+		if (!order.equals("desc")) {
+			order = "asc";
+		}
+		final String hql = "select height from Height height join height.kid kid where kid.Kid = ?0 "
+				+ "order by height.Htime " + order;
+		return findByPage(hql, pageNum, pageSize, Kid);
 	}
 }
