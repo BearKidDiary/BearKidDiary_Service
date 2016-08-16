@@ -9,6 +9,7 @@ import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Leave_Application;
 import com.bearkiddiary.bean.Organization;
+import com.bearkiddiary.bean.TimeLine;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.bean.Vision;
 import com.bearkiddiary.bean.Weight;
@@ -17,6 +18,7 @@ import com.bearkiddiary.dao.HeightDao;
 import com.bearkiddiary.dao.KidDao;
 import com.bearkiddiary.dao.LADao;
 import com.bearkiddiary.dao.OrgDao;
+import com.bearkiddiary.dao.TimeLineDao;
 import com.bearkiddiary.dao.UserDao;
 import com.bearkiddiary.dao.VisionDao;
 import com.bearkiddiary.dao.WeightDao;
@@ -59,6 +61,12 @@ public class ServiceImpl implements Service {
 
 	public void setVisionDao(VisionDao visionDao) {
 		this.visionDao = visionDao;
+	}
+
+	private TimeLineDao timeLineDao;
+
+	public void setTimeLineDao(TimeLineDao timeLineDao) {
+		this.timeLineDao = timeLineDao;
 	}
 
 	private OrgDao orgDao;
@@ -428,5 +436,43 @@ public class ServiceImpl implements Service {
 	@Override
 	public List<Vision> getVision(Long Kid, String order, int pageNum, int pageSize) {
 		return visionDao.getVision(Kid, order, pageNum, pageSize);
+	}
+
+	@Override
+	public int addTimeLine(String content, Long time, String image1, String image2, String image3, String type,
+			int logoType, Long Uid, String Uphone, Long Kid) {
+		TimeLine timeLine = new TimeLine();
+		timeLine.setTreleasecontent(content);
+		timeLine.setTreleasetime(time);
+		timeLine.setTimage1(image1);
+		timeLine.setTimage2(image2);
+		timeLine.setTimage3(image3);
+		timeLine.setTtype(type);
+		timeLine.setTtypelogo(logoType);
+		if (Uid != null) {
+			return timeLineDao.addTimeLine(timeLine, Uid, Kid);
+		} else if (Uphone != null) {
+			return timeLineDao.addTimeLine(timeLine, Uphone, Kid);
+		} else {
+			return ResultCode.ERROR_MISSING_PARAMETER;
+		}
+	}
+
+	@Override
+	public List<TimeLine> getTimeLine(Long Kid, Long Uid, String Uphone, String Order) {
+		if (Uid != null || Uphone != null) {
+			return timeLineDao.getTimeLine(Kid, Uid, Uphone, Order);
+		} else {
+			return timeLineDao.getTimeLine(Kid, Order);
+		}
+	}
+
+	@Override
+	public List<TimeLine> getTimeLine(Long Kid, Long Uid, String Uphone, String Order, int pageSize, int pageNum) {
+		if (Uid != null || Uphone != null) {
+			return timeLineDao.getTimeLine(Kid, Uid, Uphone, Order, pageSize, pageNum);
+		} else {
+			return timeLineDao.getTimeLine(Kid, Order, pageSize, pageNum);
+		}
 	}
 }

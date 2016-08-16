@@ -56,8 +56,8 @@
 	<bean id="service" class="com.bearkiddiary.service.impl.ServiceImpl"
 		p:userDao-ref="userDao" p:familyDao-ref="familyDao" p:kidDao-ref="kidDao"
 		p:orgDao-ref="orgDao" p:laDao-ref="laDao" p:heightDao-ref="heightDao" p:weightDao-ref="weightDao"
-		p:visionDao-ref="visionDao" />
-		
+		p:visionDao-ref="visionDao" p:timeLineDao-ref="timeLineDao" />
+
 	<bean id="userDao" class="com.bearkiddiary.dao.impl.UserDaoImpl"
 		p:sessionFactory-ref="sessionFactory" />
 
@@ -75,6 +75,10 @@
 
 	<bean id="visionDao" class="com.bearkiddiary.dao.impl.VisionDaoImpl"
 		p:sessionFactory-ref="sessionFactory" p:kidDao-ref="kidDao" />
+
+	<bean id="timeLineDao" class="com.bearkiddiary.dao.impl.TimeLineDaoImpl"
+		p:sessionFactory-ref="sessionFactory" p:kidDao-ref="kidDao"
+		p:userDao-ref="userDao" />
 
 	<bean id="orgDao" class="com.bearkiddiary.dao.impl.OrgDaoImpl"
 		p:sessionFactory-ref="sessionFactory" p:userDao-ref="userDao" />

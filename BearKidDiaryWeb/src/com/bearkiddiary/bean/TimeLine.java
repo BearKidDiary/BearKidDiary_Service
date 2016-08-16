@@ -10,24 +10,34 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.google.gson.annotations.Expose;
 
 @Entity
 @Table(name = "TimeLine")
 public class TimeLine implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Expose
 	private Long Tid;
 
+	@Expose
 	private Long Treleasetime;
 
+	@Expose
 	private String Treleasecontent;
 
+	@Expose
 	private String Timage1, Timage2, Timage3;
 
+	@Expose
 	private String Ttype;
 
+	@Expose
 	private Integer Ttypelogo;
-
+	
+	@Expose
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "Uid")
 	private User author;
