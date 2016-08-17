@@ -74,7 +74,7 @@ public class CreateOrgServlet extends BaseServlet {
 			result.setResultMessage("创建成功");
 			result.setData(org);
 			
-			responseWriter(response, new Gson().toJson(result));
+			responseWriter(response, gson.toJson(result));
 			System.out.println("创建成功：" + Oid);
 		}else if(type == Organization.DELETE){ // 删除机构
 			//获取客户端传递的机构id
@@ -89,7 +89,7 @@ public class CreateOrgServlet extends BaseServlet {
 			jsonResult.addProperty("resultCode", ResultCode.SUCCESS);
 			jsonResult.addProperty("resultMessage", "删除成功！");
 			jsonResult.add("Data", jsonData);
-			responseWriter(response, new Gson().toJson(jsonResult));
+			responseWriter(response, gson.toJson(jsonResult));
 			System.out.println("删除成功！");
 		}else if(type == Organization.UPDATE){ //修改机构
 			
@@ -113,7 +113,7 @@ public class CreateOrgServlet extends BaseServlet {
 			jsonResult.addProperty("resultMessage", "修改成功");
 			jsonResult.add("Data", jsonData);
 			
-			responseWriter(response, new Gson().toJson(jsonResult));
+			responseWriter(response, gson.toJson(jsonResult));
 			System.out.println("修改数据！");
 		}
 	}

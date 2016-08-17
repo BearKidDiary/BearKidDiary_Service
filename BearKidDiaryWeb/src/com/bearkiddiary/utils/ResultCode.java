@@ -51,4 +51,14 @@ public class ResultCode {
 	 * 错误
 	 */
 	public static final int ERROR = -200;
+	
+	/**
+	 * 没有数据
+	 */
+	public static final int NO_RESULT = -101;
+	
+	/**
+	 * 提交，保存失败
+	 */
+	public static final int ERROR_COMMIT = -102;
 }

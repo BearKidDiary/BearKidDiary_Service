@@ -40,9 +40,9 @@ public interface Service {
 	 * 更新请假申请的状态
 	 * @param LAstatus
 	 * @param LAcomment
-	 * @return
+	 * @return 更新的条数
 	 */
-	Long updateApplication(Integer LAstatus, String LAcomment, Long LAid);
+	int updateApplication(Integer LAstatus, Integer LAisapproved, String LAcomment, Long LAid);
 	
 	/**
 	 * 获取机构的请假申请列表
@@ -57,6 +57,13 @@ public interface Service {
 	 * @return
 	 */
 	List<Leave_Application> getUserApplicationList(Long Uid);
+	
+	/**
+	 * 教师获取个人请假的申请列表
+	 * @param Uid
+	 * @return
+	 */
+	List<Leave_Application> getUserApplicationList(String Uphone);
 //////////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
 	/**
 	 * 创建一个家庭
@@ -406,4 +413,5 @@ public interface Service {
 	 * @return
 	 */
 	public int addOrgMember(long Oid, long Uid, int identity);
+
 }

@@ -43,7 +43,6 @@ public class OrgMembersAdd extends BaseServlet {
     		jsonResult.addProperty("resultMessage", "添加成功！");
     		jsonResult.add("data", jsonData);
     		
-    		Gson gson = new Gson();
     		out.write(gson.toJson(jsonResult));
     		System.out.println(gson.toJson(jsonResult));
     	}else {
@@ -55,7 +54,6 @@ public class OrgMembersAdd extends BaseServlet {
     		jsonResult.addProperty("resultMessage", "添加失败！");
     		jsonResult.add("data", jsonData);
     		
-    		Gson gson = new Gson();
     		out.write(gson.toJson(jsonResult));
     		System.out.println(gson.toJson(jsonResult));
     	}

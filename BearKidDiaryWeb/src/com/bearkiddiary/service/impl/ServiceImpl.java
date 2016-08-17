@@ -155,12 +155,12 @@ public class ServiceImpl implements Service {
 	}
 	
 	@Override
-	public Long updateApplication(Integer LAstatus, String LAcomment, Long LAid) {
-		Long result = laDao.updateApplication(LAstatus, LAcomment, LAid);
+	public int updateApplication(Integer LAstatus, Integer LAisapproved, String LAcomment, Long LAid) {
+		int result = laDao.updateApplication(LAstatus, LAisapproved, LAcomment, LAid);
 		if(result > 0){
 			return result;
 		}
-		return (long) ResultCode.ERROR;
+		return ResultCode.ERROR;
 	}
 
 	@Override
@@ -171,6 +171,11 @@ public class ServiceImpl implements Service {
 	@Override
 	public List<Leave_Application> getUserApplicationList(Long Uid) {
 		return laDao.getUserApplicationList(Uid);
+	}
+	
+	@Override
+	public List<Leave_Application> getUserApplicationList(String Uphone) {
+		return laDao.getUserApplicationList(Uphone);
 	}
 	
 	@Override

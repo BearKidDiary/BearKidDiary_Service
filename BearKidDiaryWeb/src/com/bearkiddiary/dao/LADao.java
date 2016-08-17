@@ -25,7 +25,7 @@ public interface LADao extends BaseDao<Leave_Application>{
 	 * @param LAcomment
 	 * @return
 	 */
-	Long updateApplication(Integer LAstatus, String LAcomment, Long LAid);
+	int updateApplication(Integer LAstatus, Integer LAisapproved, String LAcomment, Long LAid);
 	
 	/**
 	 * 获取机构的请假申请列表
@@ -40,4 +40,11 @@ public interface LADao extends BaseDao<Leave_Application>{
 	 * @return
 	 */
 	List<Leave_Application> getUserApplicationList(Long Uid);
+	
+	/**
+	 * 教师获取个人请假的申请列表
+	 * @param Uphone
+	 * @return
+	 */
+	List<Leave_Application> getUserApplicationList(String Uphone);
 }
