@@ -1,4 +1,4 @@
-package com.bearkiddiary.servlet;
+package com.bearkiddiary.servlet.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.service.Service;
+import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 import com.bearkiddiary.utils.ServiceBean;
 
@@ -19,7 +20,7 @@ import com.bearkiddiary.utils.ServiceBean;
  * Servlet implementation class RegisterServlet
  */
 @WebServlet(name = "RegisterServlet", urlPatterns = "/user/regist")
-public class Register extends BaseServlet {
+public class UserRegister extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override

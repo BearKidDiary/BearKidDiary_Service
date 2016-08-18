@@ -1,4 +1,4 @@
-package com.bearkiddiary.servlet;
+package com.bearkiddiary.servlet.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +15,7 @@ import com.bearkiddiary.bean.Leave_Application;
 import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
+import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -26,6 +27,8 @@ import com.google.gson.JsonObject;
 @WebServlet(name = "UserApplication", urlPatterns = "/user/apply")
 public class UserApplication extends BaseServlet {
 	private static final long serialVersionUID = 1L;
+	private PrintWriter out;
+	
 	private JsonObject jsonResult;
 	private JsonObject jsonData;
 	
@@ -34,7 +37,7 @@ public class UserApplication extends BaseServlet {
        
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	PrintWriter out = response.getWriter();
+    	out = response.getWriter();
     	result = new Result<>();
     	list = new ArrayList<>();
     	// 获取参数 applyType = 0|1, 0:获取请假申请列表，1：请假申请
@@ -110,12 +113,17 @@ public class UserApplication extends BaseServlet {
     		result.setData(list);
     		out.write(gson.toJson(list));
     	}
-    	
-    	
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	doPost(request, response);
+    }
+    
+    @Override
+    public void destroy() {
+    	// TODO Auto-generated method stub
+    	super.destroy();
+    	out.close();
     }
 }

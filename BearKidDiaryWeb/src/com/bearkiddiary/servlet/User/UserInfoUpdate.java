@@ -1,4 +1,4 @@
-package com.bearkiddiary.servlet;
+package com.bearkiddiary.servlet.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
+import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ParameterDecode;
+import com.bearkiddiary.utils.ResultCode;
 import com.bearkiddiary.utils.ServiceBean;
 import com.google.gson.Gson;
 
@@ -20,7 +22,7 @@ import com.google.gson.Gson;
  * Servlet implementation class UpdateUserInfo
  */
 @WebServlet(name = "UpdateUserInfo", urlPatterns = "/user/updateinfo")
-public class UpdateUserInfo extends BaseServlet {
+public class UserInfoUpdate extends BaseServlet {
 	private static final long serialVersionUID = 1L;
     private Result<User> result;
     private User user;
@@ -37,29 +39,29 @@ public class UpdateUserInfo extends BaseServlet {
 		
 		user.setUphone(Uphone);
 		
-		int updateId = -1;
+		int update = 0;
 		if(Uname != null){
 			//解码
 			String name = ParameterDecode.decode(Uname);
-			updateId = service.updateUser(Uphone, User.NAME, name);
+			update = service.updateUser(Uphone, User.NAME, name);
 		}else if(Uarea != null){
 			String area = ParameterDecode.decode(Uarea);
-			updateId = service.updateUser(Uphone, User.AREA, area);
+			update = service.updateUser(Uphone, User.AREA, area);
 		}else if(Uemail != null){
 			Uemail = ParameterDecode.decode(Uemail);
-			updateId = service.updateUser(Uphone, User.EMAIL, Uemail);
+			update = service.updateUser(Uphone, User.EMAIL, Uemail);
 		}else {
 			System.out.println("没有任何数据！");
 		}
 		
-		if(updateId > 0){
+		if(update > 0){
 			result = new Result<User>();
-			result.setResultCode(0);
+			result.setResultCode(ResultCode.SUCCESS);
 			result.setResultMessage("更新数据成功！");
 			result.setData(user);
 		}else {
 			result = new Result<User>();
-			result.setResultCode(1);
+			result.setResultCode(ResultCode.ERROR_COMMIT);
 			result.setResultMessage("更新数据失败！");
 			result.setData(user);
 		}

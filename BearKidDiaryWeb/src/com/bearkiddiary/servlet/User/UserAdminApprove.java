@@ -1,4 +1,4 @@
-package com.bearkiddiary.servlet;
+package com.bearkiddiary.servlet.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bearkiddiary.bean.Leave_Application;
 import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.Result;
+import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -26,6 +27,7 @@ import com.google.gson.JsonObject;
 @WebServlet(name = "UserAdminApprove", urlPatterns = "/user/approve")
 public class UserAdminApprove extends BaseServlet {
 	private static final long serialVersionUID = 1L;
+	private PrintWriter out;
 	
 	private Result<List<Leave_Application>> result;
 	private List<Leave_Application> list;
@@ -35,7 +37,7 @@ public class UserAdminApprove extends BaseServlet {
        
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    	PrintWriter out = response.getWriter();
+    	out = response.getWriter();
     	//类型，0：获取请假列表；1：对请假进行审批
     	Integer applyType = Integer.valueOf(request.getParameter("applyType"));
     	Long Oid = Long.valueOf(request.getParameter(Organization.OID));
@@ -86,11 +88,18 @@ public class UserAdminApprove extends BaseServlet {
     		list.add(new Leave_Application());
     		result.setData(list);
     	}
-    	
+    	out.close();
     }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	doPost(request, response);
+    }
+    
+    @Override
+    public void destroy() {
+    	// TODO Auto-generated method stub
+    	super.destroy();
+    	out.close();
     }
 }

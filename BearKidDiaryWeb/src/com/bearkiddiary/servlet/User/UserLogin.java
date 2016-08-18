@@ -1,4 +1,4 @@
-package com.bearkiddiary.servlet;
+package com.bearkiddiary.servlet.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.service.Service;
+import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ServiceBean;
 import com.google.gson.Gson;
 
@@ -22,7 +23,7 @@ import com.google.gson.Gson;
  * Servlet implementation class LoginServlet
  */
 @WebServlet(name = "LoginServlet", urlPatterns = "/user/login")
-public class Login extends BaseServlet {
+public class UserLogin extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 	private Result<User> result;
 
@@ -30,16 +31,7 @@ public class Login extends BaseServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
-
-		// Map<String, String> params=((Object) request).getParams();
-		// Iterator it = params.keySet().iterator();
-		// while(it.hasNext()){
-		// String paramName = (String) it.next();
-		// String paramValue = request.getParameter(paramName);
-		// //处理你得到的参数名与值
-		// System.out.println(paramName+"="+paramValue);
-		// }
-
+		
 		String Uphone = request.getParameter("Uphone");
 		String Upsw = request.getParameter("Upsw");
 		System.out.println(Uphone);
