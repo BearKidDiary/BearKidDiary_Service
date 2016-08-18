@@ -20,7 +20,7 @@ public interface OrgDao extends BaseDao<Organization>{
 	 * 解散机构
 	 * @param Oid
 	 */
-	public void deleteOrg(long Oid);
+	public int deleteOrg(long Oid);
 	
 	/**
 	 * 更新机构名字
@@ -28,21 +28,21 @@ public interface OrgDao extends BaseDao<Organization>{
 	 * @param Oname
 	 * @return
 	 */
-	public long updateOname(long Oid, String Oname);
+	public int updateOname(long Oid, String Oname);
 	/**
 	 * 更新机构地址
 	 * @param Oid
 	 * @param Oaddress
 	 * @return
 	 */
-	public long updateOaddress(long Oid, String Oaddress);
+	public int updateOaddress(long Oid, String Oaddress);
 	/**
 	 * 更新机构公告
 	 * @param Oid
 	 * @param Oannounce
 	 * @return
 	 */
-	public long updateOannounce(long Oid, String Oannounce);
+	public int updateOannounce(long Oid, String Oannounce);
 	
 	/**
 	 * 获取机构
@@ -65,4 +65,12 @@ public interface OrgDao extends BaseDao<Organization>{
 	 * @return
 	 */
 	public int addOrgParent(long Oid, long Uid);
+	
+	/**
+	 * 验证是否是该机构的管理员
+	 * @param Uphone
+	 * @param Oid
+	 * @return
+	 */
+	int validAdmin(String Uphone, Long Oid);
 }

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bearkiddiary.bean.Leave_Application;
 import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.Result;
+import com.bearkiddiary.bean.User;
 import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 import com.google.gson.Gson;
@@ -27,13 +28,14 @@ import com.google.gson.JsonObject;
 @WebServlet(name = "UserAdminApprove", urlPatterns = "/user/approve")
 public class UserAdminApprove extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	private PrintWriter out;
+	private PrintWriter out = null;
+	private Leave_Application application = new Leave_Application();
 	
 	private Result<List<Leave_Application>> result;
 	private List<Leave_Application> list;
 	
-	private JsonObject jsonData;
-	private JsonObject jsonResult;
+//	private JsonObject jsonData;
+//	private JsonObject jsonResult;
        
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -41,54 +43,67 @@ public class UserAdminApprove extends BaseServlet {
     	//类型，0：获取请假列表；1：对请假进行审批
     	Integer applyType = Integer.valueOf(request.getParameter("applyType"));
     	Long Oid = Long.valueOf(request.getParameter(Organization.OID));
+    	String Uphone = request.getParameter(User.PHONE);
     	
     	result = new Result<>();
     	list = new ArrayList<>();
-    	if(applyType == 0){ // 获取请假申请列表
-    		list = service.getOrgApplicationList(Oid);
+    	
+    	//验证权限
+    	int resultCode = service.validAdmin(Oid, Uphone);
+    	if(resultCode == ResultCode.SUCCESS){
     		
-    		if(list.size() > 0){
-    			result.setResultCode(ResultCode.SUCCESS);
-        		result.setResultMessage("机构请假申请列表");
-        		result.setData(list);
-    		}else {
-    			result.setResultCode(ResultCode.NO_RESULT);
-    			result.setResultMessage("没有请假申请记录");
-    			list.add(new Leave_Application());
-    			result.setData(list);
-    		}
-    		out.println(gson.toJson(result));
-    	}else if(applyType == 1){ // 对请假申请进行审批
-    		Long LAid = Long.valueOf(request.getParameter(Leave_Application.LAID));
-        	Integer LAisapproved = Integer.valueOf(request.getParameter(Leave_Application.LAISAPPROVED));
-        	String LAcomment = request.getParameter(Leave_Application.LACOMMENT);
-        	int count = service.updateApplication(Leave_Application.APPROVED, LAisapproved, LAcomment, LAid);
-        	if(count > 0){
-        		jsonData = new JsonObject();
-        		jsonData.addProperty("LAid", LAid);
+    		if(applyType == 0){ // 获取请假申请列表
         		
-        		jsonResult = new JsonObject();
-        		jsonResult.addProperty(Result.RESULTCODE, ResultCode.SUCCESS);
-        		jsonResult.addProperty(Result.RESULTMESSAGE, "审批成功");
-        		jsonResult.add(Result.DATA, jsonData);
+        		if(resultCode == ResultCode.SUCCESS){
+        			list = service.getOrgApplicationList(Oid);
+            		
+            		if(list.size() > 0){
+            			result.setResultCode(ResultCode.SUCCESS);
+                		result.setResultMessage("机构请假申请列表");
+                		result.setData(list);
+            		}else {
+            			result.setResultCode(ResultCode.NO_RESULT);
+            			result.setResultMessage("没有请假申请记录");
+            			list.add(application);
+            			result.setData(list);
+            		}
+        		}
+        		
+        	}else if(applyType == 1){ // 对请假申请进行审批
+        		Long LAid = Long.valueOf(request.getParameter(Leave_Application.LAID));
+            	Integer LAisapproved = Integer.valueOf(request.getParameter(Leave_Application.LAISAPPROVED));
+            	String LAcomment = request.getParameter(Leave_Application.LACOMMENT);
+            	
+            	int count = service.updateApplication(Leave_Application.APPROVED, LAisapproved, Uphone, LAcomment, LAid);
+            	if(count > 0){
+            		
+            		result.setResultCode(ResultCode.SUCCESS);
+            		result.setResultMessage("审批成功");
+            	}else {
+            		
+            		result.setResultCode(ResultCode.ERROR_COMMIT);
+            		result.setResultMessage("提交审批出错");
+            	}
         	}else {
-        		jsonData = new JsonObject();
-        		jsonData.addProperty(Leave_Application.LAID, -1);
-        		
-        		jsonResult = new JsonObject();
-        		jsonResult.addProperty(Result.RESULTCODE, ResultCode.ERROR_COMMIT);
-        		jsonResult.addProperty(Result.RESULTMESSAGE, "提交审批出错");
-        		jsonResult.add(Result.DATA, jsonData);
+        		//出错
+        		result.setResultCode(ResultCode.ERROR);
+        		result.setResultMessage("出错了");
         	}
-        	out.write(gson.toJson(jsonResult));
-    	}else {
-    		//出错
-    		result.setResultCode(ResultCode.ERROR);
-    		result.setResultMessage("出错了");
-    		list.add(new Leave_Application());
-    		result.setData(list);
-    	}
-    	out.close();
+    		
+    		
+    	}else if(resultCode == ResultCode.ERROR_NO_ORG){
+			result.setResultCode(ResultCode.ERROR_NO_ORG);
+			result.setResultMessage("没有此机构");
+			list.add(application);
+			result.setData(list);
+		}else if(resultCode == ResultCode.ERROR_NO_PERMISSION){
+			result.setResultCode(ResultCode.ERROR_NO_PERMISSION);
+			result.setResultMessage("该用户不具备管理员权限");
+			list.add(application);
+			result.setData(list);
+		}
+    	
+    	out.write(gson.toJson(result));
     }
     
     @Override
@@ -100,6 +115,8 @@ public class UserAdminApprove extends BaseServlet {
     public void destroy() {
     	// TODO Auto-generated method stub
     	super.destroy();
-    	out.close();
+    	if(out != null){
+        	out.close();
+    	}
     }
 }

@@ -23,16 +23,22 @@ import com.bearkiddiary.utils.ServiceBean;
 public class UserRegister extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 
+	private User user;
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		Result<User> result = new Result<>();
 
-		User user = new User();
+		user = new User();
 		boolean isSuccess = false;
-		user.setUphone(request.getParameter("Uphone"));
-		user.setUpsw(request.getParameter("Upsw"));
+		
+		String Uphone = request.getParameter(User.PHONE);
+		String Upsw = request.getParameter(User.PSW);
+		
+		user.setUphone(Uphone);
+		user.setUpsw(Upsw);
+		
 		if (user.getUphone() == null || user.getUpsw() == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
 			result.setResultMessage("请求参数不完整");
@@ -48,6 +54,8 @@ public class UserRegister extends BaseServlet {
 		if (isSuccess)
 			code = service.createFamily(user.getUphone(), user.getUphone() + "的家庭");
 		result.setResultCode(code);
+		
+		user = new User();
 		if (code == ResultCode.SUCCESS) {
 			result.setResultMessage("注册成功");
 		}

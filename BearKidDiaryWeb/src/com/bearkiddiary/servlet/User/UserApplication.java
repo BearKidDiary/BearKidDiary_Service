@@ -29,8 +29,8 @@ public class UserApplication extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 	private PrintWriter out;
 	
-	private JsonObject jsonResult;
-	private JsonObject jsonData;
+//	private JsonObject jsonResult;
+//	private JsonObject jsonData;
 	
 	private Result<List<Leave_Application>> result;
 	private List<Leave_Application> list;
@@ -58,8 +58,7 @@ public class UserApplication extends BaseServlet {
     		}else {
     			result.setResultCode(ResultCode.NO_RESULT);
     			result.setResultMessage("没有请假申请记录");
-    			list.add(new Leave_Application());
-    			result.setData(list);
+
     			out.write(gson.toJson(result));
     		}
     		
@@ -80,37 +79,18 @@ public class UserApplication extends BaseServlet {
         	Long resultId = service.commitApplication(application, Oid, Uphone);
         	//判断结果，如果保存成功，则返回提交的id,否则返回错误代码（为负值）
         	if(resultId > 0){
-        		jsonData = new JsonObject();
-        		jsonData.addProperty(Leave_Application.LAID, resultId);
-        		
-        		jsonResult = new JsonObject();
-        		jsonResult.addProperty(Result.RESULTCODE, ResultCode.SUCCESS);
-        		jsonResult.addProperty(Result.RESULTMESSAGE, "申请提交成功！");
-        		jsonResult.add(Result.DATA, jsonData);
+        		result.setResultCode(ResultCode.SUCCESS);
+        		result.setResultMessage("申请提交成功！");
         	}else {
-        		jsonData = new JsonObject();
-        		jsonData.addProperty(Leave_Application.LAID, -1);
-        		
-        		jsonResult.addProperty(Result.RESULTCODE, ResultCode.ERROR_COMMIT);
-        		jsonResult.addProperty(Result.RESULTMESSAGE, "申请提交失败！");
-        		jsonResult.add(Result.DATA, jsonData);
+        		result.setResultCode(ResultCode.ERROR_COMMIT);
+        		result.setResultMessage("申请提交失败！");
         	}
         	
-        	out.write(gson.toJson(jsonResult));
+        	out.write(gson.toJson(result));
     	}else {
     		//出错
-//    		jsonData = new JsonObject();
-//    		jsonData.addProperty(Leave_Application.LAID, -1);
-//    		
-//    		jsonResult.addProperty(Result.RESULTCODE, ResultCode.ERROR);
-//    		jsonResult.addProperty(Result.RESULTMESSAGE, "出错了");
-//    		jsonResult.add(Result.DATA, jsonData);
-//    		
-//    		out.write(gson.toJson(jsonResult));
-    		list.add(new Leave_Application());
     		result.setResultCode(ResultCode.ERROR);
     		result.setResultMessage("出错了");
-    		result.setData(list);
     		out.write(gson.toJson(list));
     	}
     }

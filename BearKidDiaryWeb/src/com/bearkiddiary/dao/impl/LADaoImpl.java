@@ -39,14 +39,14 @@ public class LADaoImpl extends BaseDaoHibernate<Leave_Application> implements LA
 	}
 
 	@Override
-	public int updateApplication(Integer LAstatus, Integer LAisapproved, String LAcomment , Long LAid) {
-		String hql = "update Leave_Application application set application.LAstatus = ?0,application.LAisapproved = ?1";
+	public int updateApplication(Integer LAstatus, Integer LAisapproved, User LArover, String LAcomment, Long LAid) {
+		String hql = "update Leave_Application application set application.LAstatus = ?0,application.LAisapproved = ?1,application.LArover = ?2";
 		if(LAcomment != null){
-			hql = hql + ",application.LAcomment = ?2 where application.LAid = ?3";
-			return update(hql, LAstatus, LAisapproved, LAcomment, LAid);
+			hql = hql + ",application.LAcomment = ?3 where application.LAid = ?4";
+			return update(hql, LAstatus, LAisapproved, LArover, LAcomment, LAid);
 		}
-		hql = hql + " where application.LAid = ?2";
-		return update(hql, LAstatus, LAisapproved, LAid);
+		hql = hql + " where application.LAid = ?3";
+		return update(hql, LAstatus, LAisapproved, LArover, LAid);
 	}
 
 	@Override

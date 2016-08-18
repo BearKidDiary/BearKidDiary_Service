@@ -61,4 +61,12 @@ public class ResultCode {
 	 * 提交，保存失败
 	 */
 	public static final int ERROR_COMMIT = -102;
+	/**
+	 * 无权限操作
+	 */
+	public static final int ERROR_NO_PERMISSION = -103;
+	/**
+	 * 登录失败
+	 */
+	public static final int ERROR_LOGIN = -104;
 }

@@ -16,6 +16,7 @@ import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.service.Service;
 import com.bearkiddiary.servlet.BaseServlet;
+import com.bearkiddiary.utils.ResultCode;
 import com.bearkiddiary.utils.ServiceBean;
 import com.google.gson.Gson;
 
@@ -26,11 +27,13 @@ import com.google.gson.Gson;
 public class UserLogin extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 	private Result<User> result;
+	
+	private PrintWriter out = null;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		PrintWriter out = response.getWriter();
+		out = response.getWriter();
 		
 		String Uphone = request.getParameter("Uphone");
 		String Upsw = request.getParameter("Upsw");
@@ -43,14 +46,11 @@ public class UserLogin extends BaseServlet {
 		User user = new User();
 		// TODO Auto-generated method stub
 		if (service.Login(Uphone, Upsw)) {
-			result.setResultCode(0);
+			result.setResultCode(ResultCode.SUCCESS);
 			result.setResultMessage("登录成功！");
-			user.setUphone(Uphone);
-			result.setData(user);
 		} else {
-			result.setResultCode(1);
+			result.setResultCode(ResultCode.ERROR_LOGIN);
 			result.setResultMessage("登录失败，用户名或密码错误！");
-			result.setData(user);
 		}
 
 		System.out.println(gson.toJson(result));
@@ -61,5 +61,14 @@ public class UserLogin extends BaseServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		doPost(request, response);
+	}
+	
+	@Override
+	public void destroy() {
+		// TODO Auto-generated method stub
+		super.destroy();
+		if(out != null){
+			out.close();
+		}
 	}
 }

@@ -37,8 +37,6 @@ public class UserInfoUpdate extends BaseServlet {
 		String Uarea = request.getParameter(User.AREA);
 		String Uemail = request.getParameter(User.EMAIL);
 		
-		user.setUphone(Uphone);
-		
 		int update = 0;
 		if(Uname != null){
 			//解码
@@ -58,12 +56,10 @@ public class UserInfoUpdate extends BaseServlet {
 			result = new Result<User>();
 			result.setResultCode(ResultCode.SUCCESS);
 			result.setResultMessage("更新数据成功！");
-			result.setData(user);
 		}else {
 			result = new Result<User>();
 			result.setResultCode(ResultCode.ERROR_COMMIT);
 			result.setResultMessage("更新数据失败！");
-			result.setData(user);
 		}
 		out.write(gson.toJson(result));
 		System.out.println(gson.toJson(result));

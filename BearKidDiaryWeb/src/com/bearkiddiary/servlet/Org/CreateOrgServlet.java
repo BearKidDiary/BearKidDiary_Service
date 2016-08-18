@@ -28,13 +28,11 @@ import com.google.gson.JsonObject;
 @WebServlet(name = "CreateOrgServlet", urlPatterns = "/org/create")
 public class CreateOrgServlet extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	private JsonObject jsonResult; 
-	private JsonObject jsonData;
 	private Result<Organization> result;
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+//		response.getWriter().append("Served at: ").append(request.getContextPath());
 		doPost(request, response);
 	}
 
@@ -59,6 +57,8 @@ public class CreateOrgServlet extends BaseServlet {
 		String Oaddress = request.getParameter(Organization.OADDRESS);
 		String Oannounce = request.getParameter(Organization.OANNOUNCE);
 		
+		result = new Result<>();
+		
 		if(type == Organization.CREATE){
 			Organization org = new Organization();
 			org.setOname(Oname);
@@ -68,52 +68,72 @@ public class CreateOrgServlet extends BaseServlet {
 			Long Uid = Long.valueOf(request.getParameter(Organization.UID));
 			//创建成功返回的Oid
 			Long Oid = service.createOrg(Oname, Oaddress, Oannounce, Uid);
-			
-			result = new Result<>();
-			result.setResultCode(ResultCode.SUCCESS);
-			result.setResultMessage("创建成功");
-			result.setData(org);
+			if(Oid > 0){
+				result.setResultCode(ResultCode.SUCCESS);
+				result.setResultMessage("创建成功");
+				result.setData(org);
+			}else {
+				result.setResultCode(ResultCode.ERROR_COMMIT);
+				result.setResultMessage("创建失败");
+			}
 			
 			responseWriter(response, gson.toJson(result));
 			System.out.println("创建成功：" + Oid);
 		}else if(type == Organization.DELETE){ // 删除机构
 			//获取客户端传递的机构id
 			long Oid = Long.valueOf(request.getParameter("Oid"));
-			service.deleteOrg(Oid);
+			int count = service.deleteOrg(Oid);
 			
-			jsonData = new JsonObject();
-			jsonData.addProperty("Oid", Oid);
-			jsonData.addProperty("Oname", Oname);
+			if(count > 0){
+				result.setResultCode(ResultCode.SUCCESS);
+				result.setResultMessage("删除成功！");
+			}else {
+				result.setResultCode(ResultCode.ERROR);
+				result.setResultMessage("删除失败！");
+			}
 			
-			jsonResult = new JsonObject();
-			jsonResult.addProperty("resultCode", ResultCode.SUCCESS);
-			jsonResult.addProperty("resultMessage", "删除成功！");
-			jsonResult.add("Data", jsonData);
-			responseWriter(response, gson.toJson(jsonResult));
-			System.out.println("删除成功！");
+			responseWriter(response, gson.toJson(result));
 		}else if(type == Organization.UPDATE){ //修改机构
 			
 			//获取客户端传递的机构id
 			long Oid = Long.valueOf(request.getParameter("Oid"));
+			int count = 0;
 			if(Oname != null){
-				service.updateOrg(Oid, Organization.ONAME, Oname);
-			}else if(Oaddress != null){
-				service.updateOrg(Oid, Organization.OADDRESS, Oaddress);
-			}else if(Oannounce != null){
-				service.updateOrg(Oid, Organization.OANNOUNCE, Oannounce);
+				
+				count = service.updateOrg(Oid, Organization.ONAME, Oname);
+				if(count > 0){
+					result.setResultCode(ResultCode.SUCCESS);
+					result.setResultMessage("修改名字成功!");
+				}else {
+					result.setResultCode(ResultCode.ERROR);
+					result.setResultMessage("修改名字失败!");
+				}
+				responseWriter(response, gson.toJson(result));
 			}
-			
-			//返回的json数据
-			jsonData = new JsonObject();
-			jsonData.addProperty("Oid", Oid);
-			jsonData.addProperty("Oname", Oname);
-			
-			jsonResult = new JsonObject();
-			jsonResult.addProperty("resultCode", ResultCode.SUCCESS);
-			jsonResult.addProperty("resultMessage", "修改成功");
-			jsonResult.add("Data", jsonData);
-			
-			responseWriter(response, gson.toJson(jsonResult));
+			if(Oaddress != null){
+				
+				count = service.updateOrg(Oid, Organization.OADDRESS, Oaddress);
+				if(count > 0){
+					result.setResultCode(ResultCode.SUCCESS);
+					result.setResultMessage("修改地址成功!");
+				}else {
+					result.setResultCode(ResultCode.ERROR);
+					result.setResultMessage("修改地址失败!");
+				}
+				responseWriter(response, gson.toJson(result));
+			}
+			if(Oannounce != null){
+				
+				count = service.updateOrg(Oid, Organization.OANNOUNCE, Oannounce);
+				if(count > 0){
+					result.setResultCode(ResultCode.SUCCESS);
+					result.setResultMessage("修改公告成功!");
+				}else {
+					result.setResultCode(ResultCode.ERROR);
+					result.setResultMessage("修改公告失败!");
+				}
+				responseWriter(response, gson.toJson(result));
+			}
 			System.out.println("修改数据！");
 		}
 	}
