@@ -1,4 +1,4 @@
-package com.bearkiddiary.servlet.kid;
+package com.bearkiddiary.servlet.course;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,13 +9,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bearkiddiary.bean.Kid;
+import com.bearkiddiary.bean.Course;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 
-@WebServlet("/kid")
-public class KidGet extends BaseServlet {
+@WebServlet("/course")
+public class CourseGet extends BaseServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		doPost(req, resp);
@@ -23,15 +23,16 @@ public class KidGet extends BaseServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Result<Set<Kid>> result = new Result<>();
+		Result<Set<Course>> result = new Result<>();
 		PrintWriter out = resp.getWriter();
 
-		String sKid = req.getParameter("Kid");
-		String Uphone = req.getParameter("Uphone");
-		String sFid = req.getParameter("Fid");
 		String sCid = req.getParameter("Cid");
+		String sOid = req.getParameter("Oid");
+		String sUid = req.getParameter("Uid");
+		String Uphone = req.getParameter("Uphone");
+		String sKid = req.getParameter("Kid");
 
-		if (sKid == null && Uphone == null && sFid == null && sCid == null) {
+		if (sCid == null && sOid == null && sUid == null && Uphone == null && sKid == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
 			result.setResultMessage("请求参数不完整");
 			out.write(gson.toJson(result));
@@ -39,26 +40,31 @@ public class KidGet extends BaseServlet {
 			return;
 		}
 
-		Long Kid = null;
-		if (sKid != null)
-			Kid = Long.valueOf(sKid);
-
-		Long Fid = null;
-		if (sFid != null)
-			Fid = Long.valueOf(sFid);
-
 		Long Cid = null;
 		if (sCid != null)
 			Cid = Long.valueOf(sCid);
 
-		Set<Kid> set = service.getKids(Kid, Uphone, Fid, Cid);
+		Long Uid = null;
+		if (sUid != null)
+			Uid = Long.valueOf(sUid);
+
+		Long Oid = null;
+		if (sOid != null)
+			Oid = Long.valueOf(sOid);
+
+		Long Kid = null;
+		if (sKid != null)
+			Kid = Long.valueOf(sKid);
+
+		Set<Course> set = service.getCourse(Cid, Uid, Uphone, Oid, Kid);
+		result.setData(set);
+
 		if (set == null) {
 			result.setResultCode(ResultCode.ERROR_NO_RESULT);
-			result.setResultMessage("查询不正常，家庭可能不存在");
+			result.setResultMessage("请检查参数的合法性");
 		} else {
 			result.setResultCode(ResultCode.SUCCESS);
 			result.setResultMessage("查询成功");
-			result.setData(set);
 		}
 		out.write(gson.toJson(result));
 		out.close();

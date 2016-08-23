@@ -95,6 +95,12 @@ public class Kid implements Serializable {
 	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "students")
 	private Set<Course> attendCourse = new HashSet<>();
 
+	/**
+	 * 孩子在不同课程中获得的成绩
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+	private Set<Score> score = new HashSet<>();
+
 	public Long getKid() {
 		return Kid;
 	}
@@ -197,5 +203,13 @@ public class Kid implements Serializable {
 
 	public void setKflowers(Integer kflowers) {
 		Kflowers = kflowers;
+	}
+
+	public Set<Score> getScore() {
+		return score;
+	}
+
+	public void setScore(Set<Score> score) {
+		this.score = score;
 	}
 }

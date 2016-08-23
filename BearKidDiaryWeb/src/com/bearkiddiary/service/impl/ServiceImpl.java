@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.bearkiddiary.bean.Course;
 import com.bearkiddiary.bean.Family;
 import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
@@ -13,6 +14,7 @@ import com.bearkiddiary.bean.TimeLine;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.bean.Vision;
 import com.bearkiddiary.bean.Weight;
+import com.bearkiddiary.dao.CourseDao;
 import com.bearkiddiary.dao.FamilyDao;
 import com.bearkiddiary.dao.HeightDao;
 import com.bearkiddiary.dao.KidDao;
@@ -74,12 +76,17 @@ public class ServiceImpl implements Service {
 	public void setOrgDao(OrgDao orgDao) {
 		this.orgDao = orgDao;
 	}
-	
+
 	private LADao laDao;
-	
 
 	public void setLaDao(LADao laDao) {
 		this.laDao = laDao;
+	}
+
+	private CourseDao courseDao;
+
+	public void setCourseDao(CourseDao courseDao) {
+		this.courseDao = courseDao;
 	}
 
 	// @Override
@@ -139,25 +146,25 @@ public class ServiceImpl implements Service {
 	/**
 	 * 提交请假申请 , 成功返回LAid
 	 */
-	public Long commitApplication(Leave_Application application, Long Oid, String Uphone){
+	public Long commitApplication(Leave_Application application, Long Oid, String Uphone) {
 		Organization org = orgDao.getOrg(Oid);
-		if(org == null){
+		if (org == null) {
 			return (long) ResultCode.ERROR_NO_ORG;
 		}
 		User user = userDao.getUser(Uphone);
-		if(user == null){
+		if (user == null) {
 			return (long) ResultCode.ERROR_NO_USER;
 		}
-		
+
 		application.setLAorg(org);
 		application.setLAapplicant(user);
 		return laDao.commitApplicaton(application);
 	}
-	
+
 	@Override
 	public Long updateApplication(Integer LAstatus, String LAcomment, Long LAid) {
 		Long result = laDao.updateApplication(LAstatus, LAcomment, LAid);
-		if(result > 0){
+		if (result > 0) {
 			return result;
 		}
 		return (long) ResultCode.ERROR;
@@ -172,7 +179,7 @@ public class ServiceImpl implements Service {
 	public List<Leave_Application> getUserApplicationList(Long Uid) {
 		return laDao.getUserApplicationList(Uid);
 	}
-	
+
 	@Override
 	public int createFamily(String Uphone, String Fname) {
 		if (Fname == null) {
@@ -328,7 +335,7 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public Set<Kid> getKids(Long Kid, String Uphone, Long Fid) {
+	public Set<Kid> getKids(Long Kid, String Uphone, Long Fid, Long Cid) {
 		if (Kid != null) {
 			Set<Kid> set = new HashSet<>();
 			Kid k = kidDao.getKid(Kid);
@@ -350,6 +357,11 @@ public class ServiceImpl implements Service {
 				return set;
 		}
 
+		if (Cid != null) {
+			Set<Kid> set = courseDao.getKidsInCourse(Cid);
+			if (set != null)
+				return set;
+		}
 		return null;
 	}
 
@@ -391,8 +403,6 @@ public class ServiceImpl implements Service {
 		data.setKflowers(Kflowers);
 		return kidDao.updateKid(Kid, data);
 	}
-
-	
 
 	@Override
 	public int addKidBodyMsg(Long Kid, Float Hheight, Float Wweight, Float Vleft, Float Vright, Long time) {
@@ -474,5 +484,69 @@ public class ServiceImpl implements Service {
 		} else {
 			return timeLineDao.getTimeLine(Kid, Order, pageSize, pageNum);
 		}
+	}
+
+	@Override
+	public Set<Course> getCourse(Long Cid, Long Uid, String Uphone, Long Oid, Long Kid) {
+		if (Cid != null) {
+			Set<Course> set = new HashSet<>();
+			Course course = courseDao.getCourse(Cid);
+			if (course != null) {
+				set.add(course);
+				return set;
+			}
+		}
+		if (Uid != null || Uphone != null) {
+			return courseDao.getCourseByTeacher(Uid, Uphone);
+		}
+		if (Oid != null) {
+			return courseDao.getCourseByOrg(Oid);
+		}
+		if (Kid != null) {
+			return courseDao.getCourseByKid(Kid);
+		}
+		return null;
+	}
+
+	@Override
+	public int addKidToCourse(Long Cid, Long Kid) {
+		return courseDao.addKidToCourse(Cid, Kid);
+	}
+
+	@Override
+	public int removeKidFromCourse(Long Cid, Long Kid) {
+		return courseDao.removeKidFromCourse(Cid, Kid);
+	}
+
+	@Override
+	public int updateCourse(Long Cid, Long Cclasstime, Long Cendtime, Long Ctime, Long Cofftime, String Cbackground,
+			String Cdesc, String Cname, String Cimage, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday,
+			Boolean Cthursday, Boolean Cfriday, Boolean Csaturday, Boolean Csunday) {
+		return courseDao.updateCourse(Cid, Cclasstime, Cendtime, Ctime, Cofftime, Cbackground, Cdesc, Cname, Cimage,
+				Cmonday, Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday, Csunday);
+	}
+
+	@Override
+	public int addCourse(Long Cclasstime, Long Cendtime, Long Ctime, Long Cofftime, String Cbackground, String Cdesc,
+			String Cname, String Cimage, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday, Boolean Cthursday,
+			Boolean Cfriday, Boolean Csaturday, Boolean Csunday, Long teacherUid, String teacherUphone,
+			Long approverUid, String approverUphone, Long Oid) {
+		Course course = new Course();
+		course.setCclasstime(Cclasstime);
+		course.setCendtime(Cendtime);
+		course.setCtime(Ctime);
+		course.setCofftime(Cofftime);
+		course.setCbackground(Cbackground);
+		course.setCdesc(Cdesc);
+		course.setCname(Cname);
+		course.setCimage(Cimage);
+		course.setCmonday(Cmonday);
+		course.setCtuesday(Ctuesday);
+		course.setCwednesday(Cwednesday);
+		course.setCthursday(Cthursday);
+		course.setCfriday(Cfriday);
+		course.setCsaturday(Csaturday);
+		course.setCsunday(Csunday);
+		return courseDao.addCourse(course, teacherUid, teacherUphone, approverUid, approverUphone, Oid);
 	}
 }

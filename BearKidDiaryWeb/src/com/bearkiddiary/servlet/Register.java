@@ -53,7 +53,7 @@ public class Register extends BaseServlet {
 		if (code == ResultCode.ERROR_NO_RESULT) {
 			result.setResultMessage("×¢²áÊ§°Ü");
 		}
-		out.println(gson.toJson(result));
+		out.write(gson.toJson(result));
 	}
 
 	@Override

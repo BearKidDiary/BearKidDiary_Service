@@ -36,7 +36,7 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 		}
 
 		if (getCreatedFamily(Uphone) != null) {// 已经有创建的家庭了
-			return ResultCode.ERROR_ALREADY_HAVE_FAMILY;
+			return ResultCode.ERROR_EXIST_FAMILY;
 		}
 
 		Family family = new Family();

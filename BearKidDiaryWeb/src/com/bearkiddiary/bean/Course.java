@@ -1,5 +1,6 @@
 package com.bearkiddiary.bean;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -21,18 +22,18 @@ import com.google.gson.annotations.Expose;
 
 @Entity
 @Table(name = "Course")
-public class Course {
+public class Course implements Serializable {
 	@Expose
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Cid;
 	/**
-	 * 开课时间
+	 * 上课时间
 	 */
 	@Expose
 	private Long Cclasstime;
 	/**
-	 * 结束时间
+	 * 下课时间
 	 */
 	@Expose
 	private Long Cendtime;
@@ -71,7 +72,12 @@ public class Course {
 	 * 周一到周日是否需要上课
 	 */
 	@Expose
-	private Boolean Cmonday, Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday;
+	private Boolean Cmonday, Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday, Csunday;
+	/**
+	 * 课程的简介图片URL
+	 */
+	@Expose
+	private String Cimage;
 	/**
 	 * 课程所属的机构
 	 */
@@ -79,11 +85,23 @@ public class Course {
 	@JoinColumn(name = "organization")
 	private Organization organization;
 	/**
+	 * 课程的任课老师
+	 */
+	@Expose
+	@ManyToOne(cascade = CascadeType.MERGE)
+	@JoinColumn(name = "teacher")
+	private User teacher;
+	/**
 	 * 参与课程的孩子
 	 */
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "Course_Student", joinColumns = @JoinColumn(name = "Cid"), inverseJoinColumns = @JoinColumn(name = "Kid"))
 	private Set<Kid> students = new HashSet<>();
+	/**
+	 * 课程中各个学生获得的成绩
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+	private Set<Score> score = new HashSet<>();
 
 	public Long getCclasstime() {
 		return Cclasstime;
@@ -132,7 +150,6 @@ public class Course {
 	public void setCdesc(String cdesc) {
 		Cdesc = cdesc;
 	}
-	
 
 	public String getCname() {
 		return Cname;
@@ -220,5 +237,29 @@ public class Course {
 
 	public void setStudents(Set<Kid> students) {
 		this.students = students;
+	}
+
+	public String getCimage() {
+		return Cimage;
+	}
+
+	public void setCimage(String cimage) {
+		Cimage = cimage;
+	}
+
+	public User getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(User teacher) {
+		this.teacher = teacher;
+	}
+
+	public Boolean getCsunday() {
+		return Csunday;
+	}
+
+	public void setCsunday(Boolean csunday) {
+		Csunday = csunday;
 	}
 }

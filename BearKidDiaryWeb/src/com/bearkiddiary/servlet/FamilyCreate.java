@@ -45,7 +45,7 @@ public class FamilyCreate extends BaseServlet {
 		result.setResultCode(code);
 		if (code == ResultCode.ERROR_NO_USER) {
 			result.setResultMessage("不存在对应用户");
-		} else if (code == ResultCode.ERROR_ALREADY_HAVE_FAMILY) {
+		} else if (code == ResultCode.ERROR_EXIST_FAMILY) {
 			result.setResultMessage("该用户已经有家庭了");
 		} else {
 			result.setResultMessage("创建成功");

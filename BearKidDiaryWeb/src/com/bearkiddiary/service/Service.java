@@ -3,6 +3,7 @@ package com.bearkiddiary.service;
 import java.util.List;
 import java.util.Set;
 
+import com.bearkiddiary.bean.Course;
 import com.bearkiddiary.bean.Family;
 import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
@@ -11,10 +12,11 @@ import com.bearkiddiary.bean.TimeLine;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.bean.Vision;
 import com.bearkiddiary.bean.Weight;
+import com.bearkiddiary.utils.ResultCode;
 
 public interface Service {
-//用户
-    // 登录功能
+	// 用户
+	// 登录功能
 	boolean Login(String Uphone, String Upsw);
 
 	boolean Register(User user);
@@ -29,35 +31,40 @@ public interface Service {
 
 	/**
 	 * 提交请假申请
+	 * 
 	 * @param application
 	 * @param Oid
 	 * @param Uphone
 	 * @return
 	 */
 	Long commitApplication(Leave_Application application, Long Oid, String Uphone);
-	
+
 	/**
 	 * 更新请假申请的状态
+	 * 
 	 * @param LAstatus
 	 * @param LAcomment
 	 * @return
 	 */
 	Long updateApplication(Integer LAstatus, String LAcomment, Long LAid);
-	
+
 	/**
 	 * 获取机构的请假申请列表
+	 * 
 	 * @param Oid
 	 * @return
 	 */
 	List<Leave_Application> getOrgApplicationList(Long Oid);
-	
+
 	/**
 	 * 教师获取个人请假的申请列表
+	 * 
 	 * @param Uid
 	 * @return
 	 */
 	List<Leave_Application> getUserApplicationList(Long Uid);
-//////////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
+
+	//////////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
 	/**
 	 * 创建一个家庭
 	 * 
@@ -154,6 +161,7 @@ public interface Service {
 	 * @return
 	 */
 	int updateFamily(String Uphone, Long Fid, String Fname);
+
 	//////////////////////////////////////////////////////// 孩子/////////////////////////////////////////////////////////
 	/**
 	 * 获取孩子的信息
@@ -164,8 +172,10 @@ public interface Service {
 	 *            家庭创建者手机号码
 	 * @param Fid
 	 *            家庭编号
+	 * @param Cid
+	 *            课程编号
 	 */
-	Set<Kid> getKids(Long Kid, String Uphone, Long Fid);
+	Set<Kid> getKids(Long Kid, String Uphone, Long Fid, Long Cid);
 
 	/**
 	 * 删除孩子
@@ -368,8 +378,7 @@ public interface Service {
 	 */
 	List<TimeLine> getTimeLine(Long Kid, Long Uid, String Uphone, String Order, int pageSize, int pageNum);
 
-
-// 机构
+	// 机构
 	/**
 	 * 创建机构
 	 * 
@@ -406,4 +415,130 @@ public interface Service {
 	 * @return
 	 */
 	public int addOrgMember(long Oid, long Uid, int identity);
+
+	//////////////////////////////////////////////// 课程/////////////////////////////////////////////////////////////
+	/**
+	 * 获取课程信息
+	 * 
+	 * @param Cid
+	 *            课程编号
+	 * @param Uid
+	 *            任课老师编号
+	 * @param Uphone
+	 *            任课老师手机号码
+	 * @param Oid
+	 *            机构编号
+	 * @param Kid
+	 *            学生的编号
+	 */
+	Set<Course> getCourse(Long Cid, Long Uid, String Uphone, Long Oid, Long Kid);
+
+	/**
+	 * 把孩子添加到课程中
+	 * 
+	 * @param Cid
+	 *            课程编号
+	 * @param Kid
+	 *            孩子编号
+	 */
+	int addKidToCourse(Long Cid, Long Kid);
+
+	/**
+	 * 从课程中移除孩子
+	 * 
+	 * @param Cid
+	 *            课程编号
+	 * @param Kid
+	 *            孩子编号
+	 */
+	int removeKidFromCourse(Long Cid, Long Kid);
+
+	/**
+	 * 更新课程信息
+	 * 
+	 * @param Cid
+	 *            课程编号
+	 * @param Cclasstime
+	 *            上课时间
+	 * @param Cendtime
+	 *            下课时间
+	 * @param Ctime
+	 *            开学时间
+	 * @param Cofftime
+	 *            毕业时间
+	 * @param Cbackground
+	 *            课程背景
+	 * @param Cdesc
+	 *            课程描述
+	 * @param Cname
+	 *            课程的名称
+	 * @param Cimage
+	 *            课程的图片URL
+	 * @param Cmonday
+	 *            周一是否上课
+	 * @param Ctuesday
+	 *            周二是否上课
+	 * @param Cwednesday
+	 *            周三是否上课
+	 * @param Cthursday
+	 *            周四是否上课
+	 * @param Cfriday
+	 *            周五是否上课
+	 * @param Csaturday
+	 *            周六是否上课
+	 * @param Csunday
+	 *            周日是否上课
+	 */
+	int updateCourse(Long Cid, Long Cclasstime, Long Cendtime, Long Ctime, Long Cofftime, String Cbackground,
+			String Cdesc, String Cname, String Cimage, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday,
+			Boolean Cthursday, Boolean Cfriday, Boolean Csaturday, Boolean Csunday);
+
+	/**
+	 * 添加课程
+	 * 
+	 * @param Cclasstime
+	 *            上课时间
+	 * @param Cendtime
+	 *            下课时间
+	 * @param Ctime
+	 *            开学时间
+	 * @param Cofftime
+	 *            毕业时间
+	 * @param Cbackground
+	 *            课程背景
+	 * @param Cdesc
+	 *            课程描述
+	 * @param Cname
+	 *            课程的名称
+	 * @param Cimage
+	 *            课程的图片URL
+	 * @param Cmonday
+	 *            周一是否上课
+	 * @param Ctuesday
+	 *            周二是否上课
+	 * @param Cwednesday
+	 *            周三是否上课
+	 * @param Cthursday
+	 *            周四是否上课
+	 * @param Cfriday
+	 *            周五是否上课
+	 * @param Csaturday
+	 *            周六是否上课
+	 * @param Csunday
+	 *            周日是否上课
+	 * @param teacherUid
+	 *            任课老师的编号
+	 * @param teacherUphone
+	 *            任课老师的电话号码
+	 * @param approverUid
+	 *            审批人的编号
+	 * @param approverUphone
+	 *            审批人的手机号码
+	 * @param Oid
+	 *            机构编号
+	 */
+	int addCourse(Long Cclasstime, Long Cendtime, Long Ctime, Long Cofftime, String Cbackground, String Cdesc,
+			String Cname, String Cimage, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday, Boolean Cthursday,
+			Boolean Cfriday, Boolean Csaturday, Boolean Csunday, Long teacherUid, String teacherUphone,
+			Long approverUid, String approverUphone, Long Oid);
 }

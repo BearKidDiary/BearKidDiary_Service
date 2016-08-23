@@ -77,6 +77,12 @@ public class User implements Serializable {
 	 */
 	@OneToMany(cascade = CascadeType.MERGE, mappedBy = "approver")
 	private Set<Course> approverCourse = new HashSet<>();
+	
+	/**
+	 * 如果该用户是教师，任教的课程
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+	private Set<Course> teachCourse = new HashSet<>();
 
 	/**
 	 * 如果是管理员，创建的机构
@@ -93,20 +99,20 @@ public class User implements Serializable {
 	 * 作为家长参与其中的机构
 	 */
 	@ManyToMany(cascade = CascadeType.ALL, mappedBy = "parents")
-	private Set<Organization> parentOrganization = new HashSet<>(); 
-	
+	private Set<Organization> parentOrganization = new HashSet<>();
+
 	/**
 	 * 请假申请
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "LAapplicant")
 	private Set<Leave_Application> application = new HashSet<>();
-	
+
 	/**
 	 * 请假审批
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "LArover")
 	private Set<Leave_Application> approval = new HashSet<>();
-	
+
 	public Long getUid() {
 		return Uid;
 	}
@@ -219,7 +225,6 @@ public class User implements Serializable {
 		this.parentOrganization = parentOrganization;
 	}
 
-	
 	public Set<Leave_Application> getApplication() {
 		return application;
 	}
@@ -234,6 +239,14 @@ public class User implements Serializable {
 
 	public void setApproval(Set<Leave_Application> approval) {
 		this.approval = approval;
+	}
+	
+	public Set<Course> getTeachCourse() {
+		return teachCourse;
+	}
+
+	public void setTeachCourse(Set<Course> teachCourse) {
+		this.teachCourse = teachCourse;
 	}
 
 	@Override
