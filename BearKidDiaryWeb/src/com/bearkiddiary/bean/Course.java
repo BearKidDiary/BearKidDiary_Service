@@ -28,77 +28,77 @@ public class Course implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Cid;
 	/**
-	 * ÉÏ¿ÎÊ±¼ä
+	 * ä¸Šè¯¾æ—¶é—´
 	 */
 	@Expose
 	private Long Cclasstime;
 	/**
-	 * ÏÂ¿ÎÊ±¼ä
+	 * ä¸‹è¯¾æ—¶é—´
 	 */
 	@Expose
 	private Long Cendtime;
 	/**
-	 * ¿ªÑ§Ê±¼ä
+	 * å¼€å­¦æ—¶é—´
 	 */
 	@Expose
 	private Long Ctime;
 	/**
-	 * ±ÏÒµÊ±¼ä
+	 * æ¯•ä¸šæ—¶é—´
 	 */
 	@Expose
 	private Long Cofftime;
 	/**
-	 * ¿ª¿ÎÉóÅúÈË
+	 * å¼€è¯¾å®¡æ‰¹äºº
 	 */
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "approver")
 	private User approver;
 	/**
-	 * ¿Î³ÌµÄ¿ª¿Î±³¾°¡¢Ô­Òò
+	 * è¯¾ç¨‹çš„å¼€è¯¾èƒŒæ™¯ã€åŸå› 
 	 */
 	@Expose
 	private String Cbackground;
 	/**
-	 * ¿Î³ÌÃèÊö
+	 * è¯¾ç¨‹æè¿°
 	 */
 	@Expose
 	private String Cdesc;
 	/**
-	 * ¿Î³ÌÃû³Æ
+	 * è¯¾ç¨‹åç§°
 	 */
 	@Expose
 	private String Cname;
 	/**
-	 * ÖÜÒ»µ½ÖÜÈÕÊÇ·ñĞèÒªÉÏ¿Î
+	 * å‘¨ä¸€åˆ°å‘¨æ—¥æ˜¯å¦éœ€è¦ä¸Šè¯¾
 	 */
 	@Expose
 	private Boolean Cmonday, Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday, Csunday;
 	/**
-	 * ¿Î³ÌµÄ¼ò½éÍ¼Æ¬URL
+	 * è¯¾ç¨‹çš„ç®€ä»‹å›¾ç‰‡URL
 	 */
 	@Expose
 	private String Cimage;
 	/**
-	 * ¿Î³ÌËùÊôµÄ»ú¹¹
+	 * è¯¾ç¨‹æ‰€å±çš„æœºæ„
 	 */
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "organization")
 	private Organization organization;
 	/**
-	 * ¿Î³ÌµÄÈÎ¿ÎÀÏÊ¦
+	 * è¯¾ç¨‹çš„ä»»è¯¾è€å¸ˆ
 	 */
 	@Expose
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "teacher")
 	private User teacher;
 	/**
-	 * ²ÎÓë¿Î³ÌµÄº¢×Ó
+	 * å‚ä¸è¯¾ç¨‹çš„å­©å­
 	 */
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "Course_Student", joinColumns = @JoinColumn(name = "Cid"), inverseJoinColumns = @JoinColumn(name = "Kid"))
 	private Set<Kid> students = new HashSet<>();
 	/**
-	 * ¿Î³ÌÖĞ¸÷¸öÑ§Éú»ñµÃµÄ³É¼¨
+	 * è¯¾ç¨‹ä¸­å„ä¸ªå­¦ç”Ÿè·å¾—çš„æˆç»©
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	private Set<Score> score = new HashSet<>();

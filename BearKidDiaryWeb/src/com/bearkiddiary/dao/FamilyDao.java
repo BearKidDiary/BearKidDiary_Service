@@ -11,32 +11,32 @@ public interface FamilyDao extends BaseDao<Family> {
 	Family getFamily(Long Fid);
 
 	/**
-	 * ´´½¨Ò»¸ö¼ÒÍ¥
+	 * åˆ›å»ºä¸€ä¸ªå®¶åº­
 	 * 
 	 * @param Uphone
 	 * @param Fname
-	 * @return ÊÇ·ñ´´½¨³É¹¦
+	 * @return æ˜¯å¦åˆ›å»ºæˆåŠŸ
 	 */
 	int createFamily(String Uphone, String Fname);
 
 	/**
-	 * »ñÈ¡´´½¨µÄ¼ÒÍ¥
+	 * è·å–åˆ›å»ºçš„å®¶åº­
 	 * 
 	 * @param Uphone
-	 * @return ´´½¨µÄ¼ÒÍ¥
+	 * @return åˆ›å»ºçš„å®¶åº­
 	 */
 	Family getCreatedFamily(String Uphone);
 
 	/**
-	 * »ñÈ¡²ÎÓëµÄ¼ÒÍ¥£¨²»°üÀ¨´´½¨µÄ¼ÒÍ¥£©
+	 * è·å–å‚ä¸çš„å®¶åº­ï¼ˆä¸åŒ…æ‹¬åˆ›å»ºçš„å®¶åº­ï¼‰
 	 * 
 	 * @param Uphone
-	 * @return ²ÎÓëµÄ¼ÒÍ¥
+	 * @return å‚ä¸çš„å®¶åº­
 	 */
 	Set<Family> getAttendedFramily(String Uphone);
 
 	/**
-	 * »ñÈ¡idÎªFidµÄ¼ÒÍ¥ÖĞµÄËùÓĞ¼ÒÍ¥³ÉÔ±£¨²»°üÀ¨´´½¨Õß£©
+	 * è·å–idä¸ºFidçš„å®¶åº­ä¸­çš„æ‰€æœ‰å®¶åº­æˆå‘˜ï¼ˆä¸åŒ…æ‹¬åˆ›å»ºè€…ï¼‰
 	 * 
 	 * @param Fid
 	 * @return
@@ -44,7 +44,7 @@ public interface FamilyDao extends BaseDao<Family> {
 	Set<User> getMembersInFamily(long Fid);
 
 	/**
-	 * »ñÈ¡´´½¨ÕßÎªUphoneµÄ¼ÒÍ¥µÄËùÓĞ³ÉÔ±£¨²»°üÀ¨´´½¨Õß£©
+	 * è·å–åˆ›å»ºè€…ä¸ºUphoneçš„å®¶åº­çš„æ‰€æœ‰æˆå‘˜ï¼ˆä¸åŒ…æ‹¬åˆ›å»ºè€…ï¼‰
 	 * 
 	 * @param Uphone
 	 * @return
@@ -52,7 +52,7 @@ public interface FamilyDao extends BaseDao<Family> {
 	Set<User> getMembersInFamily(String Uphone);
 
 	/**
-	 * »ñÈ¡idÎªFidµÄ¼ÒÍ¥ÖĞµÄ´´½¨Õß
+	 * è·å–idä¸ºFidçš„å®¶åº­ä¸­çš„åˆ›å»ºè€…
 	 * 
 	 * @param Fid
 	 * @return
@@ -60,7 +60,7 @@ public interface FamilyDao extends BaseDao<Family> {
 	User getCreatorInFamily(long Fid);
 
 	/**
-	 * »ñÈ¡idÎªFidµÄ¼ÒÍ¥ÖĞµÄËùÓĞ¼ÒÍ¥³ÉÔ±£¨°üÀ¨´´½¨Õß£©
+	 * è·å–idä¸ºFidçš„å®¶åº­ä¸­çš„æ‰€æœ‰å®¶åº­æˆå‘˜ï¼ˆåŒ…æ‹¬åˆ›å»ºè€…ï¼‰
 	 * 
 	 * @param Fid
 	 * @return
@@ -68,7 +68,7 @@ public interface FamilyDao extends BaseDao<Family> {
 	Set<User> getMembersAndCreatorInFamily(long Fid);
 
 	/**
-	 * »ñÈ¡´´½¨ÕßÎªUphoneµÄ¼ÒÍ¥µÄËùÓĞ³ÉÔ±£¨°üÀ¨´´½¨Õß£©
+	 * è·å–åˆ›å»ºè€…ä¸ºUphoneçš„å®¶åº­çš„æ‰€æœ‰æˆå‘˜ï¼ˆåŒ…æ‹¬åˆ›å»ºè€…ï¼‰
 	 * 
 	 * @param Uphone
 	 * @return
@@ -76,83 +76,83 @@ public interface FamilyDao extends BaseDao<Family> {
 	Set<User> getMembersAndCreatorInFamily(String Uphone);
 
 	/**
-	 * Ìí¼Ó¼ÒÍ¥³ÉÔ±µ½¼ÒÍ¥ÖĞ
+	 * æ·»åŠ å®¶åº­æˆå‘˜åˆ°å®¶åº­ä¸­
 	 * 
 	 * @param Fid
-	 *            ¼ÒÍ¥±àºÅ
+	 *            å®¶åº­ç¼–å·
 	 * @param Uid
-	 *            ¼ÒÍ¥³ÉÔ±±àºÅ
+	 *            å®¶åº­æˆå‘˜ç¼–å·
 	 */
 	int addMemberToFamily(Long Fid, Long Uid);
 
 	/**
-	 * Ìí¼Ó¼ÒÍ¥³ÉÔ±µ½¼ÒÍ¥ÖĞ
+	 * æ·»åŠ å®¶åº­æˆå‘˜åˆ°å®¶åº­ä¸­
 	 * 
 	 * @param Fid
-	 *            ¼ÒÍ¥±àºÅ
+	 *            å®¶åº­ç¼–å·
 	 * @param Uphone
-	 *            ³ÉÔ±µÄÊÖ»úºÅÂë
+	 *            æˆå‘˜çš„æ‰‹æœºå·ç 
 	 */
 	int addMemberToFamily(Long Fid, String Uphone);
 
 	/**
-	 * Ìí¼Ó¼ÒÍ¥³ÉÔ±µ½ÓÃ»§´´½¨µÄ¼ÒÍ¥ÖĞ
+	 * æ·»åŠ å®¶åº­æˆå‘˜åˆ°ç”¨æˆ·åˆ›å»ºçš„å®¶åº­ä¸­
 	 * 
 	 * @param Uphone
-	 *            ´´½¨ÕßµÄÊÖ»úºÅÂë
+	 *            åˆ›å»ºè€…çš„æ‰‹æœºå·ç 
 	 * @param Uid
-	 *            ¼ÒÍ¥³ÉÔ±
+	 *            å®¶åº­æˆå‘˜
 	 */
 	int addMemberToFamily(String Uphone, Long Uid);
 
 	/**
-	 * Ìí¼Ó¼ÒÍ¥³ÉÔ±µ½ÓÃ»§´´½¨µÄ¼ÒÍ¥ÖĞ
+	 * æ·»åŠ å®¶åº­æˆå‘˜åˆ°ç”¨æˆ·åˆ›å»ºçš„å®¶åº­ä¸­
 	 * 
 	 * @param creatorPhone
-	 *            ´´½¨ÕßµÄÊÖ»úºÅÂë
+	 *            åˆ›å»ºè€…çš„æ‰‹æœºå·ç 
 	 * @param memberPhone
-	 *            ³ÉÔ±µÄÊÖ»úºÅÂë
+	 *            æˆå‘˜çš„æ‰‹æœºå·ç 
 	 * @return
 	 */
 	int addMemberToFamily(String creatorPhone, String memberPhone);
 
 	/**
-	 * É¾³ı¼ÒÍ¥³ÉÔ±
+	 * åˆ é™¤å®¶åº­æˆå‘˜
 	 * 
 	 * @param Uphone
-	 *            ¼ÒÍ¥³ÉÔ±ÊÖ»úºÅÂë
+	 *            å®¶åº­æˆå‘˜æ‰‹æœºå·ç 
 	 * @param Fid
-	 *            ¼ÒÍ¥±àºÅ
+	 *            å®¶åº­ç¼–å·
 	 */
 	int deleteMemberFromFamily(String Uphone, Long Fid);
 
 	/**
-	 * É¾³ı¼ÒÍ¥³ÉÔ±
+	 * åˆ é™¤å®¶åº­æˆå‘˜
 	 * 
 	 * @param memberUphone
-	 *            ¼ÒÍ¥³ÉÔ±µÄÊÖ»úºÅÂë
+	 *            å®¶åº­æˆå‘˜çš„æ‰‹æœºå·ç 
 	 * @param creatorUphone
-	 *            ¼ÒÍ¥´´½¨ÕßµÄÊÖ»úºÅÂë
+	 *            å®¶åº­åˆ›å»ºè€…çš„æ‰‹æœºå·ç 
 	 */
 	int deleteMemberFromFamily(String memberUphone, String creatorUphone);
 
 	/**
-	 * ¸üĞÂ¼ÒÍ¥µÄÃû×Ö
+	 * æ›´æ–°å®¶åº­çš„åå­—
 	 * 
 	 * @param Fid
-	 *            ¼ÒÍ¥±àºÅ
+	 *            å®¶åº­ç¼–å·
 	 * @param Fname
-	 *            ¼ÒÍ¥µÄĞÂÃû×Ö
+	 *            å®¶åº­çš„æ–°åå­—
 	 */
 	int updateFamilyName(Long Fid, String Fname);
 
 	/**
-	 * ¸üĞÂ¼ÒÍ¥µÄÃû×Ö
+	 * æ›´æ–°å®¶åº­çš„åå­—
 	 * 
 	 * @param Uphone
-	 *            ¼ÒÍ¥´´½¨ÕßµÄÊÖ»úºÅÂë
+	 *            å®¶åº­åˆ›å»ºè€…çš„æ‰‹æœºå·ç 
 	 * @param Fname
-	 *            ¼ÒÍ¥µÄĞÂÃû×Ö
+	 *            å®¶åº­çš„æ–°åå­—
 	 */
 	int updateFamilyName(String Uphone, String Fname);
 }

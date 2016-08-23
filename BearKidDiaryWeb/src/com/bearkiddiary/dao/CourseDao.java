@@ -9,136 +9,136 @@ import com.bearkiddiary.common.dao.BaseDao;
 public interface CourseDao extends BaseDao<Course> {
 
 	/**
-	 * ¸ù¾İ¿Î³Ì±àºÅ»ñµÃ¿Î³Ì
+	 * æ ¹æ®è¯¾ç¨‹ç¼–å·è·å¾—è¯¾ç¨‹
 	 * 
 	 * @param Cid
-	 *            ¿Î³Ì±àºÅ
+	 *            è¯¾ç¨‹ç¼–å·
 	 */
 	Course getCourse(Long Cid);
 
 	/**
-	 * ¸ù¾İº¢×Ó»ñµÃ¶ÔÓ¦µÄ¿Î³Ì
+	 * æ ¹æ®å­©å­è·å¾—å¯¹åº”çš„è¯¾ç¨‹
 	 * 
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 */
 	Set<Course> getCourseByKid(Long Kid);
 
 	/**
-	 * ¸ù¾İÈÎ¿ÎÀÏÊ¦»ñµÃ¶ÔÓ¦µÄ¿Î³Ì
+	 * æ ¹æ®ä»»è¯¾è€å¸ˆè·å¾—å¯¹åº”çš„è¯¾ç¨‹
 	 * 
 	 * @param Uid
-	 *            ÈÎ¿ÎÀÏÊ¦µÄ±àºÅ
+	 *            ä»»è¯¾è€å¸ˆçš„ç¼–å·
 	 * @param Uphone
-	 *            ÈÎ¿ÎÀÏÊ¦µÄÊÖ»úºÅÂë
+	 *            ä»»è¯¾è€å¸ˆçš„æ‰‹æœºå·ç 
 	 */
 	Set<Course> getCourseByTeacher(Long Uid, String Uphone);
 
 	/**
-	 * ¸ù¾İ¿Î³ÌËùÔÚ»ú¹¹»ñµÃÏàÓ¦µÄ¿Î³Ì
+	 * æ ¹æ®è¯¾ç¨‹æ‰€åœ¨æœºæ„è·å¾—ç›¸åº”çš„è¯¾ç¨‹
 	 * 
 	 * @param Oid
-	 *            »ú¹¹µÄid
+	 *            æœºæ„çš„id
 	 */
 	Set<Course> getCourseByOrg(Long Oid);
 
 	/**
-	 * ĞÂ½¨¿Î³Ì
+	 * æ–°å»ºè¯¾ç¨‹
 	 * 
 	 * @param data
-	 *            ¿Î³ÌµÄĞÅÏ¢
+	 *            è¯¾ç¨‹çš„ä¿¡æ¯
 	 * @param teacherUid
-	 *            ÈÎ¿ÎÀÏÊ¦µÄ±àºÅ
+	 *            ä»»è¯¾è€å¸ˆçš„ç¼–å·
 	 * @param teacherUphone
-	 *            ÈÎ¿ÎÀÏÊ¦µÄÊÖ»úºÅÂë
+	 *            ä»»è¯¾è€å¸ˆçš„æ‰‹æœºå·ç 
 	 * @param approverUid
-	 *            ÉóÅúÈËµÄ±àºÅ
+	 *            å®¡æ‰¹äººçš„ç¼–å·
 	 * @param approverUphone
-	 *            ÉóÅúÈËµÄµç»°ºÅÂë
+	 *            å®¡æ‰¹äººçš„ç”µè¯å·ç 
 	 * @param Oid
-	 *            ËùÔÚ»ú¹¹µÄ±àºÅ
+	 *            æ‰€åœ¨æœºæ„çš„ç¼–å·
 	 */
 	int addCourse(Course data, Long teacherUid, String teacherUphone, Long approverUid, String approverUphone,
 			Long Oid);
 
 	/**
-	 * ¸üĞÂ¿Î³ÌĞÅÏ¢
+	 * æ›´æ–°è¯¾ç¨‹ä¿¡æ¯
 	 * 
 	 * @param Cid
-	 *            Ö¸¶¨µÄ¿Î³Ì±àºÅ
+	 *            æŒ‡å®šçš„è¯¾ç¨‹ç¼–å·
 	 * @param Cclasstime
-	 *            ÉÏ¿ÎÊ±¼ä
+	 *            ä¸Šè¯¾æ—¶é—´
 	 * @param Cendtime
-	 *            ÏÂ¿ÎÊ±¼ä
+	 *            ä¸‹è¯¾æ—¶é—´
 	 * @param Ctime
-	 *            ¿ªÑ§Ê±¼ä
+	 *            å¼€å­¦æ—¶é—´
 	 * @param Cofftime
-	 *            ±ÏÒµÊ±¼ä
+	 *            æ¯•ä¸šæ—¶é—´
 	 * @param Cbackground
-	 *            ¿ª¿Î±³¾°
+	 *            å¼€è¯¾èƒŒæ™¯
 	 * @param Cdesc
-	 *            ¿Î³ÌÃèÊö
+	 *            è¯¾ç¨‹æè¿°
 	 * @param Cname
-	 *            ¿Î³ÌÃû×Ö
+	 *            è¯¾ç¨‹åå­—
 	 * @param Cimage
-	 *            ¿Î³ÌÃèÊöÍ¼Æ¬URL
+	 *            è¯¾ç¨‹æè¿°å›¾ç‰‡URL
 	 * @param Cmonday
-	 *            ÖÜÒ»ÊÇ·ñÉÏ¿Î
+	 *            å‘¨ä¸€æ˜¯å¦ä¸Šè¯¾
 	 * @param Ctuesday
-	 *            ÖÜ¶şÊÇ·ñÉÏ¿Î
+	 *            å‘¨äºŒæ˜¯å¦ä¸Šè¯¾
 	 * @param Cwednesday
-	 *            ÖÜÈıÊÇ·ñÉÏ¿Î
+	 *            å‘¨ä¸‰æ˜¯å¦ä¸Šè¯¾
 	 * @param Cthursday
-	 *            ÖÜËÄÊÇ·ñÉÏ¿Î
+	 *            å‘¨å››æ˜¯å¦ä¸Šè¯¾
 	 * @param Cfriday
-	 *            ÖÜÎåÊÇ·ñÉÏ¿Î
+	 *            å‘¨äº”æ˜¯å¦ä¸Šè¯¾
 	 * @param Csaturday
-	 *            ÖÜÁùÊÇ·ñÉÏ¿Î
+	 *            å‘¨å…­æ˜¯å¦ä¸Šè¯¾
 	 * @param Csunday
-	 *            ÖÜÈÕÊÇ·ñÉÏ¿Î
+	 *            å‘¨æ—¥æ˜¯å¦ä¸Šè¯¾
 	 */
 	int updateCourse(Long Cid, Long Cclasstime, Long Cendtime, Long Ctime, Long Cofftime, String Cbackground,
 			String Cdesc, String Cname, String Cimage, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday,
 			Boolean Cthursday, Boolean Cfriday, Boolean Csaturday, Boolean Csunday);
 
 	/**
-	 * ¸ü»»¿Î³ÌµÄÈÎ¿ÎÀÏÊ¦
+	 * æ›´æ¢è¯¾ç¨‹çš„ä»»è¯¾è€å¸ˆ
 	 * 
 	 * @param Cid
-	 *            ¿Î³Ì±àºÅ
+	 *            è¯¾ç¨‹ç¼–å·
 	 * @param Uphone
-	 *            ÀÏÊ¦µÄÊÖ»úºÅÂë
+	 *            è€å¸ˆçš„æ‰‹æœºå·ç 
 	 * @param Uid
-	 *            ÀÏÊ¦µÄ±àºÅ
+	 *            è€å¸ˆçš„ç¼–å·
 	 */
 	int updateCourseTeacher(Long Cid, String Uphone, Long Uid);
 
 	/**
-	 * °ÑÖ¸¶¨º¢×ÓÌí¼Óµ½¶ÔÓ¦µÄ¿Î³Ì
+	 * æŠŠæŒ‡å®šå­©å­æ·»åŠ åˆ°å¯¹åº”çš„è¯¾ç¨‹
 	 * 
 	 * @param Cid
-	 *            ¿Î³Ì±àºÅ
+	 *            è¯¾ç¨‹ç¼–å·
 	 * @param Kid
-	 *            º¢×Ó±àºÅ
+	 *            å­©å­ç¼–å·
 	 * @return
 	 */
 	int addKidToCourse(Long Cid, Long Kid);
 
 	/**
-	 * °ÑÖ¸¶¨º¢×Ó´Ó¿Î³ÌÖĞÒÆ³ı
+	 * æŠŠæŒ‡å®šå­©å­ä»è¯¾ç¨‹ä¸­ç§»é™¤
 	 * 
 	 * @param Cid
-	 *            ¿Î³Ì±àºÅ
+	 *            è¯¾ç¨‹ç¼–å·
 	 * @param Kid
-	 *            º¢×Ó±àºÅ
+	 *            å­©å­ç¼–å·
 	 */
 	int removeKidFromCourse(Long Cid, Long Kid);
 
 	/**
-	 * »ñµÃÖ¸¶¨¿Î³ÌÖĞµÄËùÓĞÑ§Éú
+	 * è·å¾—æŒ‡å®šè¯¾ç¨‹ä¸­çš„æ‰€æœ‰å­¦ç”Ÿ
 	 * 
 	 * @param Cid
-	 *            ¿Î³Ì±àºÅ
+	 *            è¯¾ç¨‹ç¼–å·
 	 */
 	Set<Kid> getKidsInCourse(Long Cid);
 }

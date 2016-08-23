@@ -41,11 +41,11 @@ public class OrgMembersAdd extends BaseServlet {
     	
     	if(resultCode == ResultCode.SUCCESS){
     		result.setResultCode(ResultCode.SUCCESS);
-    		result.setResultMessage("Ìí¼Ó³É¹¦£¡");
+    		result.setResultMessage("æ·»åŠ æˆåŠŸï¼");
     		
     	}else {
     		result.setResultCode(resultCode);
-    		result.setResultMessage("Ìí¼ÓÊ§°Ü£¡");
+    		result.setResultMessage("æ·»åŠ å¤±è´¥ï¼");
     	}
     	out.write(gson.toJson(result));
 		System.out.println(gson.toJson(result));

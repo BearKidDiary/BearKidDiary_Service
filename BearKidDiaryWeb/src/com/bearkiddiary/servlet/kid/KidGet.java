@@ -33,7 +33,7 @@ public class KidGet extends BaseServlet {
 
 		if (sKid == null && Uphone == null && sFid == null && sCid == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -54,13 +54,14 @@ public class KidGet extends BaseServlet {
 		Set<Kid> set = service.getKids(Kid, Uphone, Fid, Cid);
 		if (set == null) {
 			result.setResultCode(ResultCode.ERROR_NO_RESULT);
-			result.setResultMessage("²éÑ¯²»Õı³££¬¼ÒÍ¥¿ÉÄÜ²»´æÔÚ");
+			result.setResultMessage("æŸ¥è¯¢ä¸æ­£å¸¸ï¼Œå®¶åº­å¯èƒ½ä¸å­˜åœ¨");
 		} else {
 			result.setResultCode(ResultCode.SUCCESS);
-			result.setResultMessage("²éÑ¯³É¹¦");
+			result.setResultMessage("æŸ¥è¯¢æˆåŠŸ");
 			result.setData(set);
 		}
 		out.write(gson.toJson(result));
+		System.out.println(gson.toJson(result));
 		out.close();
 	}
 }

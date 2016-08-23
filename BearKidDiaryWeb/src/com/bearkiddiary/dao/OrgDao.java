@@ -7,37 +7,37 @@ import com.bearkiddiary.common.dao.BaseDao;
 public interface OrgDao extends BaseDao<Organization>{
 	
 	/**
-	 * 创建机构
-	 * @param Oname 机构名字
-	 * @param Oaddress 机构地址
-	 * @param Oannounce 机构公告（简介）
-	 * @param Uid 创建的用户id
+	 * 鍒涘缓鏈烘瀯
+	 * @param Oname 鏈烘瀯鍚嶅瓧
+	 * @param Oaddress 鏈烘瀯鍦板潃
+	 * @param Oannounce 鏈烘瀯鍏憡锛堢畝浠嬶級
+	 * @param Uid 鍒涘缓鐨勭敤鎴穒d
 	 * @return
 	 */
 	public long createOrg(String Oname, String Oaddress, String Oannounce, Long Uid);
 	
 	/**
-	 * 解散机构
+	 * 瑙ｆ暎鏈烘瀯
 	 * @param Oid
 	 */
 	public int deleteOrg(long Oid);
 	
 	/**
-	 * 更新机构名字
+	 * 鏇存柊鏈烘瀯鍚嶅瓧
 	 * @param Oid
 	 * @param Oname
 	 * @return
 	 */
 	public int updateOname(long Oid, String Oname);
 	/**
-	 * 更新机构地址
+	 * 鏇存柊鏈烘瀯鍦板潃
 	 * @param Oid
 	 * @param Oaddress
 	 * @return
 	 */
 	public int updateOaddress(long Oid, String Oaddress);
 	/**
-	 * 更新机构公告
+	 * 鏇存柊鏈烘瀯鍏憡
 	 * @param Oid
 	 * @param Oannounce
 	 * @return
@@ -45,13 +45,13 @@ public interface OrgDao extends BaseDao<Organization>{
 	public int updateOannounce(long Oid, String Oannounce);
 	
 	/**
-	 * 获取机构
+	 * 鑾峰彇鏈烘瀯
 	 */
 	public Organization getOrg(long Oid);
-//机构与用户之间的关系
+//鏈烘瀯涓庣敤鎴蜂箣闂寸殑鍏崇郴
 	
 	/**
-	 * 添加机构教师
+	 * 娣诲姞鏈烘瀯鏁欏笀
 	 * @param Oid
 	 * @param Uid
 	 * @return
@@ -59,7 +59,7 @@ public interface OrgDao extends BaseDao<Organization>{
 	public int addOrgTeacher(long Oid, long Uid);
 	
 	/**
-	 * 添加机构家长
+	 * 娣诲姞鏈烘瀯瀹堕暱
 	 * @param Oid
 	 * @param Uid
 	 * @return
@@ -67,7 +67,7 @@ public interface OrgDao extends BaseDao<Organization>{
 	public int addOrgParent(long Oid, long Uid);
 	
 	/**
-	 * 验证是否是该机构的管理员
+	 * 楠岃瘉鏄惁鏄鏈烘瀯鐨勭鐞嗗憳
 	 * @param Uphone
 	 * @param Oid
 	 * @return

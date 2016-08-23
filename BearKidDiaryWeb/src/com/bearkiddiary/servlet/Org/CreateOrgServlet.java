@@ -18,9 +18,9 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /**
- * 1¡¢´´½¨»ú¹¹
- * 2¡¢É¾³ı»ú¹¹
- * 3¡¢ĞŞ¸Ä»ú¹¹£¨»ú¹¹Ãû£¬»ú¹¹µØÖ·£¬»ú¹¹¹«¸æ£©
+ * 1ã€åˆ›å»ºæœºæ„
+ * 2ã€åˆ é™¤æœºæ„
+ * 3ã€ä¿®æ”¹æœºæ„ï¼ˆæœºæ„åï¼Œæœºæ„åœ°å€ï¼Œæœºæ„å…¬å‘Šï¼‰
  */
 /**
  * Servlet implementation class CreateOrgServlet
@@ -45,7 +45,7 @@ public class CreateOrgServlet extends BaseServlet {
 	}
 	
 	/**
-	 * ²Ù×÷»ú¹¹º¯Êı
+	 * æ“ä½œæœºæ„å‡½æ•°
 	 * @param type
 	 * @param request
 	 * @param response
@@ -66,36 +66,36 @@ public class CreateOrgServlet extends BaseServlet {
 			org.setOannounce(Oannounce);
 			
 			Long Uid = Long.valueOf(request.getParameter(Organization.UID));
-			//´´½¨³É¹¦·µ»ØµÄOid
+			//åˆ›å»ºæˆåŠŸè¿”å›çš„Oid
 			Long Oid = service.createOrg(Oname, Oaddress, Oannounce, Uid);
 			if(Oid > 0){
 				result.setResultCode(ResultCode.SUCCESS);
-				result.setResultMessage("´´½¨³É¹¦");
+				result.setResultMessage("åˆ›å»ºæˆåŠŸ");
 				result.setData(org);
 			}else {
 				result.setResultCode(ResultCode.ERROR_COMMIT);
-				result.setResultMessage("´´½¨Ê§°Ü");
+				result.setResultMessage("åˆ›å»ºå¤±è´¥");
 			}
 			
 			responseWriter(response, gson.toJson(result));
-			System.out.println("´´½¨³É¹¦£º" + Oid);
-		}else if(type == Organization.DELETE){ // É¾³ı»ú¹¹
-			//»ñÈ¡¿Í»§¶Ë´«µİµÄ»ú¹¹id
+			System.out.println("åˆ›å»ºæˆåŠŸï¼š" + Oid);
+		}else if(type == Organization.DELETE){ // åˆ é™¤æœºæ„
+			//è·å–å®¢æˆ·ç«¯ä¼ é€’çš„æœºæ„id
 			long Oid = Long.valueOf(request.getParameter("Oid"));
 			int count = service.deleteOrg(Oid);
 			
 			if(count > 0){
 				result.setResultCode(ResultCode.SUCCESS);
-				result.setResultMessage("É¾³ı³É¹¦£¡");
+				result.setResultMessage("åˆ é™¤æˆåŠŸï¼");
 			}else {
 				result.setResultCode(ResultCode.ERROR);
-				result.setResultMessage("É¾³ıÊ§°Ü£¡");
+				result.setResultMessage("åˆ é™¤å¤±è´¥ï¼");
 			}
 			
 			responseWriter(response, gson.toJson(result));
-		}else if(type == Organization.UPDATE){ //ĞŞ¸Ä»ú¹¹
+		}else if(type == Organization.UPDATE){ //ä¿®æ”¹æœºæ„
 			
-			//»ñÈ¡¿Í»§¶Ë´«µİµÄ»ú¹¹id
+			//è·å–å®¢æˆ·ç«¯ä¼ é€’çš„æœºæ„id
 			long Oid = Long.valueOf(request.getParameter("Oid"));
 			int count = 0;
 			if(Oname != null){
@@ -103,10 +103,10 @@ public class CreateOrgServlet extends BaseServlet {
 				count = service.updateOrg(Oid, Organization.ONAME, Oname);
 				if(count > 0){
 					result.setResultCode(ResultCode.SUCCESS);
-					result.setResultMessage("ĞŞ¸ÄÃû×Ö³É¹¦!");
+					result.setResultMessage("ä¿®æ”¹åå­—æˆåŠŸ!");
 				}else {
 					result.setResultCode(ResultCode.ERROR);
-					result.setResultMessage("ĞŞ¸ÄÃû×ÖÊ§°Ü!");
+					result.setResultMessage("ä¿®æ”¹åå­—å¤±è´¥!");
 				}
 				responseWriter(response, gson.toJson(result));
 			}
@@ -115,10 +115,10 @@ public class CreateOrgServlet extends BaseServlet {
 				count = service.updateOrg(Oid, Organization.OADDRESS, Oaddress);
 				if(count > 0){
 					result.setResultCode(ResultCode.SUCCESS);
-					result.setResultMessage("ĞŞ¸ÄµØÖ·³É¹¦!");
+					result.setResultMessage("ä¿®æ”¹åœ°å€æˆåŠŸ!");
 				}else {
 					result.setResultCode(ResultCode.ERROR);
-					result.setResultMessage("ĞŞ¸ÄµØÖ·Ê§°Ü!");
+					result.setResultMessage("ä¿®æ”¹åœ°å€å¤±è´¥!");
 				}
 				responseWriter(response, gson.toJson(result));
 			}
@@ -127,19 +127,19 @@ public class CreateOrgServlet extends BaseServlet {
 				count = service.updateOrg(Oid, Organization.OANNOUNCE, Oannounce);
 				if(count > 0){
 					result.setResultCode(ResultCode.SUCCESS);
-					result.setResultMessage("ĞŞ¸Ä¹«¸æ³É¹¦!");
+					result.setResultMessage("ä¿®æ”¹å…¬å‘ŠæˆåŠŸ!");
 				}else {
 					result.setResultCode(ResultCode.ERROR);
-					result.setResultMessage("ĞŞ¸Ä¹«¸æÊ§°Ü!");
+					result.setResultMessage("ä¿®æ”¹å…¬å‘Šå¤±è´¥!");
 				}
 				responseWriter(response, gson.toJson(result));
 			}
-			System.out.println("ĞŞ¸ÄÊı¾İ£¡");
+			System.out.println("ä¿®æ”¹æ•°æ®ï¼");
 		}
 	}
 	
 	/**
-	 * ´òÓ¡º¯Êı
+	 * æ‰“å°å‡½æ•°
 	 * @param response
 	 * @param Object
 	 * @throws IOException

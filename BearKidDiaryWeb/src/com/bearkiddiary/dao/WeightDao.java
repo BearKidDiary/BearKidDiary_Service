@@ -8,38 +8,38 @@ import com.bearkiddiary.common.dao.BaseDao;
 
 public interface WeightDao extends BaseDao<Weight>{
 	/**
-	 * Îªº¢×ÓÌí¼ÓÌåÖØÊı¾İ
+	 * ä¸ºå­©å­æ·»åŠ ä½“é‡æ•°æ®
 	 * 
 	 * @param Kid
-	 *            º¢×Ó±àºÅ
+	 *            å­©å­ç¼–å·
 	 * @param Wweight
-	 *            ÌåÖØÊı¾İ
+	 *            ä½“é‡æ•°æ®
 	 * @param Wtime
-	 *            ¸üĞÂÊ±¼ä
+	 *            æ›´æ–°æ—¶é—´
 	 */
 	int addWeightToKid(Long Kid, Float Wweight, Long Wtime);
 
 	/**
-	 * »ñÈ¡º¢×ÓµÄÌåÖØĞÅÏ¢
+	 * è·å–å­©å­çš„ä½“é‡ä¿¡æ¯
 	 * 
 	 * @param Kid
-	 *            º¢×Ó±àºÅ
+	 *            å­©å­ç¼–å·
 	 * @param order
-	 *            desc»òÕßasc
+	 *            descæˆ–è€…asc
 	 */
 	List<Weight> getWeight(Long Kid, String order);
 	
 	/**
-	 * ·ÖÒ³»ñÈ¡º¢×ÓµÄÌåÖØĞÅÏ¢
+	 * åˆ†é¡µè·å–å­©å­çš„ä½“é‡ä¿¡æ¯
 	 * 
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 * @param order
-	 *            desc»òÕßasc
+	 *            descæˆ–è€…asc
 	 * @param pageNum
-	 *            Ò³Âë
+	 *            é¡µç 
 	 * @param pageSize
-	 *            Ò³´óĞ¡
+	 *            é¡µå¤§å°
 	 */
 	List<Weight> getWeight(Long Kid, String order, int pageNum, int pageSize);
 }

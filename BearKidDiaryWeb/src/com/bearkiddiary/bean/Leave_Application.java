@@ -17,14 +17,14 @@ import com.google.gson.annotations.Expose;
 @Table(name = "Leave_Application")
 public class Leave_Application implements Serializable{
 
-	public static final Integer APPROVE_YES = 1;//Í¬Òâ
-	public static final Integer APPROVE_NO = 0;//²»Í¬Òâ
+	public static final Integer APPROVE_YES = 1;//åŒæ„
+	public static final Integer APPROVE_NO = 0;//ä¸åŒæ„
 	
-	public static final Integer APPROVED = 1;//ÒÑÉóÅú
-	public static final Integer UNAPPROVED = 0;//Î´ÉóÅú
+	public static final Integer APPROVED = 1;//å·²å®¡æ‰¹
+	public static final Integer UNAPPROVED = 0;//æœªå®¡æ‰¹
 	
-	public static final Integer SICK_LEAVE = 1;//²¡¼Ù
-	public static final Integer THING_LEAVE = 2;//ÊÂ¼Ù
+	public static final Integer SICK_LEAVE = 1;//ç—…å‡
+	public static final Integer THING_LEAVE = 2;//äº‹å‡
 	
 	public static final String LAID = "LAid"; 
 	public static final String LAISAPPROVED = "LAisapproved";
@@ -40,48 +40,48 @@ public class Leave_Application implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long LAid;
 	/**
-	 * ÊÇ·ñÍ¬Òâ
+	 * æ˜¯å¦åŒæ„
 	 */
 	@Expose
 	private Integer LAisapproved;
 	/**
-	 * ÉêÇë×´Ì¬
+	 * ç”³è¯·çŠ¶æ€
 	 */
 	@Expose
 	private Integer LAstatus;
 	
 	/**
-	 * Çë¼Ù¿ªÊ¼Ê±¼ä
+	 * è¯·å‡å¼€å§‹æ—¶é—´
 	 */
 	@Expose
 	private Long LAstarttime;
 	
 	/**
-	 * Çë¼Ù½áÊøÊ±¼ä
+	 * è¯·å‡ç»“æŸæ—¶é—´
 	 */
 	@Expose
 	private Long LAendtime;
 	
 	/**
-	 * Çë¼ÙÀàĞÍ
+	 * è¯·å‡ç±»å‹
 	 */
 	@Expose
 	private Integer LAtype;
 	
 	/**
-	 * Çë¼ÙÔ­Òò
+	 * è¯·å‡åŸå› 
 	 */
 	@Expose
 	private String LAreason;
 	
 	/**
-	 * ÉóÅúÈËÆÀÓï
+	 * å®¡æ‰¹äººè¯„è¯­
 	 */
 	@Expose
 	private String LAcomment;
 	
 	/**
-	 * ÉóÅúÈË
+	 * å®¡æ‰¹äºº
 	 */
 	@Expose
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -89,7 +89,7 @@ public class Leave_Application implements Serializable{
 	private User LArover;
 	
 	/**
-	 * ÉêÇëÈË
+	 * ç”³è¯·äºº
 	 */
 	@Expose
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -97,7 +97,7 @@ public class Leave_Application implements Serializable{
 	private User LAapplicant;
 	
 	/**
-	 * ¶ÔÓ¦µÄ»ú¹¹
+	 * å¯¹åº”çš„æœºæ„
 	 */
 	@Expose
 	@ManyToOne(cascade = CascadeType.ALL)

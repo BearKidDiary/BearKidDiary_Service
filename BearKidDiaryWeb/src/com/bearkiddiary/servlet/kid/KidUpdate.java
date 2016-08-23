@@ -36,7 +36,7 @@ public class KidUpdate extends BaseServlet {
 
 		if (sKid == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -53,13 +53,13 @@ public class KidUpdate extends BaseServlet {
 		int code = service.updateKid(Kid, Kname, Kbirthday, Kavatar, Ksex, Kask, Kflowers);
 		result.setResultCode(code);
 		if (code == ResultCode.ERROR_NO_KID) {
-			result.setResultMessage("²»´æÔÚ¸Ãº¢×Ó");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥å­©å­");
 		}
 		if (code == ResultCode.ERROR_EXIST_KID) {
-			result.setResultMessage("ÒÑ´æÔÚÃû×ÖÏàÍ¬µÄº¢×Ó");
+			result.setResultMessage("å·²å­˜åœ¨åå­—ç›¸åŒçš„å­©å­");
 		}
 		if (code == ResultCode.SUCCESS) {
-			result.setResultMessage("¸üĞÂ³É¹¦");
+			result.setResultMessage("æ›´æ–°æˆåŠŸ");
 		}
 		out.write(gson.toJson(result));
 	}

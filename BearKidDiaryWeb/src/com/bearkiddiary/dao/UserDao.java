@@ -5,16 +5,16 @@ import com.bearkiddiary.common.dao.BaseDao;
 
 public interface UserDao extends BaseDao<User> {
 	/**
-	 * ÓÃ»§µÇÂ¼
+	 * ç”¨æˆ·ç™»å½•
 	 * 
 	 * @param user
-	 *            ÓÃ»§Êı¾İ
+	 *            ç”¨æˆ·æ•°æ®
 	 * @return
 	 */
 	int Login(String Uphone, String Upsw);
 
 	/**
-	 * ÓÃ»§×¢²á
+	 * ç”¨æˆ·æ³¨å†Œ
 	 * 
 	 * @param user
 	 * @return
@@ -22,7 +22,7 @@ public interface UserDao extends BaseDao<User> {
 	Long Register(User user);
 
 	/**
-	 * ¼ì²â¸ÃºÅÂëÊÇ·ñ±»×¢²á¹ı
+	 * æ£€æµ‹è¯¥å·ç æ˜¯å¦è¢«æ³¨å†Œè¿‡
 	 * 
 	 * @param Uphone
 	 * @return
@@ -36,14 +36,14 @@ public interface UserDao extends BaseDao<User> {
 	int updateEmail(String Uphone, String Uemail);
 
 	/**
-	 * »ñÈ¡ÊÖ»úºÅÂëÎªUphoneµÄÓÃ»§
+	 * è·å–æ‰‹æœºå·ç ä¸ºUphoneçš„ç”¨æˆ·
 	 * 
 	 * @param Uphone
 	 */
 	User getUser(String Uphone);
 
 	/**
-	 * »ñÈ¡±àºÅÎªUidµÄÓÃ»§
+	 * è·å–ç¼–å·ä¸ºUidçš„ç”¨æˆ·
 	 * 
 	 * @param Uid
 	 */

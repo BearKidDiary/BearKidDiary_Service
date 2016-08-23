@@ -29,7 +29,7 @@ public class CourseStudentsRemove extends BaseServlet {
 
 		if (sCid == null || sKid == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -40,13 +40,13 @@ public class CourseStudentsRemove extends BaseServlet {
 		int code = service.removeKidFromCourse(Cid, Kid);
 		result.setResultCode(code);
 		if (code == ResultCode.SUCCESS) {
-			result.setResultMessage("É¾³ı³É¹¦");
+			result.setResultMessage("åˆ é™¤æˆåŠŸ");
 		}
 		if (code == ResultCode.ERROR_NO_KID) {
-			result.setResultMessage("¿Î³ÌÖĞ²»´æÔÚ¸Ãº¢×Ó»ò²»´æÔÚ¸Ã±àºÅµÄº¢×Ó");
+			result.setResultMessage("è¯¾ç¨‹ä¸­ä¸å­˜åœ¨è¯¥å­©å­æˆ–ä¸å­˜åœ¨è¯¥ç¼–å·çš„å­©å­");
 		}
 		if (code == ResultCode.ERROR_NO_COURSE) {
-			result.setResultMessage("²»´æÔÚ¸Ã¿Î³Ì");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥è¯¾ç¨‹");
 		}
 		out.write(gson.toJson(result));
 		out.close();

@@ -36,12 +36,13 @@ public class KidAdd extends BaseServlet {
 
 		if (Kname == null || (sFid == null && Uphone == null)) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
 		}
-
+		System.out.println("name: "+Kname);
+		
 		Long Kbirthday = null;
 		if (sKbirthday != null)
 			Kbirthday = Long.valueOf(sKbirthday);
@@ -57,13 +58,14 @@ public class KidAdd extends BaseServlet {
 		int code = service.addKid(Kname, Kbirthday, Kavatar, Ksex, Kask, Kflowers, Fid, Uphone);
 		result.setResultCode(code);
 		if (code == ResultCode.ERROR_NO_FAMILY)
-			result.setResultMessage("²»´æÔÚ¸Ã¼ÒÍ¥");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥å®¶åº­");
 		if (code == ResultCode.ERROR_EXIST_KID)
-			result.setResultMessage("ÒÑ´æÔÚ¸Ãº¢×Ó");
+			result.setResultMessage("å·²å­˜åœ¨è¯¥å­©å­");
 		if (code == ResultCode.SUCCESS)
-			result.setResultMessage("Ìí¼Óº¢×Ó³É¹¦");
+			result.setResultMessage("æ·»åŠ å­©å­æˆåŠŸ");
 
 		out.write(gson.toJson(result));
+		System.out.println(gson.toJson(result));
 		out.close();
 	}
 }

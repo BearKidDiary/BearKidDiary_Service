@@ -37,7 +37,7 @@ public class KidTimeLineGet extends BaseServlet {
 		
 		if(sKid==null){
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -58,6 +58,7 @@ public class KidTimeLineGet extends BaseServlet {
 		}
 
 		out.write(gson.toJson(result));
+		System.out.println(gson.toJson(result));
 		out.close();
 	}
 }

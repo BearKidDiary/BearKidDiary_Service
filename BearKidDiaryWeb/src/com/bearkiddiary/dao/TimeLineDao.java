@@ -7,82 +7,82 @@ import com.bearkiddiary.common.dao.BaseDao;
 
 public interface TimeLineDao extends BaseDao<TimeLine> {
 	/**
-	 * Ìí¼ÓÊ±¼äÖáÊÂ¼ş
+	 * æ·»åŠ æ—¶é—´è½´äº‹ä»¶
 	 * 
 	 * @param timeLine
-	 *            Ê±¼äÖáÊÂ¼ş
+	 *            æ—¶é—´è½´äº‹ä»¶
 	 * @param Uid
-	 *            ·¢²¼ÕßµÄ±àºÅ
+	 *            å‘å¸ƒè€…çš„ç¼–å·
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 */
 	int addTimeLine(TimeLine timeLine, Long Uid, Long Kid);
 
 	/**
-	 * Ìí¼ÓÊ±¼äÖáÊÂ¼ş
+	 * æ·»åŠ æ—¶é—´è½´äº‹ä»¶
 	 * 
 	 * @param timeLine
-	 *            Ê±¼äÖáÊÂ¼ş
+	 *            æ—¶é—´è½´äº‹ä»¶
 	 * @param Uphone
-	 *            ·¢²¼ÕßµÄÊÖ»úºÅÂë
+	 *            å‘å¸ƒè€…çš„æ‰‹æœºå·ç 
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 */
 	int addTimeLine(TimeLine timeLine, String Uphone, Long Kid);
 
 	/**
-	 * »ñµÃÊ±¼äÖáÊÂ¼ş
+	 * è·å¾—æ—¶é—´è½´äº‹ä»¶
 	 * 
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 * @param Order
-	 *            ÅÅĞò
+	 *            æ’åº
 	 */
 	List<TimeLine> getTimeLine(Long Kid, String Order);
 
 	/**
-	 * ·ÖÒ³»ñµÃÊ±¼äÖáÊÂ¼ş
+	 * åˆ†é¡µè·å¾—æ—¶é—´è½´äº‹ä»¶
 	 * 
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 * @param Order
-	 *            ÅÅĞò
+	 *            æ’åº
 	 * @param pageSize
-	 *            ·ÖÒ³´óĞ¡
+	 *            åˆ†é¡µå¤§å°
 	 * @param pageNum
-	 *            ·ÖÒ³Ò³Âë
+	 *            åˆ†é¡µé¡µç 
 	 */
 	List<TimeLine> getTimeLine(Long Kid, String Order, int pageSize, int pageNum);
 
 	/**
-	 * »ñµÃ·¢²¼ÕßÎªÖ¸¶¨ÈËµÄÊ±¼äÖáÊÂ¼ş
+	 * è·å¾—å‘å¸ƒè€…ä¸ºæŒ‡å®šäººçš„æ—¶é—´è½´äº‹ä»¶
 	 * 
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 * @param Uid
-	 *            ·¢²¼ÕßµÄ±àºÅ
+	 *            å‘å¸ƒè€…çš„ç¼–å·
 	 * @param Uphone
-	 *            ·¢²¼ÕßµÄÊÖ»úºÅÂë
+	 *            å‘å¸ƒè€…çš„æ‰‹æœºå·ç 
 	 * @param Order
-	 *            ÅÅĞò
+	 *            æ’åº
 	 */
 	List<TimeLine> getTimeLine(Long Kid, Long Uid, String Uphone, String Order);
 
 	/**
-	 * ·ÖÒ³»ñµÃ·¢²¼ÕßÎªÖ¸¶¨ÈËµÄÊ±¼äÖáÊÂ¼ş
+	 * åˆ†é¡µè·å¾—å‘å¸ƒè€…ä¸ºæŒ‡å®šäººçš„æ—¶é—´è½´äº‹ä»¶
 	 * 
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 * @param Uid
-	 *            ·¢²¼ÕßµÄ±àºÅ
+	 *            å‘å¸ƒè€…çš„ç¼–å·
 	 * @param Uphone
-	 *            ·¢²¼ÕßµÄÊÖ»úºÅÂë
+	 *            å‘å¸ƒè€…çš„æ‰‹æœºå·ç 
 	 * @param Order
-	 *            ÅÅĞò
+	 *            æ’åº
 	 * @param pageSize
-	 *            ·ÖÒ³´óĞ¡
+	 *            åˆ†é¡µå¤§å°
 	 * @param pageNum
-	 *            ·ÖÒ³Ò³Âë
+	 *            åˆ†é¡µé¡µç 
 	 */
 	List<TimeLine> getTimeLine(Long Kid, Long Uid, String Uphone, String Order, int pageSize, int pageNum);
 }

@@ -49,7 +49,7 @@ public class CourseAdd extends BaseServlet {
 		if (sOid == null || Cname == null || (steacherUid == null && teacherUphone == null)
 				|| (sapproverUid == null && approverUphone == null)) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -103,13 +103,13 @@ public class CourseAdd extends BaseServlet {
 				approverUphone, Oid);
 		result.setResultCode(code);
 		if (code == ResultCode.ERROR_NO_USER) {
-			result.setResultMessage("²»´æÔÚ¸ÃÉóÅúÈË»òÕßÈÎ¿ÎÀÏÊ¦");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥å®¡æ‰¹äººæˆ–è€…ä»»è¯¾è€å¸ˆ");
 		}
 		if (code == ResultCode.ERROR_NO_ORG) {
-			result.setResultMessage("²»´æÔÚ¸Ã»ú¹¹");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥æœºæ„");
 		}
 		if (code == ResultCode.SUCCESS) {
-			result.setResultMessage("ĞÂ½¨³É¹¦");
+			result.setResultMessage("æ–°å»ºæˆåŠŸ");
 		}
 		out.write(gson.toJson(result));
 	}

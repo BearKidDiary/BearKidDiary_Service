@@ -9,64 +9,64 @@ public class ResultCode {
 	public static final int SUCCESS = 0;
 
 	/**
-	 * È±ÉÙÇëÇó²ÎÊı
+	 * ç¼ºå°‘è¯·æ±‚å‚æ•°
 	 */
 	public static final int ERROR_MISSING_PARAMETER = -1;
 	/**
-	 * ²»´æÔÚ¸ÃÓÃ»§
+	 * ä¸å­˜åœ¨è¯¥ç”¨æˆ·
 	 */
 	public static final int ERROR_NO_USER = -2;
 	/**
-	 * ÒÑ¾­ÓĞ¼ÒÍ¥£¬²»ÄÜÖØ¸´´´½¨
+	 * å·²ç»æœ‰å®¶åº­ï¼Œä¸èƒ½é‡å¤åˆ›å»º
 	 */
 	public static final int ERROR_EXIST_FAMILY = -3;
 	/**
-	 * ²»´æÔÚ¸Ã¼ÒÍ¥
+	 * ä¸å­˜åœ¨è¯¥å®¶åº­
 	 */
 	public static final int ERROR_NO_FAMILY = -4;
 	/**
-	 * ²»´æÔÚ¶ÔÓ¦µÄ¹ØÁª¹ØÏµ
+	 * ä¸å­˜åœ¨å¯¹åº”çš„å…³è”å…³ç³»
 	 */
 	public static final int ERROR_NO_RELATION = -5;
 	/**
-	 * ²»´æÔÚ¸Ã»ú¹¹
+	 * ä¸å­˜åœ¨è¯¥æœºæ„
 	 */
 	public static final int ERROR_NO_ORG = -8;
 	/**
-	 * ²»´æÔÚ¸Ãº¢×Ó
+	 * ä¸å­˜åœ¨è¯¥å­©å­
 	 */
 	public static final int ERROR_NO_KID = -6;
 	/**
-	 * ÒÑ´æÔÚ¸Ãº¢×Ó
+	 * å·²å­˜åœ¨è¯¥å­©å­
 	 */
 	public static final int ERROR_EXIST_KID = -7;
 	/**
-	 * ²»´æÔÚ¸Ã¿Î³Ì
+	 * ä¸å­˜åœ¨è¯¥è¯¾ç¨‹
 	 */
 	public static final int ERROR_NO_COURSE = -9;
 	/**
-	 * ²»ÄÜÕı³£»ñµÃ½á¹û£¬¹ı³Ì·¢ÉúÁË´íÎó
+	 * ä¸èƒ½æ­£å¸¸è·å¾—ç»“æœï¼Œè¿‡ç¨‹å‘ç”Ÿäº†é”™è¯¯
 	 */
 	public static final int ERROR_NO_RESULT = -100;
 	/**
-	 * ´íÎó
+	 * é”™è¯¯
 	 */
 	public static final int ERROR = -200;
 	/**
-	 * Ã»ÓĞÊı¾İ
+	 * æ²¡æœ‰æ•°æ®
 	 */
 	public static final int NO_RESULT = -101;
 	
 	/**
-	 * Ìá½»£¬±£´æÊ§°Ü
+	 * æäº¤ï¼Œä¿å­˜å¤±è´¥
 	 */
 	public static final int ERROR_COMMIT = -102;
 	/**
-	 * ÎŞÈ¨ÏŞ²Ù×÷
+	 * æ— æƒé™æ“ä½œ
 	 */
 	public static final int ERROR_NO_PERMISSION = -103;
 	/**
-	 * µÇÂ¼Ê§°Ü
+	 * ç™»å½•å¤±è´¥
 	 */
 	public static final int ERROR_LOGIN = -104;
 }

@@ -35,7 +35,7 @@ public class KidBodyMsgAdd extends BaseServlet {
 		if (sKid == null || sTime == null
 				|| (sHeight == null && sWeight == null && sVisionLeft == null && sVisionRight == null)) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -65,10 +65,10 @@ public class KidBodyMsgAdd extends BaseServlet {
 		
 		result.setResultCode(code);
 		if(code==ResultCode.SUCCESS){
-			result.setResultMessage("Ìí¼Ó³É¹¦");
+			result.setResultMessage("æ·»åŠ æˆåŠŸ");
 		}
 		if(code==ResultCode.ERROR_NO_KID){
-			result.setResultMessage("º¢×Ó²»´æÔÚ");
+			result.setResultMessage("å­©å­ä¸å­˜åœ¨");
 		}
 		out.write(gson.toJson(result));
 		out.close();

@@ -41,7 +41,7 @@ public class UserRegister extends BaseServlet {
 		
 		if (user.getUphone() == null || user.getUpsw() == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -49,18 +49,18 @@ public class UserRegister extends BaseServlet {
 
 		isSuccess = service.Register(user);
 
-		// ´´½¨Ò»¸ö¼ÒÍ¥
+		// åˆ›å»ºä¸€ä¸ªå®¶åº­
 		int code = ResultCode.ERROR_NO_RESULT;
 		if (isSuccess)
-			code = service.createFamily(user.getUphone(), user.getUphone() + "µÄ¼ÒÍ¥");
+			code = service.createFamily(user.getUphone(), user.getUphone() + "çš„å®¶åº­");
 		result.setResultCode(code);
 		
 		user = new User();
 		if (code == ResultCode.SUCCESS) {
-			result.setResultMessage("×¢²á³É¹¦");
+			result.setResultMessage("æ³¨å†ŒæˆåŠŸ");
 		}
 		if (code == ResultCode.ERROR_NO_RESULT) {
-			result.setResultMessage("×¢²áÊ§°Ü");
+			result.setResultMessage("æ³¨å†Œå¤±è´¥");
 		}
 		out.write(gson.toJson(result));
 	}

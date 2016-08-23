@@ -33,7 +33,7 @@ public class FamilyMembersAdd extends BaseServlet {
 		System.out.println(sfid + " , " + suid + " , " + creatorPhone + " , " + memberPhone);
 		if ((creatorPhone == null && sfid == null) || (memberPhone == null && suid == null)) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -45,11 +45,11 @@ public class FamilyMembersAdd extends BaseServlet {
 		int code = service.addFamilyMembers(Fid, creatorPhone, Uid, memberPhone);
 		result.setResultCode(code);
 		if (code == ResultCode.SUCCESS) {
-			result.setResultMessage("Ìí¼Ó³É¹¦");
+			result.setResultMessage("æ·»åŠ æˆåŠŸ");
 		} else if (code == ResultCode.ERROR_NO_FAMILY) {
-			result.setResultMessage("²»´æÔÚ¸Ã¼ÒÍ¥");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥å®¶åº­");
 		} else if (code == ResultCode.ERROR_NO_USER) {
-			result.setResultMessage("²»´æÔÚ¸ÃÓÃ»§");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥ç”¨æˆ·");
 		}
 		out.write(gson.toJson(result));
 		out.close();

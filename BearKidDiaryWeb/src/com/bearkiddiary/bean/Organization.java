@@ -24,11 +24,11 @@ import com.google.gson.annotations.Expose;
 @Table(name = "Organization")
 public class Organization implements Serializable {
 	
-	//¼ÓÈë»ú¹¹ÊÇ½ÌÊ¦»¹ÊÇ¼Ò³¤
+	//åŠ å…¥æœºæ„æ˜¯æ•™å¸ˆè¿˜æ˜¯å®¶é•¿
 	public final static Integer TEACHER = 0;
 	public final static Integer PARENT = 1;
 	
-	//´´½¨£¬½âÉ¢£¬ĞŞ¸Ä»ú¹¹
+	//åˆ›å»ºï¼Œè§£æ•£ï¼Œä¿®æ”¹æœºæ„
 	public final static Integer CREATE = 1;
 	public final static Integer DELETE = -1;
 	public final static Integer UPDATE = 0;
@@ -45,57 +45,57 @@ public class Organization implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Oid;
 	/**
-	 * »ú¹¹µÄÃû³Æ
+	 * æœºæ„çš„åç§°
 	 */
 	@Expose
 	private String Oname;
 	/**
-	 * »ú¹¹µÄµØÖ·
+	 * æœºæ„çš„åœ°å€
 	 */
 	@Expose
 	private String Oaddress;
 	/**
-	 * »ú¹¹µÄ³ÉÁ¢Ê±¼ä
+	 * æœºæ„çš„æˆç«‹æ—¶é—´
 	 */
 	@Expose
 	private Long Otime;
 	/**
-	 * »ú¹¹µÄ±êÖ¾Í¼
+	 * æœºæ„çš„æ ‡å¿—å›¾
 	 */
 	@Expose
 	private String Oavatar;
 	/**
-	 * »ú¹¹µÄ¹«¸æ
+	 * æœºæ„çš„å…¬å‘Š
 	 */
 	@Expose
 	private String Oannounce;
 	/**
-	 * »ú¹¹µÄ´´½¨Õß
+	 * æœºæ„çš„åˆ›å»ºè€…
 	 */
 	@OneToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "creator")
 	private User creator;
 	/**
-	 * »ú¹¹µÄÀÏÊ¦
+	 * æœºæ„çš„è€å¸ˆ
 	 */
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Organization_Teachers", joinColumns = @JoinColumn(name = "Oid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
 	private Set<User> teachers = new HashSet<>();
 	
 	/**
-	 * »ú¹¹µÄ¼Ò³¤
+	 * æœºæ„çš„å®¶é•¿
 	 */
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "Organization_Parents", joinColumns = @JoinColumn(name = "Oid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
 	private Set<User> parents = new HashSet<>();
 	/**
-	 * »ú¹¹¿ªÉèµÄ¿Î³Ì
+	 * æœºæ„å¼€è®¾çš„è¯¾ç¨‹
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
 	private Set<Course> courses = new HashSet<>();
 
 	/**
-	 * »ú¹¹¶ÔÓ¦µÄÇë¼ÙÉêÇë
+	 * æœºæ„å¯¹åº”çš„è¯·å‡ç”³è¯·
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "LAorg")
 	private Set<Leave_Application> application = new HashSet<>();

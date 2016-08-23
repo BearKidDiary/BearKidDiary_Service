@@ -46,7 +46,7 @@ public class CourseUpdate extends BaseServlet {
 
 		if (sCid == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -96,10 +96,10 @@ public class CourseUpdate extends BaseServlet {
 				Cmonday, Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday, Csunday);
 		result.setResultCode(code);
 		if (code == ResultCode.ERROR_NO_COURSE) {
-			result.setResultMessage("²»´æÔÚ¸Ã¿Î³Ì");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥è¯¾ç¨‹");
 		}
 		if (code == ResultCode.SUCCESS) {
-			result.setResultMessage("¸üĞÂ³É¹¦");
+			result.setResultMessage("æ›´æ–°æˆåŠŸ");
 		}
 		out.write(gson.toJson(result));
 	}

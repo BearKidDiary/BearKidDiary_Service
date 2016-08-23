@@ -28,24 +28,24 @@ public class Family implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Fid;
 	/**
-	 * ¼ÒÍ¥µÄÃû×Ö
+	 * å®¶åº­çš„åå­—
 	 */
 	@Expose
 	private String Fname;
 	/**
-	 * ¼ÒÍ¥µÄ´´½¨Õß£¬ Ö»ÓĞ´´½¨Õß¿ÉÒÔĞÂÔöº¢×Ó
+	 * å®¶åº­çš„åˆ›å»ºè€…ï¼Œ åªæœ‰åˆ›å»ºè€…å¯ä»¥æ–°å¢å­©å­
 	 */
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Uid")
 	private User creator;
 	/**
-	 * ¼ÒÍ¥µÄ³ÉÔ±
+	 * å®¶åº­çš„æˆå‘˜
 	 */
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "Family_User", joinColumns = @JoinColumn(name = "Fid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
 	private Set<User> members = new HashSet<>();
 	/**
-	 * ¼ÒÍ¥µÄº¢×Ó
+	 * å®¶åº­çš„å­©å­
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "family")
 	private Set<Kid> kid = new HashSet<>();

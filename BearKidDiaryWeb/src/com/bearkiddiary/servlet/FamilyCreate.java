@@ -35,7 +35,7 @@ public class FamilyCreate extends BaseServlet {
 		System.out.println("phone: " + Uphone + " name: " + Fname);
 		if (Uphone == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -44,11 +44,11 @@ public class FamilyCreate extends BaseServlet {
 		int code = service.createFamily(Uphone, Fname);
 		result.setResultCode(code);
 		if (code == ResultCode.ERROR_NO_USER) {
-			result.setResultMessage("²»´æÔÚ¶ÔÓ¦ÓÃ»§");
+			result.setResultMessage("ä¸å­˜åœ¨å¯¹åº”ç”¨æˆ·");
 		} else if (code == ResultCode.ERROR_EXIST_FAMILY) {
-			result.setResultMessage("¸ÃÓÃ»§ÒÑ¾­ÓĞ¼ÒÍ¥ÁË");
+			result.setResultMessage("è¯¥ç”¨æˆ·å·²ç»æœ‰å®¶åº­äº†");
 		} else {
-			result.setResultMessage("´´½¨³É¹¦");
+			result.setResultMessage("åˆ›å»ºæˆåŠŸ");
 		}
 		System.out.println(gson.toJson(result));
 		out.write(gson.toJson(result));

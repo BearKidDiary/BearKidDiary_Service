@@ -11,64 +11,64 @@ import com.bearkiddiary.common.dao.BaseDao;
 public interface KidDao extends BaseDao<Kid> {
 
 	/**
-	 * ╩Я╣ц╨╒вспео╒
+	 * Х▌╥Е╬≈Е╜╘Е╜░Д©║Ф│╞
 	 * 
 	 * @param Kid
-	 *            ╨╒вс╣д╠Ю╨е
+	 *            Е╜╘Е╜░Г └Г╪√Е▐╥
 	 */
 	Kid getKid(Long Kid);
 
 	/**
-	 * ╩Я╣ц╪рм╔жп╣дкЫсп╨╒вс
+	 * Х▌╥Е╬≈Е╝╤Е╨╜Д╦╜Г └Ф┴─Ф°┴Е╜╘Е╜░
 	 * 
 	 * @param Fid
-	 *            ╪рм╔╠Ю╨е
+	 *            Е╝╤Е╨╜Г╪√Е▐╥
 	 */
 	Set<Kid> getKidsInFamily(Long Fid);
 
 	/**
-	 * ╩Я╣ц╪рм╔жп╣дкЫсп╨╒вс
+	 * Х▌╥Е╬≈Е╝╤Е╨╜Д╦╜Г └Ф┴─Ф°┴Е╜╘Е╜░
 	 * 
 	 * @param Uphone
-	 *            ╢╢╫╗уъ╣дйж╩З╨е
+	 *            Е┬⌡Е╩╨Х─┘Г └Ф┴▀Ф°╨Е▐╥
 	 */
 	Set<Kid> getKidsInFamily(String Uphone);
 
 	/**
-	 * лМ╪ср╩╦Ж╨╒вс╣╫╪рм╔жп
+	 * Ф╥╩Е┼═Д╦─Д╦╙Е╜╘Е╜░Е┬╟Е╝╤Е╨╜Д╦╜
 	 * 
 	 * @param Fid
-	 *            ╪рм╔╠Ю╨е
+	 *            Е╝╤Е╨╜Г╪√Е▐╥
 	 * @param kid
-	 *            ╨╒вс╣дпео╒
+	 *            Е╜╘Е╜░Г └Д©║Ф│╞
 	 */
 	int addKid(Long Fid, Kid kid);
 
 	/**
-	 * лМ╪ср╩╦Ж╨╒вс╣╫сц╩╖╢╢╫╗╣д╪рм╔жп
+	 * Ф╥╩Е┼═Д╦─Д╦╙Е╜╘Е╜░Е┬╟Г■╗Ф┬╥Е┬⌡Е╩╨Г └Е╝╤Е╨╜Д╦╜
 	 * 
 	 * @param Uphone
-	 *            ╢╢╫╗уъ╣дйж╩З╨е
+	 *            Е┬⌡Е╩╨Х─┘Г └Ф┴▀Ф°╨Е▐╥
 	 * @param kid
-	 *            ╨╒вспео╒
+	 *            Е╜╘Е╜░Д©║Ф│╞
 	 */
 	int addKid(String Uphone, Kid kid);
 
 	/**
-	 * ╦Эпб╨╒вс╣дпео╒
+	 * Ф⌡╢Ф√╟Е╜╘Е╜░Г └Д©║Ф│╞
 	 * 
 	 * @param Kid
-	 *            ╨╒вс╠Ю╨е
+	 *            Е╜╘Е╜░Г╪√Е▐╥
 	 * @param kid
-	 *            ╨╒вспео╒
+	 *            Е╜╘Е╜░Д©║Ф│╞
 	 */
 	int updateKid(Long Kid, Kid kid);
 
 	/**
-	 * и╬ЁЩр╩╦Ж╨╒вс
+	 * Е┬═И≥╓Д╦─Д╦╙Е╜╘Е╜░
 	 * 
 	 * @param Kid
-	 *            ╨╒вс╣д╠Ю╨е
+	 *            Е╜╘Е╜░Г └Г╪√Е▐╥
 	 */
 	int removeKid(Long Kid);
 }

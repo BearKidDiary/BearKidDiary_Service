@@ -7,21 +7,21 @@ import com.bearkiddiary.bean.User;
 import com.bearkiddiary.common.dao.BaseDao;
 
 /**
- * Çë¼ÙÉêÇëDao
+ * è¯·å‡ç”³è¯·Dao
  * @author admin
  *
  */
 public interface LADao extends BaseDao<Leave_Application>{
 	
 	/**
-	 * Ìá½»ÉêÇë
+	 * æäº¤ç”³è¯·
 	 * @param application
 	 * @return
 	 */
 	Long commitApplicaton(Leave_Application application);
 	
 	/**
-	 * ¸üĞÂÇë¼ÙÉêÇëµÄ×´Ì¬
+	 * æ›´æ–°è¯·å‡ç”³è¯·çš„çŠ¶æ€
 	 * @param LAstatus
 	 * @param LAcomment
 	 * @return
@@ -29,21 +29,21 @@ public interface LADao extends BaseDao<Leave_Application>{
 	int updateApplication(Integer LAstatus, Integer LAisapproved, User LArover, String LAcomment, Long LAid);
 	
 	/**
-	 * »ñÈ¡»ú¹¹µÄÇë¼ÙÉêÇëÁĞ±í
+	 * è·å–æœºæ„çš„è¯·å‡ç”³è¯·åˆ—è¡¨
 	 * @param Oid
 	 * @return
 	 */
 	List<Leave_Application> getOrgApplicationList(Long Oid);
 	
 	/**
-	 * ½ÌÊ¦»ñÈ¡¸öÈËÇë¼ÙµÄÉêÇëÁĞ±í
+	 * æ•™å¸ˆè·å–ä¸ªäººè¯·å‡çš„ç”³è¯·åˆ—è¡¨
 	 * @param Uid
 	 * @return
 	 */
 	List<Leave_Application> getUserApplicationList(Long Uid);
 	
 	/**
-	 * ½ÌÊ¦»ñÈ¡¸öÈËÇë¼ÙµÄÉêÇëÁĞ±í
+	 * æ•™å¸ˆè·å–ä¸ªäººè¯·å‡çš„ç”³è¯·åˆ—è¡¨
 	 * @param Uphone
 	 * @return
 	 */

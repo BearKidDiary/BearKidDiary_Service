@@ -8,40 +8,40 @@ import com.bearkiddiary.common.dao.BaseDao;
 
 public interface VisionDao extends BaseDao<Vision>{
 	/**
-	 * Îªº¢×ÓÌí¼ÓÊÓÁ¦Êı¾İ
+	 * ä¸ºå­©å­æ·»åŠ è§†åŠ›æ•°æ®
 	 * 
 	 * @param Kid
-	 *            º¢×Ó±àºÅ
+	 *            å­©å­ç¼–å·
 	 * @param Vleft
-	 *            ×óÑÛÊÓÁ¦
+	 *            å·¦çœ¼è§†åŠ›
 	 * @param Vright
-	 *            ÓÒÑÛÊÓÁ¦
+	 *            å³çœ¼è§†åŠ›
 	 * @param Vtime
-	 *            ¸üĞÂÊ±¼ä
+	 *            æ›´æ–°æ—¶é—´
 	 */
 	int addVision(Long Kid, Float Vleft, Float Vright, Long Vtime);
 
 	/**
-	 * »ñÈ¡º¢×ÓµÄÊÓÁ¦ĞÅÏ¢
+	 * è·å–å­©å­çš„è§†åŠ›ä¿¡æ¯
 	 * 
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 * @param order
-	 *            desc»òÕßasc
+	 *            descæˆ–è€…asc
 	 */
 	List<Vision> getVision(Long Kid, String order);
 
 	/**
-	 * ·ÖÒ³»ñÈ¡º¢×ÓµÄÊÓÁ¦ĞÅÏ¢
+	 * åˆ†é¡µè·å–å­©å­çš„è§†åŠ›ä¿¡æ¯
 	 * 
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 * @param order
-	 *            desc»òÕßasc
+	 *            descæˆ–è€…asc
 	 * @param pageNum
-	 *            Ò³Âë
+	 *            é¡µç 
 	 * @param pageSize
-	 *            Ò³´óĞ¡
+	 *            é¡µå¤§å°
 	 */
 	List<Vision> getVision(Long Kid, String order, int pageNum, int pageSize);
 }

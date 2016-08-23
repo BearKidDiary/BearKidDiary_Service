@@ -3,7 +3,7 @@ package com.bearkiddiary.bean;
 import com.google.gson.annotations.Expose;
 
 /**
- * ·µ»Ø¸ø¿Í»§¶ËµÄÊı¾İ¸ñÊ½
+ * è¿”å›ç»™å®¢æˆ·ç«¯çš„æ•°æ®æ ¼å¼
  * @author admin
  * 
  * @param <T>

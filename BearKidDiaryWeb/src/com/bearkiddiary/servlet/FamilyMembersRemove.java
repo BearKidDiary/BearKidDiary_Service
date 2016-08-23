@@ -31,7 +31,7 @@ public class FamilyMembersRemove extends BaseServlet {
 
 		if ((CreatorUphone == null && sFid == null) || MemberUphone == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -44,9 +44,9 @@ public class FamilyMembersRemove extends BaseServlet {
 
 		result.setResultCode(code);
 		if (code == ResultCode.ERROR_NO_FAMILY) {
-			result.setResultMessage("²»´æÔÚ¸Ã¼ÒÍ¥");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥å®¶åº­");
 		} else if (code == ResultCode.ERROR_NO_USER) {
-			result.setResultMessage("²»´æÔÚ¸ÃÓÃ»§");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥ç”¨æˆ·");
 		}
 
 		out.write(gson.toJson(result));

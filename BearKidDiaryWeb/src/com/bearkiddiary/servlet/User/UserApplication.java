@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /**
- * ½ÌÊ¦ÓÃ»§»ñÈ¡Çë¼ÙÉêÇë£¬Çë¼ÙÉêÇë
+ * æ•™å¸ˆç”¨æˆ·è·å–è¯·å‡ç”³è¯·ï¼Œè¯·å‡ç”³è¯·
  * Servlet implementation class UserApplication
  */
 @WebServlet(name = "UserApplication", urlPatterns = "/user/apply")
@@ -40,29 +40,29 @@ public class UserApplication extends BaseServlet {
     	out = response.getWriter();
     	result = new Result<>();
     	list = new ArrayList<>();
-    	// »ñÈ¡²ÎÊı applyType = 0|1, 0:»ñÈ¡Çë¼ÙÉêÇëÁĞ±í£¬1£ºÇë¼ÙÉêÇë
+    	// è·å–å‚æ•° applyType = 0|1, 0:è·å–è¯·å‡ç”³è¯·åˆ—è¡¨ï¼Œ1ï¼šè¯·å‡ç”³è¯·
     	Integer applyType = Integer.valueOf(request.getParameter("applyType"));
     	String Uphone = request.getParameter(User.PHONE);
     	
-    	if(applyType == 0){ // »ñÈ¡Çë¼ÙÉêÇëÁĞ±í
+    	if(applyType == 0){ // è·å–è¯·å‡ç”³è¯·åˆ—è¡¨
     		
     		list = service.getUserApplicationList(Uphone);
     		
-    		//´æÔÚÉêÇëÁĞ±í
+    		//å­˜åœ¨ç”³è¯·åˆ—è¡¨
     		if(list.size() > 0){
     			result.setResultCode(ResultCode.SUCCESS);
-    			result.setResultMessage("»ñÈ¡ÉêÇë³É¹¦");
+    			result.setResultMessage("è·å–ç”³è¯·æˆåŠŸ");
     			result.setData(list);
     			
     			out.write(gson.toJson(result));
     		}else {
     			result.setResultCode(ResultCode.NO_RESULT);
-    			result.setResultMessage("Ã»ÓĞÇë¼ÙÉêÇë¼ÇÂ¼");
+    			result.setResultMessage("æ²¡æœ‰è¯·å‡ç”³è¯·è®°å½•");
 
     			out.write(gson.toJson(result));
     		}
     		
-    	}else if(applyType == 1){ // Çë¼ÙÉêÇë
+    	}else if(applyType == 1){ // è¯·å‡ç”³è¯·
     		Long Oid = Long.valueOf(request.getParameter(Organization.OID));
         	Integer LAtype = Integer.valueOf(request.getParameter(Leave_Application.LATYPE));
         	Long LAstarttime = Long.valueOf(request.getParameter(Leave_Application.LASTARTTIME));
@@ -77,20 +77,20 @@ public class UserApplication extends BaseServlet {
         	application.setLAreason(LAreason);
         	
         	Long resultId = service.commitApplication(application, Oid, Uphone);
-        	//ÅĞ¶Ï½á¹û£¬Èç¹û±£´æ³É¹¦£¬Ôò·µ»ØÌá½»µÄid,·ñÔò·µ»Ø´íÎó´úÂë£¨Îª¸ºÖµ£©
+        	//åˆ¤æ–­ç»“æœï¼Œå¦‚æœä¿å­˜æˆåŠŸï¼Œåˆ™è¿”å›æäº¤çš„id,å¦åˆ™è¿”å›é”™è¯¯ä»£ç ï¼ˆä¸ºè´Ÿå€¼ï¼‰
         	if(resultId > 0){
         		result.setResultCode(ResultCode.SUCCESS);
-        		result.setResultMessage("ÉêÇëÌá½»³É¹¦£¡");
+        		result.setResultMessage("ç”³è¯·æäº¤æˆåŠŸï¼");
         	}else {
         		result.setResultCode(ResultCode.ERROR_COMMIT);
-        		result.setResultMessage("ÉêÇëÌá½»Ê§°Ü£¡");
+        		result.setResultMessage("ç”³è¯·æäº¤å¤±è´¥ï¼");
         	}
         	
         	out.write(gson.toJson(result));
     	}else {
-    		//³ö´í
+    		//å‡ºé”™
     		result.setResultCode(ResultCode.ERROR);
-    		result.setResultMessage("³ö´íÁË");
+    		result.setResultMessage("å‡ºé”™äº†");
     		out.write(gson.toJson(list));
     	}
     }

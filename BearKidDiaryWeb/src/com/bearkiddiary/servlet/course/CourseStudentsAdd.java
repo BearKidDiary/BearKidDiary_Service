@@ -30,7 +30,7 @@ public class CourseStudentsAdd extends BaseServlet {
 
 		if (sCid == null || sKid == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -41,16 +41,16 @@ public class CourseStudentsAdd extends BaseServlet {
 		int code = service.addKidToCourse(Cid, Kid);
 		result.setResultCode(code);
 		if (code == ResultCode.SUCCESS) {
-			result.setResultMessage("Ìí¼Ó³É¹¦");
+			result.setResultMessage("æ·»åŠ æˆåŠŸ");
 		}
 		if (code == ResultCode.ERROR_NO_KID) {
-			result.setResultMessage("²»´æÔÚ¸Ãº¢×Ó");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥å­©å­");
 		}
 		if (code == ResultCode.ERROR_NO_COURSE) {
-			result.setResultMessage("²»´æÔÚ¸Ã¿Î³Ì");
+			result.setResultMessage("ä¸å­˜åœ¨è¯¥è¯¾ç¨‹");
 		}
 		if (code == ResultCode.ERROR_EXIST_KID) {
-			result.setResultMessage("¿Î³ÌÖĞÒÑÓĞ¸Ãº¢×Ó");
+			result.setResultMessage("è¯¾ç¨‹ä¸­å·²æœ‰è¯¥å­©å­");
 		}
 		out.write(gson.toJson(result));
 		out.close();

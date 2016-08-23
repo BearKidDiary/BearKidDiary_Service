@@ -34,69 +34,69 @@ public class Kid implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Kid;
 	/**
-	 * º¢×ÓÃû×Ö
+	 * å­©å­åå­—
 	 */
 	@Expose
 	private String Kname;
 	/**
-	 * º¢×ÓĞÔ±ğ
+	 * å­©å­æ€§åˆ«
 	 */
 	@Expose
 	private String Ksex;
 	/**
-	 * º¢×Ó³öÉúÊ±¼ä
+	 * å­©å­å‡ºç”Ÿæ—¶é—´
 	 */
 	@Expose
 	private Long Kbirthday;
 	/**
-	 * ¼Ò³¤¶£Öö
+	 * å®¶é•¿å®å˜±
 	 */
 	@Expose
 	private String Kask;
 	/**
-	 * º¢×Ó»ñµÃµÄĞ¡ºì»¨ÊıÄ¿
+	 * å­©å­è·å¾—çš„å°çº¢èŠ±æ•°ç›®
 	 */
 	@Expose
 	private Integer Kflowers;
 	/**
-	 * ËùÔÚµÄ¼ÒÍ¥
+	 * æ‰€åœ¨çš„å®¶åº­
 	 */
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "Fid")
 	private Family family;
 	/**
-	 * Í·ÏñURL
+	 * å¤´åƒURL
 	 */
 	@Expose
 	private String Kavatar;
 	/**
-	 * º¢×ÓµÄÊ±¼äÖá
+	 * å­©å­çš„æ—¶é—´è½´
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kid")
 	private Set<TimeLine> Ktimeline = new HashSet<>();
 	/**
-	 * º¢×ÓµÄÖØÁ¿
+	 * å­©å­çš„é‡é‡
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kid")
 	private Set<Weight> weight = new HashSet<>();
 	/**
-	 * º¢×ÓµÄÊÓÁ¦
+	 * å­©å­çš„è§†åŠ›
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kid")
 	private Set<Vision> vision = new HashSet<>();
 	/**
-	 * º¢×ÓµÄÉí¸ß
+	 * å­©å­çš„èº«é«˜
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "kid")
 	private Set<Height> height = new HashSet<>();
 	/**
-	 * º¢×Ó²ÎÓëµÄ¿Î³Ì
+	 * å­©å­å‚ä¸çš„è¯¾ç¨‹
 	 */
 	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "students")
 	private Set<Course> attendCourse = new HashSet<>();
 
 	/**
-	 * º¢×ÓÔÚ²»Í¬¿Î³ÌÖĞ»ñµÃµÄ³É¼¨
+	 * å­©å­åœ¨ä¸åŒè¯¾ç¨‹ä¸­è·å¾—çš„æˆç»©
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
 	private Set<Score> score = new HashSet<>();

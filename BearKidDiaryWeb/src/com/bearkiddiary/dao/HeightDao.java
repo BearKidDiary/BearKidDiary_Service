@@ -8,38 +8,38 @@ import com.bearkiddiary.common.dao.BaseDao;
 
 public interface HeightDao extends BaseDao<Height> {
 	/**
-	 * Îªº¢×ÓÌí¼ÓÉí¸ßÊı¾İ
+	 * ä¸ºå­©å­æ·»åŠ èº«é«˜æ•°æ®
 	 * 
 	 * @param Kid
-	 *            º¢×Ó±àºÅ
+	 *            å­©å­ç¼–å·
 	 * @param Hheight
-	 *            Éí¸ßÊı¾İ
+	 *            èº«é«˜æ•°æ®
 	 * @param Htime
-	 *            ¸üĞÂÊ±¼ä
+	 *            æ›´æ–°æ—¶é—´
 	 */
 	int addHeightToKid(Long Kid, Float Hheight, Long Htime);
 
 	/**
-	 * »ñÈ¡º¢×ÓµÄÉí¸ßÊı¾İ
+	 * è·å–å­©å­çš„èº«é«˜æ•°æ®
 	 * 
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 * @param order
-	 *            asc,¼´ÉıĞòÅÅÁĞ,descÎª½µĞò
+	 *            asc,å³å‡åºæ’åˆ—,descä¸ºé™åº
 	 */
 	List<Height> getHeight(Long Kid, String order);
 
 	/**
-	 * ·ÖÒ³»ñÈ¡º¢×ÓµÄÉí¸ßĞÅÏ¢
+	 * åˆ†é¡µè·å–å­©å­çš„èº«é«˜ä¿¡æ¯
 	 * 
 	 * @param Kid
-	 *            º¢×ÓµÄ±àºÅ
+	 *            å­©å­çš„ç¼–å·
 	 * @param order
-	 *            desc»òÕßasc
+	 *            descæˆ–è€…asc
 	 * @param pageNum
-	 *            Ò³Âë
+	 *            é¡µç 
 	 * @param pageSize
-	 *            Ò³´óĞ¡
+	 *            é¡µå¤§å°
 	 */
 	List<Height> getHeight(Long Kid, String order, int pageSize, int pageNum);
 }

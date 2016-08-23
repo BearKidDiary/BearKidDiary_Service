@@ -34,7 +34,7 @@ public class CourseGet extends BaseServlet {
 
 		if (sCid == null && sOid == null && sUid == null && Uphone == null && sKid == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊı²»ÍêÕû");
+			result.setResultMessage("è¯·æ±‚å‚æ•°ä¸å®Œæ•´");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -61,10 +61,10 @@ public class CourseGet extends BaseServlet {
 
 		if (set == null) {
 			result.setResultCode(ResultCode.ERROR_NO_RESULT);
-			result.setResultMessage("Çë¼ì²é²ÎÊıµÄºÏ·¨ĞÔ");
+			result.setResultMessage("è¯·æ£€æŸ¥å‚æ•°çš„åˆæ³•æ€§");
 		} else {
 			result.setResultCode(ResultCode.SUCCESS);
-			result.setResultMessage("²éÑ¯³É¹¦");
+			result.setResultMessage("æŸ¥è¯¢æˆåŠŸ");
 		}
 		out.write(gson.toJson(result));
 		out.close();

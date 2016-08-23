@@ -5,28 +5,28 @@ import java.util.List;
 
 public interface BaseDao<T> {
 
-	// ¸ù¾İID¼ÓÔØÊµÌå
+	// æ ¹æ®IDåŠ è½½å®ä½“
 	T get(Class<T> entityClazz, Serializable id);
 
-	// ±£´æÊµÌå
+	// ä¿å­˜å®ä½“
 	Serializable save(T entity);
 
-	// ¸üĞÂÊµÌå
+	// æ›´æ–°å®ä½“
 	void update(T entity);
 
-	// É¾³ıÊµÌå
+	// åˆ é™¤å®ä½“
 	void delete(T entity);
 
-	// ¸ù¾İIDÉ¾³ıÊµÌå
+	// æ ¹æ®IDåˆ é™¤å®ä½“
 	void delete(Class<T> entityClazz, Serializable id);
 
-	// »ñÈ¡ËùÓĞÊµÌå
+	// è·å–æ‰€æœ‰å®ä½“
 	List<T> findAll(Class<T> entityClazz);
 
 	List<T> find(String hql, Object... params);
 
 	List<T> find(String hql);
 
-	// »ñÈ¡ÊµÌå×ÜÊı
+	// è·å–å®ä½“æ€»æ•°
 	long findCount(Class<T> entityClazz);
 }

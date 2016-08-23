@@ -21,38 +21,38 @@ public class Score implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Sid;
 	/**
-	 * ½ÌÊ¦ÆÀ¼Û
+	 * æ•™å¸ˆè¯„ä»·
 	 */
 	@Expose
 	private String Scomment;
 	/**
-	 * ÆÀ¶¨µÄĞÇ¼¶
+	 * è¯„å®šçš„æ˜Ÿçº§
 	 */
 	@Expose
 	private Integer Sstars;
 	/**
-	 * Ğ¡²âµÄ·ÖÊı
+	 * å°æµ‹çš„åˆ†æ•°
 	 */
 	@Expose
 	private Integer Sscore;
 	/**
-	 * Ğ¡²âµÄÖ÷Ìâ
+	 * å°æµ‹çš„ä¸»é¢˜
 	 */
 	@Expose
 	private String Stheme;
 	/**
-	 * ÆÀ·ÖµÄÊ±¼ä
+	 * è¯„åˆ†çš„æ—¶é—´
 	 */
 	@Expose
 	private Long Stime;
 	/**
-	 * ·ÖÊı¶ÔÓ¦µÄ¿Î³Ì
+	 * åˆ†æ•°å¯¹åº”çš„è¯¾ç¨‹
 	 */
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "course")
 	private Course course;
 	/**
-	 * ·ÖÊı¶ÔÓ¦µÄÑ§Éú
+	 * åˆ†æ•°å¯¹åº”çš„å­¦ç”Ÿ
 	 */
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "student")

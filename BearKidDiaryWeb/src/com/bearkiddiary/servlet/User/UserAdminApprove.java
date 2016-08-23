@@ -22,7 +22,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 
 /**
- * »ú¹¹¹ÜÀíÔ±ÓÃ»§¶ÔÇë¼ÙÉêÇë½øĞĞÉóÅú£¬»ñÈ¡Çë¼ÙÉêÇëÁĞ±í
+ * æœºæ„ç®¡ç†å‘˜ç”¨æˆ·å¯¹è¯·å‡ç”³è¯·è¿›è¡Œå®¡æ‰¹ï¼Œè·å–è¯·å‡ç”³è¯·åˆ—è¡¨
  * Servlet implementation class UserAdminApprove
  */
 @WebServlet(name = "UserAdminApprove", urlPatterns = "/user/approve")
@@ -40,7 +40,7 @@ public class UserAdminApprove extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	out = response.getWriter();
-    	//ÀàĞÍ£¬0£º»ñÈ¡Çë¼ÙÁĞ±í£»1£º¶ÔÇë¼Ù½øĞĞÉóÅú
+    	//ç±»å‹ï¼Œ0ï¼šè·å–è¯·å‡åˆ—è¡¨ï¼›1ï¼šå¯¹è¯·å‡è¿›è¡Œå®¡æ‰¹
     	Integer applyType = Integer.valueOf(request.getParameter("applyType"));
     	Long Oid = Long.valueOf(request.getParameter(Organization.OID));
     	String Uphone = request.getParameter(User.PHONE);
@@ -48,28 +48,28 @@ public class UserAdminApprove extends BaseServlet {
     	result = new Result<>();
     	list = new ArrayList<>();
     	
-    	//ÑéÖ¤È¨ÏŞ
+    	//éªŒè¯æƒé™
     	int resultCode = service.validAdmin(Oid, Uphone);
     	if(resultCode == ResultCode.SUCCESS){
     		
-    		if(applyType == 0){ // »ñÈ¡Çë¼ÙÉêÇëÁĞ±í
+    		if(applyType == 0){ // è·å–è¯·å‡ç”³è¯·åˆ—è¡¨
         		
         		if(resultCode == ResultCode.SUCCESS){
         			list = service.getOrgApplicationList(Oid);
             		
             		if(list.size() > 0){
             			result.setResultCode(ResultCode.SUCCESS);
-                		result.setResultMessage("»ú¹¹Çë¼ÙÉêÇëÁĞ±í");
+                		result.setResultMessage("æœºæ„è¯·å‡ç”³è¯·åˆ—è¡¨");
                 		result.setData(list);
             		}else {
             			result.setResultCode(ResultCode.NO_RESULT);
-            			result.setResultMessage("Ã»ÓĞÇë¼ÙÉêÇë¼ÇÂ¼");
+            			result.setResultMessage("æ²¡æœ‰è¯·å‡ç”³è¯·è®°å½•");
             			list.add(application);
             			result.setData(list);
             		}
         		}
         		
-        	}else if(applyType == 1){ // ¶ÔÇë¼ÙÉêÇë½øĞĞÉóÅú
+        	}else if(applyType == 1){ // å¯¹è¯·å‡ç”³è¯·è¿›è¡Œå®¡æ‰¹
         		Long LAid = Long.valueOf(request.getParameter(Leave_Application.LAID));
             	Integer LAisapproved = Integer.valueOf(request.getParameter(Leave_Application.LAISAPPROVED));
             	String LAcomment = request.getParameter(Leave_Application.LACOMMENT);
@@ -78,27 +78,27 @@ public class UserAdminApprove extends BaseServlet {
             	if(count > 0){
             		
             		result.setResultCode(ResultCode.SUCCESS);
-            		result.setResultMessage("ÉóÅú³É¹¦");
+            		result.setResultMessage("å®¡æ‰¹æˆåŠŸ");
             	}else {
             		
             		result.setResultCode(ResultCode.ERROR_COMMIT);
-            		result.setResultMessage("Ìá½»ÉóÅú³ö´í");
+            		result.setResultMessage("æäº¤å®¡æ‰¹å‡ºé”™");
             	}
         	}else {
-        		//³ö´í
+        		//å‡ºé”™
         		result.setResultCode(ResultCode.ERROR);
-        		result.setResultMessage("³ö´íÁË");
+        		result.setResultMessage("å‡ºé”™äº†");
         	}
     		
     		
     	}else if(resultCode == ResultCode.ERROR_NO_ORG){
 			result.setResultCode(ResultCode.ERROR_NO_ORG);
-			result.setResultMessage("Ã»ÓĞ´Ë»ú¹¹");
+			result.setResultMessage("æ²¡æœ‰æ­¤æœºæ„");
 			list.add(application);
 			result.setData(list);
 		}else if(resultCode == ResultCode.ERROR_NO_PERMISSION){
 			result.setResultCode(ResultCode.ERROR_NO_PERMISSION);
-			result.setResultMessage("¸ÃÓÃ»§²»¾ß±¸¹ÜÀíÔ±È¨ÏŞ");
+			result.setResultMessage("è¯¥ç”¨æˆ·ä¸å…·å¤‡ç®¡ç†å‘˜æƒé™");
 			list.add(application);
 			result.setData(list);
 		}

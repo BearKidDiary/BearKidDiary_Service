@@ -47,10 +47,10 @@ public class UserLogin extends BaseServlet {
 		// TODO Auto-generated method stub
 		if (service.Login(Uphone, Upsw)) {
 			result.setResultCode(ResultCode.SUCCESS);
-			result.setResultMessage("µÇÂ¼³É¹¦£¡");
+			result.setResultMessage("ç™»å½•æˆåŠŸï¼");
 		} else {
 			result.setResultCode(ResultCode.ERROR_LOGIN);
-			result.setResultMessage("µÇÂ¼Ê§°Ü£¬ÓÃ»§Ãû»òÃÜÂë´íÎó£¡");
+			result.setResultMessage("ç™»å½•å¤±è´¥ï¼Œç”¨æˆ·åæˆ–å¯†ç é”™è¯¯ï¼");
 		}
 
 		System.out.println(gson.toJson(result));
