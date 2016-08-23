@@ -57,7 +57,11 @@
 		p:userDao-ref="userDao" p:familyDao-ref="familyDao" p:kidDao-ref="kidDao"
 		p:orgDao-ref="orgDao" p:laDao-ref="laDao" p:heightDao-ref="heightDao"
 		p:weightDao-ref="weightDao" p:visionDao-ref="visionDao"
+<<<<<<< HEAD
 		p:timeLineDao-ref="timeLineDao" p:courseDao-ref="courseDao" />
+=======
+		p:timeLineDao-ref="timeLineDao" />
+>>>>>>> ee87d23fd531135c64b1bd794e400cb49e8dc66f
 
 	<bean id="userDao" class="com.bearkiddiary.dao.impl.UserDaoImpl"
 		p:sessionFactory-ref="sessionFactory" />

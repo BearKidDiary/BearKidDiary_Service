@@ -24,7 +24,7 @@ import com.google.gson.annotations.Expose;
 @Table(name = "User")
 public class User implements Serializable {
 
-	public static final String id = "Uid";
+	public static final String ID = "Uid";
 	public static final String NAME = "Uname";
 	public static final String SEX = "Usex";
 	public static final String PHONE = "Uphone";

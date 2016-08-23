@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bearkiddiary.bean.Organization;
+import com.bearkiddiary.bean.Result;
+import com.bearkiddiary.bean.User;
 import com.bearkiddiary.service.Service;
 import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
@@ -23,42 +25,30 @@ import com.google.gson.JsonObject;
 public class OrgMembersAdd extends BaseServlet {
 	private static final long serialVersionUID = 1L;
     private int resultCode;   
-    private JsonObject jsonResult;
-    private JsonObject jsonData;
+    private Result<Organization> result;
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	PrintWriter out = response.getWriter();
+    	result = new Result<>();
+    	
     	Integer identity = Integer.valueOf(request.getParameter("identity"));
     	
-    	long Oid = Long.valueOf(request.getParameter("Oid"));
-    	long Uid = Long.valueOf(request.getParameter("Uid"));
+    	long Oid = Long.valueOf(request.getParameter(Organization.OID));
+    	long Uid = Long.valueOf(request.getParameter(User.ID));
     	
     	resultCode = service.addOrgMember(Oid, Uid, identity);
+    	
     	if(resultCode == ResultCode.SUCCESS){
-    		jsonData = new JsonObject();
-    		jsonData.addProperty("Oid", Oid);
+    		result.setResultCode(ResultCode.SUCCESS);
+    		result.setResultMessage("添加成功！");
     		
-    		jsonResult = new JsonObject();
-    		jsonResult.addProperty("resultCode", ResultCode.SUCCESS);
-    		jsonResult.addProperty("resultMessage", "添加成功！");
-    		jsonResult.add("data", jsonData);
-    		
-    		Gson gson = new Gson();
-    		out.write(gson.toJson(jsonResult));
-    		System.out.println(gson.toJson(jsonResult));
     	}else {
-    		jsonData = new JsonObject();
-    		jsonData.addProperty("Oid", "null");
-    		
-    		jsonResult = new JsonObject();
-    		jsonResult.addProperty("resultCode", resultCode);
-    		jsonResult.addProperty("resultMessage", "添加失败！");
-    		jsonResult.add("data", jsonData);
-    		
-    		Gson gson = new Gson();
-    		out.write(gson.toJson(jsonResult));
-    		System.out.println(gson.toJson(jsonResult));
+    		result.setResultCode(resultCode);
+    		result.setResultMessage("添加失败！");
     	}
+    	out.write(gson.toJson(result));
+		System.out.println(gson.toJson(result));
     }
     
     @Override

@@ -162,12 +162,15 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public Long updateApplication(Integer LAstatus, String LAcomment, Long LAid) {
-		Long result = laDao.updateApplication(LAstatus, LAcomment, LAid);
-		if (result > 0) {
-			return result;
+	public int updateApplication(Integer LAstatus, Integer LAisapproved, String Uphone, String LAcomment, Long LAid) {
+		User LArover = userDao.getUser(Uphone);
+		if (LArover != null) {
+			int result = laDao.updateApplication(LAstatus, LAisapproved, LArover, LAcomment, LAid);
+			if (result > 0) {
+				return result;
+			}
 		}
-		return (long) ResultCode.ERROR;
+		return ResultCode.ERROR;
 	}
 
 	@Override
@@ -178,6 +181,17 @@ public class ServiceImpl implements Service {
 	@Override
 	public List<Leave_Application> getUserApplicationList(Long Uid) {
 		return laDao.getUserApplicationList(Uid);
+	}
+
+	@Override
+	public List<Leave_Application> getUserApplicationList(String Uphone) {
+		return laDao.getUserApplicationList(Uphone);
+	}
+
+	@Override
+	public int validAdmin(Long Oid, String Uphone) {
+		int resultCode = orgDao.validAdmin(Uphone, Oid);
+		return resultCode;
 	}
 
 	@Override
@@ -297,13 +311,13 @@ public class ServiceImpl implements Service {
 	 * ½âÉ¢»ú¹¹
 	 */
 	@Override
-	public void deleteOrg(long Oid) {
-		orgDao.deleteOrg(Oid);
+	public int deleteOrg(long Oid) {
+		return orgDao.deleteOrg(Oid);
 	}
 
 	@Override
-	public long updateOrg(long Oid, String Parameter, String value) {
-		long result = 0;
+	public int updateOrg(long Oid, String Parameter, String value) {
+		int result = 0;
 		switch (Parameter) {
 		case Organization.ONAME:
 			result = orgDao.updateOname(Oid, value);

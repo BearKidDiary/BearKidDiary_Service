@@ -28,7 +28,6 @@ public class ResultCode {
 	 * 不存在对应的关联关系
 	 */
 	public static final int ERROR_NO_RELATION = -5;
-
 	/**
 	 * 不存在该机构
 	 */
@@ -49,9 +48,25 @@ public class ResultCode {
 	 * 不能正常获得结果，过程发生了错误
 	 */
 	public static final int ERROR_NO_RESULT = -100;
-
 	/**
 	 * 错误
 	 */
 	public static final int ERROR = -200;
+	/**
+	 * 没有数据
+	 */
+	public static final int NO_RESULT = -101;
+	
+	/**
+	 * 提交，保存失败
+	 */
+	public static final int ERROR_COMMIT = -102;
+	/**
+	 * 无权限操作
+	 */
+	public static final int ERROR_NO_PERMISSION = -103;
+	/**
+	 * 登录失败
+	 */
+	public static final int ERROR_LOGIN = -104;
 }

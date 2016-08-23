@@ -27,6 +27,7 @@ public class Leave_Application implements Serializable{
 	public static final Integer THING_LEAVE = 2;//事假
 	
 	public static final String LAID = "LAid"; 
+	public static final String LAISAPPROVED = "LAisapproved";
 	public static final String LASTATUS = "LAstatus";
 	public static final String LASTARTTIME = "LAstarttime";
 	public static final String LAENDTIME = "LAendtime";
@@ -38,6 +39,11 @@ public class Leave_Application implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long LAid;
+	/**
+	 * 是否同意
+	 */
+	@Expose
+	private Integer LAisapproved;
 	/**
 	 * 申请状态
 	 */
@@ -77,6 +83,7 @@ public class Leave_Application implements Serializable{
 	/**
 	 * 审批人
 	 */
+	@Expose
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LArover")
 	private User LArover;
@@ -84,6 +91,7 @@ public class Leave_Application implements Serializable{
 	/**
 	 * 申请人
 	 */
+	@Expose
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LAapplication")
 	private User LAapplicant;
@@ -91,6 +99,7 @@ public class Leave_Application implements Serializable{
 	/**
 	 * 对应的机构
 	 */
+	@Expose
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "LAorg")
 	private Organization LAorg;
@@ -101,6 +110,14 @@ public class Leave_Application implements Serializable{
 
 	public void setLAid(Long lAid) {
 		LAid = lAid;
+	}
+
+	public Integer getLAisapproved() {
+		return LAisapproved;
+	}
+
+	public void setLAisapproved(Integer lAisapproved) {
+		LAisapproved = lAisapproved;
 	}
 
 	public Integer getLAstatus() {
@@ -173,5 +190,12 @@ public class Leave_Application implements Serializable{
 
 	public void setLAorg(Organization lAorg) {
 		LAorg = lAorg;
+	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return "{" + "LAid:" + LAid + "," + "LAstatus:" + LAstatus + "," + "LAstarttime:" + LAstarttime + "," + "LAendtime:" + LAendtime + ","
+				+ "LAtype:" + LAtype + "," + "LAreason:" + LAreason + "," + "LAcomment:" + LAcomment + "}";
 	}
 }

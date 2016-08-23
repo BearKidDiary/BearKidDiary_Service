@@ -44,9 +44,9 @@ public interface Service {
 	 * 
 	 * @param LAstatus
 	 * @param LAcomment
-	 * @return
+	 * @return 更新的条数
 	 */
-	Long updateApplication(Integer LAstatus, String LAcomment, Long LAid);
+	int updateApplication(Integer LAstatus, Integer LAisapproved, String Uphone, String LAcomment, Long LAid);
 
 	/**
 	 * 获取机构的请假申请列表
@@ -63,6 +63,24 @@ public interface Service {
 	 * @return
 	 */
 	List<Leave_Application> getUserApplicationList(Long Uid);
+
+	//////////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
+	/**
+	 * 教师获取个人请假的申请列表
+	 * 
+	 * @param Uid
+	 * @return
+	 */
+	List<Leave_Application> getUserApplicationList(String Uphone);
+
+	/**
+	 * 验证是否是该机构的管理员权限
+	 * 
+	 * @param Oid
+	 * @param Uphone
+	 * @return
+	 */
+	int validAdmin(Long Oid, String Uphone);
 
 	//////////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
 	/**
@@ -395,7 +413,7 @@ public interface Service {
 	 * 
 	 * @param Oid
 	 */
-	public void deleteOrg(long Oid);
+	public int deleteOrg(long Oid);
 
 	/**
 	 * 更新机构信息
@@ -405,7 +423,7 @@ public interface Service {
 	 * @param value
 	 * @return
 	 */
-	long updateOrg(long Oid, String Parameter, String value);
+	int updateOrg(long Oid, String Parameter, String value);
 
 	/**
 	 * 添加机构成员（家长或者教师）

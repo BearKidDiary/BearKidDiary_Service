@@ -131,7 +131,7 @@ public class BaseDaoHibernate<T> implements BaseDao<T> {
 	 * 更新操作
 	 * @param hql
 	 * @param objects
-	 * @return
+	 * @return 返回更新的条数
 	 */
 	public int update(String hql, Object...objects){
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);

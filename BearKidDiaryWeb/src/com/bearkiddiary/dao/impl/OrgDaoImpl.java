@@ -35,25 +35,25 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 	}
 
 	@Override
-	public void deleteOrg(long Oid) {
+	public int deleteOrg(long Oid) {
 		String hql = "delete Organization org where org.Oid = ?0";
-		update(hql, Oid);
+		return update(hql, Oid);
 	}
 
 	@Override
-	public long updateOname(long Oid, String Oname) {
+	public int updateOname(long Oid, String Oname) {
 		String hql = "update Organization org set org.Oname = ?0 where org.Oid = ?1";
 		return update(hql, Oname, Oid);
 	}
 
 	@Override
-	public long updateOaddress(long Oid, String Oaddress) {
+	public int updateOaddress(long Oid, String Oaddress) {
 		String hql = "update Organization org set org.Oaddress = ?0 where org.Oid = ?1";
 		return update(hql, Oaddress, Oid);
 	}
 
 	@Override
-	public long updateOannounce(long Oid, String Oannounce) {
+	public int updateOannounce(long Oid, String Oannounce) {
 		String hql = "update Organization org set org.Oannounce = ?0 where org.Oid = ?1";
 		return update(hql, Oannounce, Oid);
 	}
@@ -105,6 +105,19 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 		org.getParents().add(parent);
 		update(org);
 		return ResultCode.SUCCESS;
+	}
+
+	@Override
+	public int validAdmin(String Uphone, Long Oid) {
+		Organization org = getOrg(Oid);
+		if(org != null){
+			User creator = org.getCreator();
+			if(creator.getUphone().equals(Uphone)){
+				return ResultCode.SUCCESS;
+			}
+			return ResultCode.ERROR_NO_PERMISSION;
+		}
+		return ResultCode.ERROR_NO_ORG;
 	}
 
 	
