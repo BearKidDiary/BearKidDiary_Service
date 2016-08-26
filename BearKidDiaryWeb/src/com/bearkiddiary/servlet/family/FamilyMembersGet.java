@@ -1,4 +1,4 @@
-package com.bearkiddiary.servlet;
+package com.bearkiddiary.servlet.family;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
+import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 import com.bearkiddiary.utils.ServiceBean;
 import com.google.gson.Gson;
@@ -62,6 +63,7 @@ public class FamilyMembersGet extends BaseServlet {
 		result.setResultCode(ResultCode.SUCCESS);
 		result.setData(members);
 		out.write(gson.toJson(result));
+		System.out.println(gson.toJson(result));
 		out.close();
 	}
 }

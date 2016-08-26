@@ -27,7 +27,7 @@ public class LADaoImpl extends BaseDaoHibernate<Leave_Application> implements LA
 	}
 
 	/**
-	 * Ìá½»Çë¼ÙÉêÇë
+	 * æäº¤è¯·å‡ç”³è¯·
 	 */
 	@Override
 	public Long commitApplicaton(Leave_Application application) {

@@ -70,7 +70,7 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 	}
 	
 	/**
-	 * 添加机构教师
+	 * 娣诲姞鏈烘瀯鏁欏笀
 	 */
 	@Override
 	public int addOrgTeacher(long Oid, long Uid) {
@@ -89,7 +89,7 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 	}
 
 	/**
-	 * 添加机构家长
+	 * 娣诲姞鏈烘瀯瀹堕暱
 	 */
 	@Override
 	public int addOrgParent(long Oid, long Uid) {

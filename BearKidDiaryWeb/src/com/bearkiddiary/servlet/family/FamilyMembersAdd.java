@@ -1,4 +1,4 @@
-package com.bearkiddiary.servlet;
+package com.bearkiddiary.servlet.family;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
+import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 
 @WebServlet("/family/members/add")
@@ -52,6 +53,7 @@ public class FamilyMembersAdd extends BaseServlet {
 			result.setResultMessage("不存在该用户");
 		}
 		out.write(gson.toJson(result));
+		System.out.println(gson.toJson(result));
 		out.close();
 	}
 }

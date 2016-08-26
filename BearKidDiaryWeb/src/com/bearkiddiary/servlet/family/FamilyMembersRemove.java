@@ -1,4 +1,4 @@
-package com.bearkiddiary.servlet;
+package com.bearkiddiary.servlet.family;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bearkiddiary.bean.Family;
 import com.bearkiddiary.bean.Result;
+import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 
 @WebServlet("/family/members/remove")
@@ -50,6 +51,7 @@ public class FamilyMembersRemove extends BaseServlet {
 		}
 
 		out.write(gson.toJson(result));
+		System.out.println(gson.toJson(result));
 		out.close();
 	}
 }

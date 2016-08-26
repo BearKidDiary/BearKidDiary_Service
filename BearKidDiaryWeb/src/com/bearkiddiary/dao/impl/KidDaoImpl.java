@@ -56,7 +56,7 @@ public class KidDaoImpl extends BaseDaoHibernate<Kid> implements KidDao {
 			return ResultCode.ERROR_NO_KID;
 
 		if (kid.getKname() != null) {
-			for(Kid brother:k.getFamily().getKid()){//有兄弟的名字相同
+			for(Kid brother:k.getFamily().getKid()){//鏈夊厔寮熺殑鍚嶅瓧鐩稿悓
 				if(brother.getKname().equals(kid.getKname())){
 					return ResultCode.ERROR_EXIST_KID;
 				}

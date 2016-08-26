@@ -31,11 +31,11 @@ public class FamilyDaoImpl extends BaseDaoHibernate<Family> implements FamilyDao
 	@Override
 	public int createFamily(String Uphone, String Fname) {
 		User creator = userDao.getUser(Uphone);
-		if (creator == null) {// ²»´æÔÚÊÖ»úºÅÂëUphoneµÄÓÃ»§
+		if (creator == null) {// ä¸å­˜åœ¨æ‰‹æœºå·ç Uphoneçš„ç”¨æˆ·
 			return ResultCode.ERROR_NO_USER;
 		}
 
-		if (getCreatedFamily(Uphone) != null) {// ÒÑ¾­ÓĞ´´½¨µÄ¼ÒÍ¥ÁË
+		if (getCreatedFamily(Uphone) != null) {// å·²ç»æœ‰åˆ›å»ºçš„å®¶åº­äº†
 			return ResultCode.ERROR_EXIST_FAMILY;
 		}
 
