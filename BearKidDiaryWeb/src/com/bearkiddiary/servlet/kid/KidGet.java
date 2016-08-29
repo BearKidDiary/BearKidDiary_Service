@@ -2,6 +2,7 @@ package com.bearkiddiary.servlet.kid;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bearkiddiary.bean.Family;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.servlet.BaseServlet;
@@ -30,6 +32,7 @@ public class KidGet extends BaseServlet {
 		String Uphone = req.getParameter("Uphone");
 		String sFid = req.getParameter("Fid");
 		String sCid = req.getParameter("Cid");
+		String Range = req.getParameter("Range");
 
 		if (sKid == null && Uphone == null && sFid == null && sCid == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
@@ -51,7 +54,29 @@ public class KidGet extends BaseServlet {
 		if (sCid != null)
 			Cid = Long.valueOf(sCid);
 
-		Set<Kid> set = service.getKids(Kid, Uphone, Fid, Cid);
+		if (Range == null) {
+			Range = "Creator";
+		}
+
+		Set<Kid> set = null;
+		System.out.println(Range);
+		if (Uphone != null && Range.equals("ALL")) {
+			Set<Family> familys = service.getAttendFamily(Uphone);
+			if (familys != null) {
+				set = new HashSet<>();
+				for (Family f : familys) {
+					Set<Kid> tmp = service.getKids(null, null, f.getFid(), null);
+					set.addAll(tmp);
+				}
+			}
+		}
+
+		Set<Kid> tmp = service.getKids(Kid, Uphone, Fid, Cid);
+		if (set == null)
+			set = tmp;
+		else
+			set.addAll(tmp);
+
 		if (set == null) {
 			result.setResultCode(ResultCode.ERROR_NO_RESULT);
 			result.setResultMessage("查询不正常，家庭可能不存在");

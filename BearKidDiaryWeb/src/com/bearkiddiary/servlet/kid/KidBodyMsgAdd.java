@@ -25,15 +25,18 @@ public class KidBodyMsgAdd extends BaseServlet {
 		Result<Kid> result = new Result<>();
 		PrintWriter out = resp.getWriter();
 
-		String sHeight = req.getParameter("Height");
-		String sWeight = req.getParameter("Weight");
-		String sVisionLeft = req.getParameter("VisionLeft");
-		String sVisionRight = req.getParameter("VisionRight");
+		String sHeight = req.getParameter("Hheight");
+		String sWeight = req.getParameter("Wweight");
+		String sVisionLeft = req.getParameter("Vleft");
+		String sVisionRight = req.getParameter("Vright");
 		String sKid = req.getParameter("Kid");
-		String sTime = req.getParameter("Time");
+		String sHTime = req.getParameter("Htime");
+		String sWTime = req.getParameter("Wtime");
+		String sVTime = req.getParameter("Vtime");
 
-		if (sKid == null || sTime == null
-				|| (sHeight == null && sWeight == null && sVisionLeft == null && sVisionRight == null)) {
+		boolean ok = (sKid != null && ((sHeight != null && sHTime != null) || (sWeight != null && sWTime != null)
+				|| ((sVisionLeft != null || sVisionRight != null) && sVTime != null)));
+		if (!ok) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
 			result.setResultMessage("请求参数不完整");
 			out.write(gson.toJson(result));
@@ -42,18 +45,21 @@ public class KidBodyMsgAdd extends BaseServlet {
 		}
 
 		Long Kid = Long.valueOf(sKid);
-		Long time = Long.valueOf(sTime);
+		Long time = null;
 
 		int code = ResultCode.ERROR_MISSING_PARAMETER;
 		if (sHeight != null) {
 			Float height = Float.valueOf(sHeight);
+			time = Long.valueOf(sHTime);
 			code = service.addKidBodyMsg(Kid, height, null, null, null, time);
 		}
 		if (code != ResultCode.ERROR_NO_KID && sWeight != null) {
 			Float weight = Float.valueOf(sWeight);
+			time = Long.valueOf(sWTime);
 			code = service.addKidBodyMsg(Kid, null, weight, null, null, time);
 		}
 		if (code != ResultCode.ERROR_NO_KID && (sVisionLeft != null || sVisionRight != null)) {
+			time = Long.valueOf(sVTime);
 			Float visionLeft = null, visionRight = null;
 			if (sVisionLeft != null)
 				visionLeft = Float.valueOf(sVisionLeft);
@@ -62,12 +68,12 @@ public class KidBodyMsgAdd extends BaseServlet {
 
 			code = service.addKidBodyMsg(Kid, null, null, visionLeft, visionRight, time);
 		}
-		
+
 		result.setResultCode(code);
-		if(code==ResultCode.SUCCESS){
+		if (code == ResultCode.SUCCESS) {
 			result.setResultMessage("添加成功");
 		}
-		if(code==ResultCode.ERROR_NO_KID){
+		if (code == ResultCode.ERROR_NO_KID) {
 			result.setResultMessage("孩子不存在");
 		}
 		out.write(gson.toJson(result));

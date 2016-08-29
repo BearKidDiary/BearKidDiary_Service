@@ -52,9 +52,11 @@ public class KidTimeLineAdd extends BaseServlet {
 
 		Long Kid = Long.valueOf(sKid);
 
+		
+		System.out.println(sLogoType);
 		Integer logoType = 0;
 		if (sLogoType != null)
-			logoType = Integer.valueOf(logoType);
+			logoType = Integer.valueOf(sLogoType);
 
 		int code = service.addTimeLine(content, time, image1, image2, image3, type, logoType, Uid, Uphone, Kid);
 		result.setResultCode(code);
