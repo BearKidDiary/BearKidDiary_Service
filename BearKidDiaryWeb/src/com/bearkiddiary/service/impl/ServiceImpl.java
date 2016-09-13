@@ -6,6 +6,7 @@ import java.util.Set;
 
 import com.bearkiddiary.bean.Course;
 import com.bearkiddiary.bean.Family;
+import com.bearkiddiary.bean.Group;
 import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Leave_Application;
@@ -16,6 +17,7 @@ import com.bearkiddiary.bean.Vision;
 import com.bearkiddiary.bean.Weight;
 import com.bearkiddiary.dao.CourseDao;
 import com.bearkiddiary.dao.FamilyDao;
+import com.bearkiddiary.dao.GroupDao;
 import com.bearkiddiary.dao.HeightDao;
 import com.bearkiddiary.dao.KidDao;
 import com.bearkiddiary.dao.LADao;
@@ -89,18 +91,12 @@ public class ServiceImpl implements Service {
 		this.courseDao = courseDao;
 	}
 
-	// @Override
-	// public boolean Login(User user) {
-	// // TODO Auto-generated method stub
-	// List<User> userList = testDao.Login(user);
-	// if(!userList.isEmpty()){
-	// return true;
-	// }
-	// return false;
-	// }
-	/**
-	 * ×¢²á
-	 */
+	private GroupDao groupDao;
+
+	public void setGroupDao(GroupDao groupDao) {
+		this.groupDao = groupDao;
+	}
+
 	@Override
 	public boolean Register(User user) {
 		// TODO Auto-generated method stub
@@ -111,9 +107,6 @@ public class ServiceImpl implements Service {
 		return false;
 	}
 
-	/**
-	 * µÇÂ¼
-	 */
 	@Override
 	public boolean Login(String Uphone, String Upsw) {
 		int userCount = userDao.Login(Uphone, Upsw);
@@ -123,9 +116,6 @@ public class ServiceImpl implements Service {
 		return false;
 	}
 
-	/**
-	 * ¸üÐÂ¸öÈËÐÅÏ¢
-	 */
 	@Override
 	public int updateUser(String Uphone, String Parameter, String value) {
 		int result = 0;
@@ -143,9 +133,6 @@ public class ServiceImpl implements Service {
 		return result;
 	}
 
-	/**
-	 * Ìá½»Çë¼ÙÉêÇë , ³É¹¦·µ»ØLAid
-	 */
 	public Long commitApplication(Leave_Application application, Long Oid, String Uphone) {
 		Organization org = orgDao.getOrg(Oid);
 		if (org == null) {
@@ -197,7 +184,7 @@ public class ServiceImpl implements Service {
 	@Override
 	public int createFamily(String Uphone, String Fname) {
 		if (Fname == null) {
-			Fname = Uphone + "µÄ¼ÒÍ¥";
+			Fname = Uphone + "ï¿½Ä¼ï¿½Í¥";
 		}
 		return familyDao.createFamily(Uphone, Fname);
 	}
@@ -308,7 +295,7 @@ public class ServiceImpl implements Service {
 	}
 
 	/**
-	 * ½âÉ¢»ú¹¹
+	 * ï¿½ï¿½É¢ï¿½ï¿½ï¿½ï¿½
 	 */
 	@Override
 	public int deleteOrg(long Oid) {
@@ -562,5 +549,47 @@ public class ServiceImpl implements Service {
 		course.setCsaturday(Csaturday);
 		course.setCsunday(Csunday);
 		return courseDao.addCourse(course, teacherUid, teacherUphone, approverUid, approverUphone, Oid);
+	}
+
+	@Override
+	public int createGroup(Long Oid, String Gname, List<Long> Uids, List<String> Uphones) {
+		if (Uids != null)
+			return groupDao.createGroupWithId(Oid, Gname, Uids);
+		if (Uphones != null)
+			return groupDao.createGroupWithPhone(Oid, Gname, Uphones);
+		return groupDao.createGroup(Oid, Gname);
+	}
+
+	@Override
+	public int addGroupMembers(Long Gid, List<Long> Uids, List<String> Uphones) {
+		if (Uids != null)
+			return groupDao.addMembersById(Gid, Uids);
+		else
+			return groupDao.addMembersByPhone(Gid, Uphones);
+	}
+
+	@Override
+	public int deleteGroupMembers(Long Gid, List<Long> Uids, List<String> Uphones) {
+		if (Uids != null)
+			return groupDao.deleteMembersById(Gid, Uids);
+		return groupDao.deleteMembersByPhone(Gid, Uphones);
+	}
+
+	@Override
+	public int deleteGroup(Long Gid) {
+		return groupDao.deleteGroup(Gid);
+	}
+
+	@Override
+	public Set<Group> getGroup(Long Gid, Long Oid) {
+		if (Gid != null) {
+			Group g = groupDao.getGroup(Gid);
+			if (g != null) {
+				Set<Group> set = new HashSet<>();
+				set.add(g);
+				return set;
+			}
+		}
+		return groupDao.getGroups(Oid);
 	}
 }

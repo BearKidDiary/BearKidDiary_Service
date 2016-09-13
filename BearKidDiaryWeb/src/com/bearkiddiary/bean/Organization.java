@@ -23,23 +23,23 @@ import com.google.gson.annotations.Expose;
 @Entity
 @Table(name = "Organization")
 public class Organization implements Serializable {
-	
-	//加入机构是教师还是家长
+
+	// 加入机构是教师还是家长
 	public final static Integer TEACHER = 0;
 	public final static Integer PARENT = 1;
-	
-	//创建，解散，修改机构
+
+	// 创建，解散，修改机构
 	public final static Integer CREATE = 1;
 	public final static Integer DELETE = -1;
 	public final static Integer UPDATE = 0;
-	
+
 	public final static String OID = "Oid";
 	public final static String ONAME = "Oname";
 	public final static String OADDRESS = "Oaddress";
 	public final static String OTIME = "Otime";
 	public final static String OANNOUNCE = "Oannounce";
 	public final static String UID = "Uid";
-	
+
 	@Expose
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,7 +81,7 @@ public class Organization implements Serializable {
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name = "Organization_Teachers", joinColumns = @JoinColumn(name = "Oid"), inverseJoinColumns = @JoinColumn(name = "Uid"))
 	private Set<User> teachers = new HashSet<>();
-	
+
 	/**
 	 * 机构的家长
 	 */
@@ -99,7 +99,12 @@ public class Organization implements Serializable {
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "LAorg")
 	private Set<Leave_Application> application = new HashSet<>();
-	
+	/**
+	 * 机构中的分组
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "org")
+	private Set<Group> groups = new HashSet<>();
+
 	public Set<Course> getCourses() {
 		return courses;
 	}
@@ -187,5 +192,11 @@ public class Organization implements Serializable {
 	public void setApplication(Set<Leave_Application> application) {
 		this.application = application;
 	}
-	
+	public Set<Group> getGroups() {
+		return groups;
+	}
+
+	public void setGroups(Set<Group> groups) {
+		this.groups = groups;
+	}
 }

@@ -78,6 +78,7 @@ public class KidBodyMsgGet extends BaseServlet {
 			}
 		}
 		out.write(gson.toJson(result));
+		System.out.println(gson.toJson(result));
 		out.close();
 	}
 }

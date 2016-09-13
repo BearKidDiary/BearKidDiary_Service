@@ -74,7 +74,7 @@ public class KidGet extends BaseServlet {
 		Set<Kid> tmp = service.getKids(Kid, Uphone, Fid, Cid);
 		if (set == null)
 			set = tmp;
-		else
+		else if (tmp != null)
 			set.addAll(tmp);
 
 		if (set == null) {

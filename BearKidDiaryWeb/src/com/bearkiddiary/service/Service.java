@@ -5,6 +5,7 @@ import java.util.Set;
 
 import com.bearkiddiary.bean.Course;
 import com.bearkiddiary.bean.Family;
+import com.bearkiddiary.bean.Group;
 import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Leave_Application;
@@ -559,4 +560,60 @@ public interface Service {
 			String Cname, String Cimage, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday, Boolean Cthursday,
 			Boolean Cfriday, Boolean Csaturday, Boolean Csunday, Long teacherUid, String teacherUphone,
 			Long approverUid, String approverUphone, Long Oid);
+
+	/**
+	 * 创建分组
+	 * 
+	 * @param Oid
+	 *            机构的编号
+	 * @param Gname
+	 *            分组的名字
+	 * @param Uids
+	 *            分组的成员编号
+	 * @param Uphones
+	 *            分组的成员的电话号码
+	 */
+	int createGroup(Long Oid, String Gname, List<Long> Uids, List<String> Uphones);
+
+	/**
+	 * 删除分组
+	 * 
+	 * @param Gid
+	 *            分组的编号
+	 */
+	int deleteGroup(Long Gid);
+
+	/**
+	 * 添加分组成员
+	 * 
+	 * @param Gid
+	 *            分组编号
+	 * @param Uids
+	 *            分组成员的编号
+	 * @param Uphones
+	 *            分组成员的手机号码
+	 */
+	int addGroupMembers(Long Gid, List<Long> Uids, List<String> Uphones);
+
+	/**
+	 * 获取分组信息
+	 * 
+	 * @param Gid
+	 *            分组的编号
+	 * @param Oid
+	 *            机构的编号
+	 */
+	Set<Group> getGroup(Long Gid, Long Oid);
+
+	/**
+	 * 删除分组中的成员
+	 * 
+	 * @param Gid
+	 *            分组的编号
+	 * @param Uids
+	 *            分组成员的编号
+	 * @param Uphones
+	 *            分组成员的手机号码
+	 */
+	int deleteGroupMembers(Long Gid, List<Long> Uids, List<String> Uphones);
 }

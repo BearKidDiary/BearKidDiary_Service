@@ -45,6 +45,14 @@ public class ResultCode {
 	 */
 	public static final int ERROR_NO_COURSE = -9;
 	/**
+	 * 不存在该分组
+	 */
+	public static final int ERROR_NO_GROUP = -10;
+	/**
+	 * 已存在该分组
+	 */
+	public static final int ERROR_EXIST_GROUP = -11;
+	/**
 	 * 不能正常获得结果，过程发生了错误
 	 */
 	public static final int ERROR_NO_RESULT = -100;
@@ -56,7 +64,6 @@ public class ResultCode {
 	 * 没有数据
 	 */
 	public static final int NO_RESULT = -101;
-	
 	/**
 	 * 提交，保存失败
 	 */

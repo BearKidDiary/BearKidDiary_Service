@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -12,9 +13,12 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.google.gson.annotations.Expose;
 
+@Entity
+@Table(name = "Groups")
 public class Group implements Serializable {
 
 	@Id
@@ -29,7 +33,6 @@ public class Group implements Serializable {
 	/**
 	 * 所属机构
 	 */
-	@Expose
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "org")
 	private Organization org;
@@ -38,7 +41,7 @@ public class Group implements Serializable {
 	 */
 	@Expose
 	@ManyToMany(cascade = CascadeType.MERGE)
-	@JoinTable(name = "Group_User", joinColumns = @JoinColumn(name = "group"), inverseJoinColumns = @JoinColumn(name = "user"))
+	@JoinTable(name = "Group_User", joinColumns = @JoinColumn(name = "groups"), inverseJoinColumns = @JoinColumn(name = "member"))
 	private Set<User> members = new HashSet<>();
 
 	public Long getGid() {
