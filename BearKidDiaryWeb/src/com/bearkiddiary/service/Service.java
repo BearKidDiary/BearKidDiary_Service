@@ -1,6 +1,7 @@
 package com.bearkiddiary.service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.bearkiddiary.bean.Course;
@@ -9,6 +10,7 @@ import com.bearkiddiary.bean.Group;
 import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Leave_Application;
+import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.TimeLine;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.bean.Vision;
@@ -28,7 +30,7 @@ public interface Service {
 	 * @param Parameter
 	 * @param value
 	 */
-	int updateUser(String Uphone, String Parameter, String value);
+	int updateUserInfo(String Uphone, User user);
 
 	/**
 	 * 提交请假申请
@@ -64,6 +66,13 @@ public interface Service {
 	 * @return
 	 */
 	List<Leave_Application> getUserApplicationList(Long Uid);
+	
+	/**
+	 * 获取该用户所参与的所有机构
+	 * @param Uphone 用户手机号码
+	 * @return
+	 */
+	Map<String, List<Organization>> getUserOrganizations(String Uphone);
 
 	//////////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
 	/**
@@ -407,24 +416,24 @@ public interface Service {
 	 * @param Uid
 	 * @return
 	 */
-	public long createOrg(String Oname, String Oaddress, String Oannounce, Long Uid);
+	public long createOrg(String Oname, String Oaddress, String Oannounce, String Uphone);
 
 	/**
 	 * 解散机构
 	 * 
 	 * @param Oid
 	 */
-	public int deleteOrg(long Oid);
+	public int deleteOrg(String Uphone);
 
 	/**
 	 * 更新机构信息
 	 * 
-	 * @param Oid
+	 * @param Uphone 机构管理员手机号码
 	 * @param Parameter
 	 * @param value
 	 * @return
 	 */
-	int updateOrg(long Oid, String Parameter, String value);
+	int updateOrg(String Uphone, String Parameter, String value);
 
 	/**
 	 * 添加机构成员（家长或者教师）
@@ -433,7 +442,7 @@ public interface Service {
 	 * @param Uid
 	 * @return
 	 */
-	public int addOrgMember(long Oid, long Uid, int identity);
+	public int addOrgMember(long Oid, String Uphone, int identity);
 
 	//////////////////////////////////////////////// 课程/////////////////////////////////////////////////////////////
 	/**

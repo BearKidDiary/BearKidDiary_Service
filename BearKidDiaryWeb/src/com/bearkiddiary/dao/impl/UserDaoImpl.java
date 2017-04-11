@@ -3,9 +3,11 @@ package com.bearkiddiary.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.common.dao.impl.BaseDaoHibernate;
 import com.bearkiddiary.dao.UserDao;
+import com.bearkiddiary.utils.ResultCode;
 
 public class UserDaoImpl extends BaseDaoHibernate<User> implements UserDao {
 
@@ -68,5 +70,22 @@ public class UserDaoImpl extends BaseDaoHibernate<User> implements UserDao {
 			return list.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public int updateUser(String Uphone, User user) {
+		User u = getUser(Uphone);
+		if(u == null)
+			return ResultCode.ERROR_NO_USER;
+		if(user.getUname() != null)
+			u.setUname(user.getUname());
+		if(user.getUarea() != null)
+			u.setUarea(user.getUarea());
+		if(user.getUemail() != null)
+			u.setUemail(user.getUemail());
+		if(user.getUsex() != null)
+			u.setUsex(user.getUsex());
+		update(u);
+		return ResultCode.SUCCESS;
 	}
 }

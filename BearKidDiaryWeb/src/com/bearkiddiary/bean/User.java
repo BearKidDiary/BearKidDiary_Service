@@ -6,10 +6,12 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -24,6 +26,10 @@ import com.google.gson.annotations.Expose;
 @Table(name = "User")
 public class User implements Serializable {
 
+//	public enum Gender{
+//		男,女
+//	}
+	
 	public static final String ID = "Uid";
 	public static final String NAME = "Uname";
 	public static final String SEX = "Usex";
@@ -43,6 +49,13 @@ public class User implements Serializable {
 	@Expose
 	private String Uname = null;
 
+	/**
+	 * 对接时再进行修改
+	 */
+//	@Expose
+//	@Enumerated(EnumType.ORDINAL)
+//	private Gender sex;
+	
 	@Expose
 	private String Usex = null;
 
@@ -60,6 +73,23 @@ public class User implements Serializable {
 	@Expose
 	private String Uemail = null;
 
+	/**
+	 * 工作经历
+	 */
+	@Expose
+	private String Uworkexperience;
+	
+	/**
+	 * 特长
+	 */
+	@Expose
+	private String Uspecially;
+	
+	/**
+	 * 教育经历
+	 */
+	@Expose
+	private String Ueducationexperience;
 	/**
 	 * 该用户天生所在的家庭
 	 */
@@ -115,6 +145,12 @@ public class User implements Serializable {
 	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "members")
 	private Set<Group> groups = new HashSet<>();
 
+	/**
+	 * 教师考勤组
+	 */
+	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "teachers")
+	private Set<AttendanceGroup> attendancegroup = new HashSet<>();
+	
 	public Long getUid() {
 		return Uid;
 	}
@@ -278,4 +314,46 @@ public class User implements Serializable {
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
+
+	public Set<AttendanceGroup> getAttendancegroup() {
+		return attendancegroup;
+	}
+
+	public void setAttendancegroup(Set<AttendanceGroup> attendancegroup) {
+		this.attendancegroup = attendancegroup;
+	}
+
+	public String getUworkexperience() {
+		return Uworkexperience;
+	}
+
+	public void setUworkexperience(String uworkexperience) {
+		Uworkexperience = uworkexperience;
+	}
+
+	public String getUspecially() {
+		return Uspecially;
+	}
+
+	public void setUspecially(String uspecially) {
+		Uspecially = uspecially;
+	}
+
+	public String getUeducationexperience() {
+		return Ueducationexperience;
+	}
+
+	public void setUeducationexperience(String ueducationexperience) {
+		Ueducationexperience = ueducationexperience;
+	}
+
+//	public Gender getSex() {
+//		return sex;
+//	}
+//
+//	public void setSex(Gender sex) {
+//		this.sex = sex;
+//	}
+	
+	
 }

@@ -7,7 +7,6 @@ import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -105,6 +104,13 @@ public class Organization implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "org")
 	private Set<Group> groups = new HashSet<>();
 
+	/**
+	 * 该机构中的考勤组
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
+	private Set<AttendanceGroup> attendancegroups = new HashSet<>();
+	
+	
 	public Set<Course> getCourses() {
 		return courses;
 	}
@@ -199,4 +205,13 @@ public class Organization implements Serializable {
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
+
+	public Set<AttendanceGroup> getAttendancegroups() {
+		return attendancegroups;
+	}
+
+	public void setAttendancegroups(Set<AttendanceGroup> attendancegroups) {
+		this.attendancegroups = attendancegroups;
+	}
+	
 }

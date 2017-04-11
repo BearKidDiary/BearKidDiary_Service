@@ -21,41 +21,50 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 	}
 
 	@Override
-	public long createOrg(String Oname, String Oaddress, String Oannounce, Long Uid) {
+	public long createOrg(String Oname, String Oaddress, String Oannounce, String Uphone) {
 		Organization org = new Organization();
 		org.setOname(Oname);
 		org.setOaddress(Oaddress);
 		org.setOannounce(Oannounce);
 		
-		User creator = userDao.getUser(Uid);
-		org.setCreator(creator);
+		User creator = userDao.getUser(Uphone);
+		String hql = "select org from Organization org where org.creator = ?0";
+		List<Organization> list = find(hql, creator);
+		if(list.isEmpty()){
+			org.setCreator(creator);
+			long Oid = (long) save(org);
+			return Oid;
+		}
 		
-		long Oid = (long) save(org);
-		return Oid;
+		return ResultCode.ERROR_EXIST_ORG;
 	}
 
 	@Override
-	public int deleteOrg(long Oid) {
-		String hql = "delete Organization org where org.Oid = ?0";
-		return update(hql, Oid);
+	public int deleteOrg(String Uphone) {
+		User user = userDao.getUser(Uphone);
+		String hql = "delete Organization org where org.creator = ?0";
+		return update(hql, user);
 	}
 
 	@Override
-	public int updateOname(long Oid, String Oname) {
-		String hql = "update Organization org set org.Oname = ?0 where org.Oid = ?1";
-		return update(hql, Oname, Oid);
+	public int updateOname(String Uphone, String Oname) {
+		User user = userDao.getUser(Uphone);
+		String hql = "update Organization org set org.Oname = ?0 where org.creator = ?1";
+		return update(hql, Oname, user);
 	}
 
 	@Override
-	public int updateOaddress(long Oid, String Oaddress) {
-		String hql = "update Organization org set org.Oaddress = ?0 where org.Oid = ?1";
-		return update(hql, Oaddress, Oid);
+	public int updateOaddress(String Uphone, String Oaddress) {
+		User user = userDao.getUser(Uphone);
+		String hql = "update Organization org set org.Oaddress = ?0 where org.creator = ?1";
+		return update(hql, Oaddress, user);
 	}
 
 	@Override
-	public int updateOannounce(long Oid, String Oannounce) {
-		String hql = "update Organization org set org.Oannounce = ?0 where org.Oid = ?1";
-		return update(hql, Oannounce, Oid);
+	public int updateOannounce(String Uphone, String Oannounce) {
+		User user = userDao.getUser(Uphone);
+		String hql = "update Organization org set org.Oannounce = ?0 where org.creator = ?1";
+		return update(hql, Oannounce, user);
 	}
 	
 	
@@ -69,12 +78,19 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 		return null;
 	}
 	
+	@Override
+	public Organization getOrg(String Uphone) {
+		User user = userDao.getUser(Uphone);
+		Organization organization = user.getCreateOrganization();
+		return organization;
+	}
+	
 	/**
 	 * 添加机构教师
 	 */
 	@Override
-	public int addOrgTeacher(long Oid, long Uid) {
-		User teacher = userDao.getUser(Uid);
+	public int addOrgTeacher(long Oid, String Uphone) {
+		User teacher = userDao.getUser(Uphone);
 		if(teacher == null) {
 			return ResultCode.ERROR_NO_USER;
 		}
@@ -92,8 +108,8 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 	 * 添加机构家长
 	 */
 	@Override
-	public int addOrgParent(long Oid, long Uid) {
-		User parent = userDao.getUser(Uid);
+	public int addOrgParent(long Oid, String Uphone) {
+		User parent = userDao.getUser(Uphone);
 		if(parent == null) {
 			return ResultCode.ERROR_NO_USER;
 		}
@@ -120,5 +136,18 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 		return ResultCode.ERROR_NO_ORG;
 	}
 
-	
+	@Override
+	public List<Organization> getUserCreateOrg(User user) {
+		String hql = "select org from Organization org where org.creator = ?0";
+		List<Organization> list = find(hql, user);
+		return list;
+	}
+
+	@Override
+	public List<Organization> getUserInOrgs(User user) {
+		String hql = "select user.workOrganization from User user where Uphone = ?0";
+		List<Organization> list = find(hql, user.getUphone());
+		return list;
+	}
+
 }

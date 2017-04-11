@@ -2,11 +2,9 @@ package com.bearkiddiary.servlet.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLDecoder;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -15,8 +13,6 @@ import com.bearkiddiary.bean.User;
 import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ParameterDecode;
 import com.bearkiddiary.utils.ResultCode;
-import com.bearkiddiary.utils.ServiceBean;
-import com.google.gson.Gson;
 
 /**
  * Servlet implementation class UpdateUserInfo
@@ -24,47 +20,61 @@ import com.google.gson.Gson;
 @WebServlet(name = "UpdateUserInfo", urlPatterns = "/user/updateinfo")
 public class UserInfoUpdate extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	private Result<User> result;
-	private User user;
+	private Result<User> result = null;
+	private User user = null;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		PrintWriter out = response.getWriter();
 		user = new User();
+		result = new Result<>();
 
 		String Uphone = request.getParameter(User.PHONE);
 		String Uname = request.getParameter(User.NAME);
 		String Uarea = request.getParameter(User.AREA);
 		String Uemail = request.getParameter(User.EMAIL);
-
-		int update = 0;
-		if (Uname != null) {
-			// 解码
-			String name = ParameterDecode.decode(Uname);
-			update = service.updateUser(Uphone, User.NAME, name);
-		} else if (Uarea != null) {
-			String area = ParameterDecode.decode(Uarea);
-			update = service.updateUser(Uphone, User.AREA, area);
-		} else if (Uemail != null) {
-			Uemail = ParameterDecode.decode(Uemail);
-			update = service.updateUser(Uphone, User.EMAIL, Uemail);
-		} else {
-			System.out.println("没有任何数据！");
-		}
-		System.out.println("phone: " + Uphone);
-		System.out.println("name: " + Uname);
-		System.out.println("area: " + Uarea);
-		System.out.println("email: " + Uemail);
-
-		if (update > 0) {
-			result = new Result<User>();
-			result.setResultCode(ResultCode.SUCCESS);
-			result.setResultMessage("更新数据成功！");
-		} else {
-			result = new Result<User>();
-			result.setResultCode(ResultCode.ERROR_COMMIT);
-			result.setResultMessage("更新数据失败！");
+		String Usex = request.getParameter(User.SEX);
+		
+		if(Uphone == null){
+			result.setData(null);
+			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
+			result.setResultMessage("请求参数不完整");
+		}else{
+			if (Uname != null) {
+				// 解码
+				Uname = ParameterDecode.decode(Uname);
+				user.setUname(Uname);
+			} else if (Uarea != null) {
+				Uarea = ParameterDecode.decode(Uarea);
+				user.setUarea(Uarea);
+			} else if (Uemail != null) {
+				Uemail = ParameterDecode.decode(Uemail);
+				user.setUemail(Uemail);
+			}else if(Usex != null){
+				Usex = ParameterDecode.decode(Usex);
+				user.setUsex(Usex);
+			}else {
+				System.out.println("没有任何数据！");
+			}
+			
+			int resultCode = service.updateUserInfo(Uphone, user);
+			
+			if(resultCode == ResultCode.SUCCESS){
+				result.setData(null);
+				result.setResultCode(resultCode);
+				result.setResultMessage("更新成功");
+			}else{
+				result.setData(null);
+				result.setResultCode(resultCode);
+				result.setResultMessage("更新失败");
+			}
+				
+			System.out.println("phone: " + Uphone);
+			System.out.println("name: " + Uname);
+			System.out.println("area: " + Uarea);
+			System.out.println("email: " + Uemail);
+			System.out.println("sex: " + Usex);
 		}
 		out.write(gson.toJson(result));
 		System.out.println(gson.toJson(result));

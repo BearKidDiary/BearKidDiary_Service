@@ -1,6 +1,10 @@
 package com.bearkiddiary.dao;
 
 import com.bearkiddiary.bean.User;
+
+import java.util.List;
+
+import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.common.dao.BaseDao;
 
 public interface UserDao extends BaseDao<User> {
@@ -48,4 +52,6 @@ public interface UserDao extends BaseDao<User> {
 	 * @param Uid
 	 */
 	User getUser(Long Uid);
+
+	int updateUser(String Uphone, User user);
 }

@@ -1,8 +1,11 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:p="http://www.springframework.org/schema/p"
-	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" 
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
          http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
          http://www.springframework.org/schema/context
@@ -32,6 +35,14 @@
 		<property name="minIdle" value="20"></property>
 		<property name="maxWait" value="3000"></property>
 		<property name="initialSize" value="30"></property>
+		<!-- 使用字符1,0代替关键字true,false
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.query.substitutions">true = 1, false = 0</prop>
+			</props>
+		</property>
+		-->
+		
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean"
@@ -59,6 +70,10 @@
 		p:weightDao-ref="weightDao" p:visionDao-ref="visionDao"
 		p:timeLineDao-ref="timeLineDao" p:courseDao-ref="courseDao"
 		p:groupDao-ref="groupDao" />
+		
+	<bean id="attendanceGroupService" class="com.bearkiddiary.service.impl.AttendanceGroupServiceImpl"
+		p:attendanceGroupDao-ref="attendanceGroupDao"
+		p:userDao-ref="userDao"/>
 
 	<bean id="userDao" class="com.bearkiddiary.dao.impl.UserDaoImpl"
 		p:sessionFactory-ref="sessionFactory" />
@@ -97,6 +112,12 @@
 		p:sessionFactory-ref="sessionFactory" p:orgDao-ref="orgDao"
 		p:userDao-ref="userDao" />
 
+	<bean id="attendanceGroupDao" class="com.bearkiddiary.dao.impl.AttendanceGroupDaoImpl"
+		p:sessionFactory-ref="sessionFactory"
+		p:userDao-ref="userDao"
+		p:orgDao-ref="orgDao"/> 
+		
+		
 	<!-- 定义事务管理器（声明式的事务） -->
 	<bean id="transactionManager"
 		class="org.springframework.orm.hibernate5.HibernateTransactionManager"

@@ -76,4 +76,14 @@ public class ResultCode {
 	 * 登录失败
 	 */
 	public static final int ERROR_LOGIN = -104;
+	
+	/**
+	 * 不存在该考勤组
+	 */
+	public static final int ERROR_NO_ATTENDANCEGROUP = -20;
+	
+	/**
+	 * 已经创建过机构了，不能再创建
+	 */
+	public static final int ERROR_EXIST_ORG = -21;
 }

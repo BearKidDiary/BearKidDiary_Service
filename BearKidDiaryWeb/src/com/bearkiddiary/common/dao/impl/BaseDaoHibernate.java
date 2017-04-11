@@ -78,7 +78,7 @@ public class BaseDaoHibernate<T> implements BaseDao<T> {
 		Query query = getSessionFactory().getCurrentSession().createQuery(hql);
 		// 为包含占位符的HQL语句设置参数
 		for (int i = 0, len = params.length; i < len; i++) {
-			query.setParameter(i + "", params[i]);
+			query.setParameter(i + "", params[i]); 
 		}
 		return (List<T>) query.list();
 	}

@@ -1,7 +1,9 @@
 package com.bearkiddiary.service.impl;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import com.bearkiddiary.bean.Course;
@@ -99,7 +101,6 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public boolean Register(User user) {
-		// TODO Auto-generated method stub
 		if (userDao.Valid(user.getUphone()) == 0) {
 			System.out.println(userDao.save(user));
 			return true;
@@ -117,19 +118,8 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public int updateUser(String Uphone, String Parameter, String value) {
-		int result = 0;
-		switch (Parameter) {
-		case User.NAME:
-			result = userDao.updateName(Uphone, value);
-			break;
-		case User.AREA:
-			result = userDao.updateArea(Uphone, value);
-			break;
-		case User.EMAIL:
-			result = userDao.updateEmail(Uphone, value);
-			break;
-		}
+	public int updateUserInfo(String Uphone, User user) {
+		int result = userDao.updateUser(Uphone, user);
 		return result;
 	}
 
@@ -181,6 +171,21 @@ public class ServiceImpl implements Service {
 		return resultCode;
 	}
 
+	public Map<String, List<Organization>> getUserOrganizations(String Uphone){
+		User user = userDao.getUser(Uphone);
+		Map<String, List<Organization>> map = new HashMap<>();
+		List<Organization> list_creator = orgDao.getUserCreateOrg(user);
+		if(!list_creator.isEmpty()){
+			map.put("creator", list_creator);
+		}
+		
+		List<Organization> list_teacher = orgDao.getUserInOrgs(user);
+		if(!list_teacher.isEmpty()){
+			map.put("teacher", list_teacher);
+		}
+		return map;
+	}
+	
 	@Override
 	public int createFamily(String Uphone, String Fname) {
 		if (Fname == null) {
@@ -289,45 +294,45 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public long createOrg(String Oname, String Oaddress, String Oannounce, Long Uid) {
-		long Oid = orgDao.createOrg(Oname, Oaddress, Oannounce, Uid);
+	public long createOrg(String Oname, String Oaddress, String Oannounce, String Uphone) {
+		long Oid = orgDao.createOrg(Oname, Oaddress, Oannounce, Uphone);
 		return Oid;
 	}
 
 	/**
-	 * ��ɢ����
+	 * 机构操作
 	 */
 	@Override
-	public int deleteOrg(long Oid) {
-		return orgDao.deleteOrg(Oid);
+	public int deleteOrg(String Uphone) {
+		return orgDao.deleteOrg(Uphone);
 	}
 
 	@Override
-	public int updateOrg(long Oid, String Parameter, String value) {
+	public int updateOrg(String Uphone, String Parameter, String value) {
 		int result = 0;
 		switch (Parameter) {
 		case Organization.ONAME:
-			result = orgDao.updateOname(Oid, value);
+			result = orgDao.updateOname(Uphone, value);
 			break;
 		case Organization.OADDRESS:
-			result = orgDao.updateOaddress(Oid, value);
+			result = orgDao.updateOaddress(Uphone, value);
 			break;
 		case Organization.OANNOUNCE:
-			result = orgDao.updateOannounce(Oid, value);
+			result = orgDao.updateOannounce(Uphone, value);
 			break;
 		}
 		return result;
 	}
 
 	@Override
-	public int addOrgMember(long Oid, long Uid, int identity) {
+	public int addOrgMember(long Oid, String Uphone, int identity) {
 		int resultCode = -1;
 		switch (identity) {
 		case 0:
-			resultCode = orgDao.addOrgTeacher(Oid, Uid);
+			resultCode = orgDao.addOrgTeacher(Oid, Uphone);
 			break;
 		case 1:
-			resultCode = orgDao.addOrgParent(Oid, Uid);
+			resultCode = orgDao.addOrgParent(Oid, Uphone);
 			break;
 		default:
 			break;

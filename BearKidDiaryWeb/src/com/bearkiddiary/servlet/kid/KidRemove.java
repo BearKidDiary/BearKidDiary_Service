@@ -2,14 +2,12 @@ package com.bearkiddiary.servlet.kid;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bearkiddiary.bean.Family;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.servlet.BaseServlet;
@@ -30,7 +28,7 @@ public class KidRemove extends BaseServlet{
 		String sKid = req.getParameter("Kid");
 		if(sKid==null){
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("请求参数不完整");
+			result.setResultMessage("璇锋眰鍙傛暟涓嶅畬鏁�");
 			out.write(gson.toJson(result));
 			out.close();
 			return;
@@ -41,10 +39,10 @@ public class KidRemove extends BaseServlet{
 		
 		result.setResultCode(code);
 		if(code==ResultCode.ERROR_NO_KID){
-			result.setResultMessage("不存在该孩子");
+			result.setResultMessage("涓嶅瓨鍦ㄨ瀛╁瓙");
 		}
 		if(code == ResultCode.SUCCESS){
-			result.setResultMessage("删除成功");
+			result.setResultMessage("鍒犻櫎鎴愬姛");
 		}
 		
 		out.write(gson.toJson(result));

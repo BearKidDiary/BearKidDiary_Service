@@ -3,6 +3,7 @@ package com.bearkiddiary.servlet.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Map;
 import java.util.Observable;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.service.Service;
@@ -26,7 +28,8 @@ import com.google.gson.Gson;
 @WebServlet(name = "LoginServlet", urlPatterns = "/user/login")
 public class UserLogin extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	private Result<User> result;
+	private Result<Map<String, List<Organization>>> result;
+	private Map<String, List<Organization>> map;
 	
 	private PrintWriter out = null;
 
@@ -43,9 +46,12 @@ public class UserLogin extends BaseServlet {
 
 	public void Login(String Uphone, String Upsw, PrintWriter writer) {
 		result = new Result<>();
-		User user = new User();
 		// TODO Auto-generated method stub
 		if (service.Login(Uphone, Upsw)) {
+			map = service.getUserOrganizations(Uphone);
+			if(!map.isEmpty()){
+				result.setData(map);
+			}
 			result.setResultCode(ResultCode.SUCCESS);
 			result.setResultMessage("登录成功！");
 		} else {

@@ -34,10 +34,18 @@ public class OrgMembersAdd extends BaseServlet {
     	
     	Integer identity = Integer.valueOf(request.getParameter("identity"));
     	
-    	long Oid = Long.valueOf(request.getParameter(Organization.OID));
-    	long Uid = Long.valueOf(request.getParameter(User.ID));
+//    	Long Oid = Long.valueOf(request.getParameter(Organization.OID));
+    	String sOid = request.getParameter(Organization.OID);
+    	//机构管理员手机号码
+    	String orgOwner = request.getParameter("orgOwner");
+    	//家长
+    	String Uphone = request.getParameter(User.PHONE);
     	
-    	resultCode = service.addOrgMember(Oid, Uid, identity);
+    	if(sOid != null){
+    		Long Oid = Long.valueOf(sOid);
+    		resultCode = service.addOrgMember(Oid, Uphone, identity);
+    	}
+    	
     	
     	if(resultCode == ResultCode.SUCCESS){
     		result.setResultCode(ResultCode.SUCCESS);

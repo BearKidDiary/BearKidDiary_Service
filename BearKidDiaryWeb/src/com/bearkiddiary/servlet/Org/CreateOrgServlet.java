@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.Result;
+import com.bearkiddiary.bean.User;
 import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 import com.google.gson.Gson;
@@ -65,24 +66,28 @@ public class CreateOrgServlet extends BaseServlet {
 			org.setOaddress(Oaddress);
 			org.setOannounce(Oannounce);
 			
-			Long Uid = Long.valueOf(request.getParameter(Organization.UID));
+//			Long Uid = Long.valueOf(request.getParameter(Organization.UID));
+			//机构管理员手机号码
+			String Uphone = request.getParameter(User.PHONE);
 			//创建成功返回的Oid
-			Long Oid = service.createOrg(Oname, Oaddress, Oannounce, Uid);
-			if(Oid > 0){
+			Long resultCode = service.createOrg(Oname, Oaddress, Oannounce, Uphone);
+			if(resultCode > 0){
 				result.setResultCode(ResultCode.SUCCESS);
 				result.setResultMessage("创建成功");
+				org.setOid(resultCode);
 				result.setData(org);
 			}else {
-				result.setResultCode(ResultCode.ERROR_COMMIT);
-				result.setResultMessage("创建失败");
+				result.setResultCode(ResultCode.ERROR_EXIST_ORG);
+				result.setResultMessage("创建失败，该用户已经创建过机构了");
 			}
 			
 			responseWriter(response, gson.toJson(result));
-			System.out.println("创建成功：" + Oid);
+			System.out.println("创建成功：" + resultCode);
 		}else if(type == Organization.DELETE){ // 删除机构
 			//获取客户端传递的机构id
-			long Oid = Long.valueOf(request.getParameter("Oid"));
-			int count = service.deleteOrg(Oid);
+//			long Oid = Long.valueOf(request.getParameter("Oid"));
+			String Uphone = request.getParameter(User.PHONE);
+			int count = service.deleteOrg(Uphone);
 			
 			if(count > 0){
 				result.setResultCode(ResultCode.SUCCESS);
@@ -96,11 +101,12 @@ public class CreateOrgServlet extends BaseServlet {
 		}else if(type == Organization.UPDATE){ //修改机构
 			
 			//获取客户端传递的机构id
-			long Oid = Long.valueOf(request.getParameter("Oid"));
+//			long Oid = Long.valueOf(request.getParameter("Oid"));
+			String Uphone = request.getParameter(User.PHONE);
 			int count = 0;
 			if(Oname != null){
 				
-				count = service.updateOrg(Oid, Organization.ONAME, Oname);
+				count = service.updateOrg(Uphone, Organization.ONAME, Oname);
 				if(count > 0){
 					result.setResultCode(ResultCode.SUCCESS);
 					result.setResultMessage("修改名字成功!");
@@ -112,7 +118,7 @@ public class CreateOrgServlet extends BaseServlet {
 			}
 			if(Oaddress != null){
 				
-				count = service.updateOrg(Oid, Organization.OADDRESS, Oaddress);
+				count = service.updateOrg(Uphone, Organization.OADDRESS, Oaddress);
 				if(count > 0){
 					result.setResultCode(ResultCode.SUCCESS);
 					result.setResultMessage("修改地址成功!");
@@ -124,7 +130,7 @@ public class CreateOrgServlet extends BaseServlet {
 			}
 			if(Oannounce != null){
 				
-				count = service.updateOrg(Oid, Organization.OANNOUNCE, Oannounce);
+				count = service.updateOrg(Uphone, Organization.OANNOUNCE, Oannounce);
 				if(count > 0){
 					result.setResultCode(ResultCode.SUCCESS);
 					result.setResultMessage("修改公告成功!");
