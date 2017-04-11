@@ -2,6 +2,7 @@ package com.bearkiddiary.servlet.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -18,6 +19,7 @@ import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.service.Service;
 import com.bearkiddiary.servlet.BaseServlet;
+import com.bearkiddiary.utils.ImageUtil;
 import com.bearkiddiary.utils.ResultCode;
 import com.bearkiddiary.utils.ServiceBean;
 import com.google.gson.Gson;
@@ -29,7 +31,7 @@ import com.google.gson.Gson;
 public class UserLogin extends BaseServlet {
 	private static final long serialVersionUID = 1L;
 	private Result<Map<String, List<Organization>>> result;
-	private Map<String, List<Organization>> map;
+	private Map<String, List<Organization>> list_map;
 	
 	private PrintWriter out = null;
 
@@ -40,7 +42,7 @@ public class UserLogin extends BaseServlet {
 		
 		String Uphone = request.getParameter("Uphone");
 		String Upsw = request.getParameter("Upsw");
-		System.out.println(Uphone);
+		System.out.println("" + new Date().getTime());
 		Login(Uphone, Upsw, out);
 	}
 
@@ -48,9 +50,9 @@ public class UserLogin extends BaseServlet {
 		result = new Result<>();
 		// TODO Auto-generated method stub
 		if (service.Login(Uphone, Upsw)) {
-			map = service.getUserOrganizations(Uphone);
-			if(!map.isEmpty()){
-				result.setData(map);
+			list_map = service.getUserOrganizations(Uphone);
+			if(!list_map.isEmpty()){
+				result.setData(list_map);
 			}
 			result.setResultCode(ResultCode.SUCCESS);
 			result.setResultMessage("登录成功！");
@@ -59,7 +61,7 @@ public class UserLogin extends BaseServlet {
 			result.setResultMessage("登录失败，用户名或密码错误！");
 		}
 
-		System.out.println(gson.toJson(result));
+//		System.out.println(gson.toJson(result));
 		writer.write(gson.toJson(result));
 	}
 

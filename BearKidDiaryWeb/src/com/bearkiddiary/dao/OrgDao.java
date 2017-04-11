@@ -58,6 +58,12 @@ public interface OrgDao extends BaseDao<Organization>{
 	 * @return
 	 */
 	public Organization getOrg(String Uphone);
+	
+	/**
+	 * 获取所有的机构
+	 * @return
+	 */
+	public List<Organization> getAllOrgs();
 //机构与用户之间的关系
 	
 	/**

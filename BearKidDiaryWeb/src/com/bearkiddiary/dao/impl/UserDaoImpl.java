@@ -85,6 +85,8 @@ public class UserDaoImpl extends BaseDaoHibernate<User> implements UserDao {
 			u.setUemail(user.getUemail());
 		if(user.getUsex() != null)
 			u.setUsex(user.getUsex());
+		if(user.getUavatar() != null)
+			u.setUavatar(user.getUavatar());
 		update(u);
 		return ResultCode.SUCCESS;
 	}

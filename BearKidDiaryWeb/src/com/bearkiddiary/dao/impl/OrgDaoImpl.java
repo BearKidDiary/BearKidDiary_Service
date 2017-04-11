@@ -150,4 +150,10 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 		return list;
 	}
 
+	@Override
+	public List<Organization> getAllOrgs() {
+		List<Organization> list = findAll(Organization.class);
+		return list;
+	}
+
 }

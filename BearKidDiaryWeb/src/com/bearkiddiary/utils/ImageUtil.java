@@ -14,14 +14,13 @@ import sun.misc.BASE64Decoder;
 
 public class ImageUtil {
 
-	public static final String imgBaseUri = "F:/BearKidDiary";
 	/**
-	 * 获取图片
+	 * 从本地磁盘路径获取图片
 	 * @param imgName
 	 * @return
 	 */
-	public static String getImage(String imgName){
-		String img = imgBaseUri + "/" + imgName + ".jpg";
+	public static String getImage(String imgName, String imagePath){
+		String img = imagePath + "/" + imgName + ".jpg";
 		String str_img = null;
 		File image = new File(img);
 		BufferedImage bi;
@@ -46,9 +45,9 @@ public class ImageUtil {
 	 * @param img_name
 	 * @return
 	 */
-	public static boolean saveImage(String img_str, String img_name){
+	public static boolean saveImage(String img_str, String img_name, String img_path){
 		
-		String imgFilePath = imgBaseUri;
+		String imgFilePath = img_path;
 		
 		if(img_str == null)
 			return false;
@@ -59,7 +58,7 @@ public class ImageUtil {
 				if(b[i] < 0)
 					b[i] += 256;
 			}
-			File file = new File(imgFilePath, img_name + ".jpg");
+			File file = new File(imgFilePath, img_name);
 			OutputStream out = new FileOutputStream(file);
 			out.flush();
 			out.write(b);

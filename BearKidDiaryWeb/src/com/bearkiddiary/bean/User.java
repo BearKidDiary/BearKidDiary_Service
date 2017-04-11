@@ -68,7 +68,7 @@ public class User implements Serializable {
 	private String Upsw;
 
 	@Expose
-	private String Uavatar;
+	private String Uavatar = null;
 
 	@Expose
 	private String Uemail = null;

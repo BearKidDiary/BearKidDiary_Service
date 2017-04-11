@@ -1,5 +1,6 @@
 package com.bearkiddiary.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -171,15 +172,22 @@ public class ServiceImpl implements Service {
 		return resultCode;
 	}
 
+	public User getUserInfo(String Uphone){
+		User user = userDao.getUser(Uphone);
+		if(user == null)
+			return null;
+		return user;
+	}
+	
 	public Map<String, List<Organization>> getUserOrganizations(String Uphone){
 		User user = userDao.getUser(Uphone);
 		Map<String, List<Organization>> map = new HashMap<>();
 		List<Organization> list_creator = orgDao.getUserCreateOrg(user);
+		List<Organization> list_teacher = orgDao.getUserInOrgs(user);
 		if(!list_creator.isEmpty()){
 			map.put("creator", list_creator);
 		}
 		
-		List<Organization> list_teacher = orgDao.getUserInOrgs(user);
 		if(!list_teacher.isEmpty()){
 			map.put("teacher", list_teacher);
 		}
@@ -340,6 +348,10 @@ public class ServiceImpl implements Service {
 		return resultCode;
 	}
 
+	public List<Organization> getAllOrgs(){
+		return orgDao.getAllOrgs();
+	}
+	
 	@Override
 	public Set<Kid> getKids(Long Kid, String Uphone, Long Fid, Long Cid) {
 		if (Kid != null) {

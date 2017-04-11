@@ -22,10 +22,12 @@ public abstract class BaseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	protected Service service;
 	protected Gson gson;
+	protected String imagePath;
 
 	@Override
 	public void init() throws ServletException {
 		service = ServiceBean.getService(getServletContext());
 		gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
+		imagePath = getServletContext().getRealPath("images");
 	}
 }
