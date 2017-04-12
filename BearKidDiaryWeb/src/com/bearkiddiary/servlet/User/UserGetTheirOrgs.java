@@ -49,6 +49,7 @@ public class UserGetTheirOrgs extends BaseServlet {
 			}else{
 				result.setResultCode(ResultCode.ERROR_NO_ORG);
 				result.setResultMessage("该用户还有参与任何机构！");
+				result.setData(map);
 			}
 		}
 		

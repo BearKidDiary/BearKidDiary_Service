@@ -2,6 +2,7 @@ package com.bearkiddiary.servlet.Org;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,6 +34,7 @@ public class GetAllOrgs extends BaseServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		out = response.getWriter();
 		result = new Result<>();
+		list = new ArrayList<Organization>();
 		list = service.getAllOrgs();
 		if(!list.isEmpty()){
 			result.setResultCode(ResultCode.SUCCESS);
@@ -41,6 +43,7 @@ public class GetAllOrgs extends BaseServlet {
 		}else{
 			result.setResultCode(ResultCode.ERROR_NO_ORG);
 			result.setResultMessage("还没有任何机构！");
+			result.setData(list);
 		}
 		out.write(gson.toJson(result));
 	}

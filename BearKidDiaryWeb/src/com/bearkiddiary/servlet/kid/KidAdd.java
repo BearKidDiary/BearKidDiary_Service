@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.servlet.BaseServlet;
+import com.bearkiddiary.utils.ImageUtil;
 import com.bearkiddiary.utils.ResultCode;
 
 @WebServlet("/kid/add")
@@ -33,6 +34,8 @@ public class KidAdd extends BaseServlet {
 		String sKflowers = req.getParameter("Kflowers");
 		String sFid = req.getParameter("Fid");
 		String Uphone = req.getParameter("Uphone");
+		
+		String KavatarStr = req.getParameter("KavatarStr");
 
 		if (Kname == null || (sFid == null && Uphone == null)) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
@@ -54,6 +57,12 @@ public class KidAdd extends BaseServlet {
 		Long Fid = null;
 		if (sFid != null)
 			Fid = Long.valueOf(sFid);
+		
+		if(Kavatar != null){
+			if(KavatarStr != null){
+				ImageUtil.saveImage(KavatarStr, Kavatar, imagePath + "/avatar");
+			}
+		}
 
 		int code = service.addKid(Kname, Kbirthday, Kavatar, Ksex, Kask, Kflowers, Fid, Uphone);
 		result.setResultCode(code);

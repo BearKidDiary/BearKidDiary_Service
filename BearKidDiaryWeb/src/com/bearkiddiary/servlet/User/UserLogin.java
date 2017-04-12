@@ -56,9 +56,11 @@ public class UserLogin extends BaseServlet {
 			}
 			result.setResultCode(ResultCode.SUCCESS);
 			result.setResultMessage("登录成功！");
+			result.setData(list_map);
 		} else {
 			result.setResultCode(ResultCode.ERROR_LOGIN);
 			result.setResultMessage("登录失败，用户名或密码错误！");
+			result.setData(list_map);
 		}
 
 //		System.out.println(gson.toJson(result));

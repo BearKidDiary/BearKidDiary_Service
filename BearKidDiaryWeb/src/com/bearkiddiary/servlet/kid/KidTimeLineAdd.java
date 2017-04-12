@@ -11,7 +11,10 @@ import javax.servlet.http.HttpServletResponse;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.servlet.BaseServlet;
+import com.bearkiddiary.utils.ImageUtil;
 import com.bearkiddiary.utils.ResultCode;
+
+import jdk.nashorn.internal.ir.RuntimeNode.Request;
 
 @WebServlet("/kid/timeline/add")
 public class KidTimeLineAdd extends BaseServlet {
@@ -35,6 +38,10 @@ public class KidTimeLineAdd extends BaseServlet {
 		String sUid = req.getParameter("Uid");
 		String Uphone = req.getParameter("Uphone");
 		String sKid = req.getParameter("Kid");
+		
+		String TimageStr1 = req.getParameter("TimageStr1");
+		String TimageStr2 = req.getParameter("TimageStr2");
+		String TimageStr3 = req.getParameter("TimageStr3");
 
 		if (content == null || sTime == null || type == null || (sUid == null && Uphone == null) || sKid == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
@@ -59,6 +66,23 @@ public class KidTimeLineAdd extends BaseServlet {
 			logoType = Integer.valueOf(sLogoType);
 
 		int code = service.addTimeLine(content, time, image1, image2, image3, type, logoType, Uid, Uphone, Kid);
+		if(TimageStr1 != null){
+			if(ImageUtil.saveImage(TimageStr1, image1, imagePath + "/timeline")){
+				System.out.println("保存" + image1 + "成功！");
+			}
+		}
+		if(TimageStr2 != null){
+			if(ImageUtil.saveImage(TimageStr2, image2, imagePath + "/timeline")){
+				System.out.println("保存" + image2 + "成功！");
+			}
+		}
+		
+		if(TimageStr3 != null){
+			if(ImageUtil.saveImage(TimageStr3, image3, imagePath + "/timeline")){
+				System.out.println("保存" + image3 + "成功！");
+			}
+		}
+		
 		result.setResultCode(code);
 
 		if (code == ResultCode.ERROR_NO_USER) {
