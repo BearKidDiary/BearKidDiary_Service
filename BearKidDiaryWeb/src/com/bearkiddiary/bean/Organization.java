@@ -110,6 +110,17 @@ public class Organization implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
 	private Set<AttendanceGroup> attendancegroups = new HashSet<>();
 	
+	/**
+	 * 打卡记录
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
+	private Set<TAttendRecord> punchRecord = new HashSet<>();
+	
+	/**
+	 * kpi记录
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "organization")
+	private Set<KPI> kpis = new HashSet<>();
 	
 	public Set<Course> getCourses() {
 		return courses;
@@ -212,6 +223,22 @@ public class Organization implements Serializable {
 
 	public void setAttendancegroups(Set<AttendanceGroup> attendancegroups) {
 		this.attendancegroups = attendancegroups;
+	}
+
+	public Set<TAttendRecord> getPunchRecord() {
+		return punchRecord;
+	}
+
+	public void setPunchRecord(Set<TAttendRecord> punchRecord) {
+		this.punchRecord = punchRecord;
+	}
+
+	public Set<KPI> getKpis() {
+		return kpis;
+	}
+
+	public void setKpis(Set<KPI> kpis) {
+		this.kpis = kpis;
 	}
 	
 }

@@ -151,6 +151,19 @@ public class User implements Serializable {
 	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "teachers")
 	private Set<AttendanceGroup> attendancegroup = new HashSet<>();
 	
+	/**
+	 * 教师出勤记录（打卡）
+	 * @return
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+	private Set<TAttendRecord> attendancerecord = new HashSet<>();
+	
+	/**
+	 * 教师对应的KPI
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
+	private Set<KPI> kpis = new HashSet<>();
+	
 	public Long getUid() {
 		return Uid;
 	}
@@ -345,6 +358,22 @@ public class User implements Serializable {
 
 	public void setUeducationexperience(String ueducationexperience) {
 		Ueducationexperience = ueducationexperience;
+	}
+
+	public Set<TAttendRecord> getAttendancerecord() {
+		return attendancerecord;
+	}
+
+	public void setAttendancerecord(Set<TAttendRecord> attendancerecord) {
+		this.attendancerecord = attendancerecord;
+	}
+
+	public Set<KPI> getKpis() {
+		return kpis;
+	}
+
+	public void setKpis(Set<KPI> kpis) {
+		this.kpis = kpis;
 	}
 
 //	public Gender getSex() {

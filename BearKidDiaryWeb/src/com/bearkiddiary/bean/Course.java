@@ -101,6 +101,9 @@ public class Course implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	private Set<Score> score = new HashSet<>();
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
+	private Set<SAttendRecord> attendancerecord = new HashSet<>();
+	
 	public Long getCclasstime() {
 		return Cclasstime;
 	}
@@ -260,4 +263,22 @@ public class Course implements Serializable {
 	public void setCsunday(Boolean csunday) {
 		Csunday = csunday;
 	}
+
+	public Set<Score> getScore() {
+		return score;
+	}
+
+	public void setScore(Set<Score> score) {
+		this.score = score;
+	}
+
+	public Set<SAttendRecord> getAttendancerecord() {
+		return attendancerecord;
+	}
+
+	public void setAttendancerecord(Set<SAttendRecord> attendancerecord) {
+		this.attendancerecord = attendancerecord;
+	}
+	
+	
 }

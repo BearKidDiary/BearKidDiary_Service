@@ -101,6 +101,9 @@ public class Kid implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
 	private Set<Score> score = new HashSet<>();
 
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "student")
+	private Set<SAttendRecord> attendancerecord = new HashSet<>();
+	
 	public Long getKid() {
 		return Kid;
 	}
@@ -212,4 +215,14 @@ public class Kid implements Serializable {
 	public void setScore(Set<Score> score) {
 		this.score = score;
 	}
+
+	public Set<SAttendRecord> getAttendancerecord() {
+		return attendancerecord;
+	}
+
+	public void setAttendancerecord(Set<SAttendRecord> attendancerecord) {
+		this.attendancerecord = attendancerecord;
+	}
+	
+	
 }
