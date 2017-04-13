@@ -51,9 +51,6 @@ public class UserLogin extends BaseServlet {
 		// TODO Auto-generated method stub
 		if (service.Login(Uphone, Upsw)) {
 			list_map = service.getUserOrganizations(Uphone);
-			if(!list_map.isEmpty()){
-				result.setData(list_map);
-			}
 			result.setResultCode(ResultCode.SUCCESS);
 			result.setResultMessage("登录成功！");
 			result.setData(list_map);

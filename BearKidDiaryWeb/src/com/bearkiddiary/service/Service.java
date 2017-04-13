@@ -73,8 +73,15 @@ public interface Service {
 	 * @return
 	 */
 	Map<String, List<Organization>> getUserOrganizations(String Uphone);
+	
+	/**
+	 * 教师获取其当前的所教的所有学生
+	 * @param Uphone
+	 * @return
+	 */
+	List<Kid> getAllHisStudents(String Uphone);
 
-	//////////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
 	/**
 	 * 教师获取个人请假的申请列表
 	 * 
@@ -196,7 +203,7 @@ public interface Service {
 	 */
 	int updateFamily(String Uphone, Long Fid, String Fname);
 
-	//////////////////////////////////////////////////////// 孩子/////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////// 孩子/////////////////////////////////////////////////////////
 	/**
 	 * 获取孩子的信息
 	 * 
@@ -580,8 +587,15 @@ public interface Service {
 	int addCourse(Long Cclasstime, Long Cendtime, Long Ctime, Long Cofftime, String Cbackground, String Cdesc,
 			String Cname, String Cimage, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday, Boolean Cthursday,
 			Boolean Cfriday, Boolean Csaturday, Boolean Csunday, Long teacherUid, String teacherUphone,
-			Long approverUid, String approverUphone, Long Oid);
+			Long Oid);
 
+	/**
+	 * 获取课程的学生列表
+	 * @param Cid 课程Id
+	 * @return
+	 */
+	List<Kid> getKidsInCourse(Long Cid);
+	
 	/**
 	 * 创建分组
 	 * 

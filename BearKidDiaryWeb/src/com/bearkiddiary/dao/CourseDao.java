@@ -58,8 +58,7 @@ public interface CourseDao extends BaseDao<Course> {
 	 * @param Oid
 	 *            所在机构的编号
 	 */
-	int addCourse(Course data, Long teacherUid, String teacherUphone, Long approverUid, String approverUphone,
-			Long Oid);
+	int addCourse(Course data, Long teacherUid, String teacherUphone, Long Oid);
 
 	/**
 	 * 更新课程信息

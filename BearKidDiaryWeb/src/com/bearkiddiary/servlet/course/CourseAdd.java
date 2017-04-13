@@ -42,12 +42,9 @@ public class CourseAdd extends BaseServlet {
 		String sCsunday = req.getParameter("Csunday");
 		String steacherUid = req.getParameter("teacherUid");
 		String teacherUphone = req.getParameter("teacherUphone");
-		String sapproverUid = req.getParameter("approverUid");
-		String approverUphone = req.getParameter("approverUphone");
 		String sOid = req.getParameter("Oid");
 
-		if (sOid == null || Cname == null || (steacherUid == null && teacherUphone == null)
-				|| (sapproverUid == null && approverUphone == null)) {
+		if (sOid == null || Cname == null || (steacherUid == null && teacherUphone == null)) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
 			result.setResultMessage("请求参数不完整");
 			out.write(gson.toJson(result));
@@ -58,9 +55,6 @@ public class CourseAdd extends BaseServlet {
 		Long teacherUid = null;
 		if (steacherUid != null)
 			teacherUid = Long.valueOf(steacherUid);
-		Long approverUid = null;
-		if (sapproverUid != null)
-			approverUid = Long.valueOf(sapproverUid);
 		Long Oid = null;
 		if (sOid != null)
 			Oid = Long.valueOf(sOid);
@@ -99,8 +93,7 @@ public class CourseAdd extends BaseServlet {
 			Csunday = Boolean.valueOf(sCsunday);
 
 		int code = service.addCourse(Cclasstime, Cendtime, Ctime, Cofftime, Cbackground, Cdesc, Cname, Cimage, Cmonday,
-				Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday, Csunday, teacherUid, teacherUphone, approverUid,
-				approverUphone, Oid);
+				Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday, Csunday, teacherUid, teacherUphone, Oid);
 		result.setResultCode(code);
 		if (code == ResultCode.ERROR_NO_USER) {
 			result.setResultMessage("不存在该审批人或者任课老师");

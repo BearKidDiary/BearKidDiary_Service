@@ -183,15 +183,23 @@ public class ServiceImpl implements Service {
 		User user = userDao.getUser(Uphone);
 		Map<String, List<Organization>> map = new HashMap<>();
 		List<Organization> list_creator = orgDao.getUserCreateOrg(user);
+		map.put("creator", list_creator);
 		List<Organization> list_teacher = orgDao.getUserInOrgs(user);
-		if(!list_creator.isEmpty()){
-			map.put("creator", list_creator);
-		}
-		
-		if(!list_teacher.isEmpty()){
-			map.put("teacher", list_teacher);
-		}
+		map.put("teacher", list_teacher);
 		return map;
+	}
+	
+	public List<Kid> getAllHisStudents(String Uphone){
+		List<Course> list_course;
+		list_course = new ArrayList<>(courseDao.getCourseByTeacher(null, Uphone));
+		Set<Kid> kids = new HashSet<>();
+		Set<Kid> kid;
+		for(Course course : list_course){
+			kid = new HashSet<>();
+			kid = course.getStudents();
+			kids.addAll(kid);
+		}
+		return new ArrayList<>(kids);
 	}
 	
 	@Override
@@ -548,7 +556,7 @@ public class ServiceImpl implements Service {
 	public int addCourse(Long Cclasstime, Long Cendtime, Long Ctime, Long Cofftime, String Cbackground, String Cdesc,
 			String Cname, String Cimage, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday, Boolean Cthursday,
 			Boolean Cfriday, Boolean Csaturday, Boolean Csunday, Long teacherUid, String teacherUphone,
-			Long approverUid, String approverUphone, Long Oid) {
+			Long Oid) {
 		Course course = new Course();
 		course.setCclasstime(Cclasstime);
 		course.setCendtime(Cendtime);
@@ -565,9 +573,19 @@ public class ServiceImpl implements Service {
 		course.setCfriday(Cfriday);
 		course.setCsaturday(Csaturday);
 		course.setCsunday(Csunday);
-		return courseDao.addCourse(course, teacherUid, teacherUphone, approverUid, approverUphone, Oid);
+		return courseDao.addCourse(course, teacherUid, teacherUphone, Oid);
 	}
 
+	public List<Kid> getKidsInCourse(Long Cid){
+		Course course = courseDao.getCourse(Cid);
+		List<Kid> list;
+		if(course != null){
+			list = new ArrayList<>(course.getStudents());
+			return list;
+		}
+		return null;
+	}
+	
 	@Override
 	public int createGroup(Long Oid, String Gname, List<Long> Uids, List<String> Uphones) {
 		if (Uids != null)

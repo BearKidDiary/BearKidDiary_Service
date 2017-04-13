@@ -62,6 +62,8 @@ public class KidAdd extends BaseServlet {
 			if(KavatarStr != null){
 				ImageUtil.saveImage(KavatarStr, Kavatar, imagePath + "/avatar");
 			}
+		}else{
+			Kavatar = "default.jpg";
 		}
 
 		int code = service.addKid(Kname, Kbirthday, Kavatar, Ksex, Kask, Kflowers, Fid, Uphone);

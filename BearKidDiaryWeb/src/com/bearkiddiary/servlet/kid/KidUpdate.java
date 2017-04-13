@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.servlet.BaseServlet;
+import com.bearkiddiary.utils.ImageUtil;
 import com.bearkiddiary.utils.ResultCode;
 
 @WebServlet("/kid/update")
@@ -34,6 +35,8 @@ public class KidUpdate extends BaseServlet {
 		String Kask = req.getParameter("Kask");
 		String sKflowers = req.getParameter("Kflowers");
 
+		String KavatarStr = req.getParameter("KavatarStr");
+		
 		if (sKid == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
 			result.setResultMessage("请求参数不完整");
@@ -50,6 +53,12 @@ public class KidUpdate extends BaseServlet {
 		if (sKflowers != null)
 			Kflowers = Integer.valueOf(sKflowers);
 
+		if(Kavatar != null){
+			if(KavatarStr != null){
+				ImageUtil.saveImage(KavatarStr, Kavatar, imagePath + "/avatar");
+			}
+		}
+		
 		int code = service.updateKid(Kid, Kname, Kbirthday, Kavatar, Ksex, Kask, Kflowers);
 		result.setResultCode(code);
 		if (code == ResultCode.ERROR_NO_KID) {

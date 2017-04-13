@@ -78,8 +78,7 @@ public class CourseDaoImpl extends BaseDaoHibernate<Course> implements CourseDao
 	}
 
 	@Override
-	public int addCourse(Course data, Long teacherUid, String teacherUphone, Long approverUid, String approverUphone,
-			Long Oid) {
+	public int addCourse(Course data, Long teacherUid, String teacherUphone, Long Oid) {
 		User teacher = null;
 		if (teacherUid != null) {
 			teacher = userDao.getUser(teacherUid);
@@ -92,15 +91,16 @@ public class CourseDaoImpl extends BaseDaoHibernate<Course> implements CourseDao
 		}
 
 		User approver = null;
-		if (approverUid != null) {
-			approver = userDao.getUser(approverUid);
-		}
-		if (approver == null && approverUphone != null) {
-			approver = userDao.getUser(approverUphone);
-		}
-		if (approver == null) {
-			return ResultCode.ERROR_NO_USER;
-		}
+		approver = orgDao.getOrg(Oid).getCreator();
+//		if (approverUid != null) {
+//			approver = userDao.getUser(approverUid);
+//		}
+//		if (approver == null && approverUphone != null) {
+//			approver = userDao.getUser(approverUphone);
+//		}
+//		if (approver == null) {
+//			return ResultCode.ERROR_NO_USER;
+//		}
 
 		Organization org = orgDao.getOrg(Oid);
 		if (org == null) {

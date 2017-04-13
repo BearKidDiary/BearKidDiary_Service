@@ -101,6 +101,9 @@ public class Course implements Serializable {
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	private Set<Score> score = new HashSet<>();
 
+	/**
+	 * 考勤记录
+	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "course")
 	private Set<SAttendRecord> attendancerecord = new HashSet<>();
 	

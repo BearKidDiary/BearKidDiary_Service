@@ -46,7 +46,7 @@ public class UserRegister extends BaseServlet {
 			out.close();
 			return;
 		}
-
+		user.setUavatar("defualt.jpg");
 		isSuccess = service.Register(user);
 
 		// 创建一个家庭
