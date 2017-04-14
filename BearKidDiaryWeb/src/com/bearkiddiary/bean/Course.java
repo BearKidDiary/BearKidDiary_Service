@@ -76,6 +76,12 @@ public class Course implements Serializable {
 	 */
 	@Expose
 	private String Cimage;
+	
+	/**
+	 * 上课地点
+	 */
+	@Expose
+	private String Caddress;
 	/**
 	 * 课程所属的机构
 	 */
@@ -282,6 +288,12 @@ public class Course implements Serializable {
 	public void setAttendancerecord(Set<SAttendRecord> attendancerecord) {
 		this.attendancerecord = attendancerecord;
 	}
-	
-	
+
+	public String getCaddress() {
+		return Caddress;
+	}
+
+	public void setCaddress(String caddress) {
+		Caddress = caddress;
+	}
 }

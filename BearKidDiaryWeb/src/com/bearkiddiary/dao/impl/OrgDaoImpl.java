@@ -21,11 +21,13 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 	}
 
 	@Override
-	public long createOrg(String Oname, String Oaddress, String Oannounce, String Uphone) {
+	public long createOrg(String Oname, String Oaddress, String Oannounce, String Uphone, String Oavatar, Long Otime) {
 		Organization org = new Organization();
 		org.setOname(Oname);
 		org.setOaddress(Oaddress);
 		org.setOannounce(Oannounce);
+		org.setOavatar(Oavatar);
+		org.setOtime(Otime);
 		
 		User creator = userDao.getUser(Uphone);
 		String hql = "select org from Organization org where org.creator = ?0";
@@ -67,6 +69,11 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 		return update(hql, Oannounce, user);
 	}
 	
+	public int updateOavatar(String Uphone, String Oavatar){
+		User user = userDao.getUser(Uphone);
+		String hql = "update Organization org set org.Oavatar = ?0 where org.creator = ?1";
+		return update(hql, Oavatar, user);
+	}
 	
 	@Override
 	public Organization getOrg(long Oid) {

@@ -41,12 +41,12 @@ public class DeleteAttendanceGroup extends AGBaseServlet {
 		if(AGid == null){
 			result.setData(null);
 			result.setResultCode(ResultCode.ERROR);
-			result.setResultMessage("ÇëÇó²ÎÊý²»ÍêÕû");
+			result.setResultMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		}else{
 			int resultCode = AGservice.delete(Long.valueOf(AGid));
 			result.setData(null);
 			result.setResultCode(resultCode);
-			result.setResultMessage("É¾³ý¿¼ÇÚ×é³É¹¦");
+			result.setResultMessage("É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
 		}
 		
 		out.write(gson.toJson(result));

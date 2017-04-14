@@ -66,6 +66,7 @@ public class KidTimeLineAdd extends BaseServlet {
 			logoType = Integer.valueOf(sLogoType);
 
 		int code = service.addTimeLine(content, time, image1, image2, image3, type, logoType, Uid, Uphone, Kid);
+		
 		if(TimageStr1 != null){
 			if(ImageUtil.saveImage(TimageStr1, image1, imagePath + "/timeline")){
 				System.out.println("保存" + image1 + "成功！");

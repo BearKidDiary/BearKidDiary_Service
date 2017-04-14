@@ -110,8 +110,8 @@ public class CourseDaoImpl extends BaseDaoHibernate<Course> implements CourseDao
 		data.setTeacher(teacher);
 		data.setApprover(approver);
 		data.setOrganization(org);
-		save(data);
-		return ResultCode.SUCCESS;
+		int Cid = ((Long)save(data)).intValue();
+		return Cid;
 	}
 
 	@Override

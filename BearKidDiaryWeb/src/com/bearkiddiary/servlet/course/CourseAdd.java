@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bearkiddiary.bean.Course;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
@@ -42,6 +43,7 @@ public class CourseAdd extends BaseServlet {
 		String sCsunday = req.getParameter("Csunday");
 		String steacherUid = req.getParameter("teacherUid");
 		String teacherUphone = req.getParameter("teacherUphone");
+		String Caddress = req.getParameter("Caddress");
 		String sOid = req.getParameter("Oid");
 
 		if (sOid == null || Cname == null || (steacherUid == null && teacherUphone == null)) {
@@ -92,7 +94,7 @@ public class CourseAdd extends BaseServlet {
 		if (sCsunday != null)
 			Csunday = Boolean.valueOf(sCsunday);
 
-		int code = service.addCourse(Cclasstime, Cendtime, Ctime, Cofftime, Cbackground, Cdesc, Cname, Cimage, Cmonday,
+		int code = service.addCourse(Cclasstime, Cendtime, Ctime, Cofftime, Cbackground, Cdesc, Cname, Cimage, Caddress, Cmonday,
 				Ctuesday, Cwednesday, Cthursday, Cfriday, Csaturday, Csunday, teacherUid, teacherUphone, Oid);
 		result.setResultCode(code);
 		if (code == ResultCode.ERROR_NO_USER) {
@@ -101,8 +103,10 @@ public class CourseAdd extends BaseServlet {
 		if (code == ResultCode.ERROR_NO_ORG) {
 			result.setResultMessage("不存在该机构");
 		}
-		if (code == ResultCode.SUCCESS) {
+		if (code > 0) {
 			result.setResultMessage("新建成功");
+			Long Cid = new Long((long)code);
+			result.setData(Cid);
 		}
 		out.write(gson.toJson(result));
 	}

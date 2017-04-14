@@ -24,6 +24,9 @@ public class KPI implements Serializable{
 	@Expose
 	private Long KPItime;
 	
+	@Expose
+	private Long KPIscore;
+	
 	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "organization")
 	private Organization organization;
@@ -62,6 +65,14 @@ public class KPI implements Serializable{
 
 	public void setTeacher(User teacher) {
 		this.teacher = teacher;
+	}
+
+	public Long getKPIscore() {
+		return KPIscore;
+	}
+
+	public void setKPIscore(Long kPIscore) {
+		KPIscore = kPIscore;
 	}
 	
 	

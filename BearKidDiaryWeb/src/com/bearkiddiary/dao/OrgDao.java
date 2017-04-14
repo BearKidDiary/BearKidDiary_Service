@@ -17,7 +17,7 @@ public interface OrgDao extends BaseDao<Organization>{
 	 * @param Uid 创建的用户id
 	 * @return
 	 */
-	public long createOrg(String Oname, String Oaddress, String Oannounce, String Uphone);
+	public long createOrg(String Oname, String Oaddress, String Oannounce, String Uphone, String Oavatar, Long Otime);
 	
 	/**
 	 * 解散机构
@@ -47,6 +47,13 @@ public interface OrgDao extends BaseDao<Organization>{
 	 */
 	public int updateOannounce(String Uphone, String Oannounce);
 	
+	/**
+	 * 更新机构图标
+	 * @param Uphone
+	 * @param Oavatar
+	 * @return
+	 */
+	int updateOavatar(String Uphone, String Oavatar);
 	/**
 	 * 获取机构
 	 */

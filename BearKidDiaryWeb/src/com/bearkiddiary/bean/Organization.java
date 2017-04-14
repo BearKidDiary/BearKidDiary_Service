@@ -38,6 +38,7 @@ public class Organization implements Serializable {
 	public final static String OTIME = "Otime";
 	public final static String OANNOUNCE = "Oannounce";
 	public final static String UID = "Uid";
+	public final static String OAVATAR = "Oavatar";
 
 	@Expose
 	@Id

@@ -35,9 +35,11 @@ public class UserRegister extends BaseServlet {
 		
 		String Uphone = request.getParameter(User.PHONE);
 		String Upsw = request.getParameter(User.PSW);
+		String Uname = request.getParameter(User.NAME);
 		
 		user.setUphone(Uphone);
 		user.setUpsw(Upsw);
+		user.setUname(Uname);
 		
 		if (user.getUphone() == null || user.getUpsw() == null) {
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);

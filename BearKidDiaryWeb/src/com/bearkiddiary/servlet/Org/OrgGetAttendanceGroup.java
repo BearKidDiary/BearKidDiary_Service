@@ -40,17 +40,17 @@ public class OrgGetAttendanceGroup extends AGBaseServlet {
 		String Uphone = request.getParameter(User.PHONE);
 		if(Uphone == null){
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
-			result.setResultMessage("ÇëÇó²ÎÊý²»ÍêÕû");
+			result.setResultMessage("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 			result.setData(null);
 		}else{
 			List<AttendanceGroup> list = AGservice.getOrgAttendanceGroupList(Uphone);
 			if(list == null){
 				result.setResultCode(ResultCode.ERROR_NO_ATTENDANCEGROUP);
-				result.setResultMessage("²»´æÔÚ¿¼ÇÚ×éÁÐ±í");
+				result.setResultMessage("ï¿½ï¿½ï¿½ï¿½ï¿½Ú¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½");
 				result.setData(list);
 			}else{
 				result.setResultCode(ResultCode.SUCCESS);
-				result.setResultMessage("»ñÈ¡»ú¹¹µÄ¿¼ÇÚ×é³É¹¦");
+				result.setResultMessage("ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½");
 				result.setData(list);
 			}
 		}

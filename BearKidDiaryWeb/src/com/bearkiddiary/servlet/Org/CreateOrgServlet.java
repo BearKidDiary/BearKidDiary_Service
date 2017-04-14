@@ -2,6 +2,7 @@ package com.bearkiddiary.servlet.Org;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.Objects;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.servlet.BaseServlet;
+import com.bearkiddiary.utils.ImageUtil;
 import com.bearkiddiary.utils.ResultCode;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -57,20 +59,37 @@ public class CreateOrgServlet extends BaseServlet {
 		String Oname = request.getParameter(Organization.ONAME);
 		String Oaddress = request.getParameter(Organization.OADDRESS);
 		String Oannounce = request.getParameter(Organization.OANNOUNCE);
+		String Oavatar = request.getParameter(Organization.OAVATAR);
+		String OavatarStr = request.getParameter("OavatarStr");
 		
 		result = new Result<>();
 		
 		if(type == Organization.CREATE){
 			Organization org = new Organization();
+			Long Otime = new Date().getTime();
+			org.setOtime(Otime);
 			org.setOname(Oname);
 			org.setOaddress(Oaddress);
 			org.setOannounce(Oannounce);
 			
+			
 //			Long Uid = Long.valueOf(request.getParameter(Organization.UID));
 			//机构管理员手机号码
 			String Uphone = request.getParameter(User.PHONE);
+			if(Uphone == null){
+				result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
+				result.setResultMessage("缺少请求参数！");
+				return;
+			}
+			if(Oavatar != null){
+				if(ImageUtil.saveImage(OavatarStr, Oavatar, imagePath + "/avatar")){
+					System.out.println("保存机构图标成功！");
+				}
+			}
+			if(Oavatar == null)
+				Oavatar = "default.jpg";
 			//创建成功返回的Oid
-			Long resultCode = service.createOrg(Oname, Oaddress, Oannounce, Uphone);
+			Long resultCode = service.createOrg(Oname, Oaddress, Oannounce, Uphone, Oavatar, Otime);
 			if(resultCode > 0){
 				result.setResultCode(ResultCode.SUCCESS);
 				result.setResultMessage("创建成功");
@@ -104,6 +123,11 @@ public class CreateOrgServlet extends BaseServlet {
 //			long Oid = Long.valueOf(request.getParameter("Oid"));
 			String Uphone = request.getParameter(User.PHONE);
 			int count = 0;
+			if(Uphone == null){
+				result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
+				result.setResultMessage("缺少请求参数");
+				return;
+			}
 			if(Oname != null){
 				
 				count = service.updateOrg(Uphone, Organization.ONAME, Oname);
@@ -139,6 +163,18 @@ public class CreateOrgServlet extends BaseServlet {
 					result.setResultMessage("修改公告失败!");
 				}
 				responseWriter(response, gson.toJson(result));
+			}
+			if(Oavatar != null){
+				count = service.updateOrg(Uphone, Organization.OAVATAR, Oavatar);
+				if(count > 0){
+					result.setResultCode(ResultCode.SUCCESS);
+					result.setResultMessage("修改图标成功!");
+				}else {
+					result.setResultCode(ResultCode.ERROR);
+					result.setResultMessage("修改图标失败!");
+				}
+				responseWriter(response, gson.toJson(result));
+				ImageUtil.saveImage(OavatarStr, Oavatar, imagePath + "/avatar");
 			}
 			System.out.println("修改数据！");
 		}

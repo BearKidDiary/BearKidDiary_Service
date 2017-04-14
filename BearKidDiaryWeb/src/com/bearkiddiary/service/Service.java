@@ -429,7 +429,7 @@ public interface Service {
 	 * @param Uid
 	 * @return
 	 */
-	public long createOrg(String Oname, String Oaddress, String Oannounce, String Uphone);
+	public long createOrg(String Oname, String Oaddress, String Oannounce, String Uphone, String Oavatar, Long Otime);
 
 	/**
 	 * 解散机构
@@ -480,6 +480,12 @@ public interface Service {
 	 */
 	Set<Course> getCourse(Long Cid, Long Uid, String Uphone, Long Oid, Long Kid);
 
+	/**
+	 * 获取课程
+	 * @param Cid
+	 * @return
+	 */
+	Course getCourse(Long Cid);
 	/**
 	 * 把孩子添加到课程中
 	 * 
@@ -585,7 +591,7 @@ public interface Service {
 	 *            机构编号
 	 */
 	int addCourse(Long Cclasstime, Long Cendtime, Long Ctime, Long Cofftime, String Cbackground, String Cdesc,
-			String Cname, String Cimage, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday, Boolean Cthursday,
+			String Cname, String Cimage, String Caddress, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday, Boolean Cthursday,
 			Boolean Cfriday, Boolean Csaturday, Boolean Csunday, Long teacherUid, String teacherUphone,
 			Long Oid);
 

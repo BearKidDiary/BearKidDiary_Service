@@ -31,6 +31,7 @@ import com.bearkiddiary.dao.VisionDao;
 import com.bearkiddiary.dao.WeightDao;
 import com.bearkiddiary.service.Service;
 import com.bearkiddiary.utils.ResultCode;
+import com.sun.org.apache.xpath.internal.operations.Or;
 
 public class ServiceImpl implements Service {
 
@@ -310,8 +311,8 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public long createOrg(String Oname, String Oaddress, String Oannounce, String Uphone) {
-		long Oid = orgDao.createOrg(Oname, Oaddress, Oannounce, Uphone);
+	public long createOrg(String Oname, String Oaddress, String Oannounce, String Uphone, String Oavatar, Long Otime) {
+		long Oid = orgDao.createOrg(Oname, Oaddress, Oannounce, Uphone, Oavatar, Otime);
 		return Oid;
 	}
 
@@ -335,6 +336,9 @@ public class ServiceImpl implements Service {
 			break;
 		case Organization.OANNOUNCE:
 			result = orgDao.updateOannounce(Uphone, value);
+			break;
+		case Organization.OAVATAR:
+			result = orgDao.updateOavatar(Uphone, value);
 			break;
 		}
 		return result;
@@ -554,7 +558,7 @@ public class ServiceImpl implements Service {
 
 	@Override
 	public int addCourse(Long Cclasstime, Long Cendtime, Long Ctime, Long Cofftime, String Cbackground, String Cdesc,
-			String Cname, String Cimage, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday, Boolean Cthursday,
+			String Cname, String Cimage, String Caddress, Boolean Cmonday, Boolean Ctuesday, Boolean Cwednesday, Boolean Cthursday,
 			Boolean Cfriday, Boolean Csaturday, Boolean Csunday, Long teacherUid, String teacherUphone,
 			Long Oid) {
 		Course course = new Course();
@@ -566,6 +570,7 @@ public class ServiceImpl implements Service {
 		course.setCdesc(Cdesc);
 		course.setCname(Cname);
 		course.setCimage(Cimage);
+		course.setCaddress(Caddress);
 		course.setCmonday(Cmonday);
 		course.setCtuesday(Ctuesday);
 		course.setCwednesday(Cwednesday);
@@ -576,6 +581,11 @@ public class ServiceImpl implements Service {
 		return courseDao.addCourse(course, teacherUid, teacherUphone, Oid);
 	}
 
+	public Course getCourse(Long Cid){
+		Course course = courseDao.getCourse(Cid);
+		return course;
+	}
+	
 	public List<Kid> getKidsInCourse(Long Cid){
 		Course course = courseDao.getCourse(Cid);
 		List<Kid> list;
