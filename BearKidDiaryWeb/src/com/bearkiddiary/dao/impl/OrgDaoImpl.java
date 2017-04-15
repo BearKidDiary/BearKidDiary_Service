@@ -162,5 +162,4 @@ public class OrgDaoImpl extends BaseDaoHibernate<Organization> implements OrgDao
 		List<Organization> list = findAll(Organization.class);
 		return list;
 	}
-
 }

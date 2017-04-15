@@ -51,7 +51,7 @@ public class UserApplication extends BaseServlet {
     		//存在申请列表
     		if(list.size() > 0){
     			result.setResultCode(ResultCode.SUCCESS);
-    			result.setResultMessage("获取申请成功");
+    			result.setResultMessage("获取申请列表成功");
     			result.setData(list);
     			
     			out.write(gson.toJson(result));

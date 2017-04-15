@@ -36,22 +36,30 @@ public class UserAdminApprove extends BaseServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	out = response.getWriter();
-    	//类型，0：获取请假列表；1：对请假进行审批
-    	Integer applyType = Integer.valueOf(request.getParameter("applyType"));
-    	Long Oid = Long.valueOf(request.getParameter(Organization.OID));
+    	//类型，0：获取未审批申请列表；1：对请假进行审批；2:获取已审批申请列表
+    	String sApplyType = request.getParameter("applyType");
+    	String sOid = request.getParameter(Organization.OID);
     	String Uphone = request.getParameter(User.PHONE);
     	
     	result = new Result<>();
     	list = new ArrayList<>();
     	
+    	if(sApplyType == null || sOid == null){
+    		result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
+    		result.setResultMessage("缺少请求参数！");
+    		return;
+    	}
+    	
+    	Long Oid = Long.valueOf(sOid);
+    	Integer applyType = Integer.valueOf(sApplyType);
     	//验证权限
     	int resultCode = service.validAdmin(Oid, Uphone);
     	if(resultCode == ResultCode.SUCCESS){
-    		
-    		if(applyType == 0){ // 获取请假申请列表
+    		int LAstatus = 0;
+    		if(applyType == 0){ // 获取未审批申请列表
         		
         		if(resultCode == ResultCode.SUCCESS){
-        			list = service.getOrgApplicationList(Oid);
+        			list = service.getOrgApplicationList(Oid, 0);
             		
             		if(list.size() > 0){
             			result.setResultCode(ResultCode.SUCCESS);
@@ -64,7 +72,6 @@ public class UserAdminApprove extends BaseServlet {
             			result.setData(list);
             		}
         		}
-        		
         	}else if(applyType == 1){ // 对请假申请进行审批
         		Long LAid = Long.valueOf(request.getParameter(Leave_Application.LAID));
             	Integer LAisapproved = Integer.valueOf(request.getParameter(Leave_Application.LAISAPPROVED));
@@ -72,7 +79,6 @@ public class UserAdminApprove extends BaseServlet {
             	
             	int count = service.updateApplication(Leave_Application.APPROVED, LAisapproved, Uphone, LAcomment, LAid);
             	if(count > 0){
-            		
             		result.setResultCode(ResultCode.SUCCESS);
             		result.setResultMessage("审批成功");
             	}else {
@@ -80,6 +86,19 @@ public class UserAdminApprove extends BaseServlet {
             		result.setResultCode(ResultCode.ERROR_COMMIT);
             		result.setResultMessage("提交审批出错");
             	}
+        	}else if(applyType == 2){
+        		list = service.getOrgApplicationList(Oid, 1);
+        		
+        		if(list.size() > 0){
+        			result.setResultCode(ResultCode.SUCCESS);
+            		result.setResultMessage("获取机构已审批申请列表成功！");
+            		result.setData(list);
+        		}else {
+        			result.setResultCode(ResultCode.NO_RESULT);
+        			result.setResultMessage("没有已审批申请记录!");
+        			list.add(application);
+        			result.setData(list);
+        		}
         	}else {
         		//出错
         		result.setResultCode(ResultCode.ERROR);

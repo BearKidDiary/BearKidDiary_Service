@@ -11,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
@@ -163,6 +164,15 @@ public class User implements Serializable {
 	 */
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "teacher")
 	private Set<KPI> kpis = new HashSet<>();
+	
+	/**
+	 * 联系人
+	 */
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "contacts", 
+	joinColumns=@JoinColumn(name = "uid"),
+	inverseJoinColumns=@JoinColumn(name = "contact_id"))
+	private Set<User> contacts = new HashSet<>();
 	
 	public Long getUid() {
 		return Uid;
@@ -374,6 +384,14 @@ public class User implements Serializable {
 
 	public void setKpis(Set<KPI> kpis) {
 		this.kpis = kpis;
+	}
+
+	public Set<User> getContacts() {
+		return contacts;
+	}
+
+	public void setContacts(Set<User> contacts) {
+		this.contacts = contacts;
 	}
 
 //	public Gender getSex() {

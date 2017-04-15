@@ -86,4 +86,14 @@ public class ResultCode {
 	 * 已经创建过机构了，不能再创建
 	 */
 	public static final int ERROR_EXIST_ORG = -21;
+	
+	/**
+	 * 已经存在该课程了
+	 */
+	public static final int ERROR_EXIST_COURSE = -22;
+	
+	/**
+	 * 
+	 */
+	public static final int ERROR_NO_CONTACT = -23;
 }

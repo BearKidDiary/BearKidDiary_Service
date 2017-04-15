@@ -48,7 +48,7 @@ public interface AttendanceGroupService {
 	 * @param AGsunday
 	 * @return
 	 */
-	int update(Long AGid, Long AGstarttime, Long AGendtime, Boolean AGmonday, Boolean AGtuesday, Boolean AGwednesday, 
+	int update(Long AGid, String AGname, Long AGstarttime, Long AGendtime, Boolean AGmonday, Boolean AGtuesday, Boolean AGwednesday, 
 			Boolean AGthursday, Boolean AGfriday, Boolean AGsaturday, Boolean AGsunday);
 
 	/**
@@ -56,7 +56,7 @@ public interface AttendanceGroupService {
 	 * @param teachers_phone
 	 * @return
 	 */
-	List<User> getTeacherWithPhone(String[] teachers_phone);
+	List<User> getTeacherWithPhone(List<String> teachers_phone);
 	
 	/**
 	 * 更新打卡教师

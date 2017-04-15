@@ -71,6 +71,7 @@ public interface OrgDao extends BaseDao<Organization>{
 	 * @return
 	 */
 	public List<Organization> getAllOrgs();
+	
 //机构与用户之间的关系
 	
 	/**

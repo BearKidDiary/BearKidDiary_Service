@@ -2,7 +2,10 @@ package com.bearkiddiary.servlet.Org;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 import javax.servlet.ServletException;
@@ -20,6 +23,9 @@ import com.bearkiddiary.servlet.AGBaseServlet;
 import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 import com.bearkiddiary.utils.ServiceBean;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 
 /**
  * 更新考勤组打卡的信息
@@ -50,9 +56,8 @@ public class UpdateAttendanceGroup extends AGBaseServlet {
 		String sAGfriday = request.getParameter(AttendanceGroup.AGFRIDAY);
 		String sAGsaturday = request.getParameter(AttendanceGroup.AGSATURDAY);
 		String sAGsunday = request.getParameter(AttendanceGroup.AGSUNDAY);
-	
 		String teachers = request.getParameter(AttendanceGroup.AGTEACHERS);
-		String[] teacher_phone = teachers.split("#");
+		String AGname = request.getParameter(AttendanceGroup.AGNAME);
 		
 		if(sAGid == null){
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
@@ -98,11 +103,21 @@ public class UpdateAttendanceGroup extends AGBaseServlet {
 				AGsunday = Boolean.valueOf(sAGsunday);
 			
 			//更新考勤组的基本考勤信息
-			int resultCode_update_AG = AGservice.update(AGid, AGstarttime, AGendtime, AGmonday, AGtuesday, AGwednesday, AGthursday, AGfriday, AGsaturday, AGsunday);
+			int resultCode_update_AG = AGservice.update(AGid, AGname, AGstarttime, AGendtime, AGmonday, AGtuesday, AGwednesday, AGthursday, AGfriday, AGsaturday, AGsunday);
 			//更新考勤组的打卡教师
 			int resultCode_update_teacher = 0;
-			if(teacher_phone.length > 0)
-				resultCode_update_teacher = AGservice.updateTeachers(AGid, AGservice.getTeacherWithPhone(teacher_phone));
+			
+			List<String> teachers_phone = null;
+			if(teachers != null){
+				teachers_phone = new ArrayList<>();
+				JsonArray jsonArray = new JsonParser().parse(teachers).getAsJsonArray();
+				Iterator<JsonElement> iter = jsonArray.iterator();
+				while(iter.hasNext()){
+					teachers_phone.add(iter.next().getAsString());
+				}
+				resultCode_update_teacher = AGservice.updateTeachers(AGid, AGservice.getTeacherWithPhone(teachers_phone));
+			}
+				
 			
 			if(resultCode_update_AG >= 0 && resultCode_update_teacher >= 0){
 				result.setResultCode(ResultCode.SUCCESS);

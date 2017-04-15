@@ -2,6 +2,11 @@ package com.bearkiddiary.servlet.Org;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 
 import javax.enterprise.inject.ResolutionException;
 import javax.servlet.ServletException;
@@ -18,7 +23,10 @@ import com.bearkiddiary.servlet.AGBaseServlet;
 import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
 import com.bearkiddiary.utils.ServiceBean;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 /**
  * Servlet implementation class AddAttendanceGroup
@@ -50,6 +58,9 @@ public class AddAttendanceGroup extends AGBaseServlet {
 		String friday = request.getParameter(AttendanceGroup.AGFRIDAY);
 		String saturday = request.getParameter(AttendanceGroup.AGSATURDAY);
 		String sunday = request.getParameter(AttendanceGroup.AGSUNDAY);
+		String AGname = request.getParameter(AttendanceGroup.AGNAME);
+		String AGteacher = request.getParameter(AttendanceGroup.AGTEACHERS);
+		String teachers = request.getParameter(AttendanceGroup.AGTEACHERS);
 		
 		if(Uphone == null){
 			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
@@ -74,6 +85,20 @@ public class AddAttendanceGroup extends AGBaseServlet {
 				attendanceGroup.setAGsaturday(Boolean.valueOf(saturday));
 			if(sunday != null)
 				attendanceGroup.setAGsunday(Boolean.valueOf(sunday));
+			
+			List<String> teachers_phone = null;
+			if(teachers != null){
+				teachers_phone = new ArrayList<>();
+				JsonArray jsonArray = new JsonParser().parse(teachers).getAsJsonArray();
+				Iterator<JsonElement> iter = jsonArray.iterator();
+				while(iter.hasNext()){
+					teachers_phone.add(iter.next().getAsString());
+				}
+				
+				Set<User> teachers_set = new HashSet<>(AGservice.getTeacherWithPhone(teachers_phone));
+				attendanceGroup.setTeachers(teachers_set);
+			}
+			attendanceGroup.setAGname(AGname);
 			Long AGid = AGservice.addAttendanceGroup(attendanceGroup, Uphone);
 			if(AGid > 0){
 				AttendanceGroup ag = new AttendanceGroup();

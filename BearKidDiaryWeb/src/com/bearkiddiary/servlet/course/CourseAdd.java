@@ -100,6 +100,9 @@ public class CourseAdd extends BaseServlet {
 		if (code == ResultCode.ERROR_NO_USER) {
 			result.setResultMessage("不存在该审批人或者任课老师");
 		}
+		if(code == ResultCode.ERROR_EXIST_COURSE){
+			result.setResultMessage("已经存在该课程了！");
+		}
 		if (code == ResultCode.ERROR_NO_ORG) {
 			result.setResultMessage("不存在该机构");
 		}

@@ -50,14 +50,14 @@ public class LADaoImpl extends BaseDaoHibernate<Leave_Application> implements LA
 	}
 
 	@Override
-	public List<Leave_Application> getOrgApplicationList(Long Oid) {
+	public List<Leave_Application> getOrgApplicationList(Long Oid, int LAstatus) {
 		Organization org = new Organization();
 		org = orgDao.getOrg(Oid);
 		if(org == null){
 			return null;
 		}
-		String hql = "select application from Leave_Application application where application.LAorg = ?0";
-		List<Leave_Application> list = find(hql, org);
+		String hql = "select application from Leave_Application application where application.LAorg = ?0 and application.LAstatus = ?1";
+		List<Leave_Application> list = find(hql, org, LAstatus);
 		return list;
 	}
 

@@ -153,8 +153,8 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public List<Leave_Application> getOrgApplicationList(Long Oid) {
-		return laDao.getOrgApplicationList(Oid);
+	public List<Leave_Application> getOrgApplicationList(Long Oid, int LAstatus) {
+		return laDao.getOrgApplicationList(Oid, LAstatus);
 	}
 
 	@Override
@@ -201,6 +201,25 @@ public class ServiceImpl implements Service {
 			kids.addAll(kid);
 		}
 		return new ArrayList<>(kids);
+	}
+	
+	public Boolean addContact(String Uphone, String ContactPhone){
+		User user = userDao.getUser(Uphone);
+		User contactUser = userDao.getUser(ContactPhone);
+		Set<User> contacts = user.getContacts();
+		if(contacts.contains(contactUser)){
+			return false;
+		}
+		contacts.add(contactUser);
+		user.setContacts(contacts);
+		userDao.update(user);
+		return true;
+	}
+	
+	public List<User> getContacts(String Uphone){
+		User user = userDao.getUser(Uphone);
+		Set<User> contacts = user.getContacts();
+		return new ArrayList<>(contacts);
 	}
 	
 	@Override
@@ -362,6 +381,47 @@ public class ServiceImpl implements Service {
 
 	public List<Organization> getAllOrgs(){
 		return orgDao.getAllOrgs();
+	}
+	
+	
+	public List<User> getOrgTeachers(Long Oid, String Uphone){
+		if(Oid != null){
+			Organization org = orgDao.getOrg(Oid);
+			List<User> list = new ArrayList<>(org.getTeachers());
+			return list;
+		}
+		if(Uphone != null){
+			Organization org = orgDao.getOrg(Uphone);
+			List<User> list = new ArrayList<>(org.getTeachers());
+			return list;
+		}
+		return null;
+	}
+	
+	public List<User> getOrgParents(Long Oid, String Uphone){
+		if(Oid != null){
+			Organization org = orgDao.getOrg(Oid);
+			List<User> list = new ArrayList<>(org.getParents());
+			return list;
+		}
+		if(Uphone != null){
+			Organization org = orgDao.getOrg(Uphone);
+			List<User> list = new ArrayList<>(org.getParents());
+			return list;
+		}
+		return null;
+	}
+	
+	public List<Kid> getOrgStudents(Long Oid, String Uphone){
+		List<Course> list_course = new ArrayList<>(courseDao.getCourseByOrg(Oid));
+		Set<Kid> list_student = new HashSet<>();
+		Set<Kid> kid_set = null;
+		for(Course course : list_course){
+			kid_set = new HashSet<>();
+			kid_set = course.getStudents();
+			list_student.addAll(kid_set);
+		}
+		return new ArrayList<>(list_student);
 	}
 	
 	@Override

@@ -48,11 +48,14 @@ public class AttendanceGroupDaoImpl extends BaseDaoHibernate<AttendanceGroup> im
 	}
 
 	@Override
-	public int updateAttendanceGroup(Long AGid, Long AGstarttime, Long AGendtime, Boolean AGmonday, Boolean AGtuesday,
+	public int updateAttendanceGroup(Long AGid, String AGname, Long AGstarttime, Long AGendtime, Boolean AGmonday, Boolean AGtuesday,
 			Boolean AGwednesday, Boolean AGthursday, Boolean AGfriday, Boolean AGsaturday, Boolean AGsunday) {
 		AttendanceGroup attendancegruop = getAttendanceGruop(AGid);
 		if(attendancegruop == null){
 			return ResultCode.ERROR_NO_ATTENDANCEGROUP;
+		}
+		if(AGname != null){
+			attendancegruop.setAGname(AGname);
 		}
 		if(AGstarttime != null)
 			attendancegruop.setAGstarttime(AGstarttime);

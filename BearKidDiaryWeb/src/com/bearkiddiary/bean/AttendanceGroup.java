@@ -32,9 +32,10 @@ public class AttendanceGroup implements Serializable{
 	public static final String AGSATURDAY = "AGsaturday";
 	public static final String AGSUNDAY = "AGsunday";
 	public static final String AGTEACHERS = "AGteachers";
+	public static final String AGNAME = "AGname";
 	
 	/**
-	 * ¿¼ÇÚ×éid
+	 * è€ƒå‹¤ç»„id
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -42,25 +43,31 @@ public class AttendanceGroup implements Serializable{
 	private Long AGid;
 	
 	/**
-	 * ¿¼ÇÚ×é¿ªÊ¼Ê±¼ä
+	 * è€ƒå‹¤ç»„åå­—
+	 */
+	@Expose
+	private String AGname;
+	
+	/**
+	 * è€ƒå‹¤ä¸Šç­æ—¶é—´
 	 */
 	@Expose
 	private Long AGstarttime;
 		
 	/**
-	 * ¿¼ÇÚ×é½áÊøÊ±¼ä
+	 * è€ƒå‹¤ä¸‹ç­æ—¶é—´
 	 */
 	@Expose
 	private Long AGendtime;
 	
 	/**
-	 * ¿¼ÇÚ×éÒ»ÖÜÖĞ´ò¿¨µÄ¹¤×÷ÈÕ
+	 * å‘¨å‡ æ‰“å¡
 	 */
 	@Expose
 	private Boolean AGmonday, AGtuesday, AGwednesday, AGthursday, AGfriday, AGsaturday, AGsunday;
 	
 	/**
-	 * ¸Ã¿¼ÇÚ×é¶ÔÓ¦µÄ½ÌÊ¦
+	 * æ‰“å¡çš„æ•™å¸ˆ
 	 */
 	@ManyToMany(cascade = CascadeType.MERGE)
 	@JoinTable(name = "attendancegroup_teacher", 
@@ -69,7 +76,7 @@ public class AttendanceGroup implements Serializable{
 	private Set<User> teachers = new HashSet<>();
 	
 	/**
-	 * ¸Ã¿¼ÇÚ×é¶ÔÓ¦µÄ»ú¹¹
+	 * å±äºçš„æœºæ„
 	 */
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "Oid", referencedColumnName = "Oid")
@@ -197,6 +204,16 @@ public class AttendanceGroup implements Serializable{
 
 	public static String getAgid() {
 		return AGID;
+	}
+
+
+	public String getAGname() {
+		return AGname;
+	}
+
+
+	public void setAGname(String aGname) {
+		AGname = aGname;
 	}
 	
 	

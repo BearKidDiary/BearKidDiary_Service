@@ -79,6 +79,7 @@ public class CourseDaoImpl extends BaseDaoHibernate<Course> implements CourseDao
 
 	@Override
 	public int addCourse(Course data, Long teacherUid, String teacherUphone, Long Oid) {
+		
 		User teacher = null;
 		if (teacherUid != null) {
 			teacher = userDao.getUser(teacherUid);
@@ -89,7 +90,13 @@ public class CourseDaoImpl extends BaseDaoHibernate<Course> implements CourseDao
 		if (teacher == null) {
 			return ResultCode.ERROR_NO_USER;
 		}
-
+		
+		String hql = "select course from Course course where course.teacher = ?0 and course.Cname = ?1";
+		List<Course> list = find(hql, teacher, data.getCname());
+		if(!list.isEmpty()){
+			return ResultCode.ERROR_EXIST_COURSE;
+		}
+		
 		User approver = null;
 		approver = orgDao.getOrg(Oid).getCreator();
 //		if (approverUid != null) {

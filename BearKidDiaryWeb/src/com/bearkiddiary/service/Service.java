@@ -57,7 +57,7 @@ public interface Service {
 	 * @param Oid
 	 * @return
 	 */
-	List<Leave_Application> getOrgApplicationList(Long Oid);
+	List<Leave_Application> getOrgApplicationList(Long Oid, int LAstatus);
 
 	/**
 	 * 教师获取个人请假的申请列表
@@ -80,6 +80,21 @@ public interface Service {
 	 * @return
 	 */
 	List<Kid> getAllHisStudents(String Uphone);
+	
+	/**
+	 * 添加联系人
+	 * @param Uphone
+	 * @param ContactPhone
+	 * @return
+	 */
+	Boolean addContact(String Uphone, String ContactPhone);
+	
+	/**
+	 * 获取联系人列表
+	 * @param Uphone
+	 * @return
+	 */
+	List<User> getContacts(String Uphone);
 
 //////////////////////////////////////////////////////////// 家庭/////////////////////////////////////////////////////////
 	/**
@@ -462,6 +477,26 @@ public interface Service {
 	 * @return
 	 */
 	List<Organization> getAllOrgs();
+	
+	/**
+	 * 获取机构所有教师
+	 * @param Oid
+	 * @return
+	 */
+	List<User> getOrgTeachers(Long Oid, String Uphone);
+	
+	/**
+	 * 获取机构所有家长
+	 */
+	List<User> getOrgParents(Long Oid, String Uphone);
+	
+	/**
+	 * 获取机构所有学生
+	 * @param Oid
+	 * @param Uphone
+	 * @return
+	 */
+	List<Kid> getOrgStudents(Long Oid, String Uphone);
 
 //////////////////////////////////////////////// 课程/////////////////////////////////////////////////////////////
 	/**

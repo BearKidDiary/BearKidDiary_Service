@@ -11,60 +11,60 @@ import com.bearkiddiary.common.dao.BaseDao;
 public interface AttendanceGroupDao extends BaseDao<AttendanceGroup>{
 	
 	/**
-	 * Ìí¼Ó¿¼ÇÚ×é
-	 * @param Atdgroup ¿¼ÇÚ×éÐÅÏ¢
-	 * @param Oid »ú¹¹id
+	 * ï¿½ï¿½Ó¿ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param Atdgroup ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢
+	 * @param Oid ï¿½ï¿½ï¿½ï¿½id
 	 * @return AGid
 	 */
 	Long addAttendanceGroup(AttendanceGroup Atdgroup, String Uphone);
 	
 	/**
-	 * ¸ù¾Ýid»ñÈ¡¿¼ÇÚ×é
-	 * @param AGid ¿¼ÇÚ×éid
+	 * ï¿½ï¿½ï¿½ï¿½idï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param AGid ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
 	 * @return
 	 */
 	AttendanceGroup getAttendanceGruop(Long AGid);
 	
 	/**
-	 * É¾³ý¿¼ÇÚ×é
-	 * @param AGid ¿¼ÇÚ×éid
-	 * @return É¾³ý³É¹¦Óë·ñ
+	 * É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param AGid ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
+	 * @return É¾ï¿½ï¿½ï¿½É¹ï¿½ï¿½ï¿½ï¿½
 	 */
 	int deleteAttendanceGroup(Long AGid);
 	
 	/**
-	 * ¸üÐÂ¿¼ÇÚ×é
-	 * @param AGid ¿¼ÇÚ×éid
-	 * @param AGstarttime ¿¼ÇÚ¿ªÊ¼Ê±¼ä
-	 * @param AGendtime ¿¼ÇÚ½áÊøÊ±¼ä
-	 * @param AGmonday  ÐÇÆÚÒ»
-	 * @param AGtuesday ÐÇÆÚ¶þ
-	 * @param AGwednesday ÐÇÆÚÈý
-	 * @param AGthursday ÐÇÆÚËÄ
-	 * @param AGfriday ÐÇÆÚÎå
-	 * @param AGsaturday ÐÇÆÚÁù
-	 * @param AGsunday ÐÇÆÚÈÕ
+	 * ï¿½ï¿½ï¿½Â¿ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param AGid ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
+	 * @param AGstarttime ï¿½ï¿½ï¿½Ú¿ï¿½Ê¼Ê±ï¿½ï¿½
+	 * @param AGendtime ï¿½ï¿½ï¿½Ú½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
+	 * @param AGmonday  ï¿½ï¿½ï¿½ï¿½Ò»
+	 * @param AGtuesday ï¿½ï¿½ï¿½Ú¶ï¿½
+	 * @param AGwednesday ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param AGthursday ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param AGfriday ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param AGsaturday ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	 * @param AGsunday ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @return
 	 */
-	int updateAttendanceGroup(Long AGid, Long AGstarttime, Long AGendtime, Boolean AGmonday, Boolean AGtuesday, Boolean AGwednesday, 
+	int updateAttendanceGroup(Long AGid, String AGname, Long AGstarttime, Long AGendtime, Boolean AGmonday, Boolean AGtuesday, Boolean AGwednesday, 
 			Boolean AGthursday, Boolean AGfriday, Boolean AGsaturday, Boolean AGsunday);
 	
 	/**
-	 * Ôö¼Ó»òÐÞ¸Ä¿¼ÇÚ×é½ÌÊ¦
+	 * ï¿½ï¿½ï¿½Ó»ï¿½ï¿½Þ¸Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¦
 	 * @param teachers
 	 * @return
 	 */
 	int addTeachers(Long AGid, Set<User> teachers);
 	
 	/**
-	 * »ñÈ¡»ú¹¹µÄ¿¼ÇÚ×éÁÐ±í
-	 * @param Oid »ú¹¹id
+	 * ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
+	 * @param Oid ï¿½ï¿½ï¿½ï¿½id
 	 * @return
 	 */
 	List<AttendanceGroup> getOrgAttendanceGroupList(String Uphone);
 	
 	/**
-	 * »ñÈ¡Ä³¸öÀÏÊ¦µÄ¿¼ÇÚ×é
+	 * ï¿½ï¿½È¡Ä³ï¿½ï¿½ï¿½ï¿½Ê¦ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param Uid
 	 * @return
 	 */

@@ -47,9 +47,9 @@ public class AttendanceGroupServiceImpl implements AttendanceGroupService{
 	}
 
 	@Override
-	public int update(Long AGid, Long AGstarttime, Long AGendtime, Boolean AGmonday, Boolean AGtuesday,
+	public int update(Long AGid, String AGname, Long AGstarttime, Long AGendtime, Boolean AGmonday, Boolean AGtuesday,
 			Boolean AGwednesday, Boolean AGthursday, Boolean AGfriday, Boolean AGsaturday, Boolean AGsunday) {
-		int resultCode = attendanceGroupDao.updateAttendanceGroup(AGid, AGstarttime, AGendtime, AGmonday, AGtuesday, AGwednesday, AGthursday, AGfriday, AGsaturday, AGsunday);
+		int resultCode = attendanceGroupDao.updateAttendanceGroup(AGid, AGname, AGstarttime, AGendtime, AGmonday, AGtuesday, AGwednesday, AGthursday, AGfriday, AGsaturday, AGsunday);
 		return resultCode;
 	}
 
@@ -62,7 +62,7 @@ public class AttendanceGroupServiceImpl implements AttendanceGroupService{
 	}
 
 	@Override
-	public List<User> getTeacherWithPhone(String[] teachers_phone) {
+	public List<User> getTeacherWithPhone(List<String> teachers_phone) {
 		List<User> list = new ArrayList<>();
 		for(String Uphone : teachers_phone){
 			User user = userDao.getUser(Uphone);

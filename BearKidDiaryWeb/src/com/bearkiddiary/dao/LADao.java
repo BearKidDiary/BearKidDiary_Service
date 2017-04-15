@@ -33,7 +33,7 @@ public interface LADao extends BaseDao<Leave_Application>{
 	 * @param Oid
 	 * @return
 	 */
-	List<Leave_Application> getOrgApplicationList(Long Oid);
+	List<Leave_Application> getOrgApplicationList(Long Oid, int LAstatus);
 	
 	/**
 	 * 教师获取个人请假的申请列表
