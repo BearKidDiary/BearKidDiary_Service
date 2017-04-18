@@ -102,12 +102,12 @@ public class ServiceImpl implements Service {
 	}
 
 	@Override
-	public boolean Register(User user) {
+	public Long Register(User user) {
 		if (userDao.Valid(user.getUphone()) == 0) {
-			System.out.println(userDao.save(user));
-			return true;
+			Long Uid = (Long) userDao.save(user);
+			return Uid;
 		}
-		return false;
+		return new Long(ResultCode.ERROR);
 	}
 
 	@Override

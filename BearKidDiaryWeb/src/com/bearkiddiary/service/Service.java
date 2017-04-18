@@ -22,7 +22,7 @@ public interface Service {
 	// 登录功能
 	boolean Login(String Uphone, String Upsw);
 
-	boolean Register(User user);
+	Long Register(User user);
 
 	/**
 	 * 更新操作

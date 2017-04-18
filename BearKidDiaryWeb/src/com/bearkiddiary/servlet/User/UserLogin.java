@@ -1,12 +1,14 @@
 package com.bearkiddiary.servlet.User;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.PrintWriter;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.bearkiddiary.bean.Organization;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
+import com.bearkiddiary.easemob.TokenUtil;
 import com.bearkiddiary.service.Service;
 import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ImageUtil;
@@ -42,7 +45,7 @@ public class UserLogin extends BaseServlet {
 		
 		String Uphone = request.getParameter("Uphone");
 		String Upsw = request.getParameter("Upsw");
-		System.out.println("" + new Date().getTime());
+//		System.out.println("" + new Date().getTime());
 		Login(Uphone, Upsw, out);
 	}
 

@@ -18,7 +18,7 @@ import com.bearkiddiary.utils.ResultCode;
 /**
  * 获取联系人列表
  */
-@WebServlet("/user/contacts/get")
+@WebServlet("/user/contact/get")
 public class GetContacts extends BaseServlet {
 	private static final long serialVersionUID = 1L;
     private Result<List<User>> result;
