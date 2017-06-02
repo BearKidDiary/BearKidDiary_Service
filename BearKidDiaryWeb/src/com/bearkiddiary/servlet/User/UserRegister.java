@@ -53,7 +53,7 @@ public class UserRegister extends BaseServlet {
 			out.close();
 			return;
 		}
-		user.setUavatar("defualt.jpg");
+		user.setUavatar("default.jpg");
 		Uid = service.Register(user);
 		
 		//根据返回的Uphone进行环信注册，以保证唯一

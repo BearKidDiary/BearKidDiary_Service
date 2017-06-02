@@ -1,10 +1,12 @@
 package com.bearkiddiary.common.dao.impl;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 
 import com.bearkiddiary.common.dao.BaseDao;
@@ -141,4 +143,21 @@ public class BaseDaoHibernate<T> implements BaseDao<T> {
 		return query.executeUpdate();
 	}
 	
+	/**
+	 * 批量插入
+	 * @param entityList
+	 */
+	public List<Serializable> saveList(List<T> entityList){
+		List<Serializable> list = new ArrayList<>();
+		for(int i = 0; i < entityList.size(); i++){
+			Session session = getSessionFactory().getCurrentSession();
+			Serializable id = session.save(entityList.get(i));
+			list.add(id);
+			if(i % 20 == 0){
+				session.flush();
+				session.clear();
+			}
+		}
+		return list;
+	}
 }

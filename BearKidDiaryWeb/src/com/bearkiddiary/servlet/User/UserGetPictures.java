@@ -2,56 +2,58 @@ package com.bearkiddiary.servlet.User;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bearkiddiary.bean.AttendanceGroup;
 import com.bearkiddiary.bean.Result;
 import com.bearkiddiary.bean.User;
-import com.bearkiddiary.service.AttendanceGroupService;
-import com.bearkiddiary.servlet.AGBaseServlet;
 import com.bearkiddiary.servlet.BaseServlet;
 import com.bearkiddiary.utils.ResultCode;
-import com.bearkiddiary.utils.ServiceBean;
-import com.mysql.fabric.xmlrpc.base.Array;
-import com.sun.org.apache.bcel.internal.generic.NEW;
 
 /**
- * 教师获取考勤组
- * Servlet implementation class UserGetAttendanceGroup
+ * Servlet implementation class UserGetPictures
  */
-@WebServlet("/user/attendancegroup")
-public class UserGetAttendanceGroup extends AGBaseServlet {
+@WebServlet("/user/pictures/get")
+public class UserGetPictures extends BaseServlet {
 	private static final long serialVersionUID = 1L;
-	private PrintWriter out = null;
-	
-	private Result<List<AttendanceGroup>> result = new Result<>();
-
+    private Result<List<String>> result;
+    private PrintWriter out;
+  
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		result = new Result<>();
 		out = response.getWriter();
+		
 		String Uphone = request.getParameter(User.PHONE);
-		List<AttendanceGroup> list = AGservice.getTeacherAttendanceGroupList(Uphone);
-		if(list == null)
-		{
-			result.setResultCode(ResultCode.ERROR_NO_ATTENDANCEGROUP);
-			result.setResultMessage("不存在考勤组");
-			result.setData(null);
+		String sPageNum = request.getParameter("PageNum");
+		String sPageSize = request.getParameter("PageSize");
+		String Order = request.getParameter("Order");
+		
+		if(Uphone == null){
+			result.setResultCode(ResultCode.ERROR_MISSING_PARAMETER);
+			result.setResultMessage("缺少请求参数！");
 		}else{
+			int PageNum = 0;
+			int PageSize = 0;
+			if(sPageNum != null){
+				PageNum = Integer.valueOf(sPageNum); 
+			}
+			if(sPageSize != null){
+				PageSize = Integer.valueOf(sPageSize);
+			}
+			List<String> list = service.getPictures(Uphone, Order, PageNum, PageSize);
 			result.setResultCode(ResultCode.SUCCESS);
-			result.setResultMessage("获取考勤组成功！");
+			result.setResultMessage("获取相册成功！");
 			result.setData(list);
 		}
+		
 		out.write(gson.toJson(result));
 	}
 

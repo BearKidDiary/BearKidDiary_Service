@@ -638,6 +638,16 @@ public interface Service {
 	List<Kid> getKidsInCourse(Long Cid);
 	
 	/**
+	 * 课程点名
+	 * @param Cid 			课程id
+	 * @param STtime 		点名时间	
+	 * @param attendlist	出席的学生列表
+	 * @param unattend		未出席的学生列表
+	 * @return
+	 */
+	int named(Long Cid, Long STtime, List<Long> attendlist, List<Long> unattend);
+/////////////////////////////////////////////////////分组//////////////////////////////////	
+	/**
 	 * 创建分组
 	 * 
 	 * @param Oid
@@ -692,4 +702,9 @@ public interface Service {
 	 *            分组成员的手机号码
 	 */
 	int deleteGroupMembers(Long Gid, List<Long> Uids, List<String> Uphones);
+	
+////////////////////////////////////////////////图片///////////////////////////
+	int savePicture(String Uphone, String Pimage, Long Ptime);
+	
+	List<String> getPictures(String Uphone, String Order, int pageNo, int pageSize);
 }

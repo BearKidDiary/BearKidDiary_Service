@@ -59,7 +59,7 @@ public class KidUpdate extends BaseServlet {
 			}
 		}
 		
-		int code = service.updateKid(Kid, Kname, Kbirthday, Kavatar, Ksex, Kask, Kflowers);
+		int code = service.updateKid(Kid, Kname, Kbirthday, Kavatar + ".jpg", Ksex, Kask, Kflowers);
 		result.setResultCode(code);
 		if (code == ResultCode.ERROR_NO_KID) {
 			result.setResultMessage("不存在该孩子");

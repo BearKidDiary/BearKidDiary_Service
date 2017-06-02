@@ -165,7 +165,7 @@ public class CreateOrgServlet extends BaseServlet {
 				responseWriter(response, gson.toJson(result));
 			}
 			if(Oavatar != null){
-				count = service.updateOrg(Uphone, Organization.OAVATAR, Oavatar);
+				count = service.updateOrg(Uphone, Organization.OAVATAR, Oavatar + ".jpg");
 				if(count > 0){
 					result.setResultCode(ResultCode.SUCCESS);
 					result.setResultMessage("修改图标成功!");

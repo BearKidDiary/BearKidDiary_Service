@@ -58,7 +58,7 @@ public class ImageUtil {
 				if(b[i] < 0)
 					b[i] += 256;
 			}
-			File file = new File(imgFilePath, img_name);
+			File file = new File(imgFilePath, img_name + ".jpg");
 			OutputStream out = new FileOutputStream(file);
 			out.flush();
 			out.write(b);

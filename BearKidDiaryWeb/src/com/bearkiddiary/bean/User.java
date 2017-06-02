@@ -8,6 +8,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -149,7 +150,7 @@ public class User implements Serializable {
 	/**
 	 * 教师考勤组
 	 */
-	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "teachers")
+	@ManyToMany(cascade = CascadeType.MERGE, mappedBy = "teachers", fetch = FetchType.EAGER)
 	private Set<AttendanceGroup> attendancegroup = new HashSet<>();
 	
 	/**
@@ -173,6 +174,12 @@ public class User implements Serializable {
 	joinColumns=@JoinColumn(name = "uid"),
 	inverseJoinColumns=@JoinColumn(name = "contact_id"))
 	private Set<User> contacts = new HashSet<>();
+	
+	/**
+	 * 上传的图片
+	 */
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+	private Set<Pictures> pictures = new HashSet<>();
 	
 	public Long getUid() {
 		return Uid;
@@ -392,6 +399,14 @@ public class User implements Serializable {
 
 	public void setContacts(Set<User> contacts) {
 		this.contacts = contacts;
+	}
+
+	public Set<Pictures> getPictures() {
+		return pictures;
+	}
+
+	public void setPictures(Set<Pictures> pictures) {
+		this.pictures = pictures;
 	}
 
 //	public Gender getSex() {

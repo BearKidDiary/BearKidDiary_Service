@@ -69,7 +69,9 @@
 		p:orgDao-ref="orgDao" p:laDao-ref="laDao" p:heightDao-ref="heightDao"
 		p:weightDao-ref="weightDao" p:visionDao-ref="visionDao"
 		p:timeLineDao-ref="timeLineDao" p:courseDao-ref="courseDao"
-		p:groupDao-ref="groupDao" />
+		p:groupDao-ref="groupDao" 
+		p:sarDao-ref="sarDao"
+		p:picturesDao-ref="picturesDao"/>
 		
 	<bean id="attendanceGroupService" class="com.bearkiddiary.service.impl.AttendanceGroupServiceImpl"
 		p:attendanceGroupDao-ref="attendanceGroupDao"
@@ -116,7 +118,13 @@
 		p:sessionFactory-ref="sessionFactory"
 		p:userDao-ref="userDao"
 		p:orgDao-ref="orgDao"/> 
+	<bean id="sarDao" class="com.bearkiddiary.dao.impl.SARDaoImpl"
+		p:sessionFactory-ref="sessionFactory"></bean>
 		
+	<bean id="picturesDao" class="com.bearkiddiary.dao.impl.PicturesDaoImpl"
+		p:userDao-ref="userDao"
+		p:sessionFactory-ref="sessionFactory">
+	</bean>	
 		
 	<!-- 定义事务管理器（声明式的事务） -->
 	<bean id="transactionManager"

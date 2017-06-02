@@ -11,29 +11,26 @@ import com.bearkiddiary.common.dao.BaseDao;
 public interface AttendanceGroupDao extends BaseDao<AttendanceGroup>{
 	
 	/**
-	 * ��ӿ�����
-	 * @param Atdgroup ��������Ϣ
-	 * @param Oid ����id
-	 * @return AGid
+	 * 添加考勤组
 	 */
 	Long addAttendanceGroup(AttendanceGroup Atdgroup, String Uphone);
 	
 	/**
-	 * ����id��ȡ������
+	 * 根据AGid获取考勤组
 	 * @param AGid ������id
 	 * @return
 	 */
 	AttendanceGroup getAttendanceGruop(Long AGid);
 	
 	/**
-	 * ɾ��������
+	 * 删除考勤组
 	 * @param AGid ������id
 	 * @return ɾ���ɹ����
 	 */
 	int deleteAttendanceGroup(Long AGid);
 	
 	/**
-	 * ���¿�����
+	 * 更新考勤组
 	 * @param AGid ������id
 	 * @param AGstarttime ���ڿ�ʼʱ��
 	 * @param AGendtime ���ڽ���ʱ��
@@ -50,21 +47,21 @@ public interface AttendanceGroupDao extends BaseDao<AttendanceGroup>{
 			Boolean AGthursday, Boolean AGfriday, Boolean AGsaturday, Boolean AGsunday);
 	
 	/**
-	 * ���ӻ��޸Ŀ������ʦ
+	 * 添加考勤组教师
 	 * @param teachers
 	 * @return
 	 */
 	int addTeachers(Long AGid, Set<User> teachers);
 	
 	/**
-	 * ��ȡ�����Ŀ������б�
+	 * 获取机构考勤组
 	 * @param Oid ����id
 	 * @return
 	 */
 	List<AttendanceGroup> getOrgAttendanceGroupList(String Uphone);
 	
 	/**
-	 * ��ȡĳ����ʦ�Ŀ�����
+	 * 教师获取考勤组
 	 * @param Uid
 	 * @return
 	 */

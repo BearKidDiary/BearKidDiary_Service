@@ -22,6 +22,9 @@ import com.google.gson.annotations.Expose;
 @Table(name = "SAttendRecord")
 public class SAttendRecord implements Serializable{
 
+	public static final String STTIME = "STtime";
+	public static final String ISATTEND = "isAttend";
+	
 	@Expose
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

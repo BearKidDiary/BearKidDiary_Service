@@ -14,6 +14,8 @@ import com.bearkiddiary.bean.Height;
 import com.bearkiddiary.bean.Kid;
 import com.bearkiddiary.bean.Leave_Application;
 import com.bearkiddiary.bean.Organization;
+import com.bearkiddiary.bean.Pictures;
+import com.bearkiddiary.bean.SAttendRecord;
 import com.bearkiddiary.bean.TimeLine;
 import com.bearkiddiary.bean.User;
 import com.bearkiddiary.bean.Vision;
@@ -25,6 +27,8 @@ import com.bearkiddiary.dao.HeightDao;
 import com.bearkiddiary.dao.KidDao;
 import com.bearkiddiary.dao.LADao;
 import com.bearkiddiary.dao.OrgDao;
+import com.bearkiddiary.dao.PicturesDao;
+import com.bearkiddiary.dao.SARDao;
 import com.bearkiddiary.dao.TimeLineDao;
 import com.bearkiddiary.dao.UserDao;
 import com.bearkiddiary.dao.VisionDao;
@@ -99,6 +103,18 @@ public class ServiceImpl implements Service {
 
 	public void setGroupDao(GroupDao groupDao) {
 		this.groupDao = groupDao;
+	}
+	
+	private SARDao sarDao;
+
+	public void setSarDao(SARDao sarDao) {
+		this.sarDao = sarDao;
+	}
+
+	private PicturesDao picturesDao;
+	
+	public void setPicturesDao(PicturesDao picturesDao) {
+		this.picturesDao = picturesDao;
 	}
 
 	@Override
@@ -656,6 +672,33 @@ public class ServiceImpl implements Service {
 		return null;
 	}
 	
+	public int named(Long Cid, Long STtime, List<Long> attendlist, List<Long> unattend){
+		List<SAttendRecord> list = new ArrayList<>();
+		
+		List<Long> listAll = new ArrayList<>();
+		listAll.addAll(attendlist);
+		listAll.addAll(unattend);
+		
+		SAttendRecord sar = null;
+		Kid kid = null;
+		Course course = courseDao.getCourse(Cid);
+		for(int i = 0; i < listAll.size(); i++){
+			sar = new SAttendRecord();
+			kid = kidDao.getKid(listAll.get(i));
+			sar.setCourse(course);
+			sar.setIsAttend(true);
+			sar.setStudent(kid);
+			sar.setSTtime(STtime);
+			list.add(sar);
+		}
+		
+		List<Long> list_result = sarDao.named(list);
+		if(list_result.size() != listAll.size()){
+			return ResultCode.ERROR;
+		}
+		return ResultCode.SUCCESS;
+	}
+	
 	@Override
 	public int createGroup(Long Oid, String Gname, List<Long> Uids, List<String> Uphones) {
 		if (Uids != null)
@@ -696,5 +739,29 @@ public class ServiceImpl implements Service {
 			}
 		}
 		return groupDao.getGroups(Oid);
+	}
+
+	@Override
+	public int savePicture(String Uphone, String Pimage, Long Ptime) {
+		User user = userDao.getUser(Uphone);
+		if(user == null){
+			return ResultCode.ERROR_NO_USER;
+		}
+		Pictures pic = new Pictures();
+		pic.setPimage(Pimage);
+		pic.setPtime(Ptime);
+		pic.setUser(user);
+		return picturesDao.savePicture(pic);
+	}
+
+	@Override
+	public List<String> getPictures(String Uphone, String Order, int pageNo, int pageSize) {
+		List<String> list_pics = new ArrayList<>();
+		if(pageNo > 0 && pageSize > 0){
+			list_pics = picturesDao.getPicture(Uphone, Order, pageNo, pageSize);
+		}else{
+			list_pics = picturesDao.getPicture(Uphone, Order);
+		}
+		return list_pics;
 	}
 }

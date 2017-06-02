@@ -45,21 +45,24 @@ public class UserInfoUpdate extends BaseServlet {
 		}else{
 			if (Uname != null) {
 				// 解码
-				Uname = ParameterDecode.decode(Uname);
+//				Uname = ParameterDecode.decode(Uname);
 				user.setUname(Uname);
-			} else if (Uarea != null) {
-				Uarea = ParameterDecode.decode(Uarea);
+			} 
+			if (Uarea != null) {
+//				Uarea = ParameterDecode.decode(Uarea);
 				user.setUarea(Uarea);
-			} else if (Uemail != null) {
-				Uemail = ParameterDecode.decode(Uemail);
+			} 
+			if (Uemail != null) {
+//				Uemail = ParameterDecode.decode(Uemail);
 				user.setUemail(Uemail);
-			}else if(Usex != null){
-				Usex = ParameterDecode.decode(Usex);
+			}
+			if(Usex != null){
+//				Usex = ParameterDecode.decode(Usex);
 				user.setUsex(Usex);
-			}else if(Uavatar != null){
-				Uavatar = ParameterDecode.decode(Uavatar);
-				Uavatar = Uavatar + ".jpg";
-				user.setUavatar(Uavatar);
+			}
+			if(Uavatar != null){
+//				Uavatar = ParameterDecode.decode(Uavatar);
+				user.setUavatar(Uavatar + ".jpg");
 				
 				String Uimage = request.getParameter("Uimage"); 
 				if(ImageUtil.saveImage(Uimage, Uavatar, imagePath + "/avatar")){
